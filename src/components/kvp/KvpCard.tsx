@@ -12,7 +12,7 @@ function KvpCard() {
 
       <p className="text-gray-500 text-xl mb-3">Kategorie</p>
 
-      <div className=" py-1 text-smrounded-xl flex items-center gap-3 mb-3">
+      <div className=" py-1 text-sm rounded-xl flex items-center gap-3 mb-3">
         <div className="px-3 py-1 text-xs bg-blue-200 text-gray-700 rounded-xl flex items-center gap-2">
           Plan
         </div>
@@ -20,6 +20,8 @@ function KvpCard() {
           Hoch
         </div>
       </div>
+
+      <p className="font-normal text-sm mb-3">Zugewiesen: Anne Lang</p>
 
       <p className="text-gray-500 text-xs mb-4">
         Kurze Beschreibung der Verbesserung. Lorem ipsum dolor sit amet,

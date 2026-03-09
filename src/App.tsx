@@ -6,8 +6,8 @@ import { useState } from "react";
 function App() {
   const [view, setView] = useState("kvp");
   return (
-    <div className="flex h-screen overflow-hidden">
-      <main className="flex-1 overflow-hidden p-6">
+    <div className="flex h-screen ">
+      <main className="flex-1  p-6">
         {view === "kvp" ? <KvpView /> : <StatsView />}
       </main>
     </div>
