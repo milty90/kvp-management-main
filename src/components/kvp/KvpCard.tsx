@@ -1,4 +1,4 @@
-import ColorButton from "../Buttons/ColorButton";
+import ColorButton from "../buttons/ColorButton";
 
 function KvpCard() {
   return (

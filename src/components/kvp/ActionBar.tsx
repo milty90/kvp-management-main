@@ -1,6 +1,6 @@
-import ButtonGroup from "../Buttons/ButtonGroup";
-import ColorButton from "../Buttons/ColorButton";
-import WhiteButton from "../Buttons/WhiteButton";
+import ButtonGroup from "../buttons/ButtonGroup";
+import ColorButton from "../buttons/ColorButton";
+import WhiteButton from "../buttons/WhiteButton";
 
 function ActionBar() {
   return (
