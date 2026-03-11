@@ -1,3 +1,5 @@
+import ColorButton from "../Buttons/ColorButton";
+
 function KvpCard() {
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
@@ -29,9 +31,10 @@ function KvpCard() {
       </p>
       <div className="flex items-center justify-between gap-4">
         <span className="text-sm text-gray-500">Status: Plan</span>
-        <button className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700">
+
+        <ColorButton color="green" height="1" icon="">
           Details
-        </button>
+        </ColorButton>
       </div>
       <div className="mt-4 items-center border-t border-gray-300 w-full gap-2"></div>
       <div className="flex flex-col items-start justify-between mt-2">
