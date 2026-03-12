@@ -1,10 +1,48 @@
 import ColorButton from "../buttons/ColorButton";
 
-function KvpCard() {
+type KvpCardProps = {
+  title: string;
+  category: string;
+  colorStatus?: "yellow" | "blue" | "violet" | "green" | "gray";
+  colorPriority?: "green" | "orange" | "red" | "gray";
+  assignedTo: string;
+  description: string;
+  state: "Plan" | "Do" | "Check" | "Act";
+  priority: "Hoch" | "Mittel" | "Niedrig";
+  createdBy: string;
+  createdAt: string;
+  targetDate: string;
+};
+
+const statusColors = {
+  Plan: "bg-yellow-200",
+  Do: "bg-blue-200",
+  Check: "bg-violet-200",
+  Act: "bg-green-200",
+  any: "bg-gray-200",
+};
+
+const priorityColors = {
+  Hoch: "border-red-400",
+  Mittel: "border-orange-400",
+  Niedrig: "border-green-400",
+};
+
+function KvpCard({
+  title,
+  category,
+  assignedTo,
+  description,
+  state,
+  priority,
+  createdBy,
+  createdAt,
+  targetDate,
+}: KvpCardProps) {
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-semibold ">Verbesserungstitel</h2>
+        <h2 className="text-lg font-semibold ">{title}</h2>
         <img
           src="/more.svg"
           alt="More"
@@ -12,31 +50,39 @@ function KvpCard() {
         />
       </div>
 
-      <p className="text-gray-500 text-xl mb-3">Kategorie</p>
+      <p className="text-gray-500 text-md mb-3">{category}</p>
 
-      <div className=" py-1 text-sm rounded-xl flex items-center gap-3 mb-3">
-        <div className="px-3 py-1 text-xs bg-blue-200 text-gray-700 rounded-xl flex items-center gap-2">
-          Plan
-        </div>
-        <div className="px-3 py-1 text-xs bg-red-200 text-gray-700 rounded-xl flex items-center gap-2">
-          Hoch
-        </div>
+      <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
+        <span className="text-sm ">Priorität:</span>
+        <span
+          className={`px-2.5 py-0.5 text-xs text-gray-600 font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
+        >
+          {priority}
+        </span>
       </div>
 
-      <p className="font-normal text-sm mb-3">Zugewiesen: Anne Lang</p>
+      {/* Divider */}
+      <div className="border-t border-gray-200 mb-3" />
 
-      <p className="text-gray-500 text-xs mb-4">
-        Kurze Beschreibung der Verbesserung. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit.
-      </p>
-      <div className="flex items-center justify-between gap-4">
-        <span className="text-sm text-gray-500">Status: Plan</span>
+      <p className="font-normal text-sm mb-3">Zugewiesen: {assignedTo}</p>
 
+      <p className="text-gray-500 text-xs mb-4">{description}</p>
+
+      <div className="flex items-center justify-between gap-2 mb-4">
         <ColorButton color="green" height="1" icon="">
           Details
         </ColorButton>
+        <div className="flex items-center gap-1 text-gray-500">
+          <span className="text-sm ">Status:</span>
+          <span className={`px-2.5 py-0.5 text-sm text-gray-600 font-medium `}>
+            {state}
+          </span>
+        </div>
       </div>
-      <div className="mt-4 items-center border-t border-gray-300 w-full gap-2"></div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-200 my-3" />
+
       <div className="flex flex-col items-start justify-between mt-2">
         <span className="text-xs py-0.5 text-gray-500">
           <img
@@ -44,7 +90,7 @@ function KvpCard() {
             alt="User"
             className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
           />
-          Max Mustermann
+          {createdBy}
         </span>
         <span className="text-xs py-0.5 text-gray-500">
           <img
@@ -52,7 +98,7 @@ function KvpCard() {
             alt="Target"
             className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
           />
-          Zieldatum: 05.01.2024
+          Zieldatum: {targetDate}
         </span>
         <span className="text-xs py-0.5 text-gray-500">
           <img
@@ -60,7 +106,7 @@ function KvpCard() {
             alt="Calender"
             className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
           />
-          Erstellt: 01.01.2024
+          Erstellt: {createdAt}
         </span>
       </div>
     </div>
