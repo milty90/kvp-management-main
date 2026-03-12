@@ -3,6 +3,7 @@ type ColorButtonProps = {
   height?: string;
   icon?: string;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
 const colorClasses = {
@@ -16,11 +17,13 @@ const colorClasses = {
 export default function ColorButton({
   color = "blue",
   height = "2",
+  onClick,
   icon,
   children,
 }: ColorButtonProps) {
   return (
     <button
+      onClick={onClick}
       className={`
           inline-flex items-center gap-2 px-4 py-${height} rounded-lg
           ${colorClasses[color]}

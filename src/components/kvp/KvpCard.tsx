@@ -3,7 +3,6 @@ import ColorButton from "../buttons/ColorButton";
 type KvpCardProps = {
   title: string;
   category: string;
-  colorStatus?: "yellow" | "blue" | "violet" | "green" | "gray";
   colorPriority?: "green" | "orange" | "red" | "gray";
   assignedTo: string;
   description: string;
@@ -12,14 +11,6 @@ type KvpCardProps = {
   createdBy: string;
   createdAt: string;
   targetDate: string;
-};
-
-const statusColors = {
-  Plan: "bg-yellow-200",
-  Do: "bg-blue-200",
-  Check: "bg-violet-200",
-  Act: "bg-green-200",
-  any: "bg-gray-200",
 };
 
 const priorityColors = {

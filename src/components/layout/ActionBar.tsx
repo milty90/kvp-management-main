@@ -12,7 +12,11 @@ function ActionBar() {
       </div>
       <div className="flex items-center gap-4">
         <WhiteButton icon="">Archive</WhiteButton>
-        <ColorButton color="blue" icon="/add.svg">
+        <ColorButton
+          onClick={() => alert("Add KVP")}
+          color="blue"
+          icon="/add.svg"
+        >
           Neue Verbesserung
         </ColorButton>
       </div>
