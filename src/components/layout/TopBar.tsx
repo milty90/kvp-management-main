@@ -34,7 +34,7 @@ function TopBar({
           <img
             src="/settings.svg"
             alt="Settings"
-            className="h-9 w-9 mt-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-400 ease-in hover:rotate-45 cursor-pointer"
+            className="h-9 w-9 mt-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer"
           />
         </div>
       </div>
