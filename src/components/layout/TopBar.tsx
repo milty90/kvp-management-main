@@ -17,13 +17,13 @@ function TopBar({
   return (
     <div className="flex flex-col w-full shadow-lg rounded-2xl">
       <div className="w-full p-4 rounded-t-2xl bg-white text-white flex items-center justify-between">
-        <div className="flex flex-col items-center justify-center  ml-2">
+        <div className="flex items-center justify-center  ml-2">
           <img src="/spark.png" alt="Logo" className=" h-12  mt-3 mb-0" />
-          <p className="text-gray-700 font-light font-poppins tracking-tight text-md">
+          <p className="text-gray-700 font-light font-poppins tracking-tight -mb-6 text-sm">
             KVP Management System
           </p>
         </div>
-        <div className="flex items-start space-x-4 mr-4">
+        <div className="flex items-start space-x-4 mr-4 -mb-3">
           <ColorButton color="green" icon="/trending.svg">
             Verbesserungen
           </ColorButton>
@@ -34,7 +34,7 @@ function TopBar({
           <img
             src="/settings.svg"
             alt="Settings"
-            className="h-9 w-9 mt-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer"
+            className="w-8.5 mt-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer"
           />
         </div>
       </div>

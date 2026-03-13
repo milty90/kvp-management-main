@@ -3,7 +3,11 @@ import ColorButton from "../buttons/ColorButton";
 import PriorityGroup from "../buttons/PriorityGroup";
 import WhiteButton from "../buttons/WhiteButton";
 
-function ActionBar() {
+interface ActionBarProps {
+  onOpenModal: () => void;
+}
+
+function ActionBar({ onOpenModal }: ActionBarProps) {
   return (
     <div className="flex items-center gap-2 w-full bg-white p-3 rounded-lg shadow-lg justify-between">
       <div className="flex items-center gap-4">
@@ -12,11 +16,7 @@ function ActionBar() {
       </div>
       <div className="flex items-center gap-4">
         <WhiteButton icon="">Archive</WhiteButton>
-        <ColorButton
-          onClick={() => alert("Add KVP")}
-          color="blue"
-          icon="/add.svg"
-        >
+        <ColorButton onClick={onOpenModal} color="blue" icon="/add.svg">
           Neue Verbesserung
         </ColorButton>
       </div>

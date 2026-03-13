@@ -1,6 +1,7 @@
 import TopBar from "../components/layout/TopBar";
 import ActionBar from "../components/layout/ActionBar";
 import KvpBar from "../components/layout/KvpBar";
+import StatusCard from "../components/cards/StatCard";
 
 type Priority = "Mittel" | "Niedrig" | "Hoch";
 type State = "Plan" | "Do" | "Check" | "Act";
@@ -125,17 +126,47 @@ const kvps: Kvp[] = [
   },
 ];
 
-function KvpView() {
+interface KvpViewProps {
+  onOpenModal: () => void;
+}
+
+function KvpView({ onOpenModal }: KvpViewProps) {
   return (
-    <div className="flex flex-col items-center bg-gray-100 gap-4 h-full overflow-hidden">
+    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-full overflow-hidden">
       <TopBar
         planQuantity={kvps.filter((k) => k.state === "Plan").length}
         doQuantity={kvps.filter((k) => k.state === "Do").length}
         checkQuantity={kvps.filter((k) => k.state === "Check").length}
         actQuantity={kvps.filter((k) => k.state === "Act").length}
       />
-      <ActionBar />
+      <ActionBar onOpenModal={onOpenModal} />
       <KvpBar array={kvps} states={STATES} />
+      <div className="w-full grid grid-cols-4 gap-4 my-4">
+        <StatusCard
+          status="Gesamt"
+          quantity={kvps.length.toString()}
+          path="data.svg"
+          iconColor="blue"
+        />
+        <StatusCard
+          status="Abgeschlossen"
+          quantity={kvps.filter((k) => k.state === "Act").length.toString()}
+          path="checkmark.svg"
+          iconColor="green"
+        />
+        <StatusCard
+          status="Zugewiesen"
+          quantity={kvps.filter((k) => k.state === "Plan").length.toString()}
+          path="users.svg"
+          iconColor="violet"
+        />
+        <StatusCard
+          status="Hohe Priorität"
+          quantity={kvps.filter((k) => k.priority === "Hoch").length.toString()}
+          path="target2.svg"
+          iconColor="red"
+        />
+      </div>
     </div>
   );
 }

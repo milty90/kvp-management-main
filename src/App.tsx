@@ -6,11 +6,17 @@ import { useState } from "react";
 
 function App() {
   const [view, setView] = useState("kvp");
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className="flex h-screen ">
-      <main className="flex-1  p-6">
-        {view === "kvp" ? <KvpView /> : <StatsView />}
-        {/* <AddKvp /> */}
+      <main className="flex-1">
+        {view === "kvp" ? (
+          <KvpView onOpenModal={() => setShowModal(true)} />
+        ) : (
+          <StatsView />
+        )}
+        {showModal && <AddKvp onClose={() => setShowModal(false)} />}
       </main>
     </div>
   );
