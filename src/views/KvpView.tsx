@@ -42,7 +42,7 @@ const kvps: Kvp[] = [
     description:
       "Beschreibung des KVP 2 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     state: "Do",
-    priority: "Mittel",
+    priority: "Hoch",
     createdBy: "Erika Mustermann",
     createdAt: "02.01.2024",
     targetDate: "06.01.2024",
@@ -141,7 +141,7 @@ function KvpView({ onOpenModal }: KvpViewProps) {
       />
       <ActionBar onOpenModal={onOpenModal} />
       <KvpBar array={kvps} states={STATES} />
-      <div className="w-full grid grid-cols-4 gap-4 my-4">
+      <div className="w-full grid grid-cols-4 gap-3 px-4 my-4">
         <StatusCard
           status="Gesamt"
           quantity={kvps.length.toString()}
