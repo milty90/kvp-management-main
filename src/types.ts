@@ -1,0 +1,18 @@
+export type Priority = "Low" | "Medium" | "High";
+export type State = "Plan" | "Do" | "Check" | "Act";
+export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
+
+export type Kvp = {
+  id: number;
+  title: string;
+  category: string;
+  assignedTo: string;
+  description: string;
+  state: State;
+  priority: Priority;
+  createdBy: string;
+  createdAt: string;
+  targetDate: string;
+};
+
+export type ColorButtonType = "blue" | "green" | "violet" | "red" | "gray";

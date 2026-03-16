@@ -7,16 +7,16 @@ type KvpCardProps = {
   assignedTo: string;
   description: string;
   state: "Plan" | "Do" | "Check" | "Act";
-  priority: "Hoch" | "Mittel" | "Niedrig";
+  priority: "High" | "Medium" | "Low";
   createdBy: string;
   createdAt: string;
   targetDate: string;
 };
 
 const priorityColors = {
-  Hoch: "border-red-400",
-  Mittel: "border-orange-400",
-  Niedrig: "border-green-400",
+  High: "border-red-400",
+  Medium: "border-orange-400",
+  Low: "border-green-400",
 };
 
 function KvpCard({

@@ -1,12 +1,30 @@
-function StatsView() {
+import { KvpStatBar } from "../components/layout/KvpStatBar";
+import StatActionBar from "../components/layout/StatActionBar";
+import StatBar from "../components/layout/StatBar";
+import TopBar from "../components/layout/TopBar";
+import type { Kvp } from "../types";
+
+interface StatsViewProps {
+  kvps?: Kvp[];
+}
+
+function StatsView({ kvps = [] }: StatsViewProps) {
   return (
-    <div className="flex flex-col items-center justify-center  bg-gray-100">
-      <div className="flex flex-col items-center justify-center gap-4 mt-8">
-        <h2 className="text-2xl font-semibold text-gray-700">
-          Statistiken werden hier angezeigt
-        </h2>
-        <p className="text-gray-500">Diese Seite ist derzeit leer.</p>
-      </div>
+    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-screen overflow-hidden">
+      <TopBar
+        kvpButtonColor="gray"
+        statButtonColor="blue"
+        kvpBar={
+          <KvpStatBar
+            total={kvps.length}
+            completed={kvps.filter((k) => k.state === "Act").length}
+            assigned={kvps.filter((k) => k.assignedTo !== "").length}
+            highPriority={kvps.filter((k) => k.priority === "High").length}
+          />
+        }
+      />
+      <StatActionBar />
+      <StatBar />
     </div>
   );
 }

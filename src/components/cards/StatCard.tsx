@@ -1,4 +1,4 @@
-interface StatusCardProps {
+interface StatCardProps {
   status: string;
   quantity: string;
   path?: string;
@@ -13,14 +13,14 @@ const iconColors = {
   violet: "bg-violet-400",
 };
 
-export default function StatusCard({
+export default function StatCard({
   status,
   quantity,
   path,
   iconColor = "gray",
-}: StatusCardProps) {
+}: StatCardProps) {
   return (
-    <div className="flex flex-col items-start gap-1.5 p-3 bg-white rounded-lg shadow-md h-22 w-full">
+    <div className="flex flex-col items-start gap-1.5 p-3 bg-white rounded-xl shadow-md border border-gray-200 h-22 w-full">
       <div className="flex items-center ">
         <span className="px-3 py-1 text-xs text-gray-600 font-medium bg-gray-200/50 rounded-md">
           {status}

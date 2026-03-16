@@ -1,5 +1,7 @@
+import type { ColorButtonType } from "../../types";
+
 type ColorButtonProps = {
-  color?: "pink" | "blue" | "green" | "red" | "gray";
+  color?: ColorButtonType;
   height?: string;
   icon?: string;
   children: React.ReactNode;
@@ -12,6 +14,7 @@ const colorClasses = {
   green: "bg-green-500 hover:bg-green-600 active:bg-green-700",
   red: "bg-red-500 hover:bg-red-600 active:bg-red-700",
   gray: "bg-gray-500 hover:bg-gray-600 active:bg-gray-700",
+  violet: "bg-violet-500 hover:bg-violet-600 active:bg-violet-700",
 };
 
 export default function ColorButton({
