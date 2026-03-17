@@ -11,7 +11,7 @@ interface TopBarProps {
 
 function TopBar({
   kvpBar,
-  kvpButtonColor = "green",
+  kvpButtonColor = "blue",
   statButtonColor = "gray",
 }: TopBarProps) {
   const navigate = useNavigate();

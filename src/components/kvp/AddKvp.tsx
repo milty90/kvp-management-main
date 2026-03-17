@@ -85,9 +85,9 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                 <option className="placeholder:text-gray-400" value="">
                   Priorität
                 </option>
-                <option value="Hoch">Hoch</option>
-                <option value="Mittel">Mittel</option>
-                <option value="Niedrig">Niedrig</option>
+                <option value="High">Hoch</option>
+                <option value="Medium">Mittel</option>
+                <option value="Low">Niedrig</option>
               </select>
               <span className="text-xs pl-1 -mb-3 text-gray-500">
                 Erwarteter Nutzen

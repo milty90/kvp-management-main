@@ -5,12 +5,16 @@ const tabs = ["Keine", "Niedrig", "Mittel", "Hoch"];
 export default function PriorityGroup() {
   const [selected, setSelected] = useState("Keine");
 
+  const visibleTabs = selected === "Hoch" ? ["Keine", "Hoch"] : tabs;
+
   return (
     <div className="inline-flex items-center gap-1 bg-gray-200/80 p-1 rounded-xl">
-      {tabs.map((tab) => (
+      {visibleTabs.map((tab) => (
         <button
           key={tab}
-          onClick={() => setSelected(tab)}
+          onClick={() =>
+            setSelected(selected === tab && tab !== "Keine" ? "Keine" : tab)
+          }
           className={`
               px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${

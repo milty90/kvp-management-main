@@ -24,7 +24,7 @@ function StatsView({ kvps = [] }: StatsViewProps) {
         }
       />
       <StatActionBar />
-      <StatBar />
+      <StatBar kvps={kvps} />
     </div>
   );
 }

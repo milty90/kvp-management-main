@@ -1,5 +1,5 @@
 export type Priority = "Low" | "Medium" | "High";
-export type State = "Plan" | "Do" | "Check" | "Act";
+export type State = "Plan" | "Do" | "Check" | "Act" | "Abgelehnt" | "Closed";
 export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
 
 export type Kvp = {
