@@ -13,7 +13,7 @@ const kvps: Kvp[] = [
     category: "Kategorie 1",
     assignedTo: "",
     description: "Beschreibung des KVP",
-    state: "Plan",
+    state: "Check",
     priority: "High",
     createdBy: "Max Mustermann",
     createdAt: "01.01.2024",
@@ -27,7 +27,7 @@ const kvps: Kvp[] = [
     description:
       "Beschreibung des KVP 2 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     state: "Do",
-    priority: "High",
+    priority: "Medium",
     createdBy: "Erika Mustermann",
     createdAt: "02.01.2024",
     targetDate: "06.01.2024",
@@ -48,7 +48,7 @@ const kvps: Kvp[] = [
   {
     id: 4,
     title: "Beispiel KVP 4",
-    category: "Kategorie 4",
+    category: "Kategorie 3",
     assignedTo: "Jane Doe",
     description:
       "Beschreibung des KVP 4 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -56,12 +56,12 @@ const kvps: Kvp[] = [
     priority: "High",
     createdBy: "Jane Doe",
     createdAt: "04.01.2024",
-    targetDate: "08.01.2024",
+    targetDate: "04.01.2024",
   },
   {
     id: 5,
     title: "Beispiel KVP 5",
-    category: "Kategorie 5",
+    category: "Kategorie 2",
     assignedTo: "Max Mustermann",
     description:
       "Beschreibung des KVP 5 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -69,12 +69,12 @@ const kvps: Kvp[] = [
     priority: "Medium",
     createdBy: "Max Mustermann",
     createdAt: "05.01.2024",
-    targetDate: "09.01.2024",
+    targetDate: "04.01.2024",
   },
   {
     id: 6,
     title: "Beispiel KVP 6",
-    category: "Kategorie 6",
+    category: "Kategorie 3",
     assignedTo: "Erika Mustermann",
     description:
       "Beschreibung des KVP 6 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -87,7 +87,7 @@ const kvps: Kvp[] = [
   {
     id: 7,
     title: "Beispiel KVP 7",
-    category: "Kategorie 7",
+    category: "Kategorie 1",
     assignedTo: "John Doe",
     description:
       "Beschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -100,7 +100,7 @@ const kvps: Kvp[] = [
   {
     id: 8,
     title: "Beispiel KVP 8",
-    category: "Kategorie 8",
+    category: "Kategorie 2",
     assignedTo: "Jane Doe",
     description: "Beschreibung des KVP 8",
     state: "Do",
@@ -112,13 +112,13 @@ const kvps: Kvp[] = [
   {
     id: 9,
     title: "Beispiel KVP 9",
-    category: "Kategorie 9",
+    category: "Kategorie 2",
     assignedTo: "Jane Doe",
     description: "Beschreibung des KVP 9",
     state: "Act",
     priority: "Low",
     createdBy: "Jane Doe",
-    createdAt: "08.01.2024",
+    createdAt: "11.01.2024",
     targetDate: "12.01.2024",
   },
 ];

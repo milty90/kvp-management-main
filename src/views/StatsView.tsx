@@ -10,7 +10,7 @@ interface StatsViewProps {
 
 function StatsView({ kvps = [] }: StatsViewProps) {
   return (
-    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-screen overflow-hidden">
+    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-screen min-h-0 overflow-hidden">
       <TopBar
         kvpButtonColor="gray"
         statButtonColor="blue"
@@ -24,7 +24,9 @@ function StatsView({ kvps = [] }: StatsViewProps) {
         }
       />
       <StatActionBar />
-      <StatBar kvps={kvps} />
+      <div className="w-full flex-1 min-h-0">
+        <StatBar kvps={kvps} />
+      </div>
     </div>
   );
 }
