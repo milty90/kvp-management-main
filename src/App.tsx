@@ -13,7 +13,7 @@ const kvps: Kvp[] = [
     category: "Kategorie 1",
     assignedTo: "",
     description: "Beschreibung des KVP",
-    state: "Check",
+    state: "Act",
     priority: "High",
     createdBy: "Max Mustermann",
     createdAt: "01.01.2024",

@@ -15,4 +15,10 @@ export type Kvp = {
   targetDate: string;
 };
 
-export type ColorButtonType = "blue" | "green" | "violet" | "red" | "gray";
+export type ColorButtonType =
+  | "blue"
+  | "green"
+  | "violet"
+  | "red"
+  | "gray"
+  | "white";

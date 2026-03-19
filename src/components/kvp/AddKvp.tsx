@@ -104,7 +104,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
             <ColorButton color="gray" icon="" onClick={onClose}>
               Abbrechen
             </ColorButton>
-            <ColorButton color="green" icon="/add.svg">
+            <ColorButton color="blue" icon="/add.svg">
               KVP hinzufügen
             </ColorButton>
           </div>

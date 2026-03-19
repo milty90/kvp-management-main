@@ -28,7 +28,11 @@ function TopBar({
         <div className="flex items-start space-x-4 mr-4 -mb-3">
           <ColorButton
             color={kvpButtonColor}
-            icon="/trending.svg"
+            icon={
+              kvpButtonColor === "white"
+                ? "/trending-gray.svg"
+                : "/trending.svg"
+            }
             onClick={() => navigate("/")}
           >
             Verbesserungen
