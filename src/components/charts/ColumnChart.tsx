@@ -1,6 +1,4 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { createRoot } from "react-dom/client";
 import type { Kvp } from "../../types";
 
 interface ColumnChartProps {
@@ -12,7 +10,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
   const mediumCount = kvps.filter((k) => k.priority === "Medium").length;
   const highCount = kvps.filter((k) => k.priority === "High").length;
 
-  const [state, setState] = React.useState({
+  const state = {
     series: [
       {
         name: "Anzahl KVPs",
@@ -87,7 +85,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
         },
       },
     },
-  });
+  };
 
   return (
     <div>
@@ -104,9 +102,3 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
     </div>
   );
 };
-
-const domContainer = document.querySelector("#app");
-if (domContainer) {
-  const root = createRoot(domContainer);
-  root.render(<ColumnChart kvps={[]} />);
-}

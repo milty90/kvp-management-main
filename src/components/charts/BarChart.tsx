@@ -1,6 +1,4 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { createRoot } from "react-dom/client";
 import type { Kvp } from "../../types";
 
 interface BarChartProps {
@@ -16,7 +14,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
   const categories = Object.keys(categoryCounts);
   const counts = Object.values(categoryCounts);
 
-  const [state, setState] = React.useState({
+  const state = {
     series: [
       {
         data: counts,
@@ -41,7 +39,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
         categories: categories,
       },
     },
-  });
+  };
 
   return (
     <div>
@@ -58,8 +56,3 @@ export const BarChart = ({ kvps }: BarChartProps) => {
     </div>
   );
 };
-
-const domContainer = document.querySelector("#app");
-if (domContainer) {
-  createRoot(domContainer).render(<BarChart kvps={[]} />);
-}

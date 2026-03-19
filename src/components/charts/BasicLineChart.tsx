@@ -1,17 +1,39 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
-import { createRoot as reactCreateRoot } from "react-dom/client";
 
 interface BasicLineChartProps {
   kvps: Kvp[];
 }
+
+const MONTH_LABELS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
-  const [state, setState] = React.useState({
+  const countsByMonth: number[] = Array(12).fill(0);
+  kvps.forEach((k) => {
+    const date = new Date(k.createdAt);
+    if (!isNaN(date.getTime())) {
+      countsByMonth[date.getMonth()] += 1;
+    }
+  });
+
+  const state = {
     series: [
       {
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 120, 130, 160],
+        name: "Neue KVPs",
+        data: countsByMonth,
       },
     ],
     options: {
@@ -28,30 +50,16 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
       stroke: {
         curve: "smooth" as const,
       },
-
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"],
         },
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        categories: MONTH_LABELS,
       },
     },
-  });
+  };
 
   return (
     <div>
@@ -68,12 +76,3 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
     </div>
   );
 };
-
-const domContainer = document.querySelector("#app");
-if (domContainer) {
-  const root = createRoot(domContainer);
-  root.render(<BasicLineChart kvps={[]} />);
-}
-function createRoot(domContainer: Element) {
-  return reactCreateRoot(domContainer);
-}

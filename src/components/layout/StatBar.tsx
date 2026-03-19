@@ -1,9 +1,9 @@
-import { DonutChart } from "../charts/DonutChart";
-
 import { type Kvp } from "../../types";
 import { ColumnChart } from "../charts/ColumnChart";
 import { BarChart } from "../charts/BarChart";
 import { BasicLineChart } from "../charts/BasicLineChart";
+import { SimpleDonutChart } from "../charts/SimpleDonutChart";
+import { DonutChart } from "../charts/DonutChart";
 
 interface StatBarProps {
   kvps: Kvp[];
@@ -20,8 +20,8 @@ export default function StatBar({ kvps }: StatBarProps) {
           Anzahl der Verbesserungen pro Phase
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center mb-5 pr-15">
-          <DonutChart kvps={kvps} />
-          {/* <SimpleDonutChart kvps={kvps} /> */}
+          {/* <DonutChart kvps={kvps} /> */}
+          <SimpleDonutChart kvps={kvps} />
         </div>
       </div>
       <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-6 pb-0 ">

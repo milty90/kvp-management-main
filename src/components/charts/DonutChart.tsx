@@ -58,8 +58,8 @@ export const DonutChart = ({ kvps }: DonutChartProps) => {
   const size = 300;
   const center = size / 2;
   const radius = 110;
-  const strokeWidth = 25;
-  const gapAngle = 0.4;
+  const strokeWidth = 30;
+  const gapAngle = 0.5;
   const startAngle = -Math.PI / 2;
 
   const polarToCartesian = (angle: number) => ({
