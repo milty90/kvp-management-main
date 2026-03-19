@@ -3,7 +3,6 @@ import { ColumnChart } from "../charts/ColumnChart";
 import { BarChart } from "../charts/BarChart";
 import { BasicLineChart } from "../charts/BasicLineChart";
 import { SimpleDonutChart } from "../charts/SimpleDonutChart";
-import { DonutChart } from "../charts/DonutChart";
 
 interface StatBarProps {
   kvps: Kvp[];

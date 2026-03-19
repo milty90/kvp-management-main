@@ -125,6 +125,11 @@ const kvps: Kvp[] = [
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [kvpsState, setKvpsState] = useState<Kvp[]>(kvps);
+
+  const handleAddKvp = (newKvp: Kvp) => {
+    setKvpsState([...kvpsState, newKvp]);
+  };
 
   return (
     <BrowserRouter>
@@ -132,13 +137,15 @@ function App() {
         <Route
           path="/"
           element={
-            <KvpView kvps={kvps} onOpenModal={() => setShowModal(true)} />
+            <KvpView kvps={kvpsState} onOpenModal={() => setShowModal(true)} />
           }
         />
-        <Route path="/stats" element={<StatsView kvps={kvps} />} />
+        <Route path="/stats" element={<StatsView kvps={kvpsState} />} />
       </Routes>
 
-      {showModal && <AddKvp onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <AddKvp onClose={() => setShowModal(false)} onSubmit={handleAddKvp} />
+      )}
     </BrowserRouter>
   );
 }

@@ -13,6 +13,7 @@ export type Kvp = {
   createdBy: string;
   createdAt: string;
   targetDate: string;
+  expectedBenefit?: string;
 };
 
 export type ColorButtonType =
