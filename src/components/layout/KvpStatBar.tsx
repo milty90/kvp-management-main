@@ -14,7 +14,7 @@ export function KvpStatBar({
   highPriority,
 }: KvpStatBarProps) {
   return (
-    <div className="w-full p-4 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
+    <div className="w-full p-3 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
       <StatCard
         status="Gesamt"
         quantity={total.toString()}

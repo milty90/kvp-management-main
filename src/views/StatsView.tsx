@@ -2,13 +2,10 @@ import { KvpStatBar } from "../components/layout/KvpStatBar";
 import StatActionBar from "../components/layout/StatActionBar";
 import StatBar from "../components/layout/StatBar";
 import TopBar from "../components/layout/TopBar";
-import type { Kvp } from "../types";
+import { useKvpContext } from "../context/KvpContext";
 
-interface StatsViewProps {
-  kvps?: Kvp[];
-}
-
-function StatsView({ kvps = [] }: StatsViewProps) {
+function StatsView() {
+  const { kvps } = useKvpContext();
   return (
     <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-screen min-h-0 overflow-hidden">
       <TopBar
@@ -23,7 +20,7 @@ function StatsView({ kvps = [] }: StatsViewProps) {
           />
         }
       />
-      <StatActionBar />
+      {/* <StatActionBar /> */}
       <div className="w-full flex-1 min-h-0">
         <StatBar kvps={kvps} />
       </div>

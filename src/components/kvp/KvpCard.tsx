@@ -60,7 +60,7 @@ function KvpCard({
       <p className="text-gray-500 text-xs mb-4">{description}</p>
 
       <div className="flex items-center justify-between gap-2 mb-4">
-        <ColorButton color="green" height="1" icon="">
+        <ColorButton color="white" height="1" icon="">
           Details
         </ColorButton>
         <div className="flex items-center gap-1 text-gray-500">

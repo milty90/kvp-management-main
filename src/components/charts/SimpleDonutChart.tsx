@@ -24,7 +24,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
         position: "right" as const,
         offsetY: 28,
         itemMargin: {
-          vertical: 8,
+          vertical: 15,
         },
       },
 
@@ -36,7 +36,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
       plotOptions: {
         pie: {
           donut: {
-            size: "65%",
+            size: "55%",
 
             labels: {
               show: true,
@@ -89,7 +89,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
           options={state.options}
           series={state.series}
           type="donut"
-          width={340}
+          width={400}
         />
       </div>
       <div id="html-dist"></div>

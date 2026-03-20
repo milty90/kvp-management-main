@@ -1,20 +1,16 @@
 import CycleCard from "../cards/CycleCard";
 
-interface KvpCycleBarProps {
-  planQuantity: number;
-  doQuantity: number;
-  checkQuantity: number;
-  actQuantity: number;
-}
+import { useKvpContext } from "../../context/KvpContext";
 
-export default function KvpCycleBar({
-  planQuantity,
-  doQuantity,
-  checkQuantity,
-  actQuantity,
-}: KvpCycleBarProps) {
+export default function KvpCycleBar() {
+  const { kvps } = useKvpContext();
+  const planQuantity = kvps.filter((k) => k.state === "Plan").length;
+  const doQuantity = kvps.filter((k) => k.state === "Do").length;
+  const checkQuantity = kvps.filter((k) => k.state === "Check").length;
+  const actQuantity = kvps.filter((k) => k.state === "Act").length;
+
   return (
-    <div className="w-full p-4 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
+    <div className="w-full p-3 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
       <CycleCard
         color="yellow"
         label="Plan"

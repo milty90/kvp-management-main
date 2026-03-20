@@ -2,15 +2,14 @@ import { useState } from "react";
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
+import { ToastContainer, toast } from "react-toastify";
 
 interface AddKvpProps {
   onClose: () => void;
-  onSubmit?: (newKvp: Kvp) => void;
 }
 
-export default function AddKvp({ onClose, onSubmit }: AddKvpProps) {
+export default function AddKvp({ onClose }: AddKvpProps) {
   const { addKvp } = useKvpContext();
-  const kvpHandler = onSubmit ?? addKvp;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -44,8 +43,13 @@ export default function AddKvp({ onClose, onSubmit }: AddKvpProps) {
       createdAt: new Date().toISOString().split("T")[0],
       expectedBenefit: expectedBenefit.trim(),
     };
-    kvpHandler(newKvp);
+    addKvp(newKvp);
     onClose();
+    toast.success(`KVP ${newKvp.title} erfolgreich hinzugefügt!`, {
+      position: "top-center",
+      className:
+        "mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ",
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

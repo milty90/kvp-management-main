@@ -1,19 +1,18 @@
+import { useKvpContext } from "../../context/KvpContext";
 import KvpCard from "../kvp/KvpCard";
 
-type KvpBarProps = {
-  array: any[];
-  states: string[];
-};
+const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
-export default function KvpBar({ array, states }: KvpBarProps) {
+export default function KvpBar() {
+  const { kvps } = useKvpContext();
   return (
-    <div className="grid grid-cols-4 w-full p-4 rounded-lg bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
-      {states.map((state) => {
-        const filtered = array.filter((k) => k.state === state);
+    <div className="grid grid-cols-4 w-full pt-3 px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
+      {VALID_STATES.map((state) => {
+        const filtered = kvps.filter((k) => k.state === state);
 
         return (
           <div key={state} className="flex flex-col gap-3">
-            <div className="flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium  bg-gray-200/50">
+            <div className="flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium  bg-gray-300/50">
               <span className="text-sm ml-2 font-semibold text-gray-600">
                 {state}
               </span>
@@ -26,7 +25,7 @@ export default function KvpBar({ array, states }: KvpBarProps) {
             ) : (
               <div className="flex flex-col gap-3">
                 {filtered.map((kvp) => (
-                  <KvpCard key={kvp.id} {...kvp} />
+                  <KvpCard key={kvp.id} {...kvp} state={state} />
                 ))}
               </div>
             )}
