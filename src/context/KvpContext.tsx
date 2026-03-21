@@ -85,7 +85,7 @@ const initialKvps: Kvp[] = [
     category: "Kategorie 1",
     assignedTo: "John Doe",
     description:
-      "Beschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Beschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaBeschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Beschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Beschreibung des KVP 7 lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     state: "Plan",
     priority: "High",
     createdBy: "John Doe",
@@ -111,7 +111,7 @@ const initialKvps: Kvp[] = [
     assignedTo: "Jane Doe",
     description: "Beschreibung des KVP 9",
     state: "Act",
-    priority: "Low",
+    priority: "High",
     createdBy: "Jane Doe",
     createdAt: "11.11.2024",
     targetDate: "12.11.2024",

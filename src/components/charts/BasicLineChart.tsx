@@ -68,8 +68,8 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
           options={state.options}
           series={state.series}
           type="line"
-          height={300}
-          width={450}
+          height="300"
+          width="400"
         />
       </div>
       <div id="html-dist"></div>

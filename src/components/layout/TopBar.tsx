@@ -26,7 +26,7 @@ function TopBar({
             KVP Management System
           </p>
         </div>
-        <div className="flex items-start space-x-4 mr-3 -mb-3">
+        <div className="flex items-start space-x-3 mr-3 -mb-2.5">
           <ColorButton
             color={kvpButtonColor}
             icon={
@@ -54,7 +54,7 @@ function TopBar({
                 className: "mt-6 text-gray-500 text-sm font-poppins ",
               });
             }}
-            className="w-8.5 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer"
+            className="w-8 mt-0.5 -mr-0.4 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer"
           />
         </div>
       </div>

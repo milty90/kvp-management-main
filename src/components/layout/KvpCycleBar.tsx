@@ -11,15 +11,10 @@ export default function KvpCycleBar() {
 
   return (
     <div className="w-full p-3 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
+      <CycleCard color="blue" label="Plan" letter="P" quantity={planQuantity} />
+      <CycleCard color="violet" label="Do" letter="D" quantity={doQuantity} />
       <CycleCard
         color="yellow"
-        label="Plan"
-        letter="P"
-        quantity={planQuantity}
-      />
-      <CycleCard color="blue" label="Do" letter="D" quantity={doQuantity} />
-      <CycleCard
-        color="violet"
         label="Check"
         letter="C"
         quantity={checkQuantity}

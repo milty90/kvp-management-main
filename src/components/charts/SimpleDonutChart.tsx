@@ -11,6 +11,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
   const doCount = kvps.filter((k) => k.state === "Do").length;
   const checkCount = kvps.filter((k) => k.state === "Check").length;
   const actCount = kvps.filter((k) => k.state === "Act").length;
+
   const state = {
     series: [planCount, doCount, checkCount, actCount],
     options: {
@@ -19,7 +20,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
       },
 
       labels: ["Plan", "Do", "Check", "Act"],
-      colors: ["#F59E0B", "#3B82F6", "#8B5CF6", "#10B981"],
+      colors: ["#3B82F6", "#8B5CF6", "#F59E0B", "#10B981"],
       legend: {
         position: "right" as const,
         offsetY: 28,
@@ -89,7 +90,8 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
           options={state.options}
           series={state.series}
           type="donut"
-          width={400}
+          height="300"
+          width="400"
         />
       </div>
       <div id="html-dist"></div>

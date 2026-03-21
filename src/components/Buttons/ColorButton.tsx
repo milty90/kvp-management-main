@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { ColorButtonType } from "../../types";
 
 type ColorButtonProps = {
@@ -27,12 +28,24 @@ export default function ColorButton({
   children,
   type = "button",
 }: ColorButtonProps) {
+  const [isMedium, setIsMedium] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMedium(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <button
       type={type}
       onClick={onClick}
       className={`
-          inline-flex items-center gap-2 px-4 py-${height} rounded-lg
+          inline-flex items-center gap-1 px-4 py-${height} rounded-lg
           ${colorClasses[color]}
           ${color === "white" ? "text-gray-700" : "text-white"} text-sm font-medium
           shadow-[0_1px_1px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
@@ -44,7 +57,7 @@ export default function ColorButton({
       {icon ? (
         <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4 " />
       ) : null}
-      {children}
+      {isMedium ? children : null}
     </button>
   );
 }

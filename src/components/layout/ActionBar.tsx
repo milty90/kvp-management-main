@@ -11,11 +11,11 @@ interface ActionBarProps {
 function ActionBar({ onOpenModal }: ActionBarProps) {
   return (
     <div className="flex items-center gap-2 w-full bg-white px-2.5 py-2 rounded-xl shadow-md justify-between">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <ButtonGroup />
         <PriorityGroup />
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <WhiteButton
           onClick={() =>
             toast.info("Archivierungsfunktion ist derzeit nicht verfügbar.", {

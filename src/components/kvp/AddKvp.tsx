@@ -19,13 +19,42 @@ export default function AddKvp({ onClose }: AddKvpProps) {
   const [priority, setPriority] = useState<Kvp["priority"] | "">("");
   const [expectedBenefit, setExpectedBenefit] = useState("");
 
+  const priorityTextColor =
+    priority === "High"
+      ? "text-red-700"
+      : priority === "Medium"
+        ? "text-yellow-700"
+        : priority === "Low"
+          ? "text-green-700"
+          : "text-gray-400";
+
+  const pcdaTextColor =
+    pdcaState === "Plan"
+      ? "text-blue-700"
+      : pdcaState === "Do"
+        ? "text-violet-700"
+        : pdcaState === "Check"
+          ? "text-yellow-700"
+          : pdcaState === "Act"
+            ? "text-green-700"
+            : "text-gray-400";
+
+  const targetDateTextColor = targetDate
+    ? new Date(targetDate) < new Date()
+      ? "text-red-700"
+      : "text-gray-700"
+    : "text-gray-400";
+
   const submitForm = () => {
     if (
       !title.trim() ||
       !description.trim() ||
       !category.trim() ||
       !pdcaState ||
-      !priority
+      !priority ||
+      !assignedTo.trim() ||
+      !targetDate ||
+      targetDateTextColor === "text-red-700"
     ) {
       return;
     }
@@ -90,7 +119,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
             type="text"
             required
             placeholder="Titel"
-            className="w-full border text-sm border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border text-sm text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <span className="text-sm pl-1 -mb-3 text-gray-500">
             Beschreibung *
@@ -100,7 +129,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder="Beschreibung"
-            className="w-full border text-sm border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border text-sm text-gray-800 border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <div className="grid grid-cols-2 items-center mt-3 gap-4 w-full">
             <div className="flex flex-col items-start gap-4">
@@ -113,7 +142,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                 onChange={(e) => setCategory(e.target.value)}
                 required
                 placeholder="Kategorie"
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className="text-xs w-full border text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
               />
               <span className="text-xs pl-1 -mb-3 text-gray-500">
                 PCDA-Phase *
@@ -124,7 +153,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                   setPdcaState(e.target.value as Kvp["state"] | "")
                 }
                 required
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${pcdaTextColor}`}
               >
                 <option value="">PCDA-Phase</option>
                 <option value="Plan">Plan</option>
@@ -140,11 +169,11 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                 onChange={(e) => setAssignedTo(e.target.value)}
                 type="text"
                 placeholder="Zugewiesen an"
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className="text-xs w-full border text-gray-700 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
               />
             </div>
             <div className="flex flex-col items-start gap-4">
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-gray-500 ">
                 Zieldatum
               </span>
               <input
@@ -152,7 +181,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
                 placeholder="Zieldatum"
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className={`text-xs w-full border text-gray-400 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 ${targetDateTextColor}`}
               />
               <span className="text-xs pl-1 -mb-3 text-gray-500">
                 Priorität *
@@ -163,11 +192,9 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                   setPriority(e.target.value as Kvp["priority"] | "")
                 }
                 required
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 ${priorityTextColor}`}
               >
-                <option className="placeholder:text-gray-400" value="">
-                  Priorität
-                </option>
+                <option value="">Priorität</option>
                 <option value="High">Hoch</option>
                 <option value="Medium">Mittel</option>
                 <option value="Low">Niedrig</option>
@@ -180,7 +207,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
                 placeholder="z.B 30% Zeitersparnis"
                 value={expectedBenefit}
                 onChange={(e) => setExpectedBenefit(e.target.value)}
-                className="text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-400"
+                className="text-xs w-full border text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-400"
               />
             </div>
           </div>

@@ -23,7 +23,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
     options: {
       chart: {
         type: "bar" as const,
-        height: 200,
+        height: 350,
       },
       plotOptions: {
         bar: {
@@ -48,8 +48,8 @@ export const BarChart = ({ kvps }: BarChartProps) => {
           options={state.options}
           series={state.series}
           type="bar"
-          height={300}
-          width={450}
+          height="300"
+          width="400"
         />
       </div>
       <div id="html-dist"></div>

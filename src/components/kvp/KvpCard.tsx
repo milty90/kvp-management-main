@@ -32,8 +32,8 @@ function KvpCard({
 }: KvpCardProps) {
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-semibold ">{title}</h2>
+      <div className="flex items-start justify-between mb-2">
+        <h2 className="text-lg font-semibold text-pretty break-all">{title}</h2>
         <img
           src="/more.svg"
           alt="More"
@@ -41,7 +41,9 @@ function KvpCard({
         />
       </div>
 
-      <p className="text-gray-500 text-md mb-3">{category}</p>
+      <p className="text-gray-500 text-md text-pretty break-all mb-3">
+        {category}
+      </p>
 
       <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
         <span className="text-sm ">Priorität:</span>
@@ -55,9 +57,13 @@ function KvpCard({
       {/* Divider */}
       <div className="border-t border-gray-200 mb-3" />
 
-      <p className="font-normal text-sm mb-3">Zugewiesen: {assignedTo}</p>
+      <p className="font-normal text-wrap break-all text-sm mb-3">
+        Zugewiesen: {assignedTo}
+      </p>
 
-      <p className="text-gray-500 text-xs mb-4">{description}</p>
+      <p className="text-gray-500 text-wrap break-all text-xs mb-4">
+        {description}
+      </p>
 
       <div className="flex items-center justify-between gap-2 mb-4">
         <ColorButton color="white" height="1" icon="">
