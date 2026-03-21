@@ -13,7 +13,7 @@ export default function WhiteButton({
     <button
       onClick={onClick}
       className="
-          inline-flex items-center gap-2 px-4 py-2 rounded-lg
+          inline-flex w-fit items-center gap-2 px-4 py-2 rounded-lg
           bg-white hover:bg-gray-50
           text-gray-700 hover:text-gray-900 text-sm font-medium
           border border-gray-200 hover:border-gray-300
@@ -24,7 +24,7 @@ export default function WhiteButton({
         "
     >
       {icon ? (
-        <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4 " />
+        <img src={icon ? icon : "/info.svg"} alt="Icon" className="h-4 w-4 " />
       ) : null}
       {children}
     </button>

@@ -3,7 +3,11 @@ import KvpCard from "../kvp/KvpCard";
 
 const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
-export default function KvpBar() {
+interface KvpBarProps {
+  onOpenModal: () => void;
+}
+
+export default function KvpBar({ onOpenModal }: KvpBarProps) {
   const { kvps } = useKvpContext();
   return (
     <div className="grid grid-cols-4 w-full pt-3 px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
@@ -25,7 +29,12 @@ export default function KvpBar() {
             ) : (
               <div className="flex flex-col gap-3">
                 {filtered.map((kvp) => (
-                  <KvpCard key={kvp.id} {...kvp} state={state} />
+                  <KvpCard
+                    key={kvp.id}
+                    {...kvp}
+                    state={state}
+                    onOpenModal={onOpenModal}
+                  />
                 ))}
               </div>
             )}

@@ -16,7 +16,7 @@ function KvpView({ onOpenModal }: KvpViewProps) {
         kvpBar={<KvpCycleBar />}
       />
       <ActionBar onOpenModal={onOpenModal} />
-      <KvpBar />
+      <KvpBar onOpenModal={onOpenModal} />
     </div>
   );
 }

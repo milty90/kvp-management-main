@@ -1,6 +1,8 @@
-import ColorButton from "../buttons/ColorButton";
+import { toast } from "react-toastify";
+import WhiteButton from "../buttons/WhiteButton";
+import { useKvpContext } from "../../context/KvpContext";
 
-type KvpCardProps = {
+interface KvpCardProps {
   title: string;
   category: string;
   colorPriority?: "green" | "orange" | "red" | "gray";
@@ -11,7 +13,8 @@ type KvpCardProps = {
   createdBy: string;
   createdAt: string;
   targetDate: string;
-};
+  onOpenModal: () => void;
+}
 
 const priorityColors = {
   High: "border-red-400",
@@ -29,24 +32,29 @@ function KvpCard({
   createdBy,
   createdAt,
   targetDate,
+  onOpenModal,
 }: KvpCardProps) {
+  const kvpContent = useKvpContext();
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
       <div className="flex items-start justify-between mb-2">
-        <h2 className="text-lg font-semibold text-pretty break-all">{title}</h2>
+        <h2 className="text-sm lg:text-lg font-semibold text-pretty break-all">
+          {title}
+        </h2>
         <img
+          onClick={onOpenModal}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover"
         />
       </div>
 
-      <p className="text-gray-500 text-md text-pretty break-all mb-3">
+      <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
         {category}
       </p>
 
       <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
-        <span className="text-sm ">Priorität:</span>
+        <span className="text-xs lg:text-sm ">Priorität:</span>
         <span
           className={`px-2.5 py-0.5 text-xs text-gray-600 font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
         >
@@ -65,11 +73,20 @@ function KvpCard({
         {description}
       </p>
 
-      <div className="flex items-center justify-between gap-2 mb-4">
-        <ColorButton color="white" height="1" icon="">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
+        <WhiteButton
+          icon=""
+          onClick={() =>
+            toast.info("Details anzeigen ist derzeit nicht verfügbar.", {
+              position: "top-center",
+              className: "mt-6 text-gray-500 text-sm font-poppins ",
+            })
+          }
+        >
           Details
-        </ColorButton>
-        <div className="flex items-center gap-1 text-gray-500">
+        </WhiteButton>
+
+        <div className="flex items-center gap-1 md:ml-1 text-gray-500">
           <span className="text-sm ">Status:</span>
           <span className={`px-2.5 py-0.5 text-sm text-gray-600 font-medium `}>
             {state}
@@ -85,25 +102,25 @@ function KvpCard({
           <img
             src="/user.svg"
             alt="User"
-            className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
+            className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
           {createdBy}
         </span>
         <span className="text-xs py-0.5 text-gray-500">
           <img
-            src="/target.svg"
-            alt="Target"
-            className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
+            src="/calender.svg"
+            alt="Calender"
+            className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          Zieldatum: {targetDate}
+          Erstellt: {createdAt.slice(2, 10)}
         </span>
         <span className="text-xs py-0.5 text-gray-500">
           <img
-            src="/calender.svg"
-            alt="Calender"
-            className="h-4 w-4 rounded-full object-cover inline-block mr-1.5 mb-1"
+            src="/target.svg"
+            alt="Target"
+            className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          Erstellt: {createdAt}
+          Zieldatum: {targetDate.slice(2, 10)}
         </span>
       </div>
     </div>

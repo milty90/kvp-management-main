@@ -2,8 +2,7 @@ import { useState } from "react";
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
-import { ToastContainer, toast } from "react-toastify";
-
+import { toast } from "react-toastify";
 interface AddKvpProps {
   onClose: () => void;
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import type { ColorButtonType } from "../../types";
 
 type ColorButtonProps = {
@@ -28,36 +27,24 @@ export default function ColorButton({
   children,
   type = "button",
 }: ColorButtonProps) {
-  const [isMedium, setIsMedium] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMedium(window.innerWidth > 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
   return (
     <button
       type={type}
       onClick={onClick}
       className={`
-          inline-flex items-center gap-1 px-4 py-${height} rounded-lg
+          inline-flex items-center gap-2 px-4 py-${height} h-9 rounded-lg
           ${colorClasses[color]}
           ${color === "white" ? "text-gray-700" : "text-white"} text-sm font-medium
           shadow-[0_1px_1px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
           hover:shadow-[0_2px_2px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
           active:scale-[0.98] active:bg-${color}-700
-          transition-all duration-150
+          transition-all duration-150 
         `}
     >
       {icon ? (
-        <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4 " />
-      ) : null}
-      {isMedium ? children : null}
+        <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4" />
+      ) : null}{" "}
+      <span className="hidden md:inline">{children}</span>
     </button>
   );
 }
