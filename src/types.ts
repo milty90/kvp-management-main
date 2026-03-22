@@ -16,6 +16,13 @@ export type Kvp = {
   expectedBenefit?: string;
 };
 
+export type KvpManagementState = Kvp[];
+
+export type KvpManagementAction = {
+  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP";
+  kvp: Kvp;
+};
+
 export type ColorButtonType =
   | "blue"
   | "green"
