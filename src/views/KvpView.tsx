@@ -9,14 +9,14 @@ interface KvpViewProps {
 
 function KvpView({ onOpenModal }: KvpViewProps) {
   return (
-    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-4 h-screen">
+    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-3 h-screen">
       <TopBar
         kvpButtonColor="blue"
         statButtonColor="gray"
         kvpBar={<KvpCycleBar />}
       />
-      <ActionBar onOpenModal={onOpenModal} />
-      <KvpBar onOpenModal={onOpenModal} />
+      <ActionBar onOpenModal={() => onOpenModal()} />
+      <KvpBar onOpenModal={() => onOpenModal()} />
     </div>
   );
 }

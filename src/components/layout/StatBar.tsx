@@ -19,7 +19,6 @@ export default function StatBar({ kvps }: StatBarProps) {
           Anzahl der Verbesserungen pro Phase
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center mb-5 pr-10">
-          {/* <DonutChart kvps={kvps} /> */}
           <SimpleDonutChart kvps={kvps} />
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { toast } from "react-toastify";
 import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 
 interface KvpCardProps {
+  id: number;
   title: string;
   category: string;
   colorPriority?: "green" | "orange" | "red" | "gray";
@@ -23,6 +23,7 @@ const priorityColors = {
 };
 
 function KvpCard({
+  id,
   title,
   category,
   assignedTo,
@@ -34,7 +35,25 @@ function KvpCard({
   targetDate,
   onOpenModal,
 }: KvpCardProps) {
-  const kvpContent = useKvpContext();
+  const { setSelectedKvp } = useKvpContext();
+
+  const handleEditClick = () => {
+    setSelectedKvp({
+      id,
+      title,
+      category,
+      assignedTo,
+      description,
+      state,
+      priority,
+      createdBy,
+      createdAt,
+      targetDate,
+    });
+
+    onOpenModal();
+  };
+
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
       <div className="flex items-start justify-between mb-2">
@@ -42,7 +61,7 @@ function KvpCard({
           {title}
         </h2>
         <img
-          onClick={onOpenModal}
+          onClick={handleEditClick}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover"
@@ -74,16 +93,8 @@ function KvpCard({
       </p>
 
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
-        <WhiteButton
-          icon=""
-          onClick={() =>
-            toast.info("Details anzeigen ist derzeit nicht verfügbar.", {
-              position: "top-center",
-              className: "mt-6 text-gray-500 text-sm font-poppins ",
-            })
-          }
-        >
-          Details
+        <WhiteButton icon="" height="0.5" onClick={handleEditClick}>
+          Edit
         </WhiteButton>
 
         <div className="flex items-center gap-1 md:ml-1 text-gray-500">

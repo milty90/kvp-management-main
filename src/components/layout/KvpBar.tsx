@@ -10,7 +10,7 @@ interface KvpBarProps {
 export default function KvpBar({ onOpenModal }: KvpBarProps) {
   const { kvps } = useKvpContext();
   return (
-    <div className="grid grid-cols-4 w-full pt-3 px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 w-full pt-3 px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
       {VALID_STATES.map((state) => {
         const filtered = kvps.filter((k) => k.state === state);
 

@@ -13,9 +13,9 @@ export const DonutChart = ({ kvps }: DonutChartProps) => {
 
   const segments = useMemo(
     () => [
-      { label: "Plan", value: planCount, color: "#F59E0B" },
-      { label: "Do", value: doCount, color: "#3B82F6" },
-      { label: "Check", value: checkCount, color: "#7C3AED" },
+      { label: "Plan", value: planCount, color: "#3B82F6" },
+      { label: "Do", value: doCount, color: "#7C3AED" },
+      { label: "Check", value: checkCount, color: "#F59E0B" },
       { label: "Act", value: actCount, color: "#10B981" },
     ],
     [planCount, doCount, checkCount, actCount],

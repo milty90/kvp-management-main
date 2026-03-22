@@ -10,6 +10,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --toastify-color-info: #2b7fff;
+  --toastify-color-success: #18cb96;
 }
 
 html,

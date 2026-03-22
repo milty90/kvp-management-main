@@ -1,22 +1,35 @@
 import { useState } from "react";
+import type { ComponentProps } from "react";
+
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-interface AddKvpProps {
+
+interface KvpFormProps {
   onClose: () => void;
+  initialData?: Kvp;
 }
 
-export default function AddKvp({ onClose }: AddKvpProps) {
-  const { addKvp } = useKvpContext();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [pdcaState, setPdcaState] = useState<Kvp["state"] | "">("");
-  const [assignedTo, setAssignedTo] = useState("");
-  const [targetDate, setTargetDate] = useState("");
-  const [priority, setPriority] = useState<Kvp["priority"] | "">("");
-  const [expectedBenefit, setExpectedBenefit] = useState("");
+export default function KvpForm({ onClose, initialData }: KvpFormProps) {
+  const { addKvp, updateKvp } = useKvpContext();
+
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [description, setDescription] = useState(
+    initialData?.description || "",
+  );
+  const [category, setCategory] = useState(initialData?.category || "");
+  const [pdcaState, setPdcaState] = useState<Kvp["state"] | "">(
+    initialData?.state || "",
+  );
+  const [assignedTo, setAssignedTo] = useState(initialData?.assignedTo || "");
+  const [targetDate, setTargetDate] = useState(initialData?.targetDate || "");
+  const [priority, setPriority] = useState<Kvp["priority"] | "">(
+    initialData?.priority || "",
+  );
+  const [expectedBenefit, setExpectedBenefit] = useState(
+    initialData?.expectedBenefit || "",
+  );
 
   const priorityTextColor =
     priority === "High"
@@ -44,7 +57,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
       : "text-gray-700"
     : "text-gray-400";
 
-  const submitForm = () => {
+  function submitForm() {
     if (
       !title.trim() ||
       !description.trim() ||
@@ -71,16 +84,36 @@ export default function AddKvp({ onClose }: AddKvpProps) {
       createdAt: new Date().toISOString().split("T")[0],
       expectedBenefit: expectedBenefit.trim(),
     };
-    addKvp(newKvp);
-    onClose();
-    toast.success(`KVP ${newKvp.title} erfolgreich hinzugefügt!`, {
-      position: "top-center",
-      className:
-        "mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ",
-    });
-  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const updateKvpData: Kvp = {
+      id: initialData?.id || Date.now(),
+      title: title.trim(),
+      description: description.trim(),
+      category: category.trim(),
+      state: pdcaState,
+      assignedTo: assignedTo.trim(),
+      targetDate,
+      priority,
+      createdBy: initialData?.createdBy || "Aktueller Benutzer",
+      createdAt:
+        initialData?.createdAt || new Date().toISOString().split("T")[0],
+      expectedBenefit: expectedBenefit.trim(),
+    };
+
+    initialData ? updateKvp(updateKvpData) : addKvp(newKvp);
+
+    onClose();
+    toast.success(
+      `KVP ${initialData ? "aktualisiert" : "hinzugefügt"}: ${initialData ? updateKvpData.title : newKvp.title}`,
+      {
+        position: "top-center",
+        className:
+          "mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ",
+      },
+    );
+  }
+
+  const handleSubmit: NonNullable<ComponentProps<"form">["onSubmit"]> = (e) => {
     e.preventDefault();
     submitForm();
   };
@@ -96,7 +129,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
           &times;
         </button>
         <h2 className="text-2xl text-gray-700 font-semibold  mt-4">
-          Neuen KVP hinzufügen
+          {initialData ? "KVP bearbeiten" : "Neuen KVP erstellen"}
           <img
             src="/spark-logo.png"
             alt="Add"
@@ -216,7 +249,7 @@ export default function AddKvp({ onClose }: AddKvpProps) {
               Abbrechen
             </ColorButton>
             <ColorButton color="blue" icon="/add.svg" type="submit">
-              KVP hinzufügen
+              {initialData ? "KVP speichern" : "Neuen KVP erstellen"}
             </ColorButton>
           </div>
         </form>

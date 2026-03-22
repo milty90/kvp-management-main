@@ -38,7 +38,7 @@ export default function StatCard({
         </div>
 
         <div
-          className={`flex items-center justify-center -mt-3 shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
+          className={`flex items-center hidden md:inline justify-center -mt-3 shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
         >
           <img
             src={path || "/"}

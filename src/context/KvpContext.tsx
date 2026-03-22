@@ -119,25 +119,43 @@ import type { Kvp } from "../types";
 // ];
 
 const initialKvps: Kvp[] = [];
+
 interface KvpContextType {
   kvps: Kvp[];
   addKvp: (kvp: Kvp) => void;
+  updateKvp: (kvp: Kvp) => void;
+  selectedKvp: Kvp | null;
+  setSelectedKvp: (kvp: Kvp | null) => void;
 }
 
 const KvpContext = createContext<KvpContextType>({
   kvps: initialKvps,
   addKvp: () => {},
+  updateKvp: () => {},
+  selectedKvp: null,
+  setSelectedKvp: () => {},
 });
 
 export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
   const [kvps, setKvps] = useState<Kvp[]>(initialKvps);
+  const [selectedKvp, setSelectedKvp] = useState<Kvp | null>(null);
 
   const addKvp = (kvp: Kvp) => {
     setKvps((prevKvps) => [...prevKvps, kvp]);
+    setSelectedKvp(null);
+  };
+
+  const updateKvp = (updatedKvp: Kvp) => {
+    setKvps((prevKvps) =>
+      prevKvps.map((kvp) => (kvp.id === updatedKvp.id ? updatedKvp : kvp)),
+    );
+    setSelectedKvp(null);
   };
 
   return (
-    <KvpContext.Provider value={{ kvps, addKvp }}>
+    <KvpContext.Provider
+      value={{ kvps, addKvp, updateKvp, selectedKvp, setSelectedKvp }}
+    >
       {children}
     </KvpContext.Provider>
   );
