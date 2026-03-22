@@ -1,5 +1,6 @@
 import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
+import { toast } from "react-toastify";
 
 interface KvpCardProps {
   id: number;
@@ -61,7 +62,12 @@ function KvpCard({
           {title}
         </h2>
         <img
-          onClick={handleEditClick}
+          onClick={() => {
+            toast.warning("Weitere Optionen sind derzeit nicht verfügbar.", {
+              position: "top-center",
+              className: "mt-6 text-sm font-poppins ",
+            });
+          }}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover"
