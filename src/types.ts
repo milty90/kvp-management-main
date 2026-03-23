@@ -13,7 +13,7 @@ export type Kvp = {
   createdBy: string;
   createdAt: string;
   targetDate: string;
-  expectedBenefit?: string;
+  benefit?: string;
 };
 
 export type KvpManagementState = Kvp[];

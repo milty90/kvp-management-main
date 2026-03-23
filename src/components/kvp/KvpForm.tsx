@@ -1,10 +1,11 @@
 import { useState } from "react";
-import type { ComponentProps } from "react";
-
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
+
+import { kvpInputFormData } from "../../utils/kvpInputFormData";
+import { kvpInputFormColor } from "../../utils/kvpInputFromColor";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -13,7 +14,6 @@ interface KvpFormProps {
 
 export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const { addKvp, updateKvp } = useKvpContext();
-
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(
     initialData?.description || "",
@@ -27,35 +27,26 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const [priority, setPriority] = useState<Kvp["priority"] | "">(
     initialData?.priority || "",
   );
-  const [expectedBenefit, setExpectedBenefit] = useState(
-    initialData?.expectedBenefit || "",
-  );
+  const [benefit, setBenefit] = useState(initialData?.benefit || "");
 
-  const priorityTextColor =
-    priority === "High"
-      ? "text-red-700"
-      : priority === "Medium"
-        ? "text-yellow-700"
-        : priority === "Low"
-          ? "text-green-700"
-          : "text-gray-400";
+  const { pcdaTextColor, priorityTextColor, targetDateTextColor } =
+    kvpInputFormColor({
+      pdcaState: pdcaState as Kvp["state"],
+      targetDate,
+      priority: priority as Kvp["priority"],
+    });
 
-  const pcdaTextColor =
-    pdcaState === "Plan"
-      ? "text-blue-700"
-      : pdcaState === "Do"
-        ? "text-violet-700"
-        : pdcaState === "Check"
-          ? "text-yellow-700"
-          : pdcaState === "Act"
-            ? "text-green-700"
-            : "text-gray-400";
-
-  const targetDateTextColor = targetDate
-    ? new Date(targetDate) < new Date()
-      ? "text-red-700"
-      : "text-gray-700"
-    : "text-gray-400";
+  const { newKvp, updateKvpData } = kvpInputFormData({
+    title,
+    description,
+    category,
+    pdcaState: pdcaState as Kvp["state"],
+    assignedTo,
+    targetDate,
+    priority: priority as Kvp["priority"],
+    benefit: benefit,
+    initialData,
+  });
 
   function submitForm() {
     if (
@@ -71,35 +62,6 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       return;
     }
 
-    const newKvp: Kvp = {
-      id: Date.now(),
-      title: title.trim(),
-      description: description.trim(),
-      category: category.trim(),
-      state: pdcaState,
-      assignedTo: assignedTo.trim(),
-      targetDate,
-      priority,
-      createdBy: "Aktueller Benutzer",
-      createdAt: new Date().toISOString().split("T")[0],
-      expectedBenefit: expectedBenefit.trim(),
-    };
-
-    const updateKvpData: Kvp = {
-      id: initialData?.id || Date.now(),
-      title: title.trim(),
-      description: description.trim(),
-      category: category.trim(),
-      state: pdcaState,
-      assignedTo: assignedTo.trim(),
-      targetDate,
-      priority,
-      createdBy: initialData?.createdBy || "Aktueller Benutzer",
-      createdAt:
-        initialData?.createdAt || new Date().toISOString().split("T")[0],
-      expectedBenefit: expectedBenefit.trim(),
-    };
-
     initialData ? updateKvp(updateKvpData) : addKvp(newKvp);
 
     onClose();
@@ -112,11 +74,6 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       },
     );
   }
-
-  const handleSubmit: NonNullable<ComponentProps<"form">["onSubmit"]> = (e) => {
-    e.preventDefault();
-    submitForm();
-  };
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-700/80 shadow-md flex items-center justify-center">
@@ -142,7 +99,10 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
         </p>
         <form
           className="flex flex-col items-start gap-4"
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitForm();
+          }}
         >
           <span className="text-sm pl-1 -mb-3 text-gray-500">Titel *</span>
           <input
@@ -237,8 +197,8 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
               <input
                 type="text"
                 placeholder="z.B 30% Zeitersparnis"
-                value={expectedBenefit}
-                onChange={(e) => setExpectedBenefit(e.target.value)}
+                value={benefit}
+                onChange={(e) => setBenefit(e.target.value)}
                 className="text-xs w-full border text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-400"
               />
             </div>
