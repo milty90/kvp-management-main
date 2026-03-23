@@ -14,6 +14,7 @@ interface KvpCardProps {
   createdBy: string;
   createdAt: string;
   targetDate: string;
+  benefit?: string;
   onOpenModal: () => void;
 }
 
@@ -34,6 +35,7 @@ function KvpCard({
   createdBy,
   createdAt,
   targetDate,
+  benefit,
   onOpenModal,
 }: KvpCardProps) {
   const { setSelectedKvp } = useKvpContext();
@@ -50,6 +52,7 @@ function KvpCard({
       createdBy,
       createdAt,
       targetDate,
+      benefit,
     });
 
     onOpenModal();
@@ -93,9 +96,12 @@ function KvpCard({
       <p className="font-normal text-wrap break-all text-sm mb-3">
         Zugewiesen: {assignedTo}
       </p>
+      <p className="font-normal text-wrap break-all text-sm mb-3">
+        Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
+      </p>
 
       <p className="text-gray-500 text-wrap break-all text-xs mb-4">
-        {description}
+        Beschreibung : {description}
       </p>
 
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
