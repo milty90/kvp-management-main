@@ -48,7 +48,7 @@ export function kvpInputFormData({
     priority,
     createdBy: initialData?.createdBy || "Aktueller Benutzer",
     createdAt: initialData?.createdAt || new Date().toISOString().split("T")[0],
-    benefit: initialData?.benefit || benefit.trim(),
+    benefit: benefit?.trim(),
   };
 
   return {

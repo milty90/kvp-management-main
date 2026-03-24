@@ -61,9 +61,7 @@ function KvpCard({
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
       <div className="flex items-start justify-between mb-2">
-        <h2 className="text-sm lg:text-lg font-semibold text-pretty break-all">
-          {title}
-        </h2>
+        <p className="text-sm lg:text-lg  font-semibold ">{title}</p>
         <img
           onClick={() => {
             toast.warning("Weitere Optionen sind derzeit nicht verfügbar.", {
@@ -94,13 +92,13 @@ function KvpCard({
       <div className="border-t border-gray-200 mb-3" />
 
       <p className="font-normal text-wrap break-all text-sm mb-3">
-        Zugewiesen: {assignedTo}
+        Zugewiesen an: {assignedTo}
       </p>
-      <p className="font-normal text-wrap break-all text-sm mb-3">
+      <p className="font-normal truncate text-sm mb-3">
         Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
       </p>
 
-      <p className="text-gray-500 text-wrap break-all text-xs mb-4">
+      <p className="text-gray-500 text-pretty text-xs mb-4">
         Beschreibung : {description}
       </p>
 
