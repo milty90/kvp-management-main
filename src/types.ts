@@ -1,5 +1,5 @@
 export type Priority = "Low" | "Medium" | "High";
-export type State = "Plan" | "Do" | "Check" | "Act" | "Abgelehnt" | "Closed";
+export type State = "Plan" | "Do" | "Check" | "Act" | "Abgelehnt";
 export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
 
 export type Kvp = {
@@ -14,6 +14,12 @@ export type Kvp = {
   createdAt: string;
   targetDate: string;
   benefit?: string;
+};
+
+export type FormColor = {
+  pdcaState?: State | "";
+  targetDate?: string;
+  priority?: Priority | "";
 };
 
 export type KvpManagementState = Kvp[];
