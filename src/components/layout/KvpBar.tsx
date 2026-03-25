@@ -5,9 +5,10 @@ const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
 interface KvpBarProps {
   onOpenModal: () => void;
+  onOpenMenu: () => void;
 }
 
-export default function KvpBar({ onOpenModal }: KvpBarProps) {
+export default function KvpBar({ onOpenModal, onOpenMenu }: KvpBarProps) {
   const { kvps } = useKvpContext();
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 w-full pt-3 px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto flex-1 scrollbar-none">
@@ -34,6 +35,7 @@ export default function KvpBar({ onOpenModal }: KvpBarProps) {
                     {...kvp}
                     state={state}
                     onOpenModal={onOpenModal}
+                    onOpenMenu={onOpenMenu}
                   />
                 ))}
               </div>

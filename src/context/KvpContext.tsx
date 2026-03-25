@@ -47,6 +47,18 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedKvp(null);
   };
 
+  const deleteKvp = (id: number) => {
+    setKvps({ type: "DELETE_KVP", kvp: { id } as Kvp });
+    setSelectedKvp(null);
+  };
+
+  const archiveKvp = (id: number) => {
+    // Implementiere Archivierungslogik hier, z.B. durch Setzen eines "archived" Flags
+    // oder Verschieben des KVPs in eine separate Liste.
+    // Für jetzt wird es einfach gelöscht.
+    deleteKvp(id);
+  };
+
   return (
     <KvpContext.Provider
       value={{ kvps, addKvp, updateKvp, selectedKvp, setSelectedKvp }}

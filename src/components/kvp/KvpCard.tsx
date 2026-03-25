@@ -1,6 +1,8 @@
 import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
+import MenuItem from "../buttons/MenuItem";
+import { useState } from "react";
 
 interface KvpCardProps {
   id: number;
@@ -16,6 +18,7 @@ interface KvpCardProps {
   targetDate: string;
   benefit?: string;
   onOpenModal: () => void;
+  onOpenMenu: () => void;
 }
 
 const priorityColors = {
@@ -37,8 +40,10 @@ function KvpCard({
   targetDate,
   benefit,
   onOpenModal,
+  onOpenMenu,
 }: KvpCardProps) {
   const { setSelectedKvp } = useKvpContext();
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleEditClick = () => {
     setSelectedKvp({
@@ -62,17 +67,22 @@ function KvpCard({
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
       <div className="flex items-start justify-between mb-2">
         <p className="text-sm lg:text-lg  font-semibold ">{title}</p>
+
         <img
-          onClick={() => {
-            toast.warning("Weitere Optionen sind derzeit nicht verfügbar.", {
-              position: "top-center",
-              className: "mt-6 text-sm font-poppins ",
-            });
-          }}
+          onClick={() => setShowMenu(!showMenu)}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover"
         />
+      </div>
+      <div className="relative">
+        {showMenu && (
+          <MenuItem
+            onArchive={() => console.log("Archivieren clicked")}
+            onReject={() => console.log("Ablehnen clicked")}
+            onDelete={() => console.log("Löschen clicked")}
+          />
+        )}
       </div>
 
       <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
