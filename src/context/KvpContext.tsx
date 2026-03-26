@@ -15,6 +15,7 @@ interface KvpContextType {
   kvps: Kvp[];
   addKvp: (kvp: Kvp) => void;
   updateKvp: (kvp: Kvp) => void;
+  deleteKvp: (id: number) => void;
   selectedKvp: Kvp | null;
   setSelectedKvp: (kvp: Kvp | null) => void;
 }
@@ -23,6 +24,7 @@ const KvpContext = createContext<KvpContextType>({
   kvps: initialKvps,
   addKvp: () => {},
   updateKvp: () => {},
+  deleteKvp: () => {},
   selectedKvp: null,
   setSelectedKvp: () => {},
 });
@@ -52,16 +54,16 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedKvp(null);
   };
 
-  const archiveKvp = (id: number) => {
-    // Implementiere Archivierungslogik hier, z.B. durch Setzen eines "archived" Flags
-    // oder Verschieben des KVPs in eine separate Liste.
-    // Für jetzt wird es einfach gelöscht.
-    deleteKvp(id);
-  };
-
   return (
     <KvpContext.Provider
-      value={{ kvps, addKvp, updateKvp, selectedKvp, setSelectedKvp }}
+      value={{
+        kvps,
+        addKvp,
+        updateKvp,
+        deleteKvp,
+        selectedKvp,
+        setSelectedKvp,
+      }}
     >
       {children}
     </KvpContext.Provider>

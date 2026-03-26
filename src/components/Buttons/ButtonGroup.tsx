@@ -10,7 +10,7 @@ export default function ButtonGroup() {
   const arrow = isCollapsed ? ">" : "<";
 
   return (
-    <div className="inline-flex items-center gap-1 bg-gray-200/80 p-1 rounded-xl">
+    <div className="inline-flex  items-center gap-1 bg-gray-200/80 p-1 rounded-xl">
       {visibleTabs.map((tab) => (
         <button
           key={tab}

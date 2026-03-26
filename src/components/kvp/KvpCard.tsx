@@ -1,7 +1,7 @@
 import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-import MenuItem from "../buttons/MenuItem";
+import MenuItem from "../items/MenuItem";
 import { useState } from "react";
 
 interface KvpCardProps {
@@ -40,10 +40,35 @@ function KvpCard({
   targetDate,
   benefit,
   onOpenModal,
-  onOpenMenu,
 }: KvpCardProps) {
-  const { setSelectedKvp } = useKvpContext();
+  const { setSelectedKvp, deleteKvp } = useKvpContext();
+
   const [showMenu, setShowMenu] = useState(false);
+
+  const handleArchive = () => {
+    toast.success(`KVP archiviert: ${title}`, {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
+    setShowMenu(false);
+  };
+
+  const handleReject = () => {
+    toast.info(`KVP abgelehnt: ${title}`, {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
+    setShowMenu(false);
+  };
+
+  const handleDelete = () => {
+    toast.warning(`KVP gelöscht: ${title}`, {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
+    deleteKvp(id);
+    setShowMenu(false);
+  };
 
   const handleEditClick = () => {
     setSelectedKvp({
@@ -65,24 +90,25 @@ function KvpCard({
 
   return (
     <div className="bg-white p-4 text-left rounded-lg shadow-lg">
-      <div className="flex items-start justify-between mb-2">
-        <p className="text-sm lg:text-lg  font-semibold ">{title}</p>
+      <div className="relative flex items-start justify-between mb-2 gap-1.5">
+        <p className="text-sm lg:text-lg font-semibold ">{title}</p>
 
         <img
-          onClick={() => setShowMenu(!showMenu)}
+          onClick={() => setShowMenu(true)}
           src="/more.svg"
           alt="More"
-          className="h-6 w-6 rounded-full object-cover"
+          className="h-6 w-6 rounded-full object-cover -mr-2 hover:bg-gray-200 hover:scale-110 cursor-pointer"
         />
-      </div>
-      <div className="relative">
-        {showMenu && (
-          <MenuItem
-            onArchive={() => console.log("Archivieren clicked")}
-            onReject={() => console.log("Ablehnen clicked")}
-            onDelete={() => console.log("Löschen clicked")}
-          />
-        )}
+        <div className={`absolute top-2 right-2  ${showMenu ? "" : "hidden"}`}>
+          {showMenu && (
+            <MenuItem
+              onArchive={handleArchive}
+              onReject={handleReject}
+              onDelete={handleDelete}
+              onClose={() => setShowMenu(false)}
+            />
+          )}
+        </div>
       </div>
 
       <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">

@@ -25,7 +25,7 @@ export type FormColor = {
 export type KvpManagementState = Kvp[];
 
 export type KvpManagementAction = {
-  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP";
+  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP" | "ARCHIVE_KVP";
   kvp: Kvp;
 };
 

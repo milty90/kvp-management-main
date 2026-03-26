@@ -5,7 +5,7 @@ import KvpView from "./views/KvpView";
 import StatsView from "./views/StatsView";
 import { useState } from "react";
 import { useKvpContext } from "./context/KvpContext";
-import MenuItem from "./components/buttons/MenuItem";
+import MenuItem from "./components/items/MenuItem";
 
 function App() {
   const [showModal, setShowModal] = useState(false);

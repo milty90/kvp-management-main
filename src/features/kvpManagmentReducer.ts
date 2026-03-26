@@ -18,6 +18,10 @@ export default function kvpManagmentReducer(
     case "DELETE_KVP":
       updatedState = state.filter((kvp) => kvp.id !== action.kvp.id);
       break;
+    case "ARCHIVE_KVP":
+      // Hier könnte man eine Archivierungslogik implementieren, z.B. durch Setzen eines "archived" Flags oder Verschieben des KVPs in eine separate Liste. Für jetzt wird es einfach gelöscht.
+      updatedState = state.filter((kvp) => kvp.id !== action.kvp.id);
+      break;
     default:
       return state;
   }
