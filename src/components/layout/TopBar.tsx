@@ -37,7 +37,7 @@ function TopBar({
           </p>
         </div>
         <div
-          className={`relative${!showSettings ? "" : " mr-14"} flex items-start space-x-3 mr-3 -mb-2.5`}
+          className={`relative${!showSettings ? "" : " mr-10.5"} flex items-start space-x-3 mr-3 -mb-2.5`}
         >
           <ColorButton
             color={kvpButtonColor}
@@ -61,7 +61,7 @@ function TopBar({
             src="/settings.svg"
             alt="Settings"
             onClick={() => setShowSettings(true)}
-            className={`${!showSettings ? "" : "hidden"} w-8 mt-0.5 -mr-0.4 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
+            className={`${!showSettings ? "" : "hidden"} w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
           />
           <div
             className={`absolute top-3.5 -right-3  ${showSettings ? "" : "hidden"}`}
