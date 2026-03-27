@@ -1,8 +1,9 @@
 import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
+import type { ToastContentProps } from "react-toastify";
 import MenuItem from "../items/MenuItem";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface KvpCardProps {
   id: number;
@@ -17,8 +18,8 @@ interface KvpCardProps {
   createdAt: string;
   targetDate: string;
   benefit?: string;
+
   onOpenModal: () => void;
-  onOpenMenu: () => void;
 }
 
 const priorityColors = {
@@ -27,7 +28,7 @@ const priorityColors = {
   Low: "border-green-400",
 };
 
-function KvpCard({
+export default function KvpCard({
   id,
   title,
   category,
@@ -45,19 +46,48 @@ function KvpCard({
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleArchive = () => {
-    toast.success(
-      `Kvp Achiviren Archivierungsfunktion ist derzeit nicht verfügbar.`,
-      {
-        position: "top-center",
-        className: "mt-6 text-sm font-poppins ",
-      },
+  const menuWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (menuWrapperRef.current && !menuWrapperRef.current.contains(target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  function CustomNotification({ closeToast }: ToastContentProps) {
+    return (
+      <div>
+        <p className="text-sm min-w-80 text-gray-700 font-poppins mb-2">
+          Möchten Sie dieses KVP wirklich löschen?
+        </p>
+        <button
+          className="text-sm text-blue-500 font-poppins"
+          onClick={() => closeToast("ignore")}
+        >
+          Nein, behalten!
+        </button>
+      </div>
     );
+  }
+
+  const handleArchive = () => {
+    toast.success(`Archivierungsfunktion ist derzeit nicht verfügbar.`, {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
     setShowMenu(false);
   };
 
   const handleReject = () => {
-    toast.info(`KVP Ablehnen Funktion ist derzeit nicht verfügbar.`, {
+    toast.info(`Ablehnungsfunktion ist derzeit nicht verfügbar.`, {
       position: "top-center",
       className: "mt-6 text-sm font-poppins ",
     });
@@ -65,11 +95,23 @@ function KvpCard({
   };
 
   const handleDelete = () => {
-    toast.warning(`KVP gelöscht: ${title}`, {
+    toast.error(CustomNotification, {
       position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
+      autoClose: 10000,
+      className: "mt-6 text-sm font-poppins -top-1",
+      onClose(reason) {
+        switch (reason) {
+          case "ignore":
+            toast.info(`Löschvorgang ignoriert.`, {
+              position: "top-center",
+              className: "mt-6 min-w-[360px] text-sm font-poppins ",
+            });
+            break;
+          default:
+            deleteKvp(id);
+        }
+      },
     });
-    deleteKvp(id);
     setShowMenu(false);
   };
 
@@ -92,25 +134,26 @@ function KvpCard({
   };
 
   return (
-    <div className="bg-white p-4 text-left rounded-lg shadow-lg">
-      <div className="relative flex items-start justify-between mb-2 gap-1.5">
+    <div className="bg-white p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer">
+      <div
+        ref={menuWrapperRef}
+        className="relative flex items-start justify-between mb-2 gap-1.5"
+      >
         <p className="text-sm lg:text-lg font-semibold ">{title}</p>
 
         <img
-          onClick={() => setShowMenu(true)}
+          onClick={() => setShowMenu(!showMenu)}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover -mr-2 hover:bg-gray-200 hover:scale-110 cursor-pointer"
         />
-        <div className={`absolute top-2 right-2  ${showMenu ? "" : "hidden"}`}>
-          {showMenu && (
-            <MenuItem
-              onArchive={handleArchive}
-              onReject={handleReject}
-              onDelete={handleDelete}
-              onClose={() => setShowMenu(false)}
-            />
-          )}
+
+        <div className={`absolute ${showMenu ? "block" : "hidden"}  right-8  `}>
+          <MenuItem
+            onArchive={handleArchive}
+            onReject={handleReject}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
 
@@ -186,4 +229,3 @@ function KvpCard({
     </div>
   );
 }
-export default KvpCard;

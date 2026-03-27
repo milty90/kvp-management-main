@@ -2,13 +2,14 @@ import TopBar from "../components/layout/TopBar";
 import ActionBar from "../components/layout/ActionBar";
 import KvpBar from "../components/layout/KvpBar";
 import KvpCycleBar from "../components/layout/KvpCycleBar";
+import { useState } from "react";
 
 interface KvpViewProps {
   onOpenModal: () => void;
   onOpenMenu: () => void;
 }
 
-function KvpView({ onOpenModal, onOpenMenu }: KvpViewProps) {
+function KvpView({ onOpenModal }: KvpViewProps) {
   return (
     <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-3 h-screen">
       <TopBar
@@ -17,10 +18,7 @@ function KvpView({ onOpenModal, onOpenMenu }: KvpViewProps) {
         kvpBar={<KvpCycleBar />}
       />
       <ActionBar onOpenModal={() => onOpenModal()} />
-      <KvpBar
-        onOpenModal={() => onOpenModal()}
-        onOpenMenu={() => onOpenMenu()}
-      />
+      <KvpBar onOpenModal={() => onOpenModal()} />
     </div>
   );
 }

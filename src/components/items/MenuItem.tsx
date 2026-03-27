@@ -2,15 +2,9 @@ interface MenuItemProps {
   onArchive: () => void;
   onReject: () => void;
   onDelete: () => void;
-  onClose: () => void;
 }
 
-export function MenuItem({
-  onArchive,
-  onReject,
-  onDelete,
-  onClose,
-}: MenuItemProps) {
+export function MenuItem({ onArchive, onReject, onDelete }: MenuItemProps) {
   return (
     <div className="relative z-10 flex flex-col items-start">
       <div className="flex flex-col absolute top-full bg-amber-50 -right-3 z-2 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -33,11 +27,11 @@ export function MenuItem({
           Löschen
         </button>
       </div>
-      <div className="absolute m-0 -top-2 -right-4 p-3 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
+      {/* <div className="absolute m-0 -top-2 -right-4 p-3 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
         <button
           type="button"
           className="absolute z-4 top-1 right-1 text-2xl text-white "
-          onClick={onClose}
+          onClick={(event) => onClose(event)}
         >
           <img
             src="/add.svg"
@@ -45,7 +39,7 @@ export function MenuItem({
             className="h-4 w-4 object-cover rotate-45"
           />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

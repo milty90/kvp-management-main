@@ -25,6 +25,23 @@ function TopBar({
       position: "top-center",
       className: "mt-6 text-sm font-poppins ",
     });
+    setShowSettings(false);
+  };
+
+  const handleProfileClick = () => {
+    toast.info("Profilfunktion ist derzeit nicht verfügbar.", {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
+    setShowSettings(false);
+  };
+
+  const handleLogoutClick = () => {
+    toast.info("Abmeldefunktion ist derzeit nicht verfügbar.", {
+      position: "top-center",
+      className: "mt-6 text-sm font-poppins ",
+    });
+    setShowSettings(false);
   };
 
   return (
@@ -69,18 +86,8 @@ function TopBar({
             {showSettings && (
               <SettingItem
                 onSetting={handleSettingsClick}
-                onProfile={() =>
-                  toast.info("Profilfunktion ist derzeit nicht verfügbar.", {
-                    position: "top-center",
-                    className: "mt-6 text-sm font-poppins ",
-                  })
-                }
-                onLogout={() =>
-                  toast.info("Abmeldefunktion ist derzeit nicht verfügbar.", {
-                    position: "top-center",
-                    className: "mt-6 text-sm font-poppins ",
-                  })
-                }
+                onProfile={handleProfileClick}
+                onLogout={handleLogoutClick}
                 onClose={() => setShowSettings(false)}
               />
             )}
