@@ -20,7 +20,15 @@ export default function kvpManagmentReducer(
       break;
     case "ARCHIVE_KVP":
       // Hier könnte man eine Archivierungslogik implementieren, z.B. durch Setzen eines "archived" Flags oder Verschieben des KVPs in eine separate Liste. Für jetzt wird es einfach gelöscht.
-      updatedState = state.filter((kvp) => kvp.id !== action.kvp.id);
+      updatedState = state.map((kvp) =>
+        kvp.id === action.kvp.id ? { ...kvp, isArchived: true } : kvp,
+      );
+      break;
+    case "REJECT_KVP":
+      // Hier könnte man eine Ablehnungslogik implementieren, z.B. durch Setzen eines "rejected" Flags oder Verschieben des KVPs in eine separate Liste. Für jetzt wird es einfach gelöscht.
+      updatedState = state.map((kvp) =>
+        kvp.id === action.kvp.id ? { ...kvp, isRejected: true } : kvp,
+      );
       break;
     default:
       return state;

@@ -27,19 +27,6 @@ export function MenuItem({ onArchive, onReject, onDelete }: MenuItemProps) {
           Löschen
         </button>
       </div>
-      {/* <div className="absolute m-0 -top-2 -right-4 p-3 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
-        <button
-          type="button"
-          className="absolute z-4 top-1 right-1 text-2xl text-white "
-          onClick={(event) => onClose(event)}
-        >
-          <img
-            src="/add.svg"
-            alt="Close"
-            className="h-4 w-4 object-cover rotate-45"
-          />
-        </button>
-      </div> */}
     </div>
   );
 }

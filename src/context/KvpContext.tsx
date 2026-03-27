@@ -18,6 +18,8 @@ interface KvpContextType {
   deleteKvp: (id: number) => void;
   selectedKvp: Kvp | null;
   setSelectedKvp: (kvp: Kvp | null) => void;
+  archiveKvp: (id: number) => void;
+  rejectKvp: (id: number) => void;
 }
 
 const KvpContext = createContext<KvpContextType>({
@@ -27,6 +29,8 @@ const KvpContext = createContext<KvpContextType>({
   deleteKvp: () => {},
   selectedKvp: null,
   setSelectedKvp: () => {},
+  archiveKvp: () => {},
+  rejectKvp: () => {},
 });
 
 export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
@@ -54,6 +58,16 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedKvp(null);
   };
 
+  const archiveKvp = (id: number) => {
+    setKvps({ type: "ARCHIVE_KVP", kvp: { id } as Kvp });
+    setSelectedKvp(null);
+  };
+
+  const rejectKvp = (id: number) => {
+    setKvps({ type: "REJECT_KVP", kvp: { id } as Kvp });
+    setSelectedKvp(null);
+  };
+
   return (
     <KvpContext.Provider
       value={{
@@ -61,6 +75,8 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
         addKvp,
         updateKvp,
         deleteKvp,
+        archiveKvp,
+        rejectKvp,
         selectedKvp,
         setSelectedKvp,
       }}

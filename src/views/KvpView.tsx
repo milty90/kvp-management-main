@@ -2,7 +2,6 @@ import TopBar from "../components/layout/TopBar";
 import ActionBar from "../components/layout/ActionBar";
 import KvpBar from "../components/layout/KvpBar";
 import KvpCycleBar from "../components/layout/KvpCycleBar";
-import { useState } from "react";
 
 interface KvpViewProps {
   onOpenModal: () => void;

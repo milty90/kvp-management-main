@@ -18,7 +18,8 @@ interface KvpCardProps {
   createdAt: string;
   targetDate: string;
   benefit?: string;
-
+  isArchived?: boolean;
+  isRejected?: boolean;
   onOpenModal: () => void;
 }
 
@@ -40,9 +41,11 @@ export default function KvpCard({
   createdAt,
   targetDate,
   benefit,
+  isArchived,
+  isRejected,
   onOpenModal,
 }: KvpCardProps) {
-  const { setSelectedKvp, deleteKvp } = useKvpContext();
+  const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -79,7 +82,8 @@ export default function KvpCard({
   }
 
   const handleArchive = () => {
-    toast.success(`Archivierungsfunktion ist derzeit nicht verfügbar.`, {
+    archiveKvp(id);
+    toast.info(`KVP ${title} wurde archiviert.`, {
       position: "top-center",
       className: "mt-6 text-sm font-poppins ",
     });
@@ -87,7 +91,8 @@ export default function KvpCard({
   };
 
   const handleReject = () => {
-    toast.info(`Ablehnungsfunktion ist derzeit nicht verfügbar.`, {
+    rejectKvp(id);
+    toast.info(`KVP ${title} wurde abgelehnt.`, {
       position: "top-center",
       className: "mt-6 text-sm font-poppins ",
     });
@@ -128,13 +133,17 @@ export default function KvpCard({
       createdAt,
       targetDate,
       benefit,
+      isArchived,
+      isRejected,
     });
 
     onOpenModal();
   };
 
   return (
-    <div className="bg-white p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer">
+    <div
+      className={`bg-white  p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${isArchived ? "opacity-50" : ""} ${isRejected ? "opacity-50" : ""}`}
+    >
       <div
         ref={menuWrapperRef}
         className="relative flex items-start justify-between mb-2 gap-1.5"
@@ -192,7 +201,7 @@ export default function KvpCard({
         <div className="flex items-center gap-1 md:ml-1 text-gray-500">
           <span className="text-sm ">Status:</span>
           <span className={`px-2.5 py-0.5 text-sm text-gray-600 font-medium `}>
-            {state}
+            {isArchived ? "Archiviert" : isRejected ? "Abgelehnt" : state}
           </span>
         </div>
       </div>

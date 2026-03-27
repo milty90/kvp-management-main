@@ -14,6 +14,8 @@ export type Kvp = {
   createdAt: string;
   targetDate: string;
   benefit?: string;
+  isArchived?: boolean;
+  isRejected?: boolean;
 };
 
 export type FormColor = {
@@ -25,7 +27,7 @@ export type FormColor = {
 export type KvpManagementState = Kvp[];
 
 export type KvpManagementAction = {
-  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP" | "ARCHIVE_KVP";
+  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP" | "ARCHIVE_KVP" | "REJECT_KVP";
   kvp: Kvp;
 };
 
