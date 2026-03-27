@@ -46,15 +46,18 @@ function KvpCard({
   const [showMenu, setShowMenu] = useState(false);
 
   const handleArchive = () => {
-    toast.success(`KVP archiviert: ${title}`, {
-      position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
-    });
+    toast.success(
+      `Kvp Achiviren Archivierungsfunktion ist derzeit nicht verfügbar.`,
+      {
+        position: "top-center",
+        className: "mt-6 text-sm font-poppins ",
+      },
+    );
     setShowMenu(false);
   };
 
   const handleReject = () => {
-    toast.info(`KVP abgelehnt: ${title}`, {
+    toast.info(`KVP Ablehnen Funktion ist derzeit nicht verfügbar.`, {
       position: "top-center",
       className: "mt-6 text-sm font-poppins ",
     });
