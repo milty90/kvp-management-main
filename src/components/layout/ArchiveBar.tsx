@@ -28,7 +28,7 @@ export function ArchiveBar() {
                 <p className="text-xs text-gray-500">Keine Elemente</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 {filtered.map((kvp) => (
                   <KvpCard
                     key={kvp.id}

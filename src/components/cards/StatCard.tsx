@@ -1,3 +1,4 @@
+import { sliceText } from "../../utils/sliceText";
 interface StatCardProps {
   status: string;
   quantity: string;
@@ -24,10 +25,10 @@ export default function StatCard({
       className="flex items-center gap-1.5 p-2 bg-white rounded-xl shadow-md border border-gray-200 h-14
      w-full"
     >
-      <div className="flex items-center w-full justify-start mr-2">
-        <span className="px-1.5 lg:px-3 w-full py-1 text-sm text-gray-600 font-medium bg-gray-200/50 rounded-md">
-          {status}
-        </span>
+      <div className="flex w-full items-center justify-start mr-2">
+        <p className="px-1.5 lg:px-3  py-1 text-sm text-gray-600 font-medium bg-gray-200/50 rounded-md">
+          {sliceText(status)}
+        </p>
       </div>
       <div className="flex w-full items-center  justify-between">
         <div className="flex items-center gap-1">

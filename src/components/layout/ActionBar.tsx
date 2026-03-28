@@ -5,11 +5,16 @@ import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 
 interface ActionBarProps {
+  isArchiveOpen: boolean;
   onOpenModal: () => void;
   onOpenArchive: () => void;
 }
 
-function ActionBar({ onOpenModal, onOpenArchive }: ActionBarProps) {
+function ActionBar({
+  isArchiveOpen,
+  onOpenModal,
+  onOpenArchive,
+}: ActionBarProps) {
   const { setSelectedKvp } = useKvpContext();
 
   const handleCreateClick = () => {
@@ -24,7 +29,7 @@ function ActionBar({ onOpenModal, onOpenArchive }: ActionBarProps) {
       </div>
       <div className="flex items-center gap-3">
         <WhiteButton onClick={onOpenArchive} icon="">
-          Archiv
+          {isArchiveOpen ? "Aktive KVPs" : "Inaktive KVPs"}
         </WhiteButton>
         <ColorButton onClick={handleCreateClick} color="blue" icon="/add.svg">
           Neue KVP

@@ -20,6 +20,7 @@ function KvpView({ onOpenModal }: KvpViewProps) {
         kvpBar={<KvpCycleBar />}
       />
       <ActionBar
+        isArchiveOpen={showArchive}
         onOpenModal={() => onOpenModal()}
         onOpenArchive={() => setShowArchive((prev) => !prev)}
       />

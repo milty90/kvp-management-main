@@ -19,8 +19,7 @@ interface KvpCardProps {
   createdAt: string;
   targetDate: string;
   benefit?: string;
-  isArchived?: boolean;
-  isRejected?: boolean;
+
   onOpenModal?: () => void;
 }
 
@@ -42,8 +41,7 @@ export default function KvpCard({
   createdAt,
   targetDate,
   benefit,
-  isArchived,
-  isRejected,
+
   onOpenModal,
 }: KvpCardProps) {
   const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
@@ -122,8 +120,6 @@ export default function KvpCard({
       createdAt,
       targetDate,
       benefit,
-      isArchived,
-      isRejected,
     });
 
     if (onOpenModal) {
@@ -133,7 +129,7 @@ export default function KvpCard({
 
   return (
     <div
-      className={`bg-white  p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${isArchived ? "opacity-50" : ""} ${isRejected ? "opacity-50" : ""}`}
+      className={`bg-white  p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-70" : ""}`}
     >
       <div
         ref={menuWrapperRef}
@@ -185,14 +181,21 @@ export default function KvpCard({
       </p>
 
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
-        <WhiteButton icon="" height="0.5" onClick={handleEditClick}>
+        <WhiteButton
+          isInactive={state === "Archived" || state === "Rejected"}
+          icon=""
+          height="0.5"
+          onClick={handleEditClick}
+        >
           Edit
         </WhiteButton>
 
         <div className="flex items-center gap-1 md:ml-1 text-gray-500">
           <span className="text-sm ">Status:</span>
-          <span className={`px-2.5 py-0.5 text-sm text-gray-600 font-medium `}>
-            {isArchived ? "Archiviert" : isRejected ? "Abgelehnt" : state}
+          <span
+            className={`px-2.5 py-0.5 text-sm text-gray-600 ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
+          >
+            {state}
           </span>
         </div>
       </div>

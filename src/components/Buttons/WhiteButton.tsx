@@ -2,6 +2,7 @@ interface WhiteButtonProps {
   icon?: string;
   height?: string;
   children: React.ReactNode;
+  isInactive?: boolean;
   onClick?: () => void;
 }
 
@@ -9,12 +10,13 @@ export default function WhiteButton({
   icon = "/done.svg",
   height = "2",
   children,
+  isInactive = false,
   onClick,
 }: WhiteButtonProps) {
   return (
     <button
       onClick={onClick}
-      className={`
+      className={`${isInactive ? "cursor-not-allowed opacity-50" : ""} 
           inline-flex w-fit items-center gap-2 px-4 py-${height} rounded-lg
           bg-white hover:bg-gray-50
           text-gray-700 hover:text-gray-900 text-sm font-medium
