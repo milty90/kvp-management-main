@@ -30,19 +30,6 @@ export function SettingItem({
           Abmelden
         </button>
       </div>
-      {/* <div className="absolute m-0 -top-3 -right-5 p-4 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
-        <button
-          type="button"
-          className="absolute z-4 top-1.5 right-1.5 text-3xl text-white "
-          onClick={onClose}
-        >
-          <img
-            src="/add.svg"
-            alt="Close"
-            className="h-5 w-5 object-cover rotate-45"
-          />
-        </button>
-      </div> */}
     </div>
   );
 }

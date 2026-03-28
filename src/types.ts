@@ -1,5 +1,5 @@
 export type Priority = "Low" | "Medium" | "High";
-export type State = "Plan" | "Do" | "Check" | "Act" | "Abgelehnt";
+export type State = "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
 export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
 
 export type Kvp = {
@@ -14,8 +14,6 @@ export type Kvp = {
   createdAt: string;
   targetDate: string;
   benefit?: string;
-  isArchived?: boolean;
-  isRejected?: boolean;
 };
 
 export type FormColor = {

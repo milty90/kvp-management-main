@@ -23,8 +23,11 @@ function KvpView({ onOpenModal }: KvpViewProps) {
         onOpenModal={() => onOpenModal()}
         onOpenArchive={() => setShowArchive((prev) => !prev)}
       />
-      {showArchive && <ArchiveBar />}
-      {<KvpBar onOpenModal={() => onOpenModal()} />}
+      {showArchive ? (
+        <ArchiveBar />
+      ) : (
+        <KvpBar onOpenModal={() => onOpenModal()} />
+      )}
     </div>
   );
 }

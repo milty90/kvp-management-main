@@ -31,8 +31,6 @@ export default function KvpBar({ onOpenModal }: KvpBarProps) {
               <div className="flex flex-col gap-3">
                 {filtered.map((kvp) => (
                   <KvpCard
-                    isRejected={kvp.isRejected}
-                    isArchived={kvp.isArchived}
                     key={kvp.id}
                     {...kvp}
                     state={state}

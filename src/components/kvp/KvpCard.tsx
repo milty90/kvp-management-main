@@ -13,7 +13,7 @@ interface KvpCardProps {
   colorPriority?: "green" | "orange" | "red" | "gray";
   assignedTo: string;
   description: string;
-  state: "Plan" | "Do" | "Check" | "Act";
+  state: "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
   priority: "High" | "Medium" | "Low";
   createdBy: string;
   createdAt: string;
@@ -21,7 +21,7 @@ interface KvpCardProps {
   benefit?: string;
   isArchived?: boolean;
   isRejected?: boolean;
-  onOpenModal: () => void;
+  onOpenModal?: () => void;
 }
 
 const priorityColors = {
@@ -126,7 +126,9 @@ export default function KvpCard({
       isRejected,
     });
 
-    onOpenModal();
+    if (onOpenModal) {
+      onOpenModal();
+    }
   };
 
   return (

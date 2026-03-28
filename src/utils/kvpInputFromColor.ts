@@ -12,7 +12,8 @@ const PDCA_COLORS: Record<State, string> = {
   Do: "text-violet-700",
   Check: "text-yellow-700",
   Act: "text-green-700",
-  Abgelehnt: "text-red-700",
+  Rejected: "text-red-700",
+  Archived: "text-gray-400",
 };
 
 export function kvpInputFormColor({
