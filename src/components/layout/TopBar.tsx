@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import ColorButton from "../buttons/ColorButton";
 import type { ColorButtonType } from "../../types";
 import { toast } from "react-toastify";
 import { SettingItem } from "../items/SettingItem";
+import { useClickOutside } from "../../utils/clickOutside";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -19,6 +20,10 @@ function TopBar({
   const navigate = useNavigate();
 
   const [showSettings, setShowSettings] = useState(false);
+
+  const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useClickOutside(settingsWrapperRef, () => setShowSettings(false));
 
   const handleSettingsClick = () => {
     toast.info("Einstellungen sind derzeit nicht verfügbar.", {
@@ -54,7 +59,8 @@ function TopBar({
           </p>
         </div>
         <div
-          className={`relative${!showSettings ? "" : " mr-10.5"} flex items-start space-x-3 mr-3 -mb-2.5`}
+          ref={settingsWrapperRef}
+          className={`relative flex items-start space-x-3 mr-3 -mb-2.5`}
         >
           <ColorButton
             color={kvpButtonColor}
@@ -77,18 +83,15 @@ function TopBar({
           <img
             src="/settings.svg"
             alt="Settings"
-            onClick={() => setShowSettings(true)}
-            className={`${!showSettings ? "" : "hidden"} w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
+            onClick={() => setShowSettings(!showSettings)}
+            className={`w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
           />
-          <div
-            className={`absolute top-3.5 -right-3  ${showSettings ? "" : "hidden"}`}
-          >
+          <div className={`absolute right-13 `}>
             {showSettings && (
               <SettingItem
                 onSetting={handleSettingsClick}
                 onProfile={handleProfileClick}
                 onLogout={handleLogoutClick}
-                onClose={() => setShowSettings(false)}
               />
             )}
           </div>

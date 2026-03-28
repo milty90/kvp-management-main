@@ -21,24 +21,21 @@ export default function StatCard({
 }: StatCardProps) {
   return (
     <div
-      className="flex flex-col items-start gap-1.5 p-2 bg-white rounded-xl shadow-md border border-gray-200 h-20
+      className="flex items-center gap-1.5 p-2 bg-white rounded-xl shadow-md border border-gray-200 h-14
      w-full"
     >
-      <div className="flex items-center ">
-        <span className="px-1.5 lg:px-3  py-1 text-xs text-gray-600 font-medium bg-gray-200/50 rounded-md">
+      <div className="flex items-center w-full justify-start mr-2">
+        <span className="px-1.5 lg:px-3 w-full py-1 text-sm text-gray-600 font-medium bg-gray-200/50 rounded-md">
           {status}
         </span>
       </div>
-      <div className="flex w-full items-center mt-1 justify-between">
+      <div className="flex w-full items-center  justify-between">
         <div className="flex items-center gap-1">
-          <span className="text-md px-1 font-semibold mt-1 text-gray-500">
-            Anzahl:
-          </span>
           <p className="text-xl font-semibold  text-gray-500">{quantity}</p>
         </div>
 
         <div
-          className={`items-center hidden md:inline justify-center -mt-3 shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
+          className={`items-center hidden md:inline justify-center  shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
         >
           <img
             src={path || "/"}

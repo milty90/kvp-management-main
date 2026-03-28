@@ -3,7 +3,8 @@ import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
 import type { ToastContentProps } from "react-toastify";
 import MenuItem from "../items/MenuItem";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import { useClickOutside } from "../../utils/clickOutside";
 
 interface KvpCardProps {
   id: number;
@@ -49,23 +50,11 @@ export default function KvpCard({
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const menuWrapperRef = useRef<HTMLDivElement | null>(null);
+  const menuWrapperRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (menuWrapperRef.current && !menuWrapperRef.current.contains(target)) {
-        setShowMenu(false);
-      }
-    };
+  useClickOutside(menuWrapperRef, () => setShowMenu(false));
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  function CustomNotification({ closeToast }: ToastContentProps) {
+  function customNotification({ closeToast }: ToastContentProps) {
     return (
       <div>
         <p className="text-sm min-w-80 text-gray-700 font-poppins mb-2">
@@ -100,7 +89,7 @@ export default function KvpCard({
   };
 
   const handleDelete = () => {
-    toast.error(CustomNotification, {
+    toast.error(customNotification, {
       position: "top-center",
       autoClose: 10000,
       className: "mt-6 text-sm font-poppins -top-1",

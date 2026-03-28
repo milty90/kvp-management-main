@@ -2,13 +2,11 @@ interface SettingItemProps {
   onSetting: () => void;
   onProfile: () => void;
   onLogout: () => void;
-  onClose: () => void;
 }
 export function SettingItem({
   onSetting,
   onProfile,
   onLogout,
-  onClose,
 }: SettingItemProps) {
   return (
     <div className="relative z-10 flex flex-col items-start">
@@ -32,7 +30,7 @@ export function SettingItem({
           Abmelden
         </button>
       </div>
-      <div className="absolute m-0 -top-3 -right-5 p-4 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
+      {/* <div className="absolute m-0 -top-3 -right-5 p-4 justify-center items-center bg-blue-500 transform rounded-full z-3 hover:scale-110 transition-transform">
         <button
           type="button"
           className="absolute z-4 top-1.5 right-1.5 text-3xl text-white "
@@ -44,7 +42,7 @@ export function SettingItem({
             className="h-5 w-5 object-cover rotate-45"
           />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
