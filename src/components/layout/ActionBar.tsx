@@ -7,9 +7,10 @@ import { useKvpContext } from "../../context/KvpContext";
 
 interface ActionBarProps {
   onOpenModal: () => void;
+  onOpenArchive: () => void;
 }
 
-function ActionBar({ onOpenModal }: ActionBarProps) {
+function ActionBar({ onOpenModal, onOpenArchive }: ActionBarProps) {
   const { setSelectedKvp } = useKvpContext();
 
   const handleCreateClick = () => {
@@ -23,16 +24,8 @@ function ActionBar({ onOpenModal }: ActionBarProps) {
         <PriorityGroup />
       </div>
       <div className="flex items-center gap-3">
-        <WhiteButton
-          onClick={() =>
-            toast.info("Archivierungsfunktion ist derzeit nicht verfügbar.", {
-              position: "top-center",
-              className: "mt-6 text-sm font-poppins ",
-            })
-          }
-          icon=""
-        >
-          Archive
+        <WhiteButton onClick={onOpenArchive} icon="">
+          Archiv
         </WhiteButton>
         <ColorButton onClick={handleCreateClick} color="blue" icon="/add.svg">
           Neue KVP

@@ -5,11 +5,9 @@ import KvpView from "./views/KvpView";
 import StatsView from "./views/StatsView";
 import { useState } from "react";
 import { useKvpContext } from "./context/KvpContext";
-import MenuItem from "./components/items/MenuItem";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const { selectedKvp, setSelectedKvp } = useKvpContext();
 
   return (
@@ -17,12 +15,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <KvpView
-              onOpenModal={() => setShowModal(true)}
-              onOpenMenu={() => setShowMenu(true)}
-            />
-          }
+          element={<KvpView onOpenModal={() => setShowModal(true)} />}
         />
         <Route path="/stats" element={<StatsView />} />
       </Routes>
@@ -31,7 +24,6 @@ function App() {
         <AddKvp
           onClose={() => {
             setShowModal(false);
-
             setSelectedKvp(null);
           }}
           initialData={selectedKvp ?? undefined}
