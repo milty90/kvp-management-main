@@ -2,7 +2,11 @@ import { useState } from "react";
 
 const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
 
-export default function ButtonGroup() {
+interface ButtonGroupProps {
+  filter: (state: string) => void;
+}
+
+export default function ButtonGroup({ filter }: ButtonGroupProps) {
   const [selected, setSelected] = useState("Alle");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -14,9 +18,12 @@ export default function ButtonGroup() {
       {visibleTabs.map((tab) => (
         <button
           key={tab}
-          onClick={() =>
-            setSelected(selected === tab && tab !== "Alle" ? "Alle" : tab)
-          }
+          onClick={() => {
+            const newSelected =
+              selected === tab && tab !== "Alle" ? "Alle" : tab;
+            setSelected(newSelected);
+            filter(newSelected);
+          }}
           className={`
               px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${

@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-const tabs = ["Keine", "Niedrig", "Mittel", "Hoch"];
+const tabs = ["Alle", "Niedrig", "Mittel", "Hoch"];
 
-export default function PriorityGroup() {
-  const [selected, setSelected] = useState("Keine");
+interface PriorityGroupProps {
+  filter: (priority: string) => void;
+}
+
+export default function PriorityGroup({ filter }: PriorityGroupProps) {
+  const [selected, setSelected] = useState("Alle");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const visibleTabs = isCollapsed ? ["Keine"] : tabs;
+  const visibleTabs = isCollapsed ? ["Alle"] : tabs;
   const arrow = isCollapsed ? ">" : "<";
 
   return (
@@ -14,9 +18,12 @@ export default function PriorityGroup() {
       {visibleTabs.map((tab) => (
         <button
           key={tab}
-          onClick={() =>
-            setSelected(selected === tab && tab !== "Keine" ? "Keine" : tab)
-          }
+          onClick={() => {
+            const newSelected =
+              selected === tab && tab !== "Alle" ? "Alle" : tab;
+            setSelected(newSelected);
+            filter(newSelected);
+          }}
           className={`
               px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${

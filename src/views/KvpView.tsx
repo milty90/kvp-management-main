@@ -11,6 +11,8 @@ interface KvpViewProps {
 
 function KvpView({ onOpenModal }: KvpViewProps) {
   const [showArchive, setShowArchive] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("Alle");
+  const [activePriority, setActivePriority] = useState("Alle");
 
   return (
     <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-3 h-screen">
@@ -21,13 +23,19 @@ function KvpView({ onOpenModal }: KvpViewProps) {
       />
       <ActionBar
         isArchiveOpen={showArchive}
+        onFilter={setActiveFilter}
+        onPriority={setActivePriority}
         onOpenModal={() => onOpenModal()}
         onOpenArchive={() => setShowArchive((prev) => !prev)}
       />
       {showArchive ? (
         <ArchiveBar />
       ) : (
-        <KvpBar onOpenModal={() => onOpenModal()} />
+        <KvpBar
+          onOpenModal={() => onOpenModal()}
+          activeFilter={activeFilter}
+          activePriority={activePriority}
+        />
       )}
     </div>
   );
