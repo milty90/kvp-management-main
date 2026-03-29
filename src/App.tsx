@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AddKvp from "./components/kvp/KvpForm";
 import KvpView from "./views/KvpView";
 import StatsView from "./views/StatsView";
 import { useState } from "react";
 import { useKvpContext } from "./context/KvpContext";
+import KvpForm from "./components/kvp/KvpForm";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +21,7 @@ function App() {
       </Routes>
 
       {showModal && (
-        <AddKvp
+        <KvpForm
           onClose={() => {
             setShowModal(false);
             setSelectedKvp(null);

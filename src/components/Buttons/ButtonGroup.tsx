@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const tabs = ["Alle", "Plan", "Do", "Check", "Act", "Abgelehnt"];
+const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
 
 export default function ButtonGroup() {
   const [selected, setSelected] = useState("Alle");

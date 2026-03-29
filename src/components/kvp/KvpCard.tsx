@@ -182,7 +182,7 @@ export default function KvpCard({
 
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
         <WhiteButton
-          isInactive={state === "Archived" || state === "Rejected"}
+          isInactive={state === "Rejected" || state === "Archived"}
           icon=""
           height="0.5"
           onClick={handleEditClick}
