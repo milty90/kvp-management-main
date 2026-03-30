@@ -5,6 +5,8 @@ import StatsView from "./views/StatsView";
 import { useState } from "react";
 import { useKvpContext } from "./context/KvpContext";
 import KvpForm from "./components/kvp/KvpForm";
+import { SignupScreen } from "./components/screens/SignupScreen";
+import { LoginScreen } from "./components/screens/LoginScreen";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -13,8 +15,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LoginScreen />} />
+        <Route path="/signup" element={<SignupScreen />} />
         <Route
-          path="/"
+          path="/kvps"
           element={<KvpView onOpenModal={() => setShowModal(true)} />}
         />
         <Route path="/stats" element={<StatsView />} />

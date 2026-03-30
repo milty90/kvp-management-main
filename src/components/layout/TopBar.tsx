@@ -42,10 +42,7 @@ function TopBar({
   };
 
   const handleLogoutClick = () => {
-    toast.info("Abmeldefunktion ist derzeit nicht verfügbar.", {
-      position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
-    });
+    navigate("/");
     setShowSettings(false);
   };
 
@@ -69,7 +66,7 @@ function TopBar({
                 ? "/trending-gray.svg"
                 : "/trending.svg"
             }
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/kvps")}
           >
             Verbesserungen
           </ColorButton>
