@@ -23,6 +23,7 @@ export default function PriorityGroup({ filter }: PriorityGroupProps) {
               selected === tab && tab !== "Alle" ? "Alle" : tab;
             setSelected(newSelected);
             filter(newSelected);
+            console.log("Priority filter:", newSelected);
           }}
           className={`
               px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150

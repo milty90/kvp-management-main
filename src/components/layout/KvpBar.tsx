@@ -22,6 +22,8 @@ export default function KvpBar({
 }: KvpBarProps) {
   const { kvps } = useKvpContext();
 
+  console.log("Active Priority:", activePriority);
+
   const filtered = kvps.filter((k) => {
     const stateMatch = activeFilter === "Alle" || k.state === activeFilter;
     const priorityMatch =

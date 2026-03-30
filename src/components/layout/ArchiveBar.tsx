@@ -19,7 +19,7 @@ export function ArchiveBar() {
           <div key={state} className="flex flex-col gap-3 mb-8">
             <div className="flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium bg-gray-200/80">
               <span className="text-sm ml-2 font-semibold text-gray-600">
-                {state}
+                {state === "Archived" ? "Archivierte KVPs" : "Abgelehnte KVPs"}
               </span>
             </div>
 
