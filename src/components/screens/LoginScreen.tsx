@@ -49,10 +49,7 @@ export function LoginScreen() {
             >
               Anmelden
             </button>
-            <a
-              className="inline-block align-baseline font-semibold text-sm text-blue-600 hover:text-blue-800"
-              href="#"
-            >
+            <a className="inline-block align-baseline font-semibold text-sm text-blue-600 hover:text-blue-800">
               Passwort vergessen?
             </a>
           </div>
@@ -62,7 +59,6 @@ export function LoginScreen() {
           <a
             onClick={() => navigate("/signup")}
             className="font-semibold pl-2 text-blue-600 hover:text-blue-800"
-            href="#"
           >
             Registrieren
           </a>
