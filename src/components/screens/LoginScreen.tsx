@@ -43,6 +43,7 @@ export function LoginScreen() {
           </div>
           <div className="flex px-2 items-center justify-between">
             <button
+              onClick={() => navigate("/kvps")}
               className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-150"
               type="submit"
             >

@@ -5,7 +5,7 @@ export function SignupScreen() {
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
         <img src="/spark.png" alt="Logo" className="w-60 mb-5" />
-        <h1 className="text-2xl font-semibold mb-3">Erstellen Sie Ihr Konto</h1>
+        <h1 className="text-xl font-semibold mb-3">Erstellen Sie Ihr Konto</h1>
         <p className="text-sm text-gray-600 mb-8">
           Bitte füllen Sie die folgenden Informationen aus, um ein neues Konto
           zu erstellen.
@@ -55,14 +55,14 @@ export function SignupScreen() {
           </div>
           <div className="flex px-2 items-center justify-between">
             <button
-              className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-150"
+              className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-150"
               type="submit"
             >
               Konto erstellen
             </button>
             <a
               className="inline-block align-baseline font-semibold text-sm text-blue-600 hover:text-blue-800"
-              href="#"
+              onClick={() => navigate("/")}
             >
               Bereits ein Konto?
             </a>
