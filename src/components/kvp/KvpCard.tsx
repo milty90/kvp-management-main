@@ -1,4 +1,3 @@
-import WhiteButton from "../buttons/WhiteButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
 import type { ToastContentProps } from "react-toastify";
@@ -146,6 +145,7 @@ export default function KvpCard({
 
         <div className={`absolute ${showMenu ? "block" : "hidden"}  right-8  `}>
           <MenuItem
+            onEdit={handleEditClick}
             onArchive={handleArchive}
             onReject={handleReject}
             onDelete={handleDelete}
@@ -157,12 +157,25 @@ export default function KvpCard({
         {category}
       </p>
 
-      <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
+      <div className="flex items-center mb-2.5 gap-2.5 text-gray-500 ">
         <span className="text-xs lg:text-sm ">Priorität:</span>
         <span
           className={`px-2.5 py-0.5 text-xs text-gray-600 font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
         >
           {priority}
+        </span>
+      </div>
+
+      <div className="flex items-center mb-2.5 text-gray-500">
+        <span className="text-sm ">Status:</span>
+        <span
+          className={`px-2.5 py-0.5 text-sm text-gray-600 ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
+        >
+          {state === "Archived"
+            ? "Archiviert"
+            : state === "Rejected"
+              ? "Abgelehnt"
+              : state}
         </span>
       </div>
 
@@ -176,33 +189,9 @@ export default function KvpCard({
         Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
       </p>
 
-      <p className="text-gray-500 text-pretty text-xs mb-4">
+      <p className="text-gray-500 text-pretty text-xs mb-2">
         Beschreibung : {description}
       </p>
-
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
-        <WhiteButton
-          isInactive={state === "Rejected" || state === "Archived"}
-          icon=""
-          height="0.5"
-          onClick={handleEditClick}
-        >
-          Edit
-        </WhiteButton>
-
-        <div className="flex items-center  md:ml-1 text-gray-500">
-          <span className="text-sm ">Status:</span>
-          <span
-            className={`px-2.5 py-0.5 text-sm text-gray-600 ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
-          >
-            {state === "Archived"
-              ? "Archiviert"
-              : state === "Rejected"
-                ? "Abgelehnt"
-                : state}
-          </span>
-        </div>
-      </div>
 
       {/* Divider */}
       <div className="border-t border-gray-200 my-3" />
