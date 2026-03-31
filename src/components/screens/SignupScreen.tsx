@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export function SignupScreen() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
-        <img src="/spark.png" alt="Logo" className="w-60 mb-4" />
+        <img src="/spark.png" alt="Logo" className="w-60 mb-4 ml-4" />
         <h1 className="text-xl font-semibold mb-1">Erstellen Sie Ihr Konto</h1>
         <p className="text-sm text-gray-600 mb-8">
           Bitte füllen Sie die folgenden Informationen aus, um ein neues Konto
@@ -22,6 +23,7 @@ export function SignupScreen() {
               className="shadow border border-slate-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-blue-500"
               id="username"
               type="text"
+              required
               placeholder="Benutzername eingeben"
             />
           </div>
@@ -36,6 +38,7 @@ export function SignupScreen() {
               className="shadow border border-slate-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-blue-500"
               id="email"
               type="email"
+              required
               placeholder="E-Mail-Adresse eingeben"
             />
           </div>
@@ -50,6 +53,7 @@ export function SignupScreen() {
               className="shadow border border-slate-400 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-1 focus:outline-blue-500"
               id="password"
               type="password"
+              required
               placeholder="Passwort eingeben"
             />
           </div>
@@ -57,6 +61,15 @@ export function SignupScreen() {
             <button
               className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-150"
               type="submit"
+              onClick={() =>
+                toast.info(
+                  "Registrierungsfunktion ist derzeit nicht verfügbar.",
+                  {
+                    position: "top-center",
+                    className: "mt-6 text-sm font-poppins ",
+                  },
+                )
+              }
             >
               Konto erstellen
             </button>
@@ -79,15 +92,39 @@ export function SignupScreen() {
           oder melden Sie sich mit einem sozialen Konto an.
         </p>
         <div className="flex mt-6 space-x-4">
-          <button className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150">
+          <button
+            onClick={() =>
+              toast.info("Google Anmeldung ist derzeit nicht verfügbar.", {
+                position: "top-center",
+                className: "mt-6 text-sm font-poppins ",
+              })
+            }
+            className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
+          >
             <img src="/google.svg" alt="Google" className="w-6 mr-2 " />
             Google
           </button>
-          <button className="flex items-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150">
+          <button
+            onClick={() =>
+              toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
+                position: "top-center",
+                className: "mt-6 text-sm font-poppins ",
+              })
+            }
+            className="flex items-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
+          >
             <img src="/github.svg" alt="GitHub" className="w-6 mr-2 -mt-0.5" />
             GitHub
           </button>
-          <button className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150">
+          <button
+            onClick={() =>
+              toast.info("Slack Anmeldung ist derzeit nicht verfügbar.", {
+                position: "top-center",
+                className: "mt-6 text-sm font-poppins ",
+              })
+            }
+            className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
+          >
             <img src="/slack.svg" alt="Slack" className="w-6 mr-2" />
             Slack
           </button>
