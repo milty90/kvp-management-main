@@ -2,7 +2,15 @@ import type { Kvp } from "../types";
 
 export function loadKvps(): Kvp[] {
   const stored = localStorage.getItem("local-kvp-management");
-  return stored ? JSON.parse(stored) : [];
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (error) {
+      console.error("Fehler beim Laden der KVPs:", error);
+      return [];
+    }
+  }
+  return [];
 }
 
 export function saveKvps(kvps: Kvp[]) {

@@ -5,11 +5,11 @@ export function LoginScreen() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
-        <img src="/spark.png" alt="Logo" className="w-60 mb-5" />
-        <h1 className="text-xl font-semibold mb-2">
+        <img src="/spark.png" alt="Logo" className="w-60 mb-4" />
+        <h1 className="text-xl font-semibold mb-1">
           Willkommen zum KVP Management
         </h1>
-        <p className="text-sm text-gray-600 mb-10">
+        <p className="text-sm text-gray-600 mb-8">
           Bitte melden Sie sich an, um fortzufahren.
         </p>
         <form className="w-full mb-1 max-w-sm">

@@ -10,7 +10,7 @@ export function MenuItem({ onArchive, onReject, onDelete }: MenuItemProps) {
       <div className="flex flex-col text-stone-600 absolute top-full bg-stone-50 -right-3 z-2 p-1 border border-gray-300 rounded-md focus:outline-none">
         <button
           onClick={onArchive}
-          className="p-2 text-sm hover:bg-gray-200 hover:text-blue-800  rounded"
+          className="p-2 text-sm hover:bg-gray-200 hover:text-blue-600  rounded"
         >
           Archivieren
         </button>
