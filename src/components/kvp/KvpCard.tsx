@@ -143,7 +143,9 @@ export default function KvpCard({
           className="h-6 w-6 rounded-full object-cover -mr-2 hover:bg-gray-200 hover:scale-110 cursor-pointer"
         />
 
-        <div className={`absolute ${showMenu ? "block" : "hidden"}  right-8  `}>
+        <div
+          className={`absolute ${showMenu ? "block" : "hidden"} right-8.5 -mt-1.5 `}
+        >
           <MenuItem
             onEdit={handleEditClick}
             onArchive={handleArchive}

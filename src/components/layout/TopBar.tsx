@@ -83,7 +83,7 @@ function TopBar({
             onClick={() => setShowSettings(!showSettings)}
             className={`w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
           />
-          <div className={`absolute right-13 `}>
+          <div className={`absolute right-13 -mt-2 `}>
             {showSettings && (
               <SettingItem
                 onSetting={handleSettingsClick}
