@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { loadKvps, saveKvps } from "../storage/kvpStorage";
+import { getKvpsfromDataBase, setKvpsToDataBase } from "../storage/kvpDatabase";
 
 const initialKvps: Kvp[] = [];
 
@@ -41,6 +42,7 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     saveKvps(kvps);
+    setKvpsToDataBase(kvps);
   }, [kvps]);
 
   const addKvp = (kvp: Kvp) => {

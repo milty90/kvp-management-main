@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  signInWithGoogle,
+  signInWithGitHub,
+  signInWithSlack,
+} from "../../storage/kvpDatabase";
 
 export function LoginScreen() {
   const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
@@ -80,12 +86,10 @@ export function LoginScreen() {
         <div className="flex mt-6 space-x-4">
           <button
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-            onClick={() =>
-              toast.info("Google Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins ",
-              })
-            }
+            onClick={() => {
+              signInWithGoogle();
+              navigate("/kvps");
+            }}
           >
             <img src="/google.svg" alt="Google" className="w-6 mr-2 " />
             Google
@@ -93,12 +97,10 @@ export function LoginScreen() {
 
           <button
             className="flex items-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-            onClick={() =>
-              toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins ",
-              })
-            }
+            onClick={() => {
+              signInWithGitHub();
+              navigate("/kvps");
+            }}
           >
             <img src="/github.svg" alt="GitHub" className="w-6 mr-2 -mt-0.5" />
             GitHub
@@ -106,12 +108,10 @@ export function LoginScreen() {
 
           <button
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-            onClick={() =>
-              toast.info("Slack Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins ",
-              })
-            }
+            onClick={() => {
+              signInWithSlack();
+              navigate("/kvps");
+            }}
           >
             <img src="/slack.svg" alt="Slack" className="w-6 mr-2" />
             Slack
