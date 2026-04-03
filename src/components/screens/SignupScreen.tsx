@@ -1,7 +1,57 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { signUpWithEmailandPassword } from "../../utils/authDatabase";
+
 export function SignupScreen() {
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!email || !password) {
+      toast.error("Bitte geben Sie sowohl E-Mail als auch Passwort ein.", {
+        position: "top-center",
+        className: "mt-6 text-sm font-poppins ",
+      });
+      return;
+    }
+
+    const { data, error } = await signUpWithEmailandPassword(email, password);
+
+    if (error || !data.user) {
+      toast.error(
+        error?.message ||
+          "Fehler bei der Kontoerstellung. Bitte versuchen Sie es erneut.",
+        {
+          position: "top-center",
+          className: "mt-6 text-sm font-poppins ",
+        },
+      );
+      return;
+    }
+
+    if (data.session) {
+      toast.success("Konto erfolgreich erstellt!", {
+        position: "top-center",
+        className: "mt-6 text-sm font-poppins ",
+      });
+      navigate("/login");
+      return;
+    }
+
+    toast.success(
+      "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
+      {
+        position: "top-center",
+        className: "mt-6 text-sm font-poppins ",
+      },
+    );
+    navigate("/login");
+  }
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
@@ -11,22 +61,7 @@ export function SignupScreen() {
           Bitte füllen Sie die folgenden Informationen aus, um ein neues Konto
           zu erstellen.
         </p>
-        <form className="w-full max-w-sm">
-          <div className="mb-5 items-start justify-items-start">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
-              htmlFor="username"
-            >
-              Benutzername
-            </label>
-            <input
-              className="shadow border border-slate-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-blue-500"
-              id="username"
-              type="text"
-              required
-              placeholder="Benutzername eingeben"
-            />
-          </div>
+        <form className="w-full max-w-sm" onSubmit={handleEmailSignUp}>
           <div className="mb-5 items-start justify-items-start">
             <label
               className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
@@ -40,6 +75,8 @@ export function SignupScreen() {
               type="email"
               required
               placeholder="E-Mail-Adresse eingeben"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-5 items-start justify-items-start">
@@ -55,27 +92,20 @@ export function SignupScreen() {
               type="password"
               required
               placeholder="Passwort eingeben"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex px-2 items-center justify-between">
             <button
-              className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-150"
               type="submit"
-              onClick={() =>
-                toast.info(
-                  "Registrierungsfunktion ist derzeit nicht verfügbar.",
-                  {
-                    position: "top-center",
-                    className: "mt-6 text-sm font-poppins ",
-                  },
-                )
-              }
+              className="px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-150"
             >
               Konto erstellen
             </button>
             <a
               className="inline-block align-baseline font-semibold text-sm text-blue-600 hover:text-blue-800"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/login")}
             >
               Bereits ein Konto?
             </a>

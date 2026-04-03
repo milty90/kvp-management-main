@@ -8,7 +8,8 @@ import {
   useState,
 } from "react";
 import { loadKvps, saveKvps } from "../storage/kvpStorage";
-import { getKvpsfromDataBase, setKvpsToDataBase } from "../storage/kvpDatabase";
+import { setKvpsToDataBase } from "../storage/kvpDatabase";
+import { supabase } from "../utils/supabase";
 
 const initialKvps: Kvp[] = [];
 
@@ -42,7 +43,18 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     saveKvps(kvps);
-    setKvpsToDataBase(kvps);
+
+    const syncKvpsToDatabase = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session) return;
+
+      setKvpsToDataBase(kvps);
+    };
+
+    void syncKvpsToDatabase();
   }, [kvps]);
 
   const addKvp = (kvp: Kvp) => {

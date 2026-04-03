@@ -5,6 +5,7 @@ import type { ColorButtonType } from "../../types";
 import { toast } from "react-toastify";
 import { SettingItem } from "../items/SettingItem";
 import { useClickOutside } from "../../utils/clickOutside";
+import { signOut } from "../../utils/authDatabase";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -42,7 +43,9 @@ function TopBar({
   };
 
   const handleLogoutClick = () => {
-    navigate("/");
+    signOut();
+    navigate("/login");
+
     setShowSettings(false);
   };
 
