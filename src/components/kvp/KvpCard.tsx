@@ -4,6 +4,7 @@ import type { ToastContentProps } from "react-toastify";
 import MenuItem from "../items/MenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
+import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 
 interface KvpCardProps {
   id: number;
@@ -18,7 +19,7 @@ interface KvpCardProps {
   createdAt: string;
   targetDate: string;
   benefit?: string;
-
+  onOpenDialog?: () => void;
   onOpenModal?: () => void;
 }
 
@@ -42,6 +43,7 @@ export default function KvpCard({
   benefit,
 
   onOpenModal,
+  onOpenDialog,
 }: KvpCardProps) {
   const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
 
@@ -86,23 +88,9 @@ export default function KvpCard({
   };
 
   const handleDelete = () => {
-    toast.error(customNotification, {
-      position: "top-center",
-      autoClose: 10000,
-      className: "mt-6 text-sm font-poppins -top-1",
-      onClose(reason) {
-        switch (reason) {
-          case "ignore":
-            toast.info(`Löschvorgang ignoriert.`, {
-              position: "top-center",
-              className: "mt-6 min-w-[360px] text-sm font-poppins ",
-            });
-            break;
-          default:
-            deleteKvp(id);
-        }
-      },
-    });
+    if (onOpenDialog) {
+      onOpenDialog();
+    }
     setShowMenu(false);
   };
 

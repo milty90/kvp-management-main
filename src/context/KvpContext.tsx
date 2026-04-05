@@ -7,11 +7,15 @@ import {
   useReducer,
   useState,
 } from "react";
-import { loadKvps, saveKvps } from "../storage/kvpStorage";
-import { setKvpsToDataBase } from "../storage/kvpDatabase";
+import { saveKvps } from "../storage/kvpStorage";
+import {
+  deleteKvpFromDataBase,
+  getKvpsfromDataBase,
+  setKvpsToDataBase,
+} from "../storage/kvpDatabase";
 import { supabase } from "../utils/supabase";
 
-const initialKvps: Kvp[] = [];
+const initialKvps: Kvp[] = await getKvpsfromDataBase();
 
 interface KvpContextType {
   kvps: Kvp[];
@@ -36,14 +40,10 @@ const KvpContext = createContext<KvpContextType>({
 });
 
 export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
-  const [kvps, setKvps] = useReducer(kvpManagmentReducer, initialKvps, () =>
-    loadKvps(),
-  );
+  const [kvps, setKvps] = useReducer(kvpManagmentReducer, initialKvps);
   const [selectedKvp, setSelectedKvp] = useState<Kvp | null>(null);
 
   useEffect(() => {
-    saveKvps(kvps);
-
     const syncKvpsToDatabase = async () => {
       const {
         data: { session },
@@ -52,6 +52,7 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
       if (!session) return;
 
       setKvpsToDataBase(kvps);
+      saveKvps(kvps);
     };
 
     void syncKvpsToDatabase();
@@ -69,6 +70,7 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
 
   const deleteKvp = (id: number) => {
     setKvps({ type: "DELETE_KVP", kvp: { id } as Kvp });
+    deleteKvpFromDataBase(id);
     setSelectedKvp(null);
   };
 

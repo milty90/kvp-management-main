@@ -9,9 +9,11 @@ import { SignupScreen } from "./components/screens/SignupScreen";
 import { LoginScreen } from "./components/screens/LoginScreen";
 import { supabase } from "./utils/supabase";
 import SessionContext from "./context/SessionContext";
+import { ConfirmDialogItem } from "./components/items/ConfirmDialogItem";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const { selectedKvp, setSelectedKvp } = useKvpContext();
 
   const [session, setSession] = useState(null) as any;
@@ -39,7 +41,10 @@ function App() {
             path="/"
             element={
               session ? (
-                <KvpView onOpenModal={() => setShowModal(true)} />
+                <KvpView
+                  onOpenModal={() => setShowModal(true)}
+                  onOpenDialog={() => setShowDialog(true)}
+                />
               ) : (
                 <LoginScreen />
               )
@@ -51,7 +56,10 @@ function App() {
             path="/kvps"
             element={
               session ? (
-                <KvpView onOpenModal={() => setShowModal(true)} />
+                <KvpView
+                  onOpenModal={() => setShowModal(true)}
+                  onOpenDialog={() => setShowDialog(true)}
+                />
               ) : (
                 <LoginScreen />
               )
@@ -70,6 +78,17 @@ function App() {
               setSelectedKvp(null);
             }}
             initialData={selectedKvp ?? undefined}
+          />
+        )}
+        {showDialog && (
+          <ConfirmDialogItem
+            title="KVP löschen"
+            message="Möchten Sie dieses KVP wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+            onConfirm={() => {
+              // Handle confirm action
+              setShowDialog(false);
+            }}
+            onCancel={() => setShowDialog(false)}
           />
         )}
       </BrowserRouter>

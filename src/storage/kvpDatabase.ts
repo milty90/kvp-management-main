@@ -7,6 +7,7 @@ export async function getKvpsfromDataBase() {
     console.error("Error fetching KVPs:", error);
     return [];
   }
+  console.log("Fetched KVPs:", kvps);
   return kvps;
 }
 
@@ -19,4 +20,11 @@ export function setKvpsToDataBase(kvps: Kvp[]) {
       console.error("Error saving KVP:", error);
     }
   });
+}
+
+export async function deleteKvpFromDataBase(id: number) {
+  const { error } = await supabase.from("kvps").delete().eq("id", id);
+  if (error) {
+    console.error("Error deleting KVP:", error);
+  }
 }
