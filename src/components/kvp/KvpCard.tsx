@@ -5,6 +5,7 @@ import MenuItem from "../items/MenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
+import { createPortal } from "react-dom";
 
 interface KvpCardProps {
   id: number;
@@ -19,7 +20,6 @@ interface KvpCardProps {
   createdAt: string;
   targetDate: string;
   benefit?: string;
-  onOpenDialog?: () => void;
   onOpenModal?: () => void;
 }
 
@@ -41,13 +41,12 @@ export default function KvpCard({
   createdAt,
   targetDate,
   benefit,
-
   onOpenModal,
-  onOpenDialog,
 }: KvpCardProps) {
   const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
 
   const [showMenu, setShowMenu] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
 
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -88,9 +87,7 @@ export default function KvpCard({
   };
 
   const handleDelete = () => {
-    if (onOpenDialog) {
-      onOpenDialog();
-    }
+    setShowDialog(true);
     setShowMenu(false);
   };
 
@@ -113,7 +110,6 @@ export default function KvpCard({
       onOpenModal();
     }
   };
-
   return (
     <div
       className={`bg-white  p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
@@ -142,11 +138,9 @@ export default function KvpCard({
           />
         </div>
       </div>
-
       <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
         {category}
       </p>
-
       <div className="flex items-center mb-2.5 gap-2.5 text-gray-500 ">
         <span className="text-xs lg:text-sm ">Priorität:</span>
         <span
@@ -155,7 +149,6 @@ export default function KvpCard({
           {priority}
         </span>
       </div>
-
       <div className="flex items-center mb-2.5 text-gray-500">
         <span className="text-sm ">Status:</span>
         <span
@@ -168,24 +161,19 @@ export default function KvpCard({
               : state}
         </span>
       </div>
-
       {/* Divider */}
       <div className="border-t border-gray-200 mb-3" />
-
       <p className="font-normal text-wrap break-all text-sm mb-3">
         Zugewiesen an: {assignedTo}
       </p>
       <p className="font-normal truncate text-sm mb-3">
         Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
       </p>
-
       <p className="text-gray-500 text-pretty text-xs mb-2">
         Beschreibung : {description}
       </p>
-
       {/* Divider */}
       <div className="border-t border-gray-200 my-3" />
-
       <div className="flex flex-col items-start justify-between mt-2">
         <span className="text-xs py-0.5 text-gray-500">
           <img
@@ -212,6 +200,23 @@ export default function KvpCard({
           Zieldatum: {targetDate.slice(2, 10)}
         </span>
       </div>
+      {showDialog &&
+        createPortal(
+          <ConfirmDialogItem
+            title="KVP löschen"
+            message={`Möchten Sie das KVP "${title}" wirklich löschen?`}
+            onConfirm={() => {
+              deleteKvp(id);
+              toast.success(`KVP ${title} wurde gelöscht.`, {
+                position: "top-center",
+                className: "mt-6 text-sm font-poppins",
+              });
+              setShowDialog(false);
+            }}
+            onCancel={() => setShowDialog(false)}
+          />,
+          document.body,
+        )}
     </div>
   );
 }

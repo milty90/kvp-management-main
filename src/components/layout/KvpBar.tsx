@@ -7,7 +7,6 @@ interface KvpBarProps {
   activeFilter: string;
   activePriority: string;
   onOpenModal: () => void;
-  onOpenDialog: () => void;
 }
 
 const priorityMap: Record<string, string> = {
@@ -20,7 +19,6 @@ export default function KvpBar({
   activeFilter,
   activePriority,
   onOpenModal,
-  onOpenDialog,
 }: KvpBarProps) {
   const { kvps } = useKvpContext();
 
@@ -56,7 +54,6 @@ export default function KvpBar({
                     {...kvp}
                     state={state}
                     onOpenModal={onOpenModal}
-                    onOpenDialog={onOpenDialog}
                   />
                 ))}
               </div>

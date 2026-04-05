@@ -7,10 +7,9 @@ import { ArchiveBar } from "../components/layout/ArchiveBar";
 
 interface KvpViewProps {
   onOpenModal: () => void;
-  onOpenDialog: () => void;
 }
 
-function KvpView({ onOpenModal, onOpenDialog }: KvpViewProps) {
+function KvpView({ onOpenModal }: KvpViewProps) {
   const [showArchive, setShowArchive] = useState(false);
   const [activeFilter, setActiveFilter] = useState("Alle");
   const [activePriority, setActivePriority] = useState("Alle");
@@ -34,7 +33,6 @@ function KvpView({ onOpenModal, onOpenDialog }: KvpViewProps) {
       ) : (
         <KvpBar
           onOpenModal={() => onOpenModal()}
-          onOpenDialog={() => onOpenDialog()}
           activeFilter={activeFilter}
           activePriority={activePriority}
         />
