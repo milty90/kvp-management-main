@@ -10,6 +10,7 @@ interface FormData {
   priority: Priority;
   benefit: string;
   initialData?: Kvp;
+  createdBy: string;
 }
 
 export function kvpInputFormData({
@@ -22,6 +23,7 @@ export function kvpInputFormData({
   priority,
   benefit,
   initialData,
+  createdBy,
 }: FormData) {
   const newKvp: Kvp = {
     id: Date.now(),
@@ -32,7 +34,7 @@ export function kvpInputFormData({
     assignedTo: assignedTo.trim(),
     targetDate,
     priority,
-    createdBy: "Aktueller Benutzer",
+    createdBy: createdBy,
     createdAt: new Date().toISOString().split("T")[0],
     benefit: benefit.trim(),
   };
@@ -46,7 +48,7 @@ export function kvpInputFormData({
     assignedTo: assignedTo.trim(),
     targetDate,
     priority,
-    createdBy: initialData?.createdBy || "Aktueller Benutzer",
+    createdBy: initialData?.createdBy || createdBy,
     createdAt: initialData?.createdAt || new Date().toISOString().split("T")[0],
     benefit: benefit?.trim(),
   };

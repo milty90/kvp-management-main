@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 import { kvpInputFormData } from "../../utils/kvpInputFormData";
 import { kvpInputFormColor } from "../../utils/kvpInputFromColor";
+import { supabase } from "../../utils/supabase";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -28,6 +29,19 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     initialData?.priority || "",
   );
   const [benefit, setBenefit] = useState(initialData?.benefit || "");
+  const [createdBy, setCreatedBy] = useState(
+    initialData?.createdBy || "Unbekannter Benutzer",
+  );
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!initialData?.createdBy) {
+        const { data } = await supabase.auth.getUser();
+        setCreatedBy(data.user?.email?.split("@")[0] || "Unbekannter Benutzer");
+      }
+    };
+    fetchUser();
+  }, [initialData?.createdBy]);
 
   const { pcdaTextColor, priorityTextColor, targetDateTextColor } =
     kvpInputFormColor({
@@ -46,6 +60,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     priority: priority as Kvp["priority"],
     benefit: benefit,
     initialData,
+    createdBy: createdBy,
   });
 
   function submitForm() {
