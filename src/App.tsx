@@ -9,7 +9,6 @@ import { SignupScreen } from "./components/screens/SignupScreen";
 import { LoginScreen } from "./components/screens/LoginScreen";
 import { supabase } from "./utils/supabase";
 import SessionContext from "./context/SessionContext";
-import { ConfirmDialogItem } from "./components/items/ConfirmDialogItem";
 
 function App() {
   const [showModal, setShowModal] = useState(false);

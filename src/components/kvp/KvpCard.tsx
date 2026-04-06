@@ -1,6 +1,6 @@
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-import type { ToastContentProps } from "react-toastify";
+
 import MenuItem from "../items/MenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
@@ -52,21 +52,21 @@ export default function KvpCard({
 
   useClickOutside(menuWrapperRef, () => setShowMenu(false));
 
-  function customNotification({ closeToast }: ToastContentProps) {
-    return (
-      <div>
-        <p className="text-sm min-w-80 text-gray-700 font-poppins mb-2">
-          Möchten Sie dieses KVP wirklich löschen?
-        </p>
-        <button
-          className="text-sm text-blue-500 font-poppins"
-          onClick={() => closeToast("ignore")}
-        >
-          Nein, behalten!
-        </button>
-      </div>
-    );
-  }
+  // function customNotification({ closeToast }: ToastContentProps) {
+  //   return (
+  //     <div>
+  //       <p className="text-sm min-w-80 text-gray-700 font-poppins mb-2">
+  //         Möchten Sie dieses KVP wirklich löschen?
+  //       </p>
+  //       <button
+  //         className="text-sm text-blue-500 font-poppins"
+  //         onClick={() => closeToast("ignore")}
+  //       >
+  //         Nein, behalten!
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   const handleArchive = () => {
     archiveKvp(id);

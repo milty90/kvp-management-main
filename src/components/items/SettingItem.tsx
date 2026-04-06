@@ -15,13 +15,13 @@ export function SettingItem({
           onClick={onSetting}
           className="p-2 text-shadow-mauve-50 text-start hover:bg-gray-200 hover:text-blue-600 rounded hover:scale-95 transition-transform duration-150"
         >
-          Settings
+          Einstellungen
         </button>
         <button
           onClick={onProfile}
           className="p-2 text-shadow-mauve-50 text-start hover:bg-gray-200 hover:text-blue-600 rounded hover:scale-95 transition-transform duration-150"
         >
-          Profil
+          Profile
         </button>
         <button
           onClick={onLogout}
