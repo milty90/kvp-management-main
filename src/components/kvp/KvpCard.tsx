@@ -112,21 +112,21 @@ export default function KvpCard({
   };
   return (
     <div
-      className={`bg-white  p-4 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
+      className={`bg-white p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
         ref={menuWrapperRef}
         className="relative flex items-start justify-between mb-2 gap-1.5"
       >
-        <p className="text-sm lg:text-lg font-semibold ">{title}</p>
-
+        <p className="text-sm lg:text-lg text-gray-700 font-semibold ">
+          {title}
+        </p>
         <img
           onClick={() => setShowMenu(!showMenu)}
           src="/more.svg"
           alt="More"
           className="h-6 w-6 rounded-full object-cover -mr-2 hover:bg-gray-200 hover:scale-110 cursor-pointer"
         />
-
         <div
           className={`absolute ${showMenu ? "block" : "hidden"} right-8.5 -mt-1.5 `}
         >
@@ -139,8 +139,10 @@ export default function KvpCard({
         </div>
       </div>
       <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
+        <span className="font-medium text-gray-700">Kategorie: </span>{" "}
         {category}
       </p>
+
       <div className="flex items-center mb-2.5 gap-2.5 text-gray-500 ">
         <span className="text-xs lg:text-sm ">Priorität:</span>
         <span
@@ -205,6 +207,7 @@ export default function KvpCard({
           <ConfirmDialogItem
             title="KVP löschen"
             message={`Möchten Sie das KVP "${title}" wirklich löschen?`}
+            confirmButtonText="Löschen"
             onConfirm={() => {
               deleteKvp(id);
               toast.success(`KVP ${title} wurde gelöscht.`, {

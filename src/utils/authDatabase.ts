@@ -59,3 +59,21 @@ export async function signOut() {
     console.error("Error signing out:", error);
   }
 }
+
+export async function getCurrentUser() {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error("Error fetching current user:", error);
+    return null;
+  }
+  return data.user;
+}
+
+export async function fetchUser(
+  setUsername: React.Dispatch<React.SetStateAction<string>>,
+  setEmail: React.Dispatch<React.SetStateAction<string>>,
+) {
+  const { data } = await supabase.auth.getUser();
+  setUsername(data.user?.email?.split("@")[0] || "Unbekannter Benutzer");
+  setEmail(data.user?.email || "Keine E-Mail verfügbar");
+}

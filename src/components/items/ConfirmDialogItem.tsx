@@ -3,6 +3,8 @@ import ColorButton from "../buttons/ColorButton";
 interface ConfirmDialogProps {
   title: string;
   message: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -10,6 +12,8 @@ interface ConfirmDialogProps {
 export function ConfirmDialogItem({
   title,
   message,
+  confirmButtonText,
+  cancelButtonText,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
@@ -23,10 +27,10 @@ export function ConfirmDialogItem({
             onClick={onCancel}
             className="hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium text-gray-700"
           >
-            Abbrechen
+            {cancelButtonText || "Abbrechen"}
           </button>
           <ColorButton onClick={onConfirm} color="red">
-            Bestätigen
+            {confirmButtonText || "Bestätigen"}
           </ColorButton>
         </div>
       </div>
