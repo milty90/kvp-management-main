@@ -1,3 +1,4 @@
+import ColorButton from "../buttons/ColorButton";
 interface ProfileModalProps {
   onConfirm: () => void;
   onCancel: () => void;
@@ -5,31 +6,33 @@ interface ProfileModalProps {
 
 export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-700/30">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-bold mb-4">Profil</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-700/50">
+      <div className="bg-white px-6 py-5 rounded-xl shadow-lg w-full max-w-xl">
+        <h2 className="text-xl font-bold pl-1 mb-4">Profil</h2>
 
-        <div className="mb-4">
-          <p>Benutzname</p>
-          <p>Email adresse</p>
+        <div className="flex items-center justify-center h-30 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-xs text-gray-500">Benutzername</p>
         </div>
-
-        <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => {
-            onCancel();
-          }}
-        >
-          Schließen
-        </button>
-        <button
-          className="mt-4 ml-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          onClick={() => {
-            onConfirm();
-          }}
-        >
-          Speichern
-        </button>
+        <div className="flex items-center justify-center h-30 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-xs text-gray-500">E-Mail</p>
+        </div>
+        <div className="flex items-center justify-center h-30 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-xs text-gray-500">Weitere Informationen</p>
+        </div>
+        <div className="flex items-center justify-center h-30 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-xs text-gray-500">Weitere Informationen</p>
+        </div>
+        <div className="mt-4 flex justify-end gap-3">
+          <button
+            onClick={onCancel}
+            className="hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium text-gray-700"
+          >
+            Abbrechen
+          </button>
+          <ColorButton onClick={onConfirm} color="blue">
+            Speichern
+          </ColorButton>
+        </div>
       </div>
     </div>
   );
