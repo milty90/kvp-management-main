@@ -120,7 +120,7 @@ function TopBar({
         createPortal(
           <SettingsModal
             onConfirm={() => setShowSettingsModal(false)}
-            onClose={() => setShowSettingsModal(false)}
+            onCancel={() => setShowSettingsModal(false)}
           />,
           document.body,
         )}
