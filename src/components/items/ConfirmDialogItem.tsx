@@ -19,9 +19,11 @@ export function ConfirmDialogItem({
 }: ConfirmDialogProps) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-700/30">
-      <div className="bg-amber-100 border border-amber-300 min-w-md rounded-md px-6 py-4 shadow-lg">
+      <div className="bg-amber-100 border border-amber-300 rounded-md px-6 py-4 shadow-lg">
         <h2 className="text-lg text-gray-700 font-semibold mb-2">{title}</h2>
-        <p className=" text-gray-600 text-center pt-1 text-sm">{message}</p>
+        <p className=" text-gray-600 pt-1 pl-2 pr-4 text-center text-sm">
+          {message}
+        </p>
         <div className="mt-4 flex justify-end gap-3">
           <button
             onClick={onCancel}
