@@ -1,11 +1,11 @@
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-
 import MenuItem from "../items/MenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 
 interface KvpCardProps {
   id: number;
@@ -52,21 +52,9 @@ export default function KvpCard({
 
   useClickOutside(menuWrapperRef, () => setShowMenu(false));
 
-  // function customNotification({ closeToast }: ToastContentProps) {
-  //   return (
-  //     <div>
-  //       <p className="text-sm min-w-80 text-gray-700 font-poppins mb-2">
-  //         Möchten Sie dieses KVP wirklich löschen?
-  //       </p>
-  //       <button
-  //         className="text-sm text-blue-500 font-poppins"
-  //         onClick={() => closeToast("ignore")}
-  //       >
-  //         Nein, behalten!
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  const handleCardClick = (id: number) => {
+    window.history.pushState({}, "", `/kvps/${id}`);
+  };
 
   const handleArchive = () => {
     archiveKvp(id);
@@ -112,6 +100,7 @@ export default function KvpCard({
   };
   return (
     <div
+      onClick={() => handleCardClick(id)}
       className={`bg-white p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div

@@ -16,6 +16,14 @@ export type Kvp = {
   benefit?: string;
 };
 
+export type User = {
+  id: number;
+  userName: string;
+  userEmail: string;
+  createdAt: string;
+  lastSignIn: string;
+};
+
 export type FormColor = {
   pdcaState?: State | "";
   targetDate?: string;
