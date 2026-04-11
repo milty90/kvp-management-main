@@ -91,7 +91,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-gray-700/80 shadow-md flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-gray-700/30 shadow-md flex items-center justify-center">
       <div className="px-6 py-4 bg-white rounded-lg shadow-md w-120 relative">
         <button
           type="button"
