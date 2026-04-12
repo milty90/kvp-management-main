@@ -27,7 +27,7 @@ export default function StatCard({
 
   return (
     <div
-      className="flex flex-col-reverse md:flex-row items-center gap-1.5 md:p-2 bg-white rounded-xl shadow-md border border-gray-200 h-14
+      className="flex flex-col-reverse md:flex-row items-center gap-1 md:gap-1.5 md:p-2 bg-white rounded-xl shadow-md border border-gray-200 h-12 md:h-14
      w-full"
     >
       <div className="flex w-full items-center justify-start mr-2">
@@ -39,7 +39,7 @@ export default function StatCard({
       </div>
       <div className="flex flex-row-reverse md:flex-row w-full items-center justify-around md:justify-end md:gap-1">
         <div className="flex items-center gap-1">
-          <p className="text-xl font-semibold  md:mr-2  text-gray-500">
+          <p className="text-xl font-semibold md:mr-2 text-gray-500">
             {quantity}
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function StatCard({
           <img
             src={path || "/"}
             alt="Status Logo"
-            className="w-10 h-10 object-cover p-2"
+            className="w-9.5 md:w-10 object-cover p-2"
           />
         </div>
       </div>

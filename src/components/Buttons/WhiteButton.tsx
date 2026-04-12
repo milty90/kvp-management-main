@@ -17,9 +17,9 @@ export default function WhiteButton({
     <button
       onClick={onClick}
       className={`${isInactive ? "cursor-not-allowed opacity-50" : ""} 
-          inline-flex items-center gap-2 px-4 py-${height} rounded-lg
+          inline-flex items-center gap-2 px-2 md:px-4 py-${height} rounded-lg
           bg-white hover:bg-gray-50
-          text-gray-700 hover:text-gray-900 text-sm font-medium
+          text-gray-700 hover:text-gray-900 text-xs md:text-sm font-medium
           border border-gray-200 hover:border-gray-300
           shadow-[0_1px_2px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.05)]
           hover:shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_8px_rgba(0,0,0,0.08)]

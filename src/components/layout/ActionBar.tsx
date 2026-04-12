@@ -27,8 +27,8 @@ function ActionBar({
   };
 
   return (
-    <div className="flex items-center gap-2 w-full bg-white px-2.5 py-2 h-14 rounded-xl shadow-md justify-between">
-      <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 w-full bg-white px-2 md:px-2.5 py-2 h-14 rounded-xl shadow-md justify-between">
+      <div className="flex items-center gap-2 md:gap-3">
         {isArchiveOpen ? null : (
           <>
             <ButtonGroup filter={onFilter} />
@@ -36,7 +36,7 @@ function ActionBar({
           </>
         )}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
         <WhiteButton onClick={onOpenArchive} icon="">
           {isArchiveOpen ? "Aktive KVPs" : "Inaktive KVPs"}
         </WhiteButton>

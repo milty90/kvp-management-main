@@ -27,7 +27,7 @@ export default function CycleCard({
 }: CycleCardProps) {
   return (
     <div
-      className={`flex min-w-20  w-full items-center justify-around md:justify-between md:px-3 h-14 lg:gap-12 rounded-xl border-${color}-300/60 border shadow-md ${colorClasses[color]}`}
+      className={`flex min-w-20  w-full items-center justify-around md:justify-between h-12 md:px-3  md:h-14 lg:gap-12 rounded-xl border-${color}-300/60 border shadow-md ${colorClasses[color]}`}
     >
       <div className={`px-1 py-1 flex items-start gap-3`}>
         <p className={`text-xl md:text-3xl font-semibold text-${color}-900`}>
