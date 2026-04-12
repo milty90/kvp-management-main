@@ -53,8 +53,12 @@ function TopBar({
     <div className="flex flex-col w-full shadow-md rounded-2xl">
       <div className="w-full p-3 rounded-t-2xl bg-white text-white flex items-center justify-between">
         <div className="flex items-center justify-center">
-          <img src="/spark.png" alt="Logo" className=" h-12 -ml-1 mt-3 mb-0" />
-          <p className="text-gray-700 font-light font-poppins tracking-tight -mb-6 text-sm">
+          <img
+            src="/spark.png"
+            alt="Logo"
+            className="h-10 md:h-12 -ml-1 mt-3 mb-0"
+          />
+          <p className="hidden md:block text-gray-700 font-light font-poppins tracking-tight -mb-6 text-sm">
             KVP Management System
           </p>
         </div>

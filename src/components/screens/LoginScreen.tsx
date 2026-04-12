@@ -50,8 +50,8 @@ export function LoginScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
+    <div className="flex flex-col items-center md:justify-center  h-screen bg-gray-100">
+      <div className="flex flex-col pt-12 items-center justify-start h-screen md:h-auto md:justify-center w-full max-w-md shadow-md md:rounded-2xl bg-white p-8">
         <img src="/spark.png" alt="Logo" className="w-60 mb-4 ml-4" />
         <h1 className="text-xl font-normal mb-1">
           Willkommen zum KVP Management
@@ -171,7 +171,11 @@ export function LoginScreen() {
               signInWithGoogle();
             }}
           >
-            <img src="/google.svg" alt="Google" className="w-6 mr-2 " />
+            <img
+              src="/google.svg"
+              alt="Google"
+              className="w-6 mr-1 -ml-1 md:mr-2"
+            />
             Google
           </button>
 
@@ -189,7 +193,11 @@ export function LoginScreen() {
               signInWithGitHub();
             }}
           >
-            <img src="/github.svg" alt="GitHub" className="w-6 mr-2 -mt-0.5" />
+            <img
+              src="/github.svg"
+              alt="GitHub"
+              className="w-6 mr-1 -mt-1 -ml-1"
+            />
             GitHub
           </button>
 
@@ -200,7 +208,7 @@ export function LoginScreen() {
               signInWithSlack();
             }}
           >
-            <img src="/slack.svg" alt="Slack" className="w-6 mr-2" />
+            <img src="/slack.svg" alt="Slack" className="w-6 mr-2 -ml-1" />
             Slack
           </button>
         </div>

@@ -54,8 +54,8 @@ export function SignupScreen() {
     navigate("/login");
   }
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <div className="flex flex-col items-center w-full max-w-md shadow-md rounded-2xl bg-white p-8">
+    <div className="flex flex-col items-center md:justify-center h-screen bg-gray-100">
+      <div className="flex flex-col pt-12 items-center justify-start h-screen md:h-auto md:justify-center w-full max-w-md shadow-md md:rounded-2xl bg-white p-8">
         <img src="/spark.png" alt="Logo" className="w-60 mb-4 ml-4" />
         <h1 className="text-xl font-semibold mb-1">Erstellen Sie Ihr Konto</h1>
         <p className="text-sm text-gray-600 mb-8">
@@ -173,7 +173,11 @@ export function SignupScreen() {
             }
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
           >
-            <img src="/google.svg" alt="Google" className="w-6 mr-2 " />
+            <img
+              src="/google.svg"
+              alt="Google"
+              className="w-6 mr-1 -ml-1 md:mr-2"
+            />
             Google
           </button>
           <button
@@ -185,7 +189,11 @@ export function SignupScreen() {
             }
             className="flex items-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
           >
-            <img src="/github.svg" alt="GitHub" className="w-6 mr-2 -mt-0.5" />
+            <img
+              src="/github.svg"
+              alt="GitHub"
+              className="w-6 mr-1 -mt-1 -ml-1 "
+            />
             GitHub
           </button>
           <button
@@ -197,7 +205,7 @@ export function SignupScreen() {
             }
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
           >
-            <img src="/slack.svg" alt="Slack" className="w-6 mr-2" />
+            <img src="/slack.svg" alt="Slack" className="w-6 mr-2 -ml-1" />
             Slack
           </button>
         </div>

@@ -7,7 +7,7 @@ function StatsView() {
   const { kvps } = useKvpContext();
 
   return (
-    <div className="flex flex-col px-8 pb-0 pt-8 items-center bg-gray-100 gap-3 h-screen min-h-0 overflow-hidden">
+    <div className="flex flex-col px-2 pt-2 md:px-8 pb-0 md:pt-8 items-center bg-gray-100 gap-3 h-screen min-h-0 overflow-hidden">
       <TopBar
         kvpButtonColor="gray"
         statButtonColor="blue"
