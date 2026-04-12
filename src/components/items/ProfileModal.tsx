@@ -15,7 +15,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   fetchUser(setUsername, setEmail);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-700/50">
+    <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-white px-6 py-5 rounded-xl shadow-lg w-full max-w-xl">
         <h2 className="text-xl font-bold pl-1 mb-4">Profil</h2>
 

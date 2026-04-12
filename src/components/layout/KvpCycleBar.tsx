@@ -10,7 +10,7 @@ export default function KvpCycleBar() {
   const actQuantity = kvps.filter((k) => k.state === "Act").length;
 
   return (
-    <div className="w-full p-3 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
+    <div className="w-full p-2.5 md:p-3 pt-0 rounded-b-2xl  bg-white text-gray-800 flex items-center justify-between gap-3">
       <CycleCard color="blue" label="Plan" letter="P" quantity={planQuantity} />
       <CycleCard color="violet" label="Do" letter="D" quantity={doQuantity} />
       <CycleCard

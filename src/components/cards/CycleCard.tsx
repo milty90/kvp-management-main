@@ -38,7 +38,7 @@ export default function CycleCard({
         </p>
       </div>
       <div
-        className={`px-3 py-1 rounded-3xl ${roundColor[color]} flex flex-row items-end `}
+        className={`hidden md:inline px-3 py-1 rounded-3xl ${roundColor[color]} flex flex-row items-end `}
       >
         <p className="text-xl font-semibold">{letter}</p>
       </div>

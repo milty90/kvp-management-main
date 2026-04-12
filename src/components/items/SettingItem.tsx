@@ -9,7 +9,7 @@ export function SettingItem({
   onLogout,
 }: SettingItemProps) {
   return (
-    <div className="relative z-10 flex flex-col items-start">
+    <div className="relative z-30 flex flex-col items-start">
       <div className="flex flex-col text-stone-600 absolute top-full bg-stone-50 shadow-md -right-3 z-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
         <button
           onClick={onSetting}

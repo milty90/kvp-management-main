@@ -8,7 +8,6 @@ interface WhiteButtonProps {
 
 export default function WhiteButton({
   icon = "/done.svg",
-  height = "2",
   children,
   isInactive = false,
   onClick,
@@ -17,7 +16,7 @@ export default function WhiteButton({
     <button
       onClick={onClick}
       className={`${isInactive ? "cursor-not-allowed opacity-50" : ""} 
-          inline-flex items-center gap-2 px-2 md:px-4 py-${height} rounded-lg
+          inline-flex items-center gap-2 px-2 py-2.5 md:px-4 md:py-2 rounded-lg
           bg-white hover:bg-gray-50
           text-gray-700 hover:text-gray-900 text-xs md:text-sm font-medium
           border border-gray-200 hover:border-gray-300
