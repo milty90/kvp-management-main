@@ -45,12 +45,12 @@ export default function StatCard({
         </div>
 
         <div
-          className={`items-center ${width <= 520 ? "inline" : width < 900 ? "hidden" : "md:inline"} justify-center  shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
+          className={`items-center ${width <= 520 ? "inline mb-0.5" : width < 900 ? "hidden" : "md:inline"} justify-center  shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
         >
           <img
             src={path || "/"}
             alt="Status Logo"
-            className="w-9.5 md:w-10 object-cover p-2"
+            className="w-8.5  md:w-10 object-cover p-2"
           />
         </div>
       </div>

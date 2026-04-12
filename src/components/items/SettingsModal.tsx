@@ -28,7 +28,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
           >
             Abbrechen
           </button>
-          <ColorButton onClick={onConfirm} color="blue">
+          <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
             Speichern
           </ColorButton>
         </div>

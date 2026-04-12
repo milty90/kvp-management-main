@@ -38,7 +38,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
           >
             Abbrechen
           </button>
-          <ColorButton onClick={onConfirm} color="blue">
+          <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
             Speichern
           </ColorButton>
         </div>

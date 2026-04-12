@@ -2,6 +2,7 @@ import type { ColorButtonType } from "../../types";
 
 type ColorButtonProps = {
   color?: ColorButtonType;
+  isTextOnly?: boolean;
   height?: string;
   icon?: string;
   children: React.ReactNode;
@@ -22,6 +23,7 @@ const colorClasses = {
 export default function ColorButton({
   color = "blue",
   height = "2",
+  isTextOnly = false,
   onClick,
   icon,
   children,
@@ -44,7 +46,9 @@ export default function ColorButton({
       {icon ? (
         <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4" />
       ) : null}{" "}
-      <span className="hidden md:inline">{children}</span>
+      <span className={`${!isTextOnly ? "hidden md:inline" : ""}`}>
+        {children}
+      </span>
     </button>
   );
 }
