@@ -1,4 +1,4 @@
-import { type Session } from "react-router-dom";
+import { type Session } from "@supabase/supabase-js";
 import React from "react";
 
 const SessionContext = React.createContext<Session | null>(null);

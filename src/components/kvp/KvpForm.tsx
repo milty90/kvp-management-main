@@ -92,7 +92,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-700/30 shadow-md flex items-center justify-center">
-      <div className="px-6 bg-white md:rounded-lg pt-8 md:py-4 h-full md:h-auto shadow-md w-120 relative">
+      <div className="px-6 bg-white md:rounded-lg pt-4 md:py-4 h-full md:h-auto shadow-md w-120 relative">
         <button
           type="button"
           className="absolute top-3 right-4 text-3xl text-gray-500 hover:text-gray-700"
@@ -138,7 +138,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             placeholder="Beschreibung"
             className="w-full border text-sm text-gray-800 border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <div className="grid grid-cols-2 items-center mt-3 gap-4 w-full">
+          <div className="grid grid-cols-2 items-center mt-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-4">
               <span className="text-xs pl-1 -mb-3 text-gray-500">
                 Kategorie *
@@ -218,7 +218,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
               />
             </div>
           </div>
-          <div className="border-t border-gray-200 w-full mt-3" />
+          <div className="border-t border-gray-200 w-full mt-2" />
           <div className="flex w-full items-center justify-end gap-2  my-2">
             <ColorButton
               color="gray"

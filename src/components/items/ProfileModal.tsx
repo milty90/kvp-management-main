@@ -1,7 +1,7 @@
 import { fetchUser } from "../../utils/authDatabase";
 import ColorButton from "../buttons/ColorButton";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -12,7 +12,9 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   const [username, setUsername] = useState("... Lade Benutzerdaten");
   const [email, setEmail] = useState("... Lade Benutzerdaten");
 
-  fetchUser(setUsername, setEmail);
+  useEffect(() => {
+    fetchUser(setUsername, setEmail);
+  }, []);
 
   return (
     <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-700/50">

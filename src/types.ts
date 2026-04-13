@@ -32,10 +32,17 @@ export type FormColor = {
 
 export type KvpManagementState = Kvp[];
 
-export type KvpManagementAction = {
-  type: "ADD_KVP" | "UPDATE_KVP" | "DELETE_KVP" | "ARCHIVE_KVP" | "REJECT_KVP";
-  kvp: Kvp;
-};
+export type KvpManagementAction =
+  | {
+      type:
+        | "ADD_KVP"
+        | "UPDATE_KVP"
+        | "DELETE_KVP"
+        | "ARCHIVE_KVP"
+        | "REJECT_KVP";
+      kvp: Kvp;
+    }
+  | { type: "SET_KVPS"; kvps: Kvp[] };
 
 export type ColorButtonType =
   | "blue"

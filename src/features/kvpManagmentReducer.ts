@@ -28,6 +28,9 @@ export default function kvpManagmentReducer(
         kvp.id === action.kvp.id ? { ...kvp, state: "Rejected" } : kvp,
       );
       break;
+    case "SET_KVPS":
+      updatedState = action.kvps;
+      break;
     default:
       return state;
   }

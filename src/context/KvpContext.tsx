@@ -7,15 +7,13 @@ import {
   useReducer,
   useState,
 } from "react";
-import { saveKvps } from "../storage/kvpStorage";
+
 import {
   deleteKvpFromDataBase,
   getKvpsfromDataBase,
   setKvpsToDataBase,
 } from "../storage/kvpDatabase";
 import { supabase } from "../utils/supabase";
-
-const initialKvps: Kvp[] = await getKvpsfromDataBase();
 
 interface KvpContextType {
   kvps: Kvp[];
@@ -29,7 +27,7 @@ interface KvpContextType {
 }
 
 const KvpContext = createContext<KvpContextType>({
-  kvps: initialKvps,
+  kvps: [],
   addKvp: () => {},
   updateKvp: () => {},
   deleteKvp: () => {},
@@ -40,21 +38,32 @@ const KvpContext = createContext<KvpContextType>({
 });
 
 export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
-  const [kvps, setKvps] = useReducer(kvpManagmentReducer, initialKvps);
+  const [kvps, setKvps] = useReducer(kvpManagmentReducer, []);
   const [selectedKvp, setSelectedKvp] = useState<Kvp | null>(null);
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        getKvpsfromDataBase().then((data) => {
+          setKvps({ type: "SET_KVPS", kvps: data });
+        });
+      } else {
+        setKvps({ type: "SET_KVPS", kvps: [] });
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     const syncKvpsToDatabase = async () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-
       if (!session) return;
-
       setKvpsToDataBase(kvps);
-      saveKvps(kvps);
     };
-
     void syncKvpsToDatabase();
   }, [kvps]);
 

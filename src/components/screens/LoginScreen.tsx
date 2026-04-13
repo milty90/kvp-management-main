@@ -7,7 +7,6 @@ import {
   signInWithEmail,
 } from "../../utils/authDatabase";
 import { useState } from "react";
-import { supabase } from "../../utils/supabase";
 
 export function LoginScreen() {
   const navigate = useNavigate();
@@ -15,8 +14,6 @@ export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const user = supabase.auth.setSession;
 
   async function handleEmailLogin(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -183,13 +180,11 @@ export function LoginScreen() {
             className="flex items-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
             type="button"
             onClick={() => {
-              if (!user) {
-                toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
-                  position: "top-center",
-                  className: "mt-6 text-sm font-poppins ",
-                });
-                return;
-              }
+              toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
+                position: "top-center",
+                className: "mt-6 text-sm font-poppins ",
+              });
+
               signInWithGitHub();
             }}
           >
