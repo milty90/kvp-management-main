@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
 
 interface KvpCardProps {
   id: number;
@@ -52,10 +51,6 @@ export default function KvpCard({
 
   useClickOutside(menuWrapperRef, () => setShowMenu(false));
 
-  const handleCardClick = (id: number) => {
-    window.history.pushState({}, "", `/kvps/${id}`);
-  };
-
   const handleArchive = () => {
     archiveKvp(id);
     toast.info(`KVP ${title} wurde archiviert.`, {
@@ -100,7 +95,6 @@ export default function KvpCard({
   };
   return (
     <div
-      onClick={() => handleCardClick(id)}
       className={`bg-white p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
