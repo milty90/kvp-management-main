@@ -15,7 +15,7 @@ function KvpView({ onOpenModal }: KvpViewProps) {
   const [activePriority, setActivePriority] = useState("Alle");
 
   return (
-    <div className="flex flex-col px-2 pt-2 md:px-8 pb-0 md:pt-8 items-center bg-gray-100 gap-3 h-screen">
+    <div className="flex flex-col px-2 pt-0 md:px-8 pb-0 md:pt-8 items-center bg-gray-100 gap-3 h-screen">
       <TopBar
         kvpButtonColor="blue"
         statButtonColor="gray"

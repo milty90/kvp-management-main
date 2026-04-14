@@ -69,7 +69,7 @@ function TopBar({
   };
   return (
     <div className="flex flex-col w-full shadow-md rounded-2xl">
-      <div className="w-full p-3 rounded-t-2xl bg-white text-white flex items-center justify-between">
+      <div className="w-full px-2 py-3 pt-0 md:p-3 md:rounded-t-2xl bg-white text-white flex items-center justify-between">
         <div className="flex items-center justify-center">
           <img
             src="/spark.png"
