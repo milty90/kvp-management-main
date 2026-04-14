@@ -10,6 +10,8 @@ import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
 import { SettingsModal } from "../items/SettingsModal";
 import { ProfileModal } from "../items/ProfileModal";
+import { useWindowWidth } from "../../utils/useWindowWidth";
+import MenuItem from "../items/MenuItem";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -25,6 +27,7 @@ function TopBar({
   const navigate = useNavigate();
 
   const [showSettings, setShowSettings] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,7 +36,12 @@ function TopBar({
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-  useClickOutside(settingsWrapperRef, () => setShowSettings(false));
+  useClickOutside(settingsWrapperRef, () => {
+    setShowSettings(false);
+    setShowMenu(false);
+  });
+
+  const width = useWindowWidth();
 
   const handleSettingsClick = () => {
     setShowSettingsModal(true);
@@ -48,6 +56,16 @@ function TopBar({
   const handleLogoutClick = () => {
     setShowConfirmDialog(true);
     setShowSettings(false);
+  };
+
+  const handleKvpsClick = () => {
+    navigate("/kvps");
+    setShowMenu(false);
+  };
+
+  const handleStatisticsClick = () => {
+    navigate("/stats");
+    setShowMenu(false);
   };
   return (
     <div className="flex flex-col w-full shadow-md rounded-2xl">
@@ -66,36 +84,71 @@ function TopBar({
           ref={settingsWrapperRef}
           className={`relative flex items-start space-x-3 mr-3 -mb-2.5`}
         >
-          <ColorButton
-            color={kvpButtonColor}
-            icon={
-              kvpButtonColor === "white"
-                ? "/trending-gray.svg"
-                : "/trending.svg"
-            }
-            onClick={() => navigate("/kvps")}
-          >
-            Verbesserungen
-          </ColorButton>
-          <ColorButton
-            color={statButtonColor}
-            icon="/graph.svg"
-            onClick={() => navigate("/stats")}
-          >
-            Statistik
-          </ColorButton>
+          {width >= 768 ? (
+            <>
+              <ColorButton
+                color={kvpButtonColor}
+                icon={
+                  kvpButtonColor === "white"
+                    ? "/trending-gray.svg"
+                    : "/trending.svg"
+                }
+                onClick={() => {
+                  navigate("/kvps");
+                }}
+              >
+                Verbesserungen
+              </ColorButton>
+
+              <ColorButton
+                color={statButtonColor}
+                icon="/graph.svg"
+                onClick={() => {
+                  navigate("/stats");
+                }}
+              >
+                Statistik
+              </ColorButton>
+            </>
+          ) : (
+            <img
+              src="/menu.svg"
+              alt="menu"
+              onClick={() => {
+                setShowMenu(!showMenu);
+                setShowSettings(false);
+              }}
+              className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
+            />
+          )}
+
           <img
             src="/settings.svg"
             alt="Settings"
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={() => {
+              setShowSettings(!showSettings);
+              setShowMenu(false);
+            }}
             className={`w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
           />
-          <div className={`absolute right-13 -mt-2 `}>
+          <div
+            className={`absolute ${width < 640 ? "-right-6 mt-10" : "right-10 -mt-2"} ${showSettings ? " block" : " hidden"}`}
+          >
             {showSettings && (
               <SettingItem
                 onSetting={handleSettingsClick}
                 onProfile={handleProfileClick}
                 onLogout={handleLogoutClick}
+              />
+            )}
+          </div>
+          <div
+            className={`absolute -right-3 mt-10${showMenu ? " block" : " hidden"}`}
+          >
+            {showMenu && (
+              <MenuItem
+                onKvpsClick={handleKvpsClick}
+                onStatisticsClick={handleStatisticsClick}
               />
             )}
           </div>

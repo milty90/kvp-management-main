@@ -1,6 +1,6 @@
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-import MenuItem from "../items/MenuItem";
+import CardMenuItem from "../items/CardMenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
@@ -113,7 +113,7 @@ export default function KvpCard({
         <div
           className={`absolute ${showMenu ? "block" : "hidden"} right-8.5 -mt-1.5 `}
         >
-          <MenuItem
+          <CardMenuItem
             onEdit={handleEditClick}
             onArchive={handleArchive}
             onReject={handleReject}

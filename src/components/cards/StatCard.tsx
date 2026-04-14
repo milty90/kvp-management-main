@@ -32,7 +32,7 @@ export default function StatCard({
     >
       <div className="flex w-full items-center justify-start mr-2">
         <p
-          className={`px-1.5 ${width <= 520 ? "hidden" : "overflow-auto whitespace-nowrap lg:px-3 py-1 text-sm text-gray-600 font-medium bg-gray-200/50 rounded-md"}`}
+          className={`px-1.5 ${width <= 768 ? "hidden" : "overflow-auto whitespace-nowrap lg:px-3 py-1 text-sm text-gray-600 font-medium bg-gray-200/50 rounded-md"}`}
         >
           {label}
         </p>
@@ -45,7 +45,7 @@ export default function StatCard({
         </div>
 
         <div
-          className={`items-center ${width <= 520 ? "inline mb-0.5" : width < 900 ? "hidden" : "md:inline"} justify-center  shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
+          className={`items-center ${width <= 768 ? "inline mb-0.5" : width < 900 ? "hidden" : "md:inline"} justify-center  shadow-gray-400 shadow-sm rounded-md ${iconColors[iconColor]}`}
         >
           <img
             src={path || "/"}
