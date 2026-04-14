@@ -65,7 +65,7 @@ export function SignupScreen() {
         <form className="w-full max-w-sm" onSubmit={handleEmailSignUp}>
           <div className="mb-5 items-start justify-items-start">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
+              className="block text-left text-gray-700 text-sm font-semibold mb-2 pl-2"
               htmlFor="email"
             >
               E-Mail Adresse
@@ -82,7 +82,7 @@ export function SignupScreen() {
           </div>
           <div className="relative mb-5 items-start justify-items-start">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
+              className="block text-left text-gray-700 text-sm font-semibold mb-2 pl-2"
               htmlFor="password"
             >
               Passwort

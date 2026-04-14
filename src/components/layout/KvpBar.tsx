@@ -50,7 +50,7 @@ export default function KvpBar({
         const filteredByState = filtered.filter((k) => k.state === state);
 
         return (
-          <div key={state} className="flex flex-col gap-3 mb-8">
+          <div key={state} className="flex flex-col gap-3 mb-4 md:mb-8">
             <div
               className={`flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium ${width < 768 ? colorClasses[colorMap[state]] : " bg-gray-200/80 border-gray-300/50 text-gray-700"}`}
             >

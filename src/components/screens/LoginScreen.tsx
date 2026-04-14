@@ -59,7 +59,7 @@ export function LoginScreen() {
         <form className="w-full mb-1 max-w-sm" onSubmit={handleEmailLogin}>
           <div className="mb-4 items-start justify-items-start">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
+              className="block text-left text-gray-700 text-sm font-semibold mb-2 pl-2"
               htmlFor="email"
             >
               E-Mail Adresse
@@ -75,7 +75,7 @@ export function LoginScreen() {
           </div>
           <div className="relative mb-5 items-start justify-items-start">
             <label
-              className="block text-gray-700 text-sm font-semibold mb-2 pl-2"
+              className="block text-left text-gray-700 text-sm font-semibold mb-2 pl-2"
               htmlFor="password"
             >
               Passwort
