@@ -1,5 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface ColumnChartProps {
   kvps: Kvp[];
@@ -9,6 +10,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
   const lowCount = kvps.filter((k) => k.priority === "Low").length;
   const mediumCount = kvps.filter((k) => k.priority === "Medium").length;
   const highCount = kvps.filter((k) => k.priority === "High").length;
+  const width = useWindowWidth();
 
   const state = {
     series: [
@@ -95,7 +97,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
           series={state.series}
           type="bar"
           height={300}
-          width={400}
+          width={width < 400 ? 300 : 400}
         />
       </div>
       <div id="html-dist"></div>

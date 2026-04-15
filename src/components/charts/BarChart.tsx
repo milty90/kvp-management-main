@@ -1,5 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface BarChartProps {
   kvps: Kvp[];
@@ -13,6 +14,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
 
   const categories = Object.keys(categoryCounts);
   const counts = Object.values(categoryCounts);
+  const width = useWindowWidth();
 
   const state = {
     series: [
@@ -49,7 +51,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
           series={state.series}
           type="bar"
           height="300"
-          width="400"
+          width={width < 400 ? 300 : 400}
         />
       </div>
       <div id="html-dist"></div>

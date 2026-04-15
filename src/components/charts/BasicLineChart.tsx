@@ -1,5 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface BasicLineChartProps {
   kvps: Kvp[];
@@ -21,6 +22,7 @@ const MONTH_LABELS = [
 ];
 
 export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
+  const width = useWindowWidth();
   const countsByMonth: number[] = Array(12).fill(0);
   kvps.forEach((k) => {
     const date = new Date(k.createdAt);
@@ -69,7 +71,7 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
           series={state.series}
           type="line"
           height="300"
-          width="400"
+          width={width < 400 ? 300 : 400}
         />
       </div>
       <div id="html-dist"></div>

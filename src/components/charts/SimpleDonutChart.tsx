@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import type { ApexOptions } from "apexcharts";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface SimpleDonutChartProps {
   kvps: Kvp[];
@@ -11,6 +12,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
   const doCount = kvps.filter((k) => k.state === "Do").length;
   const checkCount = kvps.filter((k) => k.state === "Check").length;
   const actCount = kvps.filter((k) => k.state === "Act").length;
+  const width = useWindowWidth();
 
   const state = {
     series: [planCount, doCount, checkCount, actCount],
@@ -23,9 +25,9 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
       colors: ["#3B82F6", "#8B5CF6", "#F59E0B", "#10B981"],
       legend: {
         position: "right" as const,
-        offsetY: 28,
+        offsetY: 0,
         itemMargin: {
-          vertical: 15,
+          vertical: 10,
         },
       },
 
@@ -68,7 +70,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
       },
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 300,
           options: {
             chart: {
               width: 300,
@@ -91,7 +93,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
           series={state.series}
           type="donut"
           height="300"
-          width="400"
+          width={width < 400 ? 300 : 400}
         />
       </div>
       <div id="html-dist"></div>
