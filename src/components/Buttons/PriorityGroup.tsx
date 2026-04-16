@@ -4,9 +4,13 @@ const tabs = ["Alle", "Niedrig", "Mittel", "Hoch"];
 
 interface PriorityGroupProps {
   filter: (priority: string) => void;
+  onChange?: (state: boolean) => void;
 }
 
-export default function PriorityGroup({ filter }: PriorityGroupProps) {
+export default function PriorityGroup({
+  filter,
+  onChange,
+}: PriorityGroupProps) {
   const [selected, setSelected] = useState("Alle");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -14,9 +18,7 @@ export default function PriorityGroup({ filter }: PriorityGroupProps) {
   const arrow = isCollapsed ? ">" : "<";
 
   return (
-    <div
-      className={"inline-flex items-center gap-1 bg-gray-200/80 p-1 rounded-xl"}
-    >
+    <div className={"inline-flex items-center  bg-gray-200/80 p-1 rounded-xl"}>
       {visibleTabs.map((tab) => (
         <button
           key={tab}
@@ -41,10 +43,13 @@ export default function PriorityGroup({ filter }: PriorityGroupProps) {
 
       <button
         type="button"
-        onClick={() => setIsCollapsed((prev) => !prev)}
+        onClick={() => {
+          setIsCollapsed((prev) => !prev);
+          onChange?.(!isCollapsed);
+        }}
         className={`
           inline-flex
-          px-2 md:px-3 py-0.5 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
+          px-2 md:px-3 py-0.5 ml-1 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
           ${
             isCollapsed
               ? " bg-transparent hover:bg-gray-300/50"

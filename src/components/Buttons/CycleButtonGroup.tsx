@@ -4,9 +4,10 @@ const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
 
 interface ButtonGroupProps {
   filter: (state: string) => void;
+  onChange?: (state: boolean) => void;
 }
 
-export default function ButtonGroup({ filter }: ButtonGroupProps) {
+export default function ButtonGroup({ filter, onChange }: ButtonGroupProps) {
   const [selected, setSelected] = useState("Alle");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -14,9 +15,7 @@ export default function ButtonGroup({ filter }: ButtonGroupProps) {
   const arrow = isCollapsed ? ">" : "<";
 
   return (
-    <div
-      className={"inline-flex items-center gap-1 bg-gray-200/80 p-1 rounded-xl"}
-    >
+    <div className={"inline-flex items-center  bg-gray-200/80 p-1 rounded-xl"}>
       {visibleTabs.map((tab) => (
         <button
           key={tab}
@@ -26,7 +25,7 @@ export default function ButtonGroup({ filter }: ButtonGroupProps) {
             setSelected(newSelected);
             filter(newSelected);
           }}
-          className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150"
+          className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${
                 selected === tab
                   ? "bg-white text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)]"
@@ -39,8 +38,11 @@ export default function ButtonGroup({ filter }: ButtonGroupProps) {
       ))}
       <button
         type="button"
-        onClick={() => setIsCollapsed((prev) => !prev)}
-        className={`inline-flex px-2 md:px-3 py-0.5 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
+        onClick={() => {
+          setIsCollapsed((prev) => !prev);
+          onChange?.(!isCollapsed);
+        }}
+        className={`inline-flex px-2 md:px-3 py-0.5 ml-1 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
           ${
             isCollapsed
               ? " bg-transparent hover:bg-gray-300/50"

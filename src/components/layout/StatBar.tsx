@@ -10,7 +10,7 @@ interface StatBarProps {
 
 export default function StatBar({ kvps }: StatBarProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start overflow-y-auto p-3 rounded-xl bg-white text-gray-800 gap-3 scrollbar-none">
+    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start p-3 rounded-xl bg-white text-gray-800 gap-3 scrollbar-none">
       <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
         <h1 className="text-sm font-medium pl-0.5 text-gray-700">
           PDCA-Phasen Verteilung
