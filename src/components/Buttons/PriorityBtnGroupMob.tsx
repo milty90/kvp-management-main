@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
+const tabs = ["Alle", "Niedrig", "Mittel", "Hoch"];
 
-interface CycleBtnGroupMobProps {
+interface PriorityBtnGroupMobProps {
   filter: (state: string) => void;
 }
-export function CycleBtnGroupMob({ filter }: CycleBtnGroupMobProps) {
+export function PriorityBtnGroupMob({ filter }: PriorityBtnGroupMobProps) {
   const [selected, setSelected] = useState("Alle");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const visibleTabs = isCollapsed ? [selected] : tabs;
 
   return (
-    <div className="absolute z-30 flex flex-col items-center gap-1 -top-5 left-0 bg-gray-200/80 p-1 rounded-xl">
+    <div className="absolute z-30 flex flex-col items-center gap-1 -top-5 left-22 bg-gray-200/80 p-1 rounded-xl">
       {visibleTabs.map((tab) => (
         <button
           key={tab}
