@@ -51,7 +51,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
           series={state.series}
           type="bar"
           height="300"
-          width={width < 400 ? 300 : 400}
+          width={width < 480 ? 320 : 400}
         />
       </div>
       <div id="html-dist"></div>

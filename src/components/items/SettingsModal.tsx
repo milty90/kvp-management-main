@@ -6,7 +6,7 @@ interface SettingsModalProps {
 
 export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
   return (
-    <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-700/50">
+    <div className="fixed z-40 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-white px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
         <h2 className="text-xl font-bold pl-1 mb-4">Einstellungen</h2>
         <button

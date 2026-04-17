@@ -20,7 +20,6 @@ function StatsView() {
           />
         }
       />
-      {/* <StatActionBar /> */}
       <div className="w-full flex-1 min-h-0">
         <StatBar kvps={kvps} />
       </div>

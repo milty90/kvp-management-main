@@ -97,7 +97,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
           series={state.series}
           type="bar"
           height={300}
-          width={width < 400 ? 300 : 400}
+          width={width < 480 ? 350 : 400}
         />
       </div>
       <div id="html-dist"></div>

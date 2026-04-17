@@ -10,7 +10,7 @@ interface StatBarProps {
 
 export default function StatBar({ kvps }: StatBarProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start p-3 rounded-xl bg-white text-gray-800 gap-3 scrollbar-none">
+    <div className="grid grid-cols-1 mb-8 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start p-3 rounded-xl bg-white text-gray-800 gap-3 overflow-y-auto scrollbar-none">
       <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
         <h1 className="text-sm font-medium pl-0.5 text-gray-700">
           PDCA-Phasen Verteilung
@@ -18,7 +18,7 @@ export default function StatBar({ kvps }: StatBarProps) {
         <h2 className="text-md font-semibold pl-0.5 text-gray-900">
           Anzahl der Verbesserungen pro Phase
         </h2>
-        <div className="flex w-full h-full mt-5 items-center justify-center mb-5 pr-10">
+        <div className="flex w-full h-full mt-5 items-center justify-center mb-5">
           <SimpleDonutChart kvps={kvps} />
         </div>
       </div>
@@ -29,7 +29,7 @@ export default function StatBar({ kvps }: StatBarProps) {
         <h2 className="text-md font-semibold pl-0.5 text-gray-900">
           Verteilung nach Prioritätsstufen
         </h2>
-        <div className="flex w-full h-full mt-5 items-center justify-center pr-5">
+        <div className="flex w-full h-full mt-5 items-center justify-center">
           <ColumnChart kvps={kvps} />
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function StatBar({ kvps }: StatBarProps) {
         <h2 className="text-md font-semibold pl-0.5 text-gray-900">
           Verbesserungen nach Kategorie
         </h2>
-        <div className="flex w-full h-full mt-5 items-center justify-center pr-10">
+        <div className="flex w-full h-full mt-5 items-center justify-center">
           <BarChart kvps={kvps} />
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function StatBar({ kvps }: StatBarProps) {
         <h2 className="text-md font-semibold pl-0.5 text-gray-900">
           Neue Verbesserungen pro Monat
         </h2>
-        <div className="flex w-full h-full mt-5 items-center justify-center pr-5">
+        <div className="flex w-full h-full mt-5 items-center justify-center">
           <BasicLineChart kvps={kvps} />
         </div>
       </div>

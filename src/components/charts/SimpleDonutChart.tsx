@@ -93,7 +93,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
           series={state.series}
           type="donut"
           height="300"
-          width={width < 400 ? 300 : 400}
+          width={width < 450 ? 350 : 400}
         />
       </div>
       <div id="html-dist"></div>

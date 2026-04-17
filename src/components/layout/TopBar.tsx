@@ -19,7 +19,7 @@ interface TopBarProps {
   statButtonColor?: ColorButtonType;
 }
 
-function TopBar({
+export default function TopBar({
   kvpBar,
   kvpButtonColor = "blue",
   statButtonColor = "gray",
@@ -118,7 +118,7 @@ function TopBar({
                 setShowMenu(!showMenu);
                 setShowSettings(false);
               }}
-              className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
+              className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-500 ease-in hover:rotate-90 cursor-pointer`}
             />
           )}
 
@@ -192,5 +192,3 @@ function TopBar({
     </div>
   );
 }
-
-export default TopBar;
