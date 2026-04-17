@@ -45,7 +45,7 @@ export default function KvpBar({
   });
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 w-full pt-2.5 md:pt-3 px-2.5 md:px-3 rounded-t-xl bg-white text-gray-800 gap-3 flex-1 scrollbar-none">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 w-full pt-2.5 md:pt-3 px-2.5 md:px-3 rounded-t-xl bg-white text-gray-800 gap-3 overflow-y-auto z-0 flex-1 scrollbar-none">
       {VALID_STATES.map((state) => {
         const filteredByState = filtered.filter((k) => k.state === state);
 

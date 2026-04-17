@@ -95,7 +95,7 @@ export default function KvpCard({
   };
   return (
     <div
-      className={`bg-white p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
+      className={`bg-white z-0 p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
         ref={menuWrapperRef}

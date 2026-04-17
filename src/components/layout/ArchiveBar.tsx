@@ -7,7 +7,7 @@ const VALID_STATES = ["Rejected", "Archived"] as const;
 export function ArchiveBar() {
   const { kvps } = useKvpContext();
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-2 w-full pt-2.5 px-2.5 md:pt-3 md:px-3 rounded-t-xl bg-white text-gray-800 gap-3 flex-1 scrollbar-none">
+    <div className="grid md:grid-cols-2 lg:grid-cols-2 w-full pt-2.5 px-2.5 md:pt-3 md:px-3 rounded-t-xl bg-white text-gray-800 gap-3 flex-1 overflow-y-auto scrollbar-none">
       {VALID_STATES.map((state) => {
         const filtered = kvps.filter((k) =>
           state === "Archived"
