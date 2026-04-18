@@ -1,10 +1,12 @@
 import ColorButton from "../buttons/ColorButton";
+import { useTheme } from "../../context/ThemeContext";
 interface SettingsModalProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
 
 export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
+  const { theme, toggleTheme } = useTheme();
   return (
     <div className="fixed z-40 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-white px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
@@ -17,16 +19,27 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
           &times;
         </button>
         <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">Dark Mode</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Dark Mode
+          </p>
+          <button onClick={toggleTheme}>
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
         </div>
         <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">Weitere Einstellungen</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Weitere Einstellungen
+          </p>
         </div>
         <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">Weitere Einstellungen</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Weitere Einstellungen
+          </p>
         </div>
         <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">Weitere Einstellungen</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Weitere Einstellungen
+          </p>
         </div>
         <div className="mt-4 flex justify-end gap-3">
           <button

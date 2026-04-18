@@ -5,14 +5,17 @@ import App from "./App.tsx";
 import { KvpProvider } from "./context/KvpContext.tsx";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext.tsx";
+import { ThemeProvider } from "./context/ThemeContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <UserProvider>
-      <KvpProvider>
-        <App />
-        <ToastContainer />
-      </KvpProvider>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <KvpProvider>
+          <App />
+          <ToastContainer />
+        </KvpProvider>
+      </UserProvider>
+    </ThemeProvider>
   </StrictMode>,
 );
