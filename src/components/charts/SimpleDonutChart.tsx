@@ -23,8 +23,12 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
 
       labels: ["Plan", "Do", "Check", "Act"],
       colors: ["#3B82F6", "#8B5CF6", "#F59E0B", "#10B981"],
+
       legend: {
         position: "right" as const,
+        labels: {
+          colors: "#fff",
+        },
         offsetY: 0,
         itemMargin: {
           vertical: 10,
@@ -35,6 +39,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
         show: true,
         width: 5,
         lineCap: "round",
+        colors: ["#2d2d2d"],
       },
       plotOptions: {
         pie: {
@@ -47,14 +52,14 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
                 show: true,
                 fontSize: "16px",
                 fontWeight: 600,
-                color: "#373d3f",
+                color: "#fff",
                 offsetY: -10,
               },
               value: {
                 show: true,
                 fontSize: "24px",
                 fontWeight: 400,
-                color: "#373d3f",
+                color: "#fff",
                 offsetY: 10,
               },
               total: {
@@ -62,7 +67,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
                 label: "Gesamt",
                 fontSize: "18px",
                 fontWeight: 600,
-                color: "#373d3f",
+                color: "#fff",
               },
             },
           },

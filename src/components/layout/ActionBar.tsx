@@ -45,7 +45,7 @@ function ActionBar({
   };
 
   return (
-    <div className="flex z-30 items-center gap-2 w-full bg-white px-1.5 py-1.5 -ml-1 md:px-2 h-13 rounded-xl shadow-sm justify-between">
+    <div className="flex z-30 items-center gap-2 w-full bg-surface px-1.5 py-1.5 -ml-1 md:px-2 h-13 rounded-xl shadow-sm justify-between">
       <div className="flex justify-start items-center gap-2 md:gap-3">
         {isArchiveOpen ? null : (
           <div className="relative">

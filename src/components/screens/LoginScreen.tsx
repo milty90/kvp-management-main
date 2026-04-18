@@ -53,11 +53,11 @@ export function LoginScreen() {
     <div className="flex flex-col items-center md:justify-center  h-screen bg-background">
       <div className="flex flex-col pt-12 items-center justify-start h-screen md:h-auto md:justify-center w-full max-w-md shadow-md md:rounded-2xl bg-surface p-8">
         <img
-          src={theme === "dark" ? "/spark-dark.png" : "/spark.png"}
+          src={theme === "dark" ? "/spark-dark.png" : "/spark-light.png"}
           alt="Logo"
           className="w-55 mb-4 ml-4"
         />
-        <h1 className="text-xl text-text-secondary font-normal mb-1">
+        <h1 className="text-xl font-normal mb-1">
           Willkommen zum KVP Management
         </h1>
         <p className="text-sm text-text-secondary mb-8">

@@ -10,43 +10,45 @@ interface StatBarProps {
 
 export default function StatBar({ kvps }: StatBarProps) {
   return (
-    <div className="grid grid-cols-1 mb-8 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start p-3 rounded-xl bg-white text-gray-800 gap-3 overflow-y-auto scrollbar-none">
-      <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
-        <h1 className="text-sm font-medium pl-0.5 text-gray-700">
+    <div className="grid grid-cols-1 mb-8 md:grid-cols-1 lg:grid-cols-2 w-full h-full min-h-0 content-start p-3 rounded-xl bg-surface text-gray-800 gap-3 overflow-y-auto scrollbar-none">
+      <div className="flex flex-col items-start rounded-lg border border-dashed border-border p-4 pb-0 ">
+        <h1 className="text-sm font-medium pl-0.5 text-text-secondary">
           PDCA-Phasen Verteilung
         </h1>
-        <h2 className="text-md font-semibold pl-0.5 text-gray-900">
+        <h2 className="text-md font-semibold pl-0.5 text-text-primary">
           Anzahl der Verbesserungen pro Phase
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center mb-5">
           <SimpleDonutChart kvps={kvps} />
         </div>
       </div>
-      <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
-        <h1 className="text-sm font-medium pl-0.5 text-gray-700">
+      <div className="flex flex-col items-start rounded-lg border border-dashed border-border p-4 pb-0 ">
+        <h1 className="text-sm font-medium pl-0.5 text-text-secondary">
           Prioritäten
         </h1>
-        <h2 className="text-md font-semibold pl-0.5 text-gray-900">
+        <h2 className="text-md font-semibold pl-0.5 text-text-primary">
           Verteilung nach Prioritätsstufen
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center">
           <ColumnChart kvps={kvps} />
         </div>
       </div>
-      <div className="flex flex-col items-start rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
-        <h1 className="text-sm font-medium pl-0.5 text-gray-700">Kategorien</h1>
-        <h2 className="text-md font-semibold pl-0.5 text-gray-900">
+      <div className="flex  flex-col items-start rounded-lg border border-dashed border-border p-4 pb-0 ">
+        <h1 className="text-sm font-medium pl-0.5 text-text-secondary">
+          Kategorien
+        </h1>
+        <h2 className="text-md font-semibold pl-0.5 text-text-primary">
           Verbesserungen nach Kategorie
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center">
           <BarChart kvps={kvps} />
         </div>
       </div>
-      <div className="flex flex-col items-start  rounded-lg border border-dashed border-gray-300 p-4 pb-0 ">
-        <h1 className="text-sm font-medium pl-0.5 text-gray-700">
+      <div className="flex flex-col items-start rounded-lg border border-dashed border-border p-4 pb-0 ">
+        <h1 className="text-sm font-medium pl-0.5 text-text-secondary">
           Zeitverlauf
         </h1>
-        <h2 className="text-md font-semibold pl-0.5 text-gray-900">
+        <h2 className="text-md font-semibold pl-0.5 text-text-primary">
           Neue Verbesserungen pro Monat
         </h2>
         <div className="flex w-full h-full mt-5 items-center justify-center">

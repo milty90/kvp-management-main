@@ -95,13 +95,13 @@ export default function KvpCard({
   };
   return (
     <div
-      className={`bg-white z-0 p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
+      className={`bg-card z-0 p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
         ref={menuWrapperRef}
         className="relative flex items-start justify-between mb-2 gap-1.5"
       >
-        <p className="text-sm lg:text-lg text-gray-700 font-semibold ">
+        <p className="text-sm lg:text-lg text-text-primary font-semibold ">
           {title}
         </p>
         <img
@@ -122,22 +122,24 @@ export default function KvpCard({
         </div>
       </div>
       <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
-        <span className="font-medium text-gray-700">Kategorie: </span>{" "}
+        <span className="font-medium text-text-primary">Kategorie: </span>{" "}
         {category}
       </p>
 
       <div className="flex items-center mb-2.5 gap-2.5 text-gray-500 ">
-        <span className="text-xs lg:text-sm ">Priorität:</span>
+        <span className="text-x text-text-secondary lg:text-sm ">
+          Priorität:
+        </span>
         <span
-          className={`px-2.5 py-0.5 text-xs text-gray-600 font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
+          className={`px-2.5 py-0.5 text-xs text-text-primary font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
         >
           {priority}
         </span>
       </div>
       <div className="flex items-center mb-2.5 text-gray-500">
-        <span className="text-sm ">Status:</span>
+        <span className="text-sm text-text-secondary">Status:</span>
         <span
-          className={`px-2.5 py-0.5 text-sm text-gray-600 ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
+          className={`px-2.5 py-0.5 text-sm text-text-primary ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
         >
           {state === "Archived"
             ? "Archiviert"
@@ -148,19 +150,19 @@ export default function KvpCard({
       </div>
       {/* Divider */}
       <div className="border-t border-gray-200 mb-3" />
-      <p className="font-normal text-wrap break-all text-sm mb-3">
+      <p className="font-normal text-text-secondary text-wrap break-all text-sm mb-3">
         Zugewiesen an: {assignedTo}
       </p>
-      <p className="font-normal truncate text-sm mb-3">
+      <p className="font-normal text-text-secondary truncate text-sm mb-3">
         Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
       </p>
-      <p className="text-gray-500 text-pretty text-xs mb-2">
+      <p className="text-text-secondary text-pretty text-xs mb-2">
         Beschreibung : {description}
       </p>
       {/* Divider */}
       <div className="border-t border-gray-200 my-3" />
       <div className="flex flex-col items-start justify-between mt-2">
-        <span className="text-xs py-0.5 text-gray-500">
+        <span className="text-xs py-0.5 text-text-secondary">
           <img
             src="/user.svg"
             alt="User"
@@ -168,7 +170,7 @@ export default function KvpCard({
           />
           {createdBy}
         </span>
-        <span className="text-xs py-0.5 text-gray-500">
+        <span className="text-xs py-0.5 text-text-secondary">
           <img
             src="/calender.svg"
             alt="Calender"
@@ -176,7 +178,7 @@ export default function KvpCard({
           />
           Erstellt: {createdAt.slice(2, 10)}
         </span>
-        <span className="text-xs py-0.5 text-gray-500">
+        <span className="text-xs py-0.5 text-text-secondary">
           <img
             src="/target.svg"
             alt="Target"

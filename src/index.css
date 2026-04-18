@@ -2,8 +2,9 @@
 @import "tailwindcss";
 @theme {
   --icon: var(--spark-icon);
-  --color-surface: var(--color-bg-card);
+  --color-surface: var(--color-bg-surface);
   --color-background: var(--color-bg-primary);
+  --color-card: var(--color-bg-card);
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
   --color-button: var(--color-button);
@@ -24,18 +25,20 @@
   --toastify-color-info: #2b7fff;
   --toastify-color-success: #18cb96;
   --color-bg-primary: #f3f4f6;
+  --color-bg-surface: #ffffff;
   --color-bg-card: #ffffff;
   --color-text-primary: #1f2937;
   --color-text-secondary: #4a5565;
-  --color-button: #155dfc;
-  --color-button-hover: #1447e6;
+  --color-button: #2b7fff;
+  --color-button-hover: #155dfc;
   --color-border: #e5e7eb;
 }
 
 [data-theme="dark"] {
   --spark-icon: "public/spark-dark.png";
-  --color-bg-primary: #2d2d2d;
-  --color-bg-card: #1e1e1e;
+  --color-bg-primary: #1d1d1d;
+  --color-bg-surface: #2d2d2d;
+  --color-bg-card: #3f4247;
   --color-text-primary: #f9fafb;
   --color-text-secondary: #9ca3af;
   --color-button: #00a63e;

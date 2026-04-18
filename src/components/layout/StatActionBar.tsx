@@ -1,7 +1,7 @@
 import ColorButton from "../buttons/ColorButton";
 export default function StatActionBar() {
   return (
-    <div className="flex items-center gap-2 w-full bg-white p-3 rounded-lg shadow-lg justify-between">
+    <div className="flex items-center gap-2 w-full bg-surface p-3 rounded-lg shadow-lg justify-between">
       <div className="flex items-center gap-4">
         {/* <ButtonGroup />
         <PriorityGroup /> */}
