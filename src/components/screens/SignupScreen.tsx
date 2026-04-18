@@ -78,7 +78,7 @@ export function SignupScreen() {
               E-Mail Adresse
             </label>
             <input
-              className="shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary leading-tight focus:outline-1 focus:outline-blue-500"
+              className={`shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary leading-tight focus:outline-1 ${theme === "dark" ? "focus:outline-green-500" : "focus:outline-blue-500"}`}
               id="email"
               type="email"
               required
@@ -96,7 +96,7 @@ export function SignupScreen() {
             </label>
 
             <input
-              className="shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary mb-3 leading-tight focus:outline-1 focus:outline-blue-500"
+              className={`shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary mb-3 leading-tight focus:outline-1 ${theme === "dark" ? "focus:outline-green-500" : "focus:outline-blue-500"}`}
               id="password"
               type={showPassword ? "text" : "password"}
               required
