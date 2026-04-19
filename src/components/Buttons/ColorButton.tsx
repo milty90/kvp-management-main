@@ -11,6 +11,7 @@ type ColorButtonProps = {
 };
 
 const colorClasses = {
+  color: "bg-color text-white hover:bg-color-hover active:bg-color-active",
   blue: "bg-blue-500 hover:bg-blue-600 active:bg-blue-700",
   green: "bg-green-500 hover:bg-green-600 active:bg-green-700",
   red: "bg-red-500 hover:bg-red-600 active:bg-red-700",

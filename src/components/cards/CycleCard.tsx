@@ -15,10 +15,10 @@ const colorClassesLight = {
 };
 
 const colorClassesDark = {
-  yellow: "bg-yellow-200 border-yellow-600/70 text-yellow-950",
-  blue: "bg-blue-300 border-blue-600/70 text-blue-950",
-  violet: "bg-violet-300 border-violet-600/70 text-violet-950",
-  green: "bg-green-200 border-green-600/70 text-green-950",
+  yellow: "bg-yellow-200/90 border-yellow-600/70 text-yellow-950",
+  blue: "bg-blue-200/90 border-blue-600/70 text-blue-950",
+  violet: "bg-violet-200/90 border-violet-600/70 text-violet-950",
+  green: "bg-green-200/90 border-green-600/70 text-green-950",
 };
 
 const roundColorLight = {

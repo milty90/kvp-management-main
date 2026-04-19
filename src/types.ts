@@ -45,6 +45,7 @@ export type KvpManagementAction =
   | { type: "SET_KVPS"; kvps: Kvp[] };
 
 export type ColorButtonType =
+  | "color"
   | "blue"
   | "green"
   | "violet"

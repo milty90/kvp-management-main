@@ -91,11 +91,7 @@ export default function TopBar({
             <>
               <ColorButton
                 color={kvpButtonColor}
-                icon={
-                  kvpButtonColor === "green"
-                    ? "/trending-gray.svg"
-                    : "/trending.svg"
-                }
+                icon={"/trending.svg"}
                 onClick={() => {
                   navigate("/kvps");
                 }}
@@ -114,26 +110,64 @@ export default function TopBar({
               </ColorButton>
             </>
           ) : (
-            <img
-              src="/menu.svg"
-              alt="menu"
+            <svg
               onClick={() => {
                 setShowMenu(!showMenu);
                 setShowSettings(false);
               }}
-              className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-500 ease-in hover:rotate-90 cursor-pointer`}
-            />
+              viewBox="-0.5 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-500" : "hover:ring-blue-500"}  transition-transform duration-600 ease-in hover:rotate-90 cursor-pointer`}
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <path
+                  d="M19 3.32001H16C14.8954 3.32001 14 4.21544 14 5.32001V8.32001C14 9.42458 14.8954 10.32 16 10.32H19C20.1046 10.32 21 9.42458 21 8.32001V5.32001C21 4.21544 20.1046 3.32001 19 3.32001Z"
+                  stroke={`${theme === "dark" ? "#f3f4f6" : "#373643"}`}
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>{" "}
+                <path
+                  d="M8 3.32001H5C3.89543 3.32001 3 4.21544 3 5.32001V8.32001C3 9.42458 3.89543 10.32 5 10.32H8C9.10457 10.32 10 9.42458 10 8.32001V5.32001C10 4.21544 9.10457 3.32001 8 3.32001Z"
+                  stroke={`${theme === "dark" ? "#f3f4f6" : "#373643"}`}
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>{" "}
+                <path
+                  d="M19 14.32H16C14.8954 14.32 14 15.2154 14 16.32V19.32C14 20.4246 14.8954 21.32 16 21.32H19C20.1046 21.32 21 20.4246 21 19.32V16.32C21 15.2154 20.1046 14.32 19 14.32Z"
+                  stroke={`${theme === "dark" ? "#f3f4f6" : "#373643"}`}
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>{" "}
+                <path
+                  d="M8 14.32H5C3.89543 14.32 3 15.2154 3 16.32V19.32C3 20.4246 3.89543 21.32 5 21.32H8C9.10457 21.32 10 20.4246 10 19.32V16.32C10 15.2154 9.10457 14.32 8 14.32Z"
+                  stroke={`${theme === "dark" ? "#f3f4f6" : "#373643"}`}
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>{" "}
+              </g>
+            </svg>
+            // <img
+            //   src="/menu.svg"
+            //   alt="menu"
+            //   onClick={() => {
+            //     setShowMenu(!showMenu);
+            //     setShowSettings(false);
+            //   }}
+            //   className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-500 ease-in hover:rotate-90 cursor-pointer`}
+            // />
           )}
-
-          {/* <img
-            src="/settings.svg"
-            alt="Settings"
-            onClick={() => {
-              setShowSettings(!showSettings);
-              setShowMenu(false);
-            }}
-            className={`w-8 mt-0.5 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
-          /> */}
           <svg
             onClick={() => {
               setShowSettings(!showSettings);
@@ -144,11 +178,11 @@ export default function TopBar({
             fill="none"
             className={`w-8 mt-0.5 -mr-0.5  rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-500" : "hover:ring-blue-500"}  transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
               id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               <path
@@ -157,9 +191,9 @@ export default function TopBar({
               ></path>
               <path
                 stroke={theme === "dark" ? "#f3f4f6" : "#373643"}
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="12"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="12"
                 d="M96 120c13.255 0 24-10.745 24-24s-10.745-24-24-24-24 10.745-24 24 10.745 24 24 24Z"
               ></path>
             </g>

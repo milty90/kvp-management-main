@@ -63,16 +63,16 @@ export default function KvpBar({
         return (
           <div key={state} className="flex flex-col gap-3 mb-4 md:mb-8">
             <div
-              className={`flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium ${width < 768 ? colorClasses[colorMap[state]] : ` ${theme === "dark" ? "bg-gray-500/20 border-border text-text-primary" : "bg-gray-200/80 border-border text-text-primary"}`}`}
+              className={`flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium ${width < 768 ? colorClasses[colorMap[state]] : ` ${theme === "dark" ? "bg-gray-500/20 border-border text-text-secondary" : "bg-gray-200/80 border-border text-text-secondary"}`}`}
             >
-              <span className="text-sm ml-2 font-semibold text-text-primary">
+              <span className="text-sm ml-2 font-semibold text-text-secondary">
                 {state}
               </span>
             </div>
 
             {filteredByState.length === 0 ? (
               <div className="flex items-center justify-center h-32 rounded-lg border border-dashed border-border">
-                <p className="text-xs text-text-primary">Keine Elemente</p>
+                <p className="text-xs text-text-secondary">Keine Elemente</p>
               </div>
             ) : (
               <div className="flex flex-col gap-3">
