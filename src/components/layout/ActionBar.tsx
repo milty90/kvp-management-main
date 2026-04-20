@@ -8,6 +8,7 @@ import { CycleBtnGroupMob } from "../buttons/CycleBtnGroupMob";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { PriorityBtnGroupMob } from "../buttons/PriorityBtnGroupMob";
 import { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 interface ActionBarProps {
   isArchiveOpen: boolean;
@@ -27,6 +28,7 @@ function ActionBar({
   const { setSelectedKvp } = useKvpContext();
 
   const width = useWindowWidth();
+  const { theme } = useTheme();
 
   const [isCycleCollapsed, setIsCycleCollapsed] = useState(true);
   const [isPriorityCollapsed, setIsPriorityCollapsed] = useState(true);
@@ -69,12 +71,17 @@ function ActionBar({
       <div className="flex items-center gap-2 md:gap-3">
         {isCycleCollapsed && isPriorityCollapsed ? (
           <div className="flex items-center gap-3">
-            <WhiteButton onClick={onOpenArchive} icon="">
+            <ColorButton
+              onClick={onOpenArchive}
+              color={theme === "dark" ? "gray" : "white"}
+              isTextOnly={true}
+            >
               {isArchiveOpen ? "Aktive KVPs" : "Inaktive KVPs"}
-            </WhiteButton>
+            </ColorButton>
+
             <ColorButton
               onClick={handleCreateClick}
-              color="blue"
+              color={theme === "dark" ? "green" : "blue"}
               icon="/add.svg"
             >
               Neue KVP

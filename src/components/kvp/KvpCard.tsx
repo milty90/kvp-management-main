@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 interface KvpCardProps {
   id: number;
@@ -46,6 +47,7 @@ export default function KvpCard({
 
   const [showMenu, setShowMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const { theme } = useTheme();
 
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -149,7 +151,9 @@ export default function KvpCard({
         </span>
       </div>
       {/* Divider */}
-      <div className="border-t border-gray-200 mb-3" />
+      <div
+        className={`border-t ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
+      />
       <p className="font-normal text-text-secondary text-wrap break-all text-sm mb-3">
         Zugewiesen an: {assignedTo}
       </p>
@@ -160,7 +164,9 @@ export default function KvpCard({
         Beschreibung : {description}
       </p>
       {/* Divider */}
-      <div className="border-t border-gray-200 my-3" />
+      <div
+        className={`border-t ${theme === "dark" ? "border-gray-500" : "border-gray-300"} my-3`}
+      />
       <div className="flex flex-col items-start justify-between mt-2">
         <span className="text-xs py-0.5 text-text-secondary">
           <img

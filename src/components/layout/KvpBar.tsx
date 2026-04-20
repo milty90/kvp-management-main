@@ -6,17 +6,17 @@ import { useTheme } from "../../context/ThemeContext";
 const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
 const colorClassesLight: Record<string, string> = {
-  yellow: "bg-yellow-100/70 border-yellow-300/60 text-yellow-700",
-  blue: "bg-blue-100/70 border-blue-300/50 text-blue-700",
-  violet: "bg-violet-100/70 border-violet-300/50 text-violet-700",
-  green: "bg-green-100/70 border-green-300/50 text-green-700",
+  yellow: "bg-yellow-100 border-yellow-300/60 text-yellow-700",
+  blue: "bg-blue-100 border-blue-300/50 text-blue-700",
+  violet: "bg-violet-100 border-violet-300/50 text-violet-700",
+  green: "bg-green-100 border-green-300/50 text-green-700",
 };
 
 const colorClassesDark: Record<string, string> = {
-  yellow: "bg-yellow-200/90 border-yellow-600/70 text-yellow-950",
-  blue: "bg-blue-300/90 border-blue-600/70 text-blue-950",
-  violet: "bg-violet-300/90 border-violet-600/70 text-violet-950",
-  green: "bg-green-200/90 border-green-600/70 text-green-950",
+  blue: "bg-blue-400/40 border-blue-600/70 text-blue-950",
+  violet: "bg-violet-400/40 border-violet-600/70 text-violet-950",
+  yellow: "bg-yellow-300/40 border-yellow-600/70 text-yellow-950",
+  green: "bg-green-300/40 border-green-600/70 text-green-950",
 };
 
 interface KvpBarProps {
@@ -63,9 +63,11 @@ export default function KvpBar({
         return (
           <div key={state} className="flex flex-col gap-3 mb-4 md:mb-8">
             <div
-              className={`flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium ${width < 768 ? colorClasses[colorMap[state]] : ` ${theme === "dark" ? "bg-gray-500/20 border-border text-text-secondary" : "bg-gray-200/80 border-border text-text-secondary"}`}`}
+              className={`flex gap-2 px-2 py-1.5 rounded-lg text-sm font-medium ${width < 768 ? colorClasses[colorMap[state]] : ` ${theme === "dark" ? "bg-gray-500/20 border-border text-text-primary" : "bg-gray-200/80 border-border text-text-secondary"}`}`}
             >
-              <span className="text-sm ml-2 font-semibold text-text-secondary">
+              <span
+                className={`text-sm ml-2 font-semibold ${theme === "dark" ? "text-text-primary text-shadow-lg/20" : " text-text-secondary"}`}
+              >
                 {state}
               </span>
             </div>

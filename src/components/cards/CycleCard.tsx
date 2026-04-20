@@ -15,10 +15,13 @@ const colorClassesLight = {
 };
 
 const colorClassesDark = {
-  yellow: "bg-yellow-200/90 border-yellow-600/70 text-yellow-950",
-  blue: "bg-blue-200/90 border-blue-600/70 text-blue-950",
-  violet: "bg-violet-200/90 border-violet-600/70 text-violet-950",
-  green: "bg-green-200/90 border-green-600/70 text-green-950",
+  blue: "bg-gradient-to-r from-blue-200/80 from-60% to-cyan-300 border-blue-600 text-blue-950",
+  violet:
+    "bg-gradient-to-r from-violet-200/80 from-60% to-purple-300 border-violet-600 text-violet-950",
+  yellow:
+    "bg-gradient-to-r from-amber-100/80 from-60% to-yellow-300  border-yellow-600 text-yellow-950",
+  green:
+    "bg-gradient-to-r from-green-100/80 from-60% to-lime-300 border-green-600 text-green-950",
 };
 
 const roundColorLight = {
@@ -29,10 +32,10 @@ const roundColorLight = {
 };
 
 const roundColorDark = {
-  yellow: "bg-yellow-600/60 text-yellow-50",
-  blue: "bg-blue-500/80 text-blue-50",
-  violet: "bg-violet-500/80 text-violet-50",
-  green: "bg-green-600/60 text-green-50",
+  blue: "bg-blue-400/60 text-blue-50",
+  violet: "bg-violet-400/60 text-violet-50",
+  yellow: "bg-amber-400/60 text-yellow-50",
+  green: "bg-green-400/60 text-green-50",
 };
 
 export default function CycleCard({

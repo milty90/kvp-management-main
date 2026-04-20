@@ -3,10 +3,10 @@ import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { toast } from "react-toastify";
-
 import { kvpInputFormData } from "../../utils/kvpInputFormData";
 import { kvpInputFormColor } from "../../utils/kvpInputFromColor";
 import { supabase } from "../../utils/supabase";
+import { useTheme } from "../../context/ThemeContext";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -32,6 +32,8 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const [createdBy, setCreatedBy] = useState(
     initialData?.createdBy || "Unbekannter Benutzer",
   );
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -84,15 +86,14 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       `KVP ${initialData ? "aktualisiert" : "hinzugefügt"}: ${initialData ? updateKvpData.title : newKvp.title}`,
       {
         position: "top-center",
-        className:
-          "mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ",
+        className: `mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`,
       },
     );
   }
 
   return (
     <div className="fixed inset-0 z-40 bg-gray-700/30 shadow-md flex items-center justify-center">
-      <div className="px-6 bg-white md:rounded-lg pt-4 md:py-4 h-full md:h-auto shadow-md w-120 relative">
+      <div className="px-6 bg-surface md:rounded-lg pt-4 md:py-4 h-full md:h-auto shadow-md w-120 relative">
         <button
           type="button"
           className="absolute top-3 right-4 text-3xl text-gray-500 hover:text-gray-700"
@@ -100,16 +101,16 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
         >
           &times;
         </button>
-        <h2 className="text-2xl text-gray-700 font-semibold  mt-4">
+        <h2 className="text-2xl text-text-primary font-semibold mt-4">
           {initialData ? "KVP bearbeiten" : "Neuen KVP erstellen"}
           <img
-            src="/spark-logo.png"
+            src={theme === "dark" ? "/spark-logo-dark.png" : "/spark-logo.png"}
             alt="Add"
             className="inline-block h-6 w-6 mb-3 object-cover"
           />
         </h2>
 
-        <p className="text-xs text-gray-500 mb-4">
+        <p className="text-xs text-text-secondary mb-4">
           Bitte füllen Sie alle Pflichtfelder aus.
         </p>
         <form
@@ -119,16 +120,16 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             submitForm();
           }}
         >
-          <span className="text-sm pl-1 -mb-3 text-gray-500">Titel *</span>
+          <span className="text-sm pl-1 -mb-3 text-text-primary">Titel *</span>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             required
             placeholder="Titel"
-            className="w-full border text-sm text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border text-sm text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <span className="text-sm pl-1 -mb-3 text-gray-500">
+          <span className="text-sm pl-1 -mb-3 text-text-primary">
             Beschreibung *
           </span>
           <textarea
@@ -136,11 +137,11 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder="Beschreibung"
-            className="w-full border text-sm text-gray-800 border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border text-sm text-text-primary border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <div className="grid grid-cols-2 items-center mt-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-4">
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Kategorie *
               </span>
               <input
@@ -149,9 +150,9 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 onChange={(e) => setCategory(e.target.value)}
                 required
                 placeholder="Kategorie"
-                className="text-xs w-full border text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className="text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-text-secondary"
               />
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 PCDA-Phase *
               </span>
               <select
@@ -168,7 +169,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 <option value="Check">Check</option>
                 <option value="Act">Act</option>
               </select>
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Zugewiesen an
               </span>
               <input
@@ -176,11 +177,11 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 onChange={(e) => setAssignedTo(e.target.value)}
                 type="text"
                 placeholder="Zugewiesen an"
-                className="text-xs w-full border text-gray-700 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                className="text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-text-secondary"
               />
             </div>
             <div className="flex flex-col items-start gap-4">
-              <span className="text-xs pl-1 -mb-3 text-gray-500 ">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Zieldatum
               </span>
               <input
@@ -188,9 +189,9 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
                 placeholder="Zieldatum"
-                className={`text-xs w-full border text-gray-400 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 ${targetDateTextColor}`}
+                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${targetDateTextColor}`}
               />
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Priorität *
               </span>
               <select
@@ -199,14 +200,14 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                   setPriority(e.target.value as Kvp["priority"] | "")
                 }
                 required
-                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 ${priorityTextColor}`}
+                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${priorityTextColor}`}
               >
                 <option value="">Priorität</option>
                 <option value="High">Hoch</option>
                 <option value="Medium">Mittel</option>
                 <option value="Low">Niedrig</option>
               </select>
-              <span className="text-xs pl-1 -mb-3 text-gray-500">
+              <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Erwarteter Nutzen
               </span>
               <input
@@ -214,7 +215,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 placeholder="z.B 30% Zeitersparnis"
                 value={benefit}
                 onChange={(e) => setBenefit(e.target.value)}
-                className="text-xs w-full border text-gray-800 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-400"
+                className="text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-text-secondary"
               />
             </div>
           </div>
@@ -229,7 +230,11 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             >
               Abbrechen
             </ColorButton>
-            <ColorButton color="blue" icon="/add.svg" type="submit">
+            <ColorButton
+              color={theme === "dark" ? "green" : "blue"}
+              icon="/add.svg"
+              type="submit"
+            >
               {initialData ? "KVP speichern" : "Neuen KVP erstellen"}
             </ColorButton>
           </div>

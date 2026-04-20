@@ -2,17 +2,17 @@ import type { State, Priority } from "../types";
 import type { FormColor } from "../types";
 
 const PRIORITY_COLORS: Record<Priority, string> = {
-  High: "text-red-700",
-  Medium: "text-yellow-700",
-  Low: "text-green-700",
+  High: "text-red-500",
+  Medium: "text-yellow-500",
+  Low: "text-green-500",
 };
 
 const PDCA_COLORS: Record<State, string> = {
-  Plan: "text-blue-700",
-  Do: "text-violet-700",
-  Check: "text-yellow-700",
-  Act: "text-green-700",
-  Rejected: "text-red-700",
+  Plan: "text-blue-500",
+  Do: "text-violet-500",
+  Check: "text-yellow-500",
+  Act: "text-green-500",
+  Rejected: "text-red-500",
   Archived: "text-gray-400",
 };
 
@@ -23,16 +23,16 @@ export function kvpInputFormColor({
 }: FormColor) {
   const priorityTextColor = priority
     ? PRIORITY_COLORS[priority as Priority]
-    : "text-gray-400";
+    : "text-text-secondary";
   const pcdaTextColor = pdcaState
     ? PDCA_COLORS[pdcaState as State]
-    : "text-gray-400";
+    : "text-text-secondary";
 
   const targetDateTextColor = !targetDate
-    ? "text-gray-400"
+    ? "text-text-secondary"
     : new Date(targetDate) < new Date()
-      ? "text-red-700"
-      : "text-gray-700";
+      ? "text-red-500"
+      : "text-text-primary";
 
   return { priorityTextColor, pcdaTextColor, targetDateTextColor };
 }

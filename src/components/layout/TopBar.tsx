@@ -158,15 +158,6 @@ export default function TopBar({
                 ></path>{" "}
               </g>
             </svg>
-            // <img
-            //   src="/menu.svg"
-            //   alt="menu"
-            //   onClick={() => {
-            //     setShowMenu(!showMenu);
-            //     setShowSettings(false);
-            //   }}
-            //   className={`w-8 mt-0.5 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 transition-transform duration-500 ease-in hover:rotate-90 cursor-pointer`}
-            // />
           )}
           <svg
             onClick={() => {
@@ -199,7 +190,7 @@ export default function TopBar({
             </g>
           </svg>
           <div
-            className={`absolute ${width < 640 ? "-right-6 mt-10" : "right-10 -mt-2"} ${showSettings ? " block" : " hidden"}`}
+            className={`absolute ${width < 768 ? "-right-6 mt-10" : "right-10 -mt-2"} ${showSettings ? " block" : " hidden"}`}
           >
             {showSettings && (
               <SettingItem
