@@ -2,12 +2,14 @@ import { toast } from "react-toastify";
 import { useKvpContext } from "../../context/KvpContext";
 import KvpCard from "../kvp/KvpCard";
 import { useTheme } from "../../context/ThemeContext";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 const VALID_STATES = ["Rejected", "Archived"] as const;
 
 export function ArchiveBar() {
   const { kvps } = useKvpContext();
   const { theme } = useTheme();
+  const width = useWindowWidth();
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-2 w-full pt-2.5 px-2.5 md:pt-3 md:px-3 rounded-t-xl bg-surface text-text-primary gap-3 flex-1 overflow-y-auto scrollbar-none">
       {VALID_STATES.map((state) => {
@@ -44,8 +46,18 @@ export function ArchiveBar() {
                       toast.info(
                         "Archivierte und abgelehnte KVPs können nicht bearbeitet werden.",
                         {
-                          position: "top-center",
-                          className: "mt-6 text-sm font-poppins ",
+                          position:
+                            width < 768 ? "bottom-center" : "top-center",
+                          className: ` text-sm font-poppins `,
+                          style: {
+                            borderRadius: "0.5rem",
+                            width: width < 768 ? "90vw" : "400px",
+                            marginTop: width < 768 ? "0rem" : "1.3rem",
+                            marginBottom: "0.5rem",
+                            backgroundColor:
+                              theme === "dark" ? "#374151" : "#bfbfbf",
+                            color: theme === "dark" ? "#bfbfbf" : "#1f2937",
+                          },
                         },
                       );
                     }}

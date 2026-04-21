@@ -46,7 +46,7 @@ export default function ButtonGroup({ filter, onChange }: ButtonGroupProps) {
           setIsCollapsed((prev) => !prev);
           onChange?.(!isCollapsed);
         }}
-        className={`inline-flex px-2 md:px-3 py-0.5 ml-1 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700 transition-all duration-150
+        className={`inline-flex px-2 md:px-3 py-0.5 ml-1 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
           ${
             isCollapsed
               ? " bg-transparent hover:bg-gray-300/50"

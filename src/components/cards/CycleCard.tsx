@@ -34,7 +34,7 @@ const roundColorLight = {
 const roundColorDark = {
   blue: "bg-blue-400/60 text-blue-50",
   violet: "bg-violet-400/60 text-violet-50",
-  yellow: "bg-amber-400/60 text-yellow-50",
+  yellow: "bg-amber-400/80 text-yellow-50",
   green: "bg-green-400/60 text-green-50",
 };
 

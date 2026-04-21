@@ -24,6 +24,8 @@
   --spark-icon: "/spark.png";
   --toastify-color-info: #2b7fff;
   --toastify-color-success: #18cb96;
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #121212;
   --color-bg-primary: #f3f4f6;
   --color-bg-surface: #ffffff;
   --color-bg-card: #ffffff;
@@ -35,6 +37,8 @@
 }
 
 [data-theme="dark"] {
+  --toastify-color-dark: #121212;
+
   --spark-icon: "public/spark-dark.png";
   --color-bg-primary: #1d1d1d;
   --color-bg-surface: #2d2d2d;
