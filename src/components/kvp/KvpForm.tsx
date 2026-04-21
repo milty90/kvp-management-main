@@ -161,7 +161,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                   setPdcaState(e.target.value as Kvp["state"] | "")
                 }
                 required
-                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${pcdaTextColor}`}
+                className={` text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${pcdaTextColor}`}
               >
                 <option value="">PCDA-Phase</option>
                 <option value="Plan">Plan</option>
@@ -200,7 +200,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                   setPriority(e.target.value as Kvp["priority"] | "")
                 }
                 required
-                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${priorityTextColor}`}
+                className={`text-xs w-full border border-gray-300 rounded-md p-2  focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${priorityTextColor}`}
               >
                 <option value="">Priorität</option>
                 <option value="High">Hoch</option>
