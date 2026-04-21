@@ -18,7 +18,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
-      <div className="bg-white px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
+      <div className="bg-surface px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
         <h2 className="text-xl font-bold pl-1 mb-4">Profil</h2>
         <button
           type="button"

@@ -12,7 +12,7 @@ export default function MenuItem({
   return (
     <div className="relative z-40 flex flex-col items-start">
       <div
-        className={`flex flex-col text-text-secondary absolute top-full w-42 ${theme === "dark" ? "bg-card border-gray-500" : "bg-surface border-gray-300"} -right-2 z-40 p-1 border rounded-md focus:outline-none`}
+        className={`flex flex-col text-primary absolute top-full w-42 ${theme === "dark" ? "bg-card border-gray-500" : "bg-surface border-gray-300"} -right-2 z-40 p-1 border rounded-md focus:outline-none`}
       >
         <button
           onClick={onKvpsClick}
