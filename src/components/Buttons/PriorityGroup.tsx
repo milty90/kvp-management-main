@@ -37,7 +37,7 @@ export default function PriorityGroup({
               ${
                 selected === tab
                   ? `${theme === "dark" ? "text-text-primary bg-gray-500" : "text-gray-900 bg-white"} shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)]`
-                  : "text-gray-500 hover:text-text-primary"
+                  : `${theme === "dark" ? "text-gray-300 hover:text-text-primary" : "text-gray-600 hover:text-text-primary"}`
               }
             `}
         >

@@ -15,13 +15,13 @@ const colorClassesLight = {
 };
 
 const colorClassesDark = {
-  blue: "bg-gradient-to-r from-blue-200/80 from-60% to-cyan-300 border-blue-600 text-blue-950",
+  blue: "bg-gradient-to-r from-blue-200/80 from-30% to-cyan-300/90 border-blue-600 text-blue-950",
   violet:
-    "bg-gradient-to-r from-violet-200/80 from-60% to-purple-300 border-violet-600 text-violet-950",
+    "bg-gradient-to-r from-violet-200/80 from-30% to-purple-300/80 border-violet-600 text-violet-950",
   yellow:
-    "bg-gradient-to-r from-amber-100/80 from-60% to-yellow-300  border-yellow-600 text-yellow-950",
+    "bg-gradient-to-r from-amber-100/80 from-30% to-yellow-300/90  border-yellow-600 text-yellow-950",
   green:
-    "bg-gradient-to-r from-green-100/80 from-60% to-lime-300 border-green-600 text-green-950",
+    "bg-gradient-to-r from-green-100/80 from-30% to-lime-300/80 border-green-600 text-green-950",
 };
 
 const roundColorLight = {
