@@ -108,9 +108,9 @@ export default function KvpCard({
         </p>
         <img
           onClick={() => setShowMenu(!showMenu)}
-          src="/more.svg"
+          src={theme === "dark" ? "/more-white.svg" : "/more.svg"}
           alt="More"
-          className="h-6 w-6 rounded-full object-cover -mr-2 hover:bg-gray-200 hover:scale-110 cursor-pointer"
+          className={`h-6 w-6 rounded-full object-cover -mr-2 ${theme === "dark" ? "hover:bg-gray-500/50" : "hover:bg-gray-200"} hover:scale-110 cursor-pointer`}
         />
         <div
           className={`absolute ${showMenu ? "block" : "hidden"} right-8.5 -mt-1.5 `}
@@ -123,8 +123,8 @@ export default function KvpCard({
           />
         </div>
       </div>
-      <p className="text-gray-500 text-sm lg:text-md text-pretty break-all mb-3">
-        <span className="font-medium text-text-primary">Kategorie: </span>{" "}
+      <p className="text-text-primary text-sm lg:text-md text-pretty break-all mb-3">
+        <span className="font-medium text-text-primary mr-1">Kategorie: </span>
         {category}
       </p>
 
@@ -170,7 +170,7 @@ export default function KvpCard({
       <div className="flex flex-col items-start justify-between mt-2">
         <span className="text-xs py-0.5 text-text-secondary">
           <img
-            src="/user.svg"
+            src={theme === "dark" ? "/user-white.svg" : "/user.svg"}
             alt="User"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
@@ -178,7 +178,7 @@ export default function KvpCard({
         </span>
         <span className="text-xs py-0.5 text-text-secondary">
           <img
-            src="/calender.svg"
+            src={theme === "dark" ? "/calender-white.svg" : "/calender.svg"}
             alt="Calender"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
@@ -186,7 +186,7 @@ export default function KvpCard({
         </span>
         <span className="text-xs py-0.5 text-text-secondary">
           <img
-            src="/target.svg"
+            src={theme === "dark" ? "/target-white.svg" : "/target.svg"}
             alt="Target"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
