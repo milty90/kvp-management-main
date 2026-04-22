@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTheme } from "../../context/ThemeContext";
 
 interface BasicLineChartProps {
   kvps: Kvp[];
@@ -23,6 +24,7 @@ const MONTH_LABELS = [
 
 export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
   const width = useWindowWidth();
+  const { theme } = useTheme();
   const countsByMonth: number[] = Array(12).fill(0);
   kvps.forEach((k) => {
     const date = new Date(k.createdAt);
@@ -34,7 +36,6 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
   const state = {
     series: [
       {
-        name: "Neue KVPs",
         data: countsByMonth,
       },
     ],
@@ -54,11 +55,26 @@ export const BasicLineChart = ({ kvps }: BasicLineChartProps) => {
       },
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"],
+          colors:
+            theme === "dark"
+              ? ["#333", "transparent"]
+              : ["#f3f3f3", "transparent"],
         },
       },
       xaxis: {
         categories: MONTH_LABELS,
+        labels: {
+          style: {
+            colors: theme === "dark" ? "#fff" : "#000",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: theme === "dark" ? "#fff" : "#000",
+          },
+        },
       },
     },
   };

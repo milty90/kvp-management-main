@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTheme } from "../../context/ThemeContext";
 
 interface BarChartProps {
   kvps: Kvp[];
@@ -15,6 +16,7 @@ export const BarChart = ({ kvps }: BarChartProps) => {
   const categories = Object.keys(categoryCounts);
   const counts = Object.values(categoryCounts);
   const width = useWindowWidth();
+  const { theme } = useTheme();
 
   const state = {
     series: [
@@ -39,6 +41,18 @@ export const BarChart = ({ kvps }: BarChartProps) => {
       },
       xaxis: {
         categories: categories,
+        labels: {
+          style: {
+            colors: theme === "dark" ? "#fff" : "#000",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: theme === "dark" ? "#fff" : "#000",
+          },
+        },
       },
     },
   };

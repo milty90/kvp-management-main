@@ -2,6 +2,7 @@ import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import type { ApexOptions } from "apexcharts";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTheme } from "../../context/ThemeContext";
 
 interface SimpleDonutChartProps {
   kvps: Kvp[];
@@ -13,6 +14,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
   const checkCount = kvps.filter((k) => k.state === "Check").length;
   const actCount = kvps.filter((k) => k.state === "Act").length;
   const width = useWindowWidth();
+  const { theme } = useTheme();
 
   const state = {
     series: [planCount, doCount, checkCount, actCount],
@@ -26,10 +28,12 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
 
       legend: {
         position: "right" as const,
+
         labels: {
-          colors: "#fff",
+          colors: theme === "dark" ? "#fff" : "#000",
         },
         offsetY: 0,
+
         itemMargin: {
           vertical: 10,
         },
@@ -39,7 +43,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
         show: true,
         width: 5,
         lineCap: "round",
-        colors: ["#2d2d2d"],
+        colors: [theme === "dark" ? "#2d2d2d" : "#fff"],
       },
       plotOptions: {
         pie: {
@@ -52,14 +56,14 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
                 show: true,
                 fontSize: "16px",
                 fontWeight: 600,
-                color: "#fff",
+                color: theme === "dark" ? "#fff" : "#000",
                 offsetY: -10,
               },
               value: {
                 show: true,
                 fontSize: "24px",
                 fontWeight: 400,
-                color: "#fff",
+                color: theme === "dark" ? "#fff" : "#000",
                 offsetY: 10,
               },
               total: {
@@ -67,7 +71,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
                 label: "Gesamt",
                 fontSize: "18px",
                 fontWeight: 600,
-                color: "#fff",
+                color: theme === "dark" ? "#fff" : "#000",
               },
             },
           },

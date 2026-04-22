@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTheme } from "../../context/ThemeContext";
 
 interface ColumnChartProps {
   kvps: Kvp[];
@@ -11,6 +12,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
   const mediumCount = kvps.filter((k) => k.priority === "Medium").length;
   const highCount = kvps.filter((k) => k.priority === "High").length;
   const width = useWindowWidth();
+  const { theme } = useTheme();
 
   const state = {
     series: [
@@ -43,12 +45,18 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
         offsetY: 10,
         style: {
           fontSize: "16px",
-          colors: ["#333333"],
+          colors: [theme === "dark" ? "#fff" : "#000"],
         },
       },
 
       xaxis: {
         categories: ["Niedrig", "Mittel", "Hoch"],
+        labels: {
+          style: {
+            fontSize: "14px",
+            colors: theme === "dark" ? "#fff" : "#000",
+          },
+        },
         position: "bottom" as const,
         axisBorder: {
           show: false,
@@ -69,9 +77,11 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
           },
         },
         tooltip: {
-          enabled: true,
+          enabled: false,
+          colors: theme === "dark" ? "#fff" : "#000",
         },
       },
+
       yaxis: {
         axisBorder: {
           show: true,
@@ -79,6 +89,7 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
         axisTicks: {
           show: true,
         },
+
         labels: {
           show: false,
           formatter: function (val: number) {
