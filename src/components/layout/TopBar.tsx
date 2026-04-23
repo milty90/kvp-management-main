@@ -21,11 +21,7 @@ interface TopBarProps {
   statButtonColor?: ColorButtonType;
 }
 
-export default function TopBar({
-  kvpBar,
-  kvpButtonColor = "blue",
-  statButtonColor = "gray",
-}: TopBarProps) {
+export default function TopBar({ kvpBar }: TopBarProps) {
   const navigate = useNavigate();
 
   const { theme } = useTheme();
@@ -92,12 +88,9 @@ export default function TopBar({
             <>
               <TopNavButton
                 icon={<img src="/settings.svg" alt="Settings" />}
-                onClick={() => {
-                  setShowSettingsModal(true);
-                }}
                 theme={theme}
               />
-              <ColorButton
+              {/* <ColorButton
                 color={kvpButtonColor}
                 icon={"/trending.svg"}
                 onClick={() => {
@@ -115,7 +108,7 @@ export default function TopBar({
                 }}
               >
                 Statistik
-              </ColorButton>
+              </ColorButton> */}
             </>
           ) : (
             <svg

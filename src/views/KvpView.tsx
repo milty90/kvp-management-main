@@ -14,15 +14,10 @@ function KvpView({ onOpenModal }: KvpViewProps) {
   const [showArchive, setShowArchive] = useState(false);
   const [activeFilter, setActiveFilter] = useState("Alle");
   const [activePriority, setActivePriority] = useState("Alle");
-  const { theme } = useTheme();
 
   return (
     <div className="flex flex-col px-2 pt-0 md:px-8 pb-0 md:pt-8 items-center bg-background gap-3 h-screen">
-      <TopBar
-        kvpButtonColor={theme === "dark" ? "green" : "blue"}
-        statButtonColor="gray"
-        kvpBar={<KvpCycleBar />}
-      />
+      <TopBar kvpBar={<KvpCycleBar />} />
       <ActionBar
         isArchiveOpen={showArchive}
         onFilter={setActiveFilter}
