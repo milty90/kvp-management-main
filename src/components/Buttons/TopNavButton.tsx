@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 interface TopNavButtonProps {
-  icon: React.ReactNode;
   theme?: string;
+  onChange?: (state: boolean) => void;
 }
 
 const tabs = ["Verbesseungen", "Statistiken"];
 
-export function TopNavButton({ theme }: TopNavButtonProps) {
-  const [selected, setSelected] = useState("Verbesseungen");
+export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
+  const location = useLocation();
+  const selected =
+    location.pathname === "/kvps" ? "Verbesseungen" : "Statistiken";
   return (
     <div
-      className={`inline-flex items-center p-1 gap-2 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
+      className={`inline-flex items-center p-1 gap-1.5 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
     >
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => {
             const newSelected = selected === tab ? selected : tab;
-            setSelected(newSelected);
-            console.log(newSelected);
+            if (onChange) {
+              onChange(newSelected === "Verbesseungen");
+            }
           }}
-          className={`flex px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150
+          className={`flex px-3 md:px-4 py-2 rounded-lg text-sm font-medium
               ${
                 selected === tab
                   ? `${theme === "dark" ? "text-text-primary bg-button" : "text-white bg-button"} shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)]`

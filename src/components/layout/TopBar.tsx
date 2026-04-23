@@ -25,6 +25,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const navigate = useNavigate();
 
   const { theme } = useTheme();
+  const width = useWindowWidth();
 
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -32,7 +33,6 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
@@ -41,7 +41,9 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     setShowMenu(false);
   });
 
-  const width = useWindowWidth();
+  const handleTopNavChange = (isKvpSelected: boolean) => {
+    navigate(isKvpSelected ? "/kvps" : "/stats");
+  };
 
   const handleSettingsClick = () => {
     setShowSettingsModal(true);
@@ -86,12 +88,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
         >
           {width >= 768 ? (
             <>
-              <TopNavButton
-                icon={<img src="/settings.svg" alt="Settings" />}
-                theme={theme}
-              />
+              <TopNavButton theme={theme} onChange={handleTopNavChange} />
               {/* <ColorButton
-                color={kvpButtonColor}
                 icon={"/trending.svg"}
                 onClick={() => {
                   handleKvpsClick();
@@ -101,7 +99,6 @@ export default function TopBar({ kvpBar }: TopBarProps) {
               </ColorButton>
 
               <ColorButton
-                color={statButtonColor}
                 icon="/graph.svg"
                 onClick={() => {
                   handleStatisticsClick();
