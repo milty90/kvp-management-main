@@ -7,7 +7,6 @@ export default function StatActionBar() {
         <PriorityGroup /> */}
       </div>
       <div className="flex items-center gap-4">
-        {/* <WhiteButton icon="">Archive</WhiteButton> */}
         <ColorButton
           onClick={() => {
             alert("pdf export");

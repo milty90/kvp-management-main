@@ -11,14 +11,17 @@ export const showToast = (
 ) => {
   toast[type](content, {
     position: width < 768 ? "bottom-center" : "top-center",
-    className: ` text-sm font-poppins `,
     style: {
-      borderRadius: "0.5rem",
-      width: width < 768 ? "90vw" : "400px",
-      marginTop: width < 768 ? "0rem" : "1.3rem",
+      fontFamily: "Poppins, sans-serif",
+      fontSize: "0.875rem",
+      color:
+        theme === "dark"
+          ? "var(--color-text-primary)"
+          : "var(--color-text-secondary)",
+      width: width < 768 ? "90vw" : "350px",
+      marginTop: width < 768 ? "0rem" : "1.5rem",
       marginBottom: "0.5rem",
-      backgroundColor: theme === "dark" ? "#374151" : "#f3f4f6",
-      color: theme === "dark" ? "#bfbfbf" : "#1f2937",
+      backgroundColor: "var(--color-bg-card)",
     },
   });
 };

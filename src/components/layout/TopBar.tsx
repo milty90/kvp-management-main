@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState, type ReactNode } from "react";
 import ColorButton from "../buttons/ColorButton";
 import type { ColorButtonType } from "../../types";
-import { toast } from "react-toastify";
 import { SettingItem } from "../items/SettingItem";
 import { useClickOutside } from "../../utils/clickOutside";
 import { signOut } from "../../utils/authDatabase";
@@ -13,6 +12,8 @@ import { ProfileModal } from "../items/ProfileModal";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import MenuItem from "../items/MenuItem";
 import { useTheme } from "../../context/ThemeContext";
+import { showToast } from "../items/ToastItem";
+import { TopNavButton } from "../buttons/TopNavButton";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -89,11 +90,18 @@ export default function TopBar({
         >
           {width >= 768 ? (
             <>
+              <TopNavButton
+                icon={<img src="/settings.svg" alt="Settings" />}
+                onClick={() => {
+                  setShowSettingsModal(true);
+                }}
+                theme={theme}
+              />
               <ColorButton
                 color={kvpButtonColor}
                 icon={"/trending.svg"}
                 onClick={() => {
-                  navigate("/kvps");
+                  handleKvpsClick();
                 }}
               >
                 Verbesserungen
@@ -103,7 +111,7 @@ export default function TopBar({
                 color={statButtonColor}
                 icon="/graph.svg"
                 onClick={() => {
-                  navigate("/stats");
+                  handleStatisticsClick();
                 }}
               >
                 Statistik
@@ -221,10 +229,7 @@ export default function TopBar({
             onConfirm={() => {
               signOut();
               navigate("/login");
-              toast.success("Erfolgreich abgemeldet.", {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins ",
-              });
+              showToast(width, theme, "success", "Erfolgreich abgemeldet.");
               setShowConfirmDialog(false);
             }}
             onCancel={() => setShowConfirmDialog(false)}

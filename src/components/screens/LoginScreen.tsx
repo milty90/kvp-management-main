@@ -8,6 +8,8 @@ import {
 } from "../../utils/authDatabase";
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
+import { useWindowWidth } from "../../utils/useWindowWidth";
+import { showToast } from "../items/ToastItem";
 
 export function LoginScreen() {
   const navigate = useNavigate();
@@ -17,35 +19,35 @@ export function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { theme } = useTheme();
+  const width = useWindowWidth();
 
   async function handleEmailLogin(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!email || !password) {
-      toast.error("Bitte geben Sie sowohl E-Mail als auch Passwort ein.", {
-        position: "top-center",
-        className: "mt-6 text-sm font-poppins ",
-      });
+      showToast(
+        width,
+        theme,
+        "error",
+        "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+      );
       return;
     }
 
     const { data, error } = await signInWithEmail(email, password);
 
     if (error || !data.session) {
-      toast.error(
+      showToast(
+        width,
+        theme,
+        "error",
         "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.",
-        {
-          position: "top-center",
-          className: "mt-6 text-sm font-poppins ",
-        },
       );
       return;
     }
 
-    toast.success("Erfolgreich angemeldet!", {
-      position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
-    });
+    showToast(width, theme, "success", "Erfolgreich angemeldet!");
+
     navigate("/kvps");
   }
 
@@ -143,12 +145,11 @@ export function LoginScreen() {
             <a
               className="inline-block align-baseline font-semibold text-sm text-button hover:text-button-hover cursor-pointer"
               onClick={() =>
-                toast.info(
+                showToast(
+                  width,
+                  theme,
+                  "info",
                   "Passwort vergessen Funktion ist derzeit nicht verfügbar.",
-                  {
-                    position: "top-center",
-                    className: "mt-6 text-sm font-poppins ",
-                  },
                 )
               }
             >
@@ -187,10 +188,12 @@ export function LoginScreen() {
             className={`flex items-center px-3 py-2 ${theme === "light" ? "bg-gray-900" : "bg-gray-600"} text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150`}
             type="button"
             onClick={() => {
-              toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins ",
-              });
+              showToast(
+                width,
+                theme,
+                "info",
+                "GitHub Anmeldung ist derzeit nicht verfügbar.",
+              );
 
               signInWithGitHub();
             }}
@@ -216,6 +219,12 @@ export function LoginScreen() {
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
             type="button"
             onClick={() => {
+              showToast(
+                width,
+                theme,
+                "info",
+                "Slack Anmeldung ist derzeit nicht verfügbar.",
+              );
               signInWithSlack();
             }}
           >

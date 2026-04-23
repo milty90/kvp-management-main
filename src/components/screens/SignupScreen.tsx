@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { signUpWithEmailandPassword } from "../../utils/authDatabase";
 import { useTheme } from "../../context/ThemeContext";
+import { showToast } from "../items/ToastItem";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -12,47 +13,44 @@ export function SignupScreen() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { theme } = useTheme();
+  const width = useWindowWidth();
 
   async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!email || !password) {
-      toast.error("Bitte geben Sie sowohl E-Mail als auch Passwort ein.", {
-        position: "top-center",
-        className: "mt-6 text-sm font-poppins ",
-      });
+      showToast(
+        width,
+        theme,
+        "error",
+        "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+      );
       return;
     }
 
     const { data, error } = await signUpWithEmailandPassword(email, password);
 
     if (error || !data.user) {
-      toast.error(
-        error?.message ||
-          "Fehler bei der Kontoerstellung. Bitte versuchen Sie es erneut.",
-        {
-          position: "top-center",
-          className: "mt-6 text-sm font-poppins ",
-        },
+      showToast(
+        width,
+        theme,
+        "error",
+        "Fehler bei der Kontoerstellung: " + error?.message,
       );
       return;
     }
 
     if (data.session) {
-      toast.success("Konto erfolgreich erstellt!", {
-        position: "top-center",
-        className: "mt-6 text-sm font-poppins ",
-      });
+      showToast(width, theme, "success", "Konto erfolgreich erstellt!");
       navigate("/login");
       return;
     }
 
-    toast.success(
+    showToast(
+      width,
+      theme,
+      "success",
       "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
-      {
-        position: "top-center",
-        className: "mt-6 text-sm font-poppins ",
-      },
     );
     navigate("/login");
   }
@@ -173,10 +171,12 @@ export function SignupScreen() {
         <div className="flex mt-6 space-x-4">
           <button
             onClick={() =>
-              toast.info("Google Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "md:mt-6 text-sm font-poppins",
-              })
+              showToast(
+                width,
+                theme,
+                "info",
+                "Google Anmeldung ist derzeit nicht verfügbar.",
+              )
             }
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
           >
@@ -189,10 +189,12 @@ export function SignupScreen() {
           </button>
           <button
             onClick={() =>
-              toast.info("GitHub Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "md:mt-6 text-sm font-poppins",
-              })
+              showToast(
+                width,
+                theme,
+                "info",
+                "GitHub Anmeldung ist derzeit nicht verfügbar.",
+              )
             }
             className={`flex items-center px-3 py-2 ${theme === "light" ? "bg-gray-900" : "bg-gray-600"} text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150`}
           >
@@ -214,10 +216,12 @@ export function SignupScreen() {
           </button>
           <button
             onClick={() =>
-              toast.info("Slack Anmeldung ist derzeit nicht verfügbar.", {
-                position: "top-center",
-                className: "md:mt-6 text-sm font-poppins",
-              })
+              showToast(
+                width,
+                theme,
+                "info",
+                "Slack Anmeldung ist derzeit nicht verfügbar.",
+              )
             }
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
           >

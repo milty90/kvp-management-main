@@ -1,11 +1,12 @@
 import { useKvpContext } from "../../context/KvpContext";
-import { toast } from "react-toastify";
 import CardMenuItem from "../items/CardMenuItem";
 import { useRef, useState } from "react";
 import { useClickOutside } from "../../utils/clickOutside";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
 import { useTheme } from "../../context/ThemeContext";
+import { useWindowWidth } from "../../utils/useWindowWidth";
+import { showToast } from "../items/ToastItem";
 
 interface KvpCardProps {
   id: number;
@@ -48,6 +49,7 @@ export default function KvpCard({
   const [showMenu, setShowMenu] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const { theme } = useTheme();
+  const width = useWindowWidth();
 
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -55,19 +57,13 @@ export default function KvpCard({
 
   const handleArchive = () => {
     archiveKvp(id);
-    toast.info(`KVP ${title} wurde archiviert.`, {
-      position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
-    });
+    showToast(width, theme, "success", `KVP ${title} wurde archiviert.`);
     setShowMenu(false);
   };
 
   const handleReject = () => {
     rejectKvp(id);
-    toast.info(`KVP ${title} wurde abgelehnt.`, {
-      position: "top-center",
-      className: "mt-6 text-sm font-poppins ",
-    });
+    showToast(width, theme, "info", `KVP ${title} wurde abgelehnt.`);
     setShowMenu(false);
   };
 
@@ -201,10 +197,12 @@ export default function KvpCard({
             confirmButtonText="Löschen"
             onConfirm={() => {
               deleteKvp(id);
-              toast.success(`KVP ${title} wurde gelöscht.`, {
-                position: "top-center",
-                className: "mt-6 text-sm font-poppins",
-              });
+              showToast(
+                width,
+                theme,
+                "success",
+                `KVP ${title} wurde gelöscht.`,
+              );
               setShowDialog(false);
             }}
             onCancel={() => setShowDialog(false)}

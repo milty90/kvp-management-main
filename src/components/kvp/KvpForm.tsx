@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import type { Kvp } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
-import { toast } from "react-toastify";
+import { showToast } from "../items/ToastItem";
 import { kvpInputFormData } from "../../utils/kvpInputFormData";
 import { kvpInputFormColor } from "../../utils/kvpInputFromColor";
 import { supabase } from "../../utils/supabase";
 import { useTheme } from "../../context/ThemeContext";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -34,6 +35,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   );
 
   const { theme } = useTheme();
+  const width = useWindowWidth();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -82,12 +84,11 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     initialData ? updateKvp(updateKvpData) : addKvp(newKvp);
 
     onClose();
-    toast.success(
+    showToast(
+      width,
+      theme,
+      "success",
       `KVP ${initialData ? "aktualisiert" : "hinzugefügt"}: ${initialData ? updateKvpData.title : newKvp.title}`,
-      {
-        position: "top-center",
-        className: `mt-6 color-green-500 font-poppins text-sm rounded-lg shadow-lg ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`,
-      },
     );
   }
 
