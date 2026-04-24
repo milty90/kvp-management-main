@@ -14,16 +14,6 @@ const colorClassesLight = {
   green: "bg-green-100/70 border-green-300/50 text-green-700",
 };
 
-const colorClassesDark = {
-  blue: "bg-gradient-to-r from-blue-200/80 from-30% to-cyan-300/90 border-blue-600 text-blue-950",
-  violet:
-    "bg-gradient-to-r from-violet-200/80 from-30% to-purple-300/80 border-violet-600 text-violet-950",
-  yellow:
-    "bg-gradient-to-r from-amber-100/80 from-30% to-yellow-300/90  border-yellow-600 text-yellow-950",
-  green:
-    "bg-gradient-to-r from-green-100/80 from-30% to-lime-300/80 border-green-600 text-green-950",
-};
-
 const roundColorLight = {
   yellow: "bg-yellow-300/60 text-yellow-900",
   blue: "bg-blue-300/50 text-blue-900",
@@ -31,11 +21,27 @@ const roundColorLight = {
   green: "bg-green-300/50 text-green-900",
 };
 
+// const colorClassesDark = {
+//   blue: "bg-gradient-to-r from-blue-200/80 from-30% to-cyan-300/90 border-blue-600 text-blue-950",
+//   violet:
+//     "bg-gradient-to-r from-violet-200/80 from-30% to-purple-300/80 border-violet-600 text-violet-950",
+//   yellow:
+//     "bg-gradient-to-r from-amber-100/80 from-30% to-yellow-300/90  border-yellow-600 text-yellow-950",
+//   green:
+//     "bg-gradient-to-r from-green-100/80 from-30% to-lime-300/80 border-green-600 text-green-950",
+// };
+const colorClassesDark = {
+  blue: "bg-blue-500/10 border-blue-800/50 text-blue-200",
+  violet: "bg-violet-500/10 border-violet-800/60 text-violet-200",
+  yellow: "bg-yellow-500/10 border-yellow-800/30 text-yellow-100/90",
+  green: "bg-green-500/10 border-green-800/30 text-green-100",
+};
+
 const roundColorDark = {
-  blue: "bg-blue-400/60 text-blue-50",
-  violet: "bg-violet-400/60 text-violet-50",
-  yellow: "bg-amber-400/80 text-yellow-50",
-  green: "bg-green-400/60 text-green-50",
+  blue: "bg-blue-400/40 text-blue-50",
+  violet: "bg-violet-400/40 text-violet-50",
+  yellow: "bg-yellow-300/40 text-yellow-50",
+  green: "bg-green-300/40 text-green-50",
 };
 
 export default function CycleCard({

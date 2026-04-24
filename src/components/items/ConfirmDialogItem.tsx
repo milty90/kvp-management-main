@@ -20,7 +20,9 @@ export function ConfirmDialogItem({
 }: ConfirmDialogProps) {
   const { theme } = useTheme();
   return (
-    <div className="fixed z-30 inset-0 flex items-center justify-center bg-gray-200/20 md:bg-gray-700/30">
+    <div
+      className={`fixed z-30 inset-0 flex items-center justify-center ${theme === "dark" ? "bg-gray-800/50" : "bg-gray-500/30"}`}
+    >
       <div
         className={`bg-amber-100 border border-amber-300 rounded-md px-6 py-4 shadow-lg ${theme === "dark" ? "bg-card border-gray-500" : "bg-amber-100 border-amber-300"}`}
       >

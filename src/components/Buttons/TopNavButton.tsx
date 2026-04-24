@@ -27,7 +27,7 @@ export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
           className={`flex px-3 md:px-4 py-2 rounded-lg text-sm font-medium
               ${
                 selected === tab
-                  ? `${theme === "dark" ? "text-text-primary bg-button" : "text-white bg-button"} shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)]`
+                  ? `${theme === "dark" ? "text-text-primary bg-green-800 hover:bg-green-600" : "text-white bg-blue-500 hover:bg-blue-600"} shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)]`
                   : `${theme === "dark" ? "text-gray-300 hover:text-text-primary" : "text-gray-600 hover:text-text-primary"}`
               }
             `}
