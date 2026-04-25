@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
-const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
-
-interface ButtonGroupProps {
+interface FilterButtonGroupProps {
+  selected: string;
   filter: (state: string) => void;
   onChange?: (state: boolean) => void;
+  tabs: string[];
 }
 
-export default function ButtonGroup({ filter, onChange }: ButtonGroupProps) {
-  const [selected, setSelected] = useState("Alle");
+export default function FilterButtonGroup({
+  selected,
+  filter,
+  onChange,
+  tabs,
+}: FilterButtonGroupProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { theme } = useTheme();
 
@@ -26,7 +30,6 @@ export default function ButtonGroup({ filter, onChange }: ButtonGroupProps) {
           onClick={() => {
             const newSelected =
               selected === tab && tab !== "Alle" ? selected : tab;
-            setSelected(newSelected);
             filter(newSelected);
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150

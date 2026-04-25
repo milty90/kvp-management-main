@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
-const tabs = ["Alle", "Plan", "Do", "Check", "Act"];
-
-interface CycleBtnGroupMobProps {
+interface FilterBtnGroupMobProps {
+  selected: string;
   filter: (state: string) => void;
+  tabs: string[];
+  position: string;
 }
-export function CycleBtnGroupMob({ filter }: CycleBtnGroupMobProps) {
-  const [selected, setSelected] = useState("Alle");
+export function FilterBtnGroupMob({
+  selected,
+  filter,
+  tabs,
+  position,
+}: FilterBtnGroupMobProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const visibleTabs = isCollapsed ? [selected] : tabs;
@@ -16,7 +21,7 @@ export function CycleBtnGroupMob({ filter }: CycleBtnGroupMobProps) {
 
   return (
     <div
-      className={`absolute z-30 flex flex-col items-center gap-1 -top-5 left-0 p-1 rounded-xl ${theme === "dark" ? "bg-gray-500" : "bg-gray-200/80"}`}
+      className={`absolute z-30 flex flex-col items-center gap-1 -top-5 ${position} p-1 rounded-xl ${theme === "dark" ? "bg-gray-500" : "bg-gray-200/80"}`}
     >
       {visibleTabs.map((tab) => (
         <button
@@ -24,7 +29,6 @@ export function CycleBtnGroupMob({ filter }: CycleBtnGroupMobProps) {
           onClick={() => {
             const newSelected =
               selected === tab && tab !== "Alle" ? selected : tab;
-            setSelected(newSelected);
             filter(newSelected);
             setIsCollapsed((prev) => !prev);
           }}

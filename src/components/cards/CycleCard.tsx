@@ -15,21 +15,12 @@ const colorClassesLight = {
 };
 
 const roundColorLight = {
-  yellow: "bg-yellow-300/60 text-yellow-900",
-  blue: "bg-blue-300/50 text-blue-900",
-  violet: "bg-violet-300/50 text-violet-900",
-  green: "bg-green-300/50 text-green-900",
+  blue: "bg-blue-300/50 shadow-sm/20 text-blue-900",
+  violet: "bg-violet-300/50 shadow-sm/20 text-violet-900",
+  yellow: "bg-yellow-300/60 shadow-sm/20 text-yellow-900",
+  green: "bg-green-300/50 shadow-sm/20 text-green-900",
 };
 
-// const colorClassesDark = {
-//   blue: "bg-gradient-to-r from-blue-200/80 from-30% to-cyan-300/90 border-blue-600 text-blue-950",
-//   violet:
-//     "bg-gradient-to-r from-violet-200/80 from-30% to-purple-300/80 border-violet-600 text-violet-950",
-//   yellow:
-//     "bg-gradient-to-r from-amber-100/80 from-30% to-yellow-300/90  border-yellow-600 text-yellow-950",
-//   green:
-//     "bg-gradient-to-r from-green-100/80 from-30% to-lime-300/80 border-green-600 text-green-950",
-// };
 const colorClassesDark = {
   blue: "bg-blue-500/10 border-blue-800/50 text-blue-200",
   violet: "bg-violet-500/10 border-violet-800/60 text-violet-200",
@@ -38,10 +29,10 @@ const colorClassesDark = {
 };
 
 const roundColorDark = {
-  blue: "bg-blue-400/40 text-blue-50",
-  violet: "bg-violet-400/40 text-violet-50",
-  yellow: "bg-yellow-300/40 text-yellow-50",
-  green: "bg-green-300/40 text-green-50",
+  blue: "bg-blue-400/40 shadow-md/20 text-blue-50",
+  violet: "bg-violet-400/40 shadow-md/20 text-violet-50",
+  yellow: "bg-yellow-300/40 shadow-md/20 text-yellow-50",
+  green: "bg-green-300/40 shadow-md/20 text-green-50",
 };
 
 export default function CycleCard({
@@ -55,7 +46,7 @@ export default function CycleCard({
   const roundColor = theme === "dark" ? roundColorDark : roundColorLight;
   return (
     <div
-      className={`flex min-w-20 w-full items-center justify-around md:justify-between h-12 md:px-3  md:h-14 lg:gap-12 rounded-xl border-${color}-300/60 border shadow-md ${colorClasses[color]}`}
+      className={`flex min-w-19 w-full items-center justify-around md:justify-between h-12 md:px-3  md:h-14 lg:gap-12 rounded-xl border-${color}-300/60 border shadow-md ${colorClasses[color]}`}
     >
       <div className={`px-1 py-1 flex items-start gap-3`}>
         <p className={`text-xl md:text-3xl font-semibold text-${color}`}>

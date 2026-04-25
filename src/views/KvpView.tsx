@@ -4,7 +4,6 @@ import KvpBar from "../components/layout/KvpBar";
 import KvpCycleBar from "../components/layout/KvpCycleBar";
 import { useState } from "react";
 import { ArchiveBar } from "../components/layout/ArchiveBar";
-import { useTheme } from "../context/ThemeContext";
 
 interface KvpViewProps {
   onOpenModal: () => void;
@@ -20,13 +19,19 @@ function KvpView({ onOpenModal }: KvpViewProps) {
       <TopBar kvpBar={<KvpCycleBar />} />
       <ActionBar
         isArchiveOpen={showArchive}
+        activeFilter={activeFilter}
+        activePriority={activePriority}
         onFilter={setActiveFilter}
         onPriority={setActivePriority}
         onOpenModal={() => onOpenModal()}
         onOpenArchive={() => setShowArchive((prev) => !prev)}
       />
       {showArchive ? (
-        <ArchiveBar />
+        <ArchiveBar
+          activeFilter={activeFilter}
+          activePriority={activePriority}
+          onOpenModal={() => onOpenModal()}
+        />
       ) : (
         <KvpBar
           onOpenModal={() => onOpenModal()}

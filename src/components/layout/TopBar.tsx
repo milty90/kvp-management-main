@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, type ReactNode } from "react";
-import ColorButton from "../buttons/ColorButton";
 import type { ColorButtonType } from "../../types";
 import { SettingItem } from "../items/SettingItem";
 import { useClickOutside } from "../../utils/clickOutside";
@@ -104,7 +103,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
               setShowSettings(!showSettings);
               setShowMenu(false);
             }}
-            className={`w-8 -mr-0.5  rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-700" : "hover:ring-blue-600"}  transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
+            className={`w-8 -mr-0.5 rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-700" : "hover:ring-blue-600"}  transition-transform duration-300 ease-in hover:rotate-30 cursor-pointer`}
             src={theme === "dark" ? "/settings-light.svg" : "/settings.svg"}
             alt="Settings"
           />

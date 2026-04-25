@@ -1,25 +1,24 @@
-import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
 const tabs = ["KVPs", "Archiv"];
 
 interface KvpSwitchTabProps {
+  isArchiveOpen: boolean;
   onChange?: (state: boolean) => void;
 }
 
-export function KvpSwitchTab({ onChange }: KvpSwitchTabProps) {
-  const [selected, setSelected] = useState("KVPs");
+export function KvpSwitchTab({ isArchiveOpen, onChange }: KvpSwitchTabProps) {
   const { theme } = useTheme();
+  const selected = isArchiveOpen ? "Archiv" : "KVPs";
 
   return (
     <div
-      className={`inline-flex items-center p-1 rounded-xl ${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}
+      className={`inline-flex items-center p-1 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
     >
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => {
-            setSelected(tab);
             onChange?.(tab === "KVPs");
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150

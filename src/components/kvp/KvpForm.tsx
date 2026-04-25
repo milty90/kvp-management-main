@@ -190,7 +190,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
                 placeholder="Zieldatum"
-                className={`text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${targetDateTextColor}`}
+                className={`text-xs w-full max-w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${targetDateTextColor}`}
               />
               <span className="text-xs pl-1 -mb-3 text-text-primary">
                 Priorität *
