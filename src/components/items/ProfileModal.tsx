@@ -27,13 +27,15 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
         <h2 className="text-xl font-bold pl-1 mb-4">Profil</h2>
         <button
           type="button"
-          className="absolute top-4 right-6 text-3xl text-gray-500 hover:text-text-primary"
+          className="absolute top-4 right-7 text-3xl text-gray-500 hover:text-text-primary"
           onClick={onCancel}
         >
           &times;
         </button>
 
-        <div className="flex flex-col items-start justify-start mb-2 p-5 rounded-lg border border-dashed border-gray-300">
+        <div className="border-t border-border my-4"></div>
+
+        <div className="flex flex-col items-start justify-start mb-2 p-5 rounded-lg border border-gray-500">
           <div className="flex flex-row w-full justify-between items-center px-3">
             <img
               src="/face-id.png"
@@ -64,31 +66,34 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
         </div>
         <div className="flex items-center justify-around p-5 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
           <div className="text-sm text-gray-500">
-            <p>12</p>
+            <p className="text-2xl">12</p>
             <p>Aktiv</p>
           </div>
           <div className="text-sm text-gray-500">
-            <p>12</p>
+            <p className="text-2xl">12</p>
             <p>Zugewiesen</p>
           </div>
           <div className="text-sm text-gray-500">
-            <p>12</p>
-            <p>Abgeschlossen</p>
+            <p className="text-2xl">12</p>
+            <p>Done</p>
           </div>
         </div>
-        <div className="flex flex-col items-start justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">E-Mail: {email}</p>
-          <p>Abteilung: </p>
-          <p>Rolle: </p>
-          <p>Weitere Informationen</p>
+        <div className="flex flex-col items-start justify-center px-8 py-6 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-md text-gray-500 my-1.5">E-Mail: {email}</p>
+          <div className="border-t border-0 border-border w-full mb-2 px-2"></div>
+          <p className="text-md text-gray-500 my-1.5">Abteilung: </p>
+          <div className="border-t border-0 border-border w-full mb-2 px-2"></div>
+          <p className="text-md text-gray-500 my-1.5">Rolle: </p>
+          <div className="border-t border-0 border-border w-full mb-2 px-2"></div>
+          <p className="text-md text-gray-500 my-1.5">Weitere Informationen</p>
         </div>
-        <div className="flex flex-col items-start justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-gray-500">Weitere Informationen</p>
+        <div className="flex flex-col items-start justify-center px-8 py-6 mb-2 rounded-lg border border-dashed border-gray-300">
+          <p className="text-md text-gray-500 my-1.5">Weitere Informationen</p>
         </div>
         <div className="mt-4 flex justify-end gap-3">
           <button
             onClick={onCancel}
-            className="hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium text-gray-700"
+            className={`px-4 py-2 rounded-md text-sm font-medium ${theme === "dark" ? " text-text-secondary hover:text-text-primary hover:bg-gray-700/80" : "text-text-secondary hover:text-text-primary hover:bg-gray-300/80"} transition-colors duration-150`}
           >
             Abbrechen
           </button>
