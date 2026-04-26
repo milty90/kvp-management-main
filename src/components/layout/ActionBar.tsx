@@ -57,7 +57,7 @@ function ActionBar({
                 <FilterBtnGroupMob
                   selected={activeFilter}
                   filter={onFilter}
-                  tabs={["Alle", "Archiv", "Abgelehnt"]}
+                  tabs={["Alle", "Abgelehnt", "Archiv"]}
                   position="left-0"
                 />
                 <FilterBtnGroupMob
@@ -73,7 +73,7 @@ function ActionBar({
                   selected={activeFilter}
                   filter={onFilter}
                   onChange={handleCycleChange}
-                  tabs={["Alle", "Archiv", "Abgelehnt"]}
+                  tabs={["Alle", "Abgelehnt", "Archiv"]}
                 />
                 <FilterButtonGroup
                   selected={activePriority}
