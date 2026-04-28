@@ -82,23 +82,23 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
           </div>
         </div>
         <div className="flex flex-col items-start justify-center px-6 lg:px-8 py-3 mb-2 rounded-lg border border-gray-500">
-          <p className="text-md text-text-secondary my-1">
+          <p className="text-sm text-text-secondary my-1">
             E-Mail: <span className="text-text-primary pl-3">{email}</span>
           </p>
-          <p className="text-md text-text-secondary my-1">
+          <p className="text-sm text-text-secondary my-1">
             Abteilung:{" "}
             <span className="text-text-primary pl-3">{department}</span>
           </p>
-          <p className="text-md text-text-secondary my-1">
+          <p className="text-sm text-text-secondary my-1">
             Rolle: <span className="text-text-primary pl-3">{role}</span>
           </p>
-          <p className="text-md text-text-secondary my-1">
+          <p className="text-sm text-text-secondary my-1">
             Letzte Anmeldung:
             <span className="text-text-primary pl-3">23.03.2026</span>
           </p>
         </div>
-        <div className="border-t border-border my-4"></div>
-        <div className="mt-4 pr-2 flex justify-end gap-3">
+        {/* <div className="border-t border-border my-4"></div> */}
+        <div className="mt-6 pr-2 flex justify-end gap-3">
           <button
             onClick={onCancel}
             className={`px-4 py-2 rounded-md text-sm font-medium ${theme === "dark" ? " text-text-secondary hover:text-text-primary hover:bg-gray-700/80" : "text-text-secondary hover:text-text-primary hover:bg-gray-300/80"} transition-colors duration-150`}

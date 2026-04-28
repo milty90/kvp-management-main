@@ -21,34 +21,92 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
           &times;
         </button>
         <div className="border-t border-border my-4"></div>
-        <div className="flex items-center justify-between pl-8 h-15 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-text-primary mr-4">App Theme</p>
-          <div className="flex items-center">
-            <p className="text-sm text-text-secondary mr-4">
-              {theme === "dark" ? "Hell" : "Dunkel"}
+        <div className="flex flex-col px-2 py-4 gap-4 ">
+          <div
+            className={`flex flex-col bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+          >
+            <div className="flex items-start justify-between w-full mb-1">
+              <p className="text-sm text-text-primary mr-4">Dunkelmodus</p>
+              <div className="flex items-center">
+                <p className="text-xs lg:text-sm  text-text-secondary mr-4">
+                  Aktuell: {theme === "dark" ? "Dunkel" : "Hell"}
+                </p>
+                <div className="flex items-center">
+                  <label className="relative inline-flex items-center cursor-pointer lg:mr-1">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      value="theme"
+                      checked={theme === "dark"}
+                      onChange={toggleTheme}
+                    />
+                    <div className="group bg-surface rounded-full duration-300 w-10 h-5 ring-2 ring-blue-500 after:duration-300 after:bg-blue-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-3 after:w-3 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4.5 peer-hover:after:scale-95"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs lg:text-sm text-text-secondary">
+              Wechseln Sie zum {theme === "dark" ? "Hellmodus" : "Dunkelmodus"}
             </p>
-            <label className="relative inline-flex items-center cursor-pointer mr-7">
-              <input
-                type="checkbox"
-                className="sr-only peer"
-                value="theme"
-                checked={theme === "dark"}
-                onChange={toggleTheme}
-              />
-              <div className="group bg-surface rounded-full duration-300 w-10 h-5 ring-2 ring-blue-500 after:duration-300 after:bg-blue-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-3 after:w-3 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4.5 peer-hover:after:scale-95"></div>
-            </label>
+          </div>
+          <div
+            className={`flex flex-col bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+          >
+            <div className="flex items-start justify-between w-full mb-1">
+              <p className="text-sm text-text-primary mr-4">Sprache wechseln</p>
+              <div className="flex items-center">
+                <p className="text-xs lg:text-sm text-text-secondary mr-4">
+                  Aktuell: Deutsch
+                </p>
+                <div className="flex items-center">
+                  <label className="relative inline-flex items-center cursor-pointer lg:mr-1">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      value="theme"
+                      checked={theme === "dark"}
+                      onChange={toggleTheme}
+                    />
+                    <div className="group bg-surface rounded-full duration-300 w-10 h-5 ring-2 ring-blue-500 after:duration-300 after:bg-blue-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-3 after:w-3 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4.5 peer-hover:after:scale-95"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs lg:text-sm text-text-secondary">
+              Wechseln Sie zu English
+            </p>
+          </div>
+
+          <div
+            className={`flex flex-col bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+          >
+            <div className="flex items-start justify-between w-full mb-1">
+              <p className="text-sm text-text-primary mr-4">Benachrichtigung</p>
+              <div className="flex items-center">
+                <p className="text-xs lg:text-sm  text-text-secondary mr-4">
+                  Aktuell: An
+                </p>
+                <div className="flex items-center">
+                  <label className="relative inline-flex items-center cursor-pointer lg:mr-1">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      value="theme"
+                      checked={theme === "dark"}
+                      onChange={toggleTheme}
+                    />
+                    <div className="group bg-surface rounded-full duration-300 w-10 h-5 ring-2 ring-blue-500 after:duration-300 after:bg-blue-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-3 after:w-3 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4.5 peer-hover:after:scale-95"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs lg:text-sm text-text-secondary">
+              Schalten Sie die Benachrichtigungen aus
+            </p>
           </div>
         </div>
-        <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-text-secondary">Weitere Einstellungen</p>
-        </div>
-        <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-text-secondary">Weitere Einstellungen</p>
-        </div>
-        <div className="flex items-center justify-start pl-8 h-30 mb-2 rounded-lg border border-dashed border-gray-300">
-          <p className="text-sm text-text-secondary">Weitere Einstellungen</p>
-        </div>
-        <div className="mt-4 flex justify-end gap-3">
+
+        <div className="mt-4 mb-1 flex justify-end gap-3 pr-4">
           <button
             onClick={onCancel}
             className="hover:bg-gray-200 hover:text-gray-700 px-4 py-2 rounded-md text-sm font-medium text-text-secondary"
