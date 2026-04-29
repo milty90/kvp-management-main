@@ -1,5 +1,6 @@
 import ColorButton from "../buttons/ColorButton";
 import { useTheme } from "../../context/ThemeContext";
+import { useLanguage } from "../../context/LanguageContext";
 interface SettingsModalProps {
   onConfirm: () => void;
   onCancel: () => void;
@@ -7,6 +8,7 @@ interface SettingsModalProps {
 
 export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
   return (
     <div className="fixed z-40 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-surface px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
@@ -63,9 +65,9 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                     <input
                       type="checkbox"
                       className="sr-only peer"
-                      value="theme"
-                      checked={theme === "dark"}
-                      onChange={toggleTheme}
+                      value="language"
+                      checked={language === "en"}
+                      onChange={toggleLanguage}
                     />
                     <div className="group bg-surface rounded-full duration-300 w-10 h-5 ring-2 ring-blue-500 after:duration-300 after:bg-blue-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-3 after:w-3 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4.5 peer-hover:after:scale-95"></div>
                   </label>
@@ -73,7 +75,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
               </div>
             </div>
             <p className="text-xs lg:text-sm text-text-secondary">
-              Wechseln Sie zu English
+              Wechseln Sie zu {language === "de" ? "English" : "Deutsch"}
             </p>
           </div>
 

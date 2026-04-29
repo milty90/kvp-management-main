@@ -1,16 +1,19 @@
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface TopNavButtonProps {
   theme?: string;
   onChange?: (state: boolean) => void;
 }
 
-const tabs = ["Verbesseungen", "Statistiken"];
-
 export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
   const location = useLocation();
+  const translation = useTranslation();
+  const tabs = [translation.topNavButton.pdca, translation.topNavButton.stats];
   const selected =
-    location.pathname === "/kvps" ? "Verbesseungen" : "Statistiken";
+    location.pathname === "/kvps"
+      ? translation.topNavButton.pdca
+      : translation.topNavButton.stats;
   return (
     <div
       className={`inline-flex items-center p-1 gap-1.5 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
@@ -21,7 +24,7 @@ export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
           onClick={() => {
             const newSelected = selected === tab ? selected : tab;
             if (onChange) {
-              onChange(newSelected === "Verbesseungen");
+              onChange(newSelected === translation.topNavButton.pdca);
             }
           }}
           className={`flex px-3 md:px-4 py-2 rounded-lg text-sm font-medium
@@ -34,7 +37,7 @@ export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
         >
           <img
             src={
-              tab === "Verbesseungen"
+              tab === translation.topNavButton.pdca
                 ? `${theme === "dark" ? (selected === tab ? "/trending.svg" : "/trending-light-gray.svg") : selected === tab ? "/trending.svg" : "/trending-gray.svg"}`
                 : `${theme === "dark" ? (selected === tab ? "/graph.svg" : "/graph-light-gray.svg") : selected === tab ? "/graph.svg" : "/graph-gray.svg"}`
             }

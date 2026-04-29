@@ -1,3 +1,4 @@
+import { useTranslation } from "../../utils/useTranslation";
 import StatCard from "../cards/StatCard";
 
 interface KvpStatBarProps {
@@ -13,28 +14,29 @@ export function KvpStatBar({
   assigned,
   highPriority,
 }: KvpStatBarProps) {
+  const translation = useTranslation();
   return (
     <div className="w-full p-2.5 pt-0 rounded-b-2xl  bg-surface text-gray-800 flex items-center justify-between gap-3">
       <StatCard
-        status="Gesamt"
+        status={translation.statCard.total}
         quantity={total.toString()}
         path="data.svg"
         iconColor="blue"
       />
       <StatCard
-        status="Abgeschlossen"
+        status={translation.statCard.closed}
         quantity={completed.toString()}
         path="checkmark.svg"
         iconColor="green"
       />
       <StatCard
-        status="Zugewiesen"
+        status={translation.statCard.assigned}
         quantity={assigned.toString()}
         path="users.svg"
         iconColor="violet"
       />
       <StatCard
-        status="Hohe Priorität"
+        status={translation.statCard.highPriority}
         quantity={highPriority.toString()}
         path="target2.svg"
         iconColor="red"

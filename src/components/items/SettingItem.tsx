@@ -1,4 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface SettingItemProps {
   onSetting: () => void;
@@ -11,6 +12,7 @@ export function SettingItem({
   onLogout,
 }: SettingItemProps) {
   const { theme } = useTheme();
+  const translation = useTranslation();
   return (
     <div className="relative z-50 flex flex-col items-start">
       <div
@@ -20,19 +22,19 @@ export function SettingItem({
           onClick={onSetting}
           className={`text-sm p-2  text-start  hover:text-blue-600 rounded hover:scale-95 transition-transform duration-150 ${theme === "dark" ? "hover:text-green-500 hover:bg-gray-500/50" : "hover:text-blue-600 hover:bg-gray-200"}`}
         >
-          Einstellungen
+          {translation.settingsModal.settings}
         </button>
         <button
           onClick={onProfile}
           className={`text-sm p-2  text-start    hover:text-blue-600 rounded hover:scale-95 transition-transform duration-150 ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-500" : "hover:bg-gray-200 hover:text-blue-600"}`}
         >
-          Profile
+          {translation.settingsModal.profile}
         </button>
         <button
           onClick={onLogout}
           className={`text-sm p-2  text-start hover:bg-gray-200 hover:text-red-600 rounded hover:scale-95 transition-transform duration-150 ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-red-500" : "hover:bg-gray-200 hover:text-red-600"}`}
         >
-          Abmelden
+          {translation.settingsModal.logout}
         </button>
       </div>
     </div>

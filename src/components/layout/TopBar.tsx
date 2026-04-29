@@ -13,6 +13,7 @@ import MenuItem from "../items/MenuItem";
 import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { TopNavButton } from "../buttons/TopNavButton";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -24,7 +25,9 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const navigate = useNavigate();
 
   const { theme } = useTheme();
+
   const width = useWindowWidth();
+  const translation = useTranslation();
 
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -78,7 +81,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             className="h-10 md:h-11 mx-3 mt-3 mb-0"
           />
           <p className="hidden lg:block text-text-primary font-light font-poppins tracking-tight -mb-6 text-sm">
-            KVP Management System
+            {translation.appName}
           </p>
         </div>
         <div
@@ -134,12 +137,12 @@ export default function TopBar({ kvpBar }: TopBarProps) {
       {showConfirmDialog &&
         createPortal(
           <ConfirmDialogItem
-            title="Abmelden"
-            message="Möchten Sie sich wirklich abmelden?"
+            title={translation.logoutTitle}
+            message={translation.logoutMessage}
             onConfirm={() => {
               signOut();
               navigate("/login");
-              showToast(width, theme, "success", "Erfolgreich abgemeldet.");
+              showToast(width, theme, "success", translation.logoutMessage);
               setShowConfirmDialog(false);
             }}
             onCancel={() => setShowConfirmDialog(false)}

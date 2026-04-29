@@ -6,16 +6,19 @@ import { KvpProvider } from "./context/KvpContext.tsx";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext.tsx";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
+import { LanguageProvider } from "./context/LanguageContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <UserProvider>
-        <KvpProvider>
-          <App />
-          <ToastContainer />
-        </KvpProvider>
-      </UserProvider>
+      <LanguageProvider>
+        <UserProvider>
+          <KvpProvider>
+            <App />
+            <ToastContainer />
+          </KvpProvider>
+        </UserProvider>
+      </LanguageProvider>
     </ThemeProvider>
   </StrictMode>,
 );
