@@ -1,14 +1,6 @@
-import { SettingsModal } from "../components/items/SettingsModal";
-
 export const translations = {
   de: {
-    logoutTitle: "Abmelden",
-    logoutMessage: "Möchten Sie sich wirklich abmelden?",
     appName: "KVP Management System",
-    settingsTitle: "Einstellungen",
-    darkMode: "Dunkelmodus",
-    language: "Sprache",
-    notifications: "Benachrichtigungen",
     topNavButton: { pdca: "Verbesserungen", stats: "Statistiken" },
     statCard: {
       total: "Gesamt",
@@ -21,17 +13,16 @@ export const translations = {
       profile: "Profil",
       logout: "Abmelden",
     },
-    kvpSwitchTabKVP: "KVPs",
-    kvpSwitchTabArchive: "Archiv",
+    logOutModal: {
+      title: "Abmelden",
+      message: "Sind Sie sicher, dass Sie sich abmelden möchten?",
+      toastMessage: "Sie wurden erfolgreich abgemeldet.",
+      onCancel: "Abbrechen",
+      onConfirm: "Abmelden",
+    },
   },
   en: {
-    logoutTitle: "Logout",
-    logoutMessage: "Are you sure you want to log out?",
     appName: "PCDA Management System",
-    settingsTitle: "Settings",
-    darkMode: "Dark Mode",
-    language: "Language",
-    notifications: "Notifications",
     topNavButton: { pdca: "Improvements", stats: "Statistics" },
     statCard: {
       total: "Total",
@@ -44,7 +35,12 @@ export const translations = {
       profile: "Profile",
       logout: "Logout",
     },
-    kvpSwitchTabKVP: "KVPs",
-    kvpSwitchTabArchive: "Archive",
+    logOutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      toastMessage: "You have been logged out successfully.",
+      onCancel: "Cancel",
+      onConfirm: "Log Out",
+    },
   },
 };

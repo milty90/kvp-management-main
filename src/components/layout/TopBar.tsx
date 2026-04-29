@@ -137,12 +137,19 @@ export default function TopBar({ kvpBar }: TopBarProps) {
       {showConfirmDialog &&
         createPortal(
           <ConfirmDialogItem
-            title={translation.logoutTitle}
-            message={translation.logoutMessage}
+            confirmButtonText={translation.logOutModal.onConfirm}
+            cancelButtonText={translation.logOutModal.onCancel}
+            title={translation.logOutModal.title}
+            message={translation.logOutModal.message}
             onConfirm={() => {
               signOut();
               navigate("/login");
-              showToast(width, theme, "success", translation.logoutMessage);
+              showToast(
+                width,
+                theme,
+                "success",
+                translation.logOutModal.toastMessage,
+              );
               setShowConfirmDialog(false);
             }}
             onCancel={() => setShowConfirmDialog(false)}
