@@ -35,7 +35,7 @@ export default function ColorButton({
       type={type}
       onClick={onClick}
       className={`
-          inline-flex items-center gap-2 px-4 py-${height} h-9 rounded-lg
+          inline-flex items-center gap-2 px-4 py-${height} h-9 rounded-lg text-nowrap
           bg-button text-primary hover:bg-button-hover active:bg-button-active
           ${colorClasses[color]}
           ${color === "white" ? "text-gray-700" : "text-white"} text-sm font-medium
