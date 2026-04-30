@@ -1,3 +1,5 @@
+import { SettingsModal } from "../components/items/SettingsModal";
+
 export const translations = {
   de: {
     appName: "KVP Management System",
@@ -8,7 +10,7 @@ export const translations = {
       assigned: "Zugewiesen",
       highPriority: "Hohe Priorität",
     },
-    settingsModal: {
+    settingItem: {
       settings: "Einstellungen",
       profile: "Profil",
       logout: "Abmelden",
@@ -20,6 +22,28 @@ export const translations = {
       onCancel: "Abbrechen",
       onConfirm: "Abmelden",
     },
+    SettingsModal: {
+      settings: "Einstellungen",
+      settingTheme: {
+        title: "Dunkelmodus",
+        descriptionLight: "Wechseln Sie zum Hellmodus",
+        descriptionDark: "Wechseln Sie zum Dunkelmodus",
+        current: "Aktuell: ",
+        dark: "Dunkel",
+        light: "Hell",
+      },
+      settingLanguage: {
+        title: "Sprache wechseln",
+        description: "Wechseln Sie zu Deutsch oder Englisch",
+        current: "Aktuell: Deutsch",
+      },
+      settingsNotification: {
+        title: "Benachrichtigungen",
+        description:
+          "Verwalten Sie Ihre Schalten Sie die Benachrichtigungen ein oder aus",
+        current: "Aktuell: An",
+      },
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -30,7 +54,7 @@ export const translations = {
       assigned: "Assigned",
       highPriority: "High Priority",
     },
-    settingsModal: {
+    settingItem: {
       settings: "Settings",
       profile: "Profile",
       logout: "Logout",
@@ -41,6 +65,27 @@ export const translations = {
       toastMessage: "You have been logged out successfully.",
       onCancel: "Cancel",
       onConfirm: "Log Out",
+    },
+    SettingsModal: {
+      settings: "Settings",
+      settingTheme: {
+        title: "Dark Mode",
+        descriptionLight: "Switch to Light Mode",
+        descriptionDark: "Switch to Dark Mode",
+        current: "Current: ",
+        dark: "Dark",
+        light: "Light",
+      },
+      settingLanguage: {
+        title: "Change Language",
+        description: "Switch between English and German",
+        current: "Current: English",
+      },
+      settingsNotification: {
+        title: "Notifications",
+        description: "Manage your notifications by turning them on or off",
+        current: "Current: On",
+      },
     },
   },
 };
