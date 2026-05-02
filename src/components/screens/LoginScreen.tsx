@@ -9,16 +9,17 @@ import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
+import { useTranslation } from "../../utils/useTranslation";
 
 export function LoginScreen() {
   const navigate = useNavigate();
+  const width = useWindowWidth();
+  const translation = useTranslation();
+  const { theme } = useTheme();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const { theme } = useTheme();
-  const width = useWindowWidth();
 
   async function handleEmailLogin(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,11 +59,11 @@ export function LoginScreen() {
           alt="Logo"
           className="w-55 mb-4 ml-4"
         />
-        <h1 className="text-xl font-normal mb-1">
-          Willkommen zum KVP Management
+        <h1 className="text-lg font-normal mb-1">
+          {translation.loginScreen.title}
         </h1>
         <p className="text-sm text-text-secondary mb-8">
-          Bitte melden Sie sich an, um fortzufahren.
+          {translation.loginScreen.description}
         </p>
         <form className="w-full mb-1 max-w-sm" onSubmit={handleEmailLogin}>
           <div className="mb-4 items-start justify-items-start">
@@ -70,13 +71,13 @@ export function LoginScreen() {
               className="block text-left text-text-primary text-sm font-semibold mb-2 pl-2"
               htmlFor="email"
             >
-              E-Mail Adresse
+              {translation.loginScreen.emailTitle}
             </label>
             <input
               className={`shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary leading-tight focus:outline-1 ${theme === "dark" ? "focus:outline-green-500" : "focus:outline-blue-500"}`}
               id="email"
               type="email"
-              placeholder="E-Mail-Adresse eingeben"
+              placeholder={translation.loginScreen.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -86,13 +87,13 @@ export function LoginScreen() {
               className="block text-left text-text-primary text-sm font-semibold mb-2 pl-2"
               htmlFor="password"
             >
-              Passwort
+              {translation.loginScreen.passwordTitle}
             </label>
             <input
               className={`shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary mb-3 leading-tight  focus:outline-1 ${theme === "dark" ? "focus:outline-green-500" : "focus:outline-blue-500"}`}
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Passwort eingeben"
+              placeholder={translation.loginScreen.passwordPlaceholder}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -139,7 +140,7 @@ export function LoginScreen() {
               type="submit"
               className="px-5 py-2.5 bg-button text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150"
             >
-              Anmelden
+              {translation.loginScreen.loginButton}
             </button>
             <a
               className="inline-block align-baseline font-semibold text-sm text-button hover:text-button-hover cursor-pointer"
@@ -148,24 +149,24 @@ export function LoginScreen() {
                   width,
                   theme,
                   "info",
-                  "Passwort vergessen Funktion ist derzeit nicht verfügbar.",
+                  translation.loginScreen.forgotPassword,
                 )
               }
             >
-              Passwort vergessen?
+              {translation.loginScreen.forgotPassword}
             </a>
           </div>
         </form>
         <p className="text-sm text-text-secondary mt-6">
-          Noch kein Konto?
+          {translation.loginScreen.subTextFirst}
           <a
             onClick={() => navigate("/signup")}
             className="font-semibold pl-2 text-button hover:text-button-hover cursor-pointer"
           >
-            Registrieren
+            {translation.loginScreen.subTextSecond}
           </a>
           <br />
-          oder melden Sie sich mit einem sozialen Konto an.
+          {translation.loginScreen.subTextThird}
         </p>
         <div className="flex mt-6 space-x-4">
           <button

@@ -2,6 +2,7 @@ import ReactApexChart from "react-apexcharts";
 import type { Kvp } from "../../types";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface ColumnChartProps {
   kvps: Kvp[];
@@ -13,11 +14,12 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
   const highCount = kvps.filter((k) => k.priority === "High").length;
   const width = useWindowWidth();
   const { theme } = useTheme();
+  const translation = useTranslation();
 
   const state = {
     series: [
       {
-        name: "Anzahl KVPs",
+        name: translation.statistics.ColumnChart.name,
         data: [lowCount, mediumCount, highCount],
       },
     ],
@@ -50,7 +52,13 @@ export const ColumnChart = ({ kvps }: ColumnChartProps) => {
       },
 
       xaxis: {
-        categories: ["Niedrig", "Mittel", "Hoch"],
+        categories: translation.statistics.ColumnChart.priority
+          ? [
+              translation.statistics.ColumnChart.priority.low,
+              translation.statistics.ColumnChart.priority.medium,
+              translation.statistics.ColumnChart.priority.high,
+            ]
+          : ["Low", "Medium", "High"],
         labels: {
           style: {
             fontSize: "14px",

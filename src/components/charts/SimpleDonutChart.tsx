@@ -3,6 +3,7 @@ import type { Kvp } from "../../types";
 import type { ApexOptions } from "apexcharts";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface SimpleDonutChartProps {
   kvps: Kvp[];
@@ -15,6 +16,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
   const actCount = kvps.filter((k) => k.state === "Act").length;
   const width = useWindowWidth();
   const { theme } = useTheme();
+  const traslation = useTranslation();
 
   const state = {
     series: [planCount, doCount, checkCount, actCount],
@@ -68,7 +70,7 @@ export const SimpleDonutChart = ({ kvps }: SimpleDonutChartProps) => {
               },
               total: {
                 show: true,
-                label: "Gesamt",
+                label: traslation.statistics.DonutChart.total,
                 fontSize: "18px",
                 fontWeight: 600,
                 color: theme === "dark" ? "#fff" : "#000",
