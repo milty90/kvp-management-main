@@ -1,4 +1,5 @@
-import { SettingsModal } from "../components/items/SettingsModal";
+import { BarChart } from "../components/charts/BarChart";
+import { ColumnChart } from "../components/charts/ColumnChart";
 
 export const translations = {
   de: {
@@ -22,7 +23,7 @@ export const translations = {
       onCancel: "Abbrechen",
       onConfirm: "Abmelden",
     },
-    SettingsModal: {
+    settingsModal: {
       settings: "Einstellungen",
       settingTheme: {
         title: "Dunkelmodus",
@@ -35,13 +36,35 @@ export const translations = {
       settingLanguage: {
         title: "Sprache wechseln",
         description: "Wechseln Sie zu Deutsch oder Englisch",
-        current: "Aktuell: Deutsch",
+        current: "Aktuell:",
       },
       settingsNotification: {
         title: "Benachrichtigungen",
         description:
           "Verwalten Sie Ihre Schalten Sie die Benachrichtigungen ein oder aus",
         current: "Aktuell: An",
+      },
+      settingsButton: {
+        save: "Änderungen speichern",
+        cancel: "Abbrechen",
+      },
+    },
+    statistics: {
+      DonutChart: {
+        title: "PDCA-Phasen Verteilung",
+        description: "Anzahl der Verbesserungen pro Phase",
+      },
+      ColumnChart: {
+        title: "Prioritäten",
+        description: "Verteilung nach Prioritätsstufen",
+      },
+      BarChart: {
+        title: "Kategorien",
+        description: "Verbesserungen nach Kategorien",
+      },
+      LineChart: {
+        title: "Zeitverlauf",
+        description: "Neue Verbesserungen pro Monat",
       },
     },
   },
@@ -66,8 +89,9 @@ export const translations = {
       onCancel: "Cancel",
       onConfirm: "Log Out",
     },
-    SettingsModal: {
+    settingsModal: {
       settings: "Settings",
+
       settingTheme: {
         title: "Dark Mode",
         descriptionLight: "Switch to Light Mode",
@@ -79,12 +103,34 @@ export const translations = {
       settingLanguage: {
         title: "Change Language",
         description: "Switch between English and German",
-        current: "Current: English",
+        current: "Current:",
       },
       settingsNotification: {
         title: "Notifications",
         description: "Manage your notifications by turning them on or off",
         current: "Current: On",
+      },
+      settingsButton: {
+        save: "Save Changes",
+        cancel: "Cancel",
+      },
+    },
+    statistics: {
+      DonutChart: {
+        title: "PDCA Phase Distribution",
+        description: "Number of improvements per phase",
+      },
+      ColumnChart: {
+        title: "Priorities",
+        description: "Distribution by priority levels",
+      },
+      BarChart: {
+        title: "Categories",
+        description: "Improvements by categories",
+      },
+      LineChart: {
+        title: "Timeline",
+        description: "New improvements per month",
       },
     },
   },

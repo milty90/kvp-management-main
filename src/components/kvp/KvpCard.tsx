@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
+import { sliceText } from "../../utils/sliceText";
 
 interface KvpCardProps {
   id: number;
@@ -24,11 +25,41 @@ interface KvpCardProps {
   onOpenModal?: () => void;
 }
 
-const priorityColors = {
+const priorityColorsLight = {
   High: "border-red-400",
   Medium: "border-orange-400",
   Low: "border-green-400",
 };
+
+const priorityColorsDark = {
+  High: "border-red-400/40",
+  Medium: "border-orange-400/40",
+  Low: "border-green-400/40",
+};
+
+const pcdaColorsLight = {
+  Plan: "border-blue-300/70",
+  Do: "border-purple-300/70",
+  Check: "border-yellow-300/70",
+  Act: "border-green-300/70",
+  Rejected: "border-red-400/70",
+  Archived: "border-gray-400/70",
+};
+
+const pcdaColorsDark = {
+  Plan: "border-blue-400/40",
+  Do: "border-purple-400/40",
+  Check: "border-yellow-400/40",
+  Act: "border-green-400/40",
+  Rejected: "border-red-400/40",
+  Archived: "border-gray-400/40",
+};
+
+const pcdaColors = (theme: string) =>
+  theme === "dark" ? pcdaColorsDark : pcdaColorsLight;
+
+const priorityColors = (theme: string) =>
+  theme === "dark" ? priorityColorsDark : priorityColorsLight;
 
 export default function KvpCard({
   id,
@@ -93,14 +124,14 @@ export default function KvpCard({
   };
   return (
     <div
-      className={`bg-card z-0 p-4 pb-2.5 text-left rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
+      className={`bg-card z-0 p-4 pb-2.5 text-left border-b-3 ${pcdaColors(theme)[state]} rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
         ref={menuWrapperRef}
         className="relative flex items-start justify-between mb-2 gap-1.5"
       >
         <p className="text-sm lg:text-lg text-text-primary font-semibold ">
-          {title}
+          {sliceText(title, 15)}
         </p>
         <img
           onClick={() => setShowMenu(!showMenu)}
@@ -124,26 +155,14 @@ export default function KvpCard({
         {category}
       </p>
 
-      <div className="flex items-center mb-2.5 gap-2.5 text-gray-500 ">
+      <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
         <span className="text-x text-text-secondary lg:text-sm ">
           Priorität:
         </span>
         <span
-          className={`px-2.5 py-0.5 text-xs text-text-primary font-medium rounded-full border-2 shadow ${priorityColors[priority]}`}
+          className={`px-2.5 py-0.5 text-xs text-text-primary font-medium rounded-full border-2 shadow ${priorityColors(theme)[priority]}`}
         >
           {priority}
-        </span>
-      </div>
-      <div className="flex items-center mb-2.5 text-gray-500">
-        <span className="text-sm text-text-secondary">Status:</span>
-        <span
-          className={`px-2.5 py-0.5 text-sm text-text-primary ${state === "Archived" ? "text-slate-900" : state === "Rejected" ? "text-red-700" : ""} font-medium `}
-        >
-          {state === "Archived"
-            ? "Archiviert"
-            : state === "Rejected"
-              ? "Abgelehnt"
-              : state}
         </span>
       </div>
       {/* Divider */}
@@ -156,8 +175,11 @@ export default function KvpCard({
       <p className="font-normal text-text-secondary truncate text-sm mb-3">
         Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
       </p>
-      <p className="text-text-secondary text-pretty text-xs mb-2">
-        Beschreibung : {description}
+      <p className="text-text-primary font-semibold text-pretty text-xs mb-2">
+        Beschreibung :
+        <span className="text-xs font-normal text-text-secondary  ml-2">
+          {sliceText(description, 200)}
+        </span>
       </p>
       {/* Divider */}
       <div
