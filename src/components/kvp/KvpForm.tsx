@@ -162,7 +162,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 className={`text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} placeholder:text-text-secondary`}
               />
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                {translation.pdcaForm.formPdcaState[0]} *
+                {translation.pdcaForm.formPdcaStateTitle} *
               </span>
               <select
                 value={pdcaState}
