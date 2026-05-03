@@ -24,7 +24,7 @@ export function kvpInputFormColor({
   const priorityTextColor = priority
     ? PRIORITY_COLORS[priority as Priority]
     : "text-text-secondary";
-  const pcdaTextColor = pdcaState
+  const pdcaTextColor = pdcaState
     ? PDCA_COLORS[pdcaState as State]
     : "text-text-secondary";
 
@@ -34,5 +34,5 @@ export function kvpInputFormColor({
       ? "text-red-500"
       : "text-text-primary";
 
-  return { priorityTextColor, pcdaTextColor, targetDateTextColor };
+  return { priorityTextColor, pdcaTextColor, targetDateTextColor };
 }

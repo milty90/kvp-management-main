@@ -8,6 +8,7 @@ import { kvpInputFormColor } from "../../utils/kvpInputFromColor";
 import { supabase } from "../../utils/supabase";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -16,6 +17,7 @@ interface KvpFormProps {
 
 export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const { addKvp, updateKvp } = useKvpContext();
+  const translation = useTranslation();
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(
     initialData?.description || "",
@@ -31,7 +33,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   );
   const [benefit, setBenefit] = useState(initialData?.benefit || "");
   const [createdBy, setCreatedBy] = useState(
-    initialData?.createdBy || "Unbekannter Benutzer",
+    initialData?.createdBy || translation.pdcaForm.unknownUser,
   );
 
   const { theme } = useTheme();
@@ -41,13 +43,15 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     const fetchUser = async () => {
       if (!initialData?.createdBy) {
         const { data } = await supabase.auth.getUser();
-        setCreatedBy(data.user?.email?.split("@")[0] || "Unbekannter Benutzer");
+        setCreatedBy(
+          data.user?.email?.split("@")[0] || translation.pdcaForm.unknownUser,
+        );
       }
     };
     fetchUser();
   }, [initialData?.createdBy]);
 
-  const { pcdaTextColor, priorityTextColor, targetDateTextColor } =
+  const { pdcaTextColor, priorityTextColor, targetDateTextColor } =
     kvpInputFormColor({
       pdcaState: pdcaState as Kvp["state"],
       targetDate,
@@ -88,7 +92,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       width,
       theme,
       "success",
-      `KVP ${initialData ? "aktualisiert" : "hinzugefügt"}: ${initialData ? updateKvpData.title : newKvp.title}`,
+      `${translation.pdcaForm.pdca} ${initialData ? translation.pdcaForm.updated : translation.pdcaForm.added}: ${initialData ? updateKvpData.title : newKvp.title}`,
     );
   }
 
@@ -103,16 +107,18 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
           &times;
         </button>
         <h2 className="text-2xl text-text-primary font-semibold mt-4">
-          {initialData ? "KVP bearbeiten" : "Neuen KVP erstellen"}
+          {initialData
+            ? translation.pdcaForm.editTitle
+            : translation.pdcaForm.createTitle}
           <img
             src={theme === "dark" ? "/spark-logo-dark.png" : "/spark-logo.png"}
             alt="Add"
-            className="inline-block h-6 w-6 mb-3 object-cover"
+            className="inline-block h-6 w-6 mb-2.5 ml-1 object-cover"
           />
         </h2>
 
         <p className="text-xs text-text-secondary mb-4">
-          Bitte füllen Sie alle Pflichtfelder aus.
+          {translation.pdcaForm.subTitle}
         </p>
         <form
           className="flex flex-col items-start gap-4"
@@ -121,40 +127,42 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             submitForm();
           }}
         >
-          <span className="text-sm pl-1 -mb-3 text-text-primary">Titel *</span>
+          <span className="text-sm pl-1 -mb-3 text-text-primary">
+            {translation.pdcaForm.formTitle} *
+          </span>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             required
-            placeholder="Titel"
+            placeholder={translation.pdcaForm.formTitlePlaceholder}
             className={`w-full border text-sm text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"}`}
           />
           <span className="text-sm pl-1 -mb-3 text-text-primary">
-            Beschreibung *
+            {translation.pdcaForm.formDescription} *
           </span>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            placeholder="Beschreibung"
+            placeholder={translation.pdcaForm.formDescriptionPlaceholder}
             className={`w-full border text-sm text-text-primary border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"}`}
           />
           <div className="grid grid-cols-2 items-center mt-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-4">
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                Kategorie *
+                {translation.pdcaForm.formCategory} *
               </span>
               <input
                 type="text"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                placeholder="Kategorie"
+                placeholder={translation.pdcaForm.formCategoryPlaceholder}
                 className={`text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} placeholder:text-text-secondary`}
               />
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                PCDA-Phase *
+                {translation.pdcaForm.formPdcaState[0]} *
               </span>
               <select
                 value={pdcaState}
@@ -162,38 +170,48 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                   setPdcaState(e.target.value as Kvp["state"] | "")
                 }
                 required
-                className={` text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${pcdaTextColor}`}
+                className={` text-xs w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${pdcaTextColor}`}
               >
-                <option value="">PCDA-Phase</option>
-                <option value="Plan">Plan</option>
-                <option value="Do">Do</option>
-                <option value="Check">Check</option>
-                <option value="Act">Act</option>
+                <option value="">
+                  {translation.pdcaForm.formPdcaState[0]}
+                </option>
+                <option value="Plan">
+                  {translation.pdcaForm.formPdcaState[1]}
+                </option>
+                <option value="Do">
+                  {translation.pdcaForm.formPdcaState[2]}
+                </option>
+                <option value="Check">
+                  {translation.pdcaForm.formPdcaState[3]}
+                </option>
+                <option value="Act">
+                  {translation.pdcaForm.formPdcaState[4]}
+                </option>
               </select>
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                Zugewiesen an
+                {translation.pdcaForm.formAssignedTo}
               </span>
               <input
                 value={assignedTo}
                 onChange={(e) => setAssignedTo(e.target.value)}
                 type="text"
-                placeholder="Zugewiesen an"
+                placeholder={translation.pdcaForm.formAssignedToPlaceholder}
                 className={`text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} placeholder:text-text-secondary`}
               />
             </div>
             <div className="flex flex-col items-start gap-4">
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                Zieldatum
+                {translation.pdcaForm.formTargetDate}
               </span>
               <input
                 type="date"
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
-                placeholder="Zieldatum"
+                placeholder={translation.pdcaForm.formTargetDatePlaceholder}
                 className={`text-xs w-full max-w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${targetDateTextColor}`}
               />
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                Priorität *
+                {translation.pdcaForm.formPriority[0]} *
               </span>
               <select
                 value={priority}
@@ -203,17 +221,23 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 required
                 className={`text-xs w-full border border-gray-300 rounded-md p-2  focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} ${priorityTextColor}`}
               >
-                <option value="">Priorität</option>
-                <option value="High">Hoch</option>
-                <option value="Medium">Mittel</option>
-                <option value="Low">Niedrig</option>
+                <option value="">{translation.pdcaForm.formPriority[0]}</option>
+                <option value="High">
+                  {translation.pdcaForm.formPriority[1]}
+                </option>
+                <option value="Medium">
+                  {translation.pdcaForm.formPriority[2]}
+                </option>
+                <option value="Low">
+                  {translation.pdcaForm.formPriority[3]}
+                </option>
               </select>
               <span className="text-xs pl-1 -mb-3 text-text-primary">
-                Erwarteter Nutzen
+                {translation.pdcaForm.formBenefit}
               </span>
               <input
                 type="text"
-                placeholder="z.B 30% Zeitersparnis"
+                placeholder={translation.pdcaForm.formBenefitPlaceholder}
                 value={benefit}
                 onChange={(e) => setBenefit(e.target.value)}
                 className={`text-xs w-full border text-text-primary border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} placeholder:text-text-secondary`}
@@ -231,14 +255,16 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
               type="button"
               isTextOnly={true}
             >
-              Abbrechen
+              {translation.pdcaForm.cancelButton}
             </ColorButton>
             <ColorButton
               color={theme === "dark" ? "green" : "blue"}
               icon="/add.svg"
               type="submit"
             >
-              {initialData ? "KVP speichern" : "Neuen KVP erstellen"}
+              {initialData
+                ? translation.pdcaForm.saveEditButton
+                : translation.pdcaForm.saveCreateButton}
             </ColorButton>
           </div>
         </form>
