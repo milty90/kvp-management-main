@@ -46,7 +46,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                 {translation.settingsModal.settingTheme.title}
               </p>
               <div className="flex items-center">
-                <p className="text-xs lg:text-sm  text-text-secondary mr-2">
+                <p className="text-xs lg:text-sm tracking-tight text-text-secondary mr-2">
                   {translation.settingsModal.settingTheme.current}
                 </p>
                 <select
@@ -84,7 +84,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                 <select
                   value={language}
                   onChange={toggleLanguage}
-                  className={`text-xs border text-text-primary border-gray-300 rounded-md px-1 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface`}
+                  className={`text-xs border text-text-primary border-gray-300 rounded-md px-1 tracking-tight focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface`}
                 >
                   <option value="de">Deutsch</option>
                   <option value="en">English</option>
@@ -104,7 +104,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                 {translation.settingsModal.settingsNotification.title}
               </p>
               <div className="flex items-center">
-                <p className="text-xs lg:text-sm  text-text-secondary mr-3">
+                <p className="text-xs lg:text-sm tracking-tight text-text-secondary mr-3">
                   {translation.settingsModal.settingsNotification.current}
                 </p>
                 <div className="flex items-center">
@@ -116,7 +116,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                       checked={theme === "dark"}
                       onChange={handleNotificationToggle}
                     />
-                    <div className="group bg-surface rounded-full duration-300 w-8 h-4.5 ring-2 ring-gray-400 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-2.5 after:w-2.5 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-3 peer-hover:after:scale-95"></div>
+                    <div className="group bg-surface rounded-full duration-300 w-8 h-4 ring-2 ring-gray-400 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-2.5 after:w-2.5 after:top-0.75 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-3 peer-hover:after:scale-95"></div>
                   </label>
                 </div>
               </div>
