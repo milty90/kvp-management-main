@@ -58,7 +58,7 @@ export function SignupScreen() {
   }
   return (
     <div className="flex flex-col items-center md:justify-center h-screen bg-background">
-      <div className="flex flex-col pt-12 items-center justify-start h-screen md:h-auto md:justify-center w-full max-w-md shadow-md md:rounded-2xl bg-surface p-8">
+      <div className="flex flex-col pt-12 items-center justify-start h-screen md:h-auto  md:justify-center w-full max-w-md shadow-md md:rounded-2xl bg-surface p-8">
         <img
           src={theme === "dark" ? "/spark-dark.png" : "/spark-light.png"}
           alt="Logo"
@@ -164,7 +164,14 @@ export function SignupScreen() {
         <p className="text-sm text-text-secondary mt-6">
           <a
             className="font-semibold  text-button hover:text-button-hover cursor-pointer"
-            onClick={() => navigate("/kvps")}
+            onClick={() =>
+              showToast(
+                width,
+                theme,
+                "info",
+                "Demo account functionality is currently not available.",
+              )
+            }
           >
             {translation.signupScreen.demoAccount}
           </a>

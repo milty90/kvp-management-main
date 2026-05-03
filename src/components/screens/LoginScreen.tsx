@@ -29,7 +29,7 @@ export function LoginScreen() {
         width,
         theme,
         "error",
-        "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+        translation.loginScreen.missingFieldsError,
       );
       return;
     }
@@ -41,12 +41,12 @@ export function LoginScreen() {
         width,
         theme,
         "error",
-        "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.",
+        translation.loginScreen.loginError + " " + error?.message,
       );
       return;
     }
 
-    showToast(width, theme, "success", "Erfolgreich angemeldet!");
+    showToast(width, theme, "success", translation.loginScreen.loginSuccess);
 
     navigate("/kvps");
   }
@@ -59,7 +59,7 @@ export function LoginScreen() {
           alt="Logo"
           className="w-55 mb-4 ml-4"
         />
-        <h1 className="text-lg font-normal mb-1">
+        <h1 className="text-lg font-semibold mb-1">
           {translation.loginScreen.title}
         </h1>
         <p className="text-sm text-text-secondary mb-8">
@@ -149,7 +149,7 @@ export function LoginScreen() {
                   width,
                   theme,
                   "info",
-                  translation.loginScreen.forgotPassword,
+                  "Password reset functionality is currently not available.",
                 )
               }
             >
@@ -158,15 +158,15 @@ export function LoginScreen() {
           </div>
         </form>
         <p className="text-sm text-text-secondary mt-6">
-          {translation.loginScreen.subTextFirst}
+          {translation.loginScreen.haventGotAccount}
           <a
             onClick={() => navigate("/signup")}
             className="font-semibold pl-2 text-button hover:text-button-hover cursor-pointer"
           >
-            {translation.loginScreen.subTextSecond}
+            {translation.loginScreen.signupButton}
           </a>
           <br />
-          {translation.loginScreen.subTextThird}
+          {translation.loginScreen.orLogInWithSocials}
         </p>
         <div className="flex mt-6 space-x-4">
           <button

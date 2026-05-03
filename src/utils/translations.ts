@@ -11,9 +11,14 @@ export const translations = {
       passwordPlaceholder: "Passwort eingeben",
       loginButton: "Anmelden",
       forgotPassword: "Passwort vergessen?",
-      subTextFirst: "Noch kein Konto?",
-      subTextSecond: "Registrieren",
-      subTextThird: "oder melden Sie sich mit einem sozialen Konto an.",
+      loginSuccess: "Erfolgreich angemeldet!",
+      loginError:
+        "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.",
+      missingFieldsError:
+        "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+      haventGotAccount: "Noch kein Konto?",
+      signupButton: "Registrieren",
+      orLogInWithSocials: "oder melden Sie sich mit einem sozialen Konto an.",
     },
     signupScreen: {
       title: "Erstellen Sie Ihr Konto",
@@ -182,9 +187,12 @@ export const translations = {
       passwordPlaceholder: "Enter your password",
       loginButton: "Log In",
       forgotPassword: "Forgot Password?",
-      subTextFirst: "Don't have an account?",
-      subTextSecond: "Sign Up",
-      subTextThird: "or log in with a social account.",
+      loginSuccess: "Successfully logged in!",
+      loginError: "Login failed. Please check your credentials.",
+      missingFieldsError: "Please enter both email and password.",
+      haventGotAccount: "Don't have an account?",
+      signupButton: "Sign Up",
+      orLogInWithSocials: "or log in with a social account.",
     },
     signupScreen: {
       title: "Create Your Account",
