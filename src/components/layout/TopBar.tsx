@@ -80,7 +80,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             alt="Logo"
             className="h-10 md:h-11 mx-3 mt-3 mb-0"
           />
-          <p className="hidden lg:block text-text-primary font-light font-poppins tracking-tight -mb-6 text-sm">
+          <p className="hidden lg:block text-text-primary font-light tracking-tight -mb-6 text-sm">
             {translation.appName}
           </p>
         </div>

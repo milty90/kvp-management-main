@@ -8,6 +8,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
 import { sliceText } from "../../utils/sliceText";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface KvpCardProps {
   id: number;
@@ -24,6 +25,15 @@ interface KvpCardProps {
   benefit?: string;
   onOpenModal?: () => void;
 }
+
+const priorityMap: Record<string, string> = {
+  High: "High",
+  Medium: "Medium",
+  Low: "Low",
+  Hoch: "High",
+  Mittel: "Medium",
+  Niedrig: "Low",
+};
 
 const priorityColorsLight = {
   High: "border-red-400",
@@ -81,6 +91,7 @@ export default function KvpCard({
   const [showDialog, setShowDialog] = useState(false);
   const { theme } = useTheme();
   const width = useWindowWidth();
+  const translation = useTranslation();
 
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -88,13 +99,23 @@ export default function KvpCard({
 
   const handleArchive = () => {
     archiveKvp(id);
-    showToast(width, theme, "success", `KVP ${title} wurde archiviert.`);
+    showToast(
+      width,
+      theme,
+      "success",
+      `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.archived}.`,
+    );
     setShowMenu(false);
   };
 
   const handleReject = () => {
     rejectKvp(id);
-    showToast(width, theme, "info", `KVP ${title} wurde abgelehnt.`);
+    showToast(
+      width,
+      theme,
+      "info",
+      `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.rejected}.`,
+    );
     setShowMenu(false);
   };
 
@@ -151,79 +172,87 @@ export default function KvpCard({
         </div>
       </div>
       <p className="text-text-primary text-sm lg:text-md text-pretty break-all mb-3">
-        <span className="font-medium text-text-primary mr-1">Kategorie: </span>
-        {category}
+        <span className="font-medium text-text-primary mr-1">
+          {translation.pdcaCard.category}:{" "}
+        </span>
+        {sliceText(category, 30)}
       </p>
 
       <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
-        <span className="text-x text-text-secondary lg:text-sm ">
-          Priorität:
+        <span className="text-x text-text-secondary tracking-tight lg:text-sm ">
+          {translation.pdcaCard.priority}:
         </span>
         <span
-          className={`px-2.5 py-0.5 text-xs text-text-primary font-medium rounded-full border-2 shadow ${priorityColors(theme)[priority]}`}
+          className={`px-2.5 py-0.5 text-xs text-text-primary font-body font-medium rounded-full border-2 shadow ${priorityColors(theme)[priority]}`}
         >
-          {priority}
+          {priorityMap[translation.pdcaCard.priorities[0]] === priority
+            ? translation.pdcaCard.priorities[0]
+            : priorityMap[translation.pdcaCard.priorities[1]] === priority
+              ? translation.pdcaCard.priorities[1]
+              : translation.pdcaCard.priorities[2]}
         </span>
       </div>
       {/* Divider */}
       <div
-        className={`border-t ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
+        className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
       />
-      <p className="font-normal text-text-secondary text-wrap break-all text-sm mb-3">
-        Zugewiesen an: {assignedTo}
+      <p className="font-normal tracking-tight text-text-secondary text-wrap break-all text-sm mb-3">
+        {translation.pdcaCard.assignedTo}: {assignedTo}
       </p>
-      <p className="font-normal text-text-secondary truncate text-sm mb-3">
-        Benefits: {benefit ? benefit : "Keine Benefits angegeben"}
+      <p className="font-normal tracking-tight text-text-secondary truncate text-sm mb-3">
+        {translation.pdcaCard.benefit}:{" "}
+        {benefit ? benefit : translation.pdcaCard.noBenefits}
       </p>
       <p className="text-text-primary font-semibold text-pretty text-xs mb-2">
-        Beschreibung :
-        <span className="text-xs font-normal text-text-secondary  ml-2">
+        {translation.pdcaCard.description}:
+        <span className="text-xs font-normal text-text-secondary ml-2">
           {sliceText(description, 200)}
         </span>
       </p>
       {/* Divider */}
       <div
-        className={`border-t ${theme === "dark" ? "border-gray-500" : "border-gray-300"} my-3`}
+        className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} my-3`}
       />
       <div className="flex flex-col items-start justify-between mt-2">
-        <span className="text-xs py-0.5 text-text-secondary">
+        <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
             src={theme === "dark" ? "/user-white.svg" : "/user.svg"}
             alt="User"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {createdBy}
+          {translation.pdcaCard.createdBy}: {createdBy}
         </span>
-        <span className="text-xs py-0.5 text-text-secondary">
+        <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
             src={theme === "dark" ? "/calender-white.svg" : "/calender.svg"}
             alt="Calender"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          Erstellt: {createdAt.slice(2, 10)}
+          {translation.pdcaCard.createdAt}: {createdAt.slice(2, 10)}
         </span>
-        <span className="text-xs py-0.5 text-text-secondary">
+        <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
             src={theme === "dark" ? "/target-white.svg" : "/target.svg"}
             alt="Target"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          Zieldatum: {targetDate.slice(2, 10)}
+          {translation.pdcaCard.targetDate}: {targetDate.slice(2, 10)}
         </span>
       </div>
       {showDialog &&
         createPortal(
           <ConfirmDialogItem
-            title="KVP löschen"
-            message={`Möchten Sie das KVP "${title}" wirklich löschen?`}
-            confirmButtonText="Löschen"
+            title={translation.pdcaCard.deletePdca}
+            message={translation.pdcaCard.deleteMessage(title)}
+            confirmButtonText={translation.pdcaCard.confirmButton}
+            cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
               deleteKvp(id);
               showToast(
                 width,
                 theme,
                 "success",
-                `KVP ${title} wurde gelöscht.`,
+                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.deleted}.`,
               );
               setShowDialog(false);
             }}

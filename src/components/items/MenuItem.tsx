@@ -1,4 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface MenuItemProps {
   onKvpsClick: () => void;
@@ -9,6 +10,7 @@ export default function MenuItem({
   onStatisticsClick,
 }: MenuItemProps) {
   const { theme } = useTheme();
+  const translation = useTranslation();
   return (
     <div className="relative z-40 flex flex-col items-start">
       <div
@@ -23,7 +25,7 @@ export default function MenuItem({
             alt="Add"
             className="inline-block h-4.5 w-4.5  object-cover"
           />
-          Verbesserungen
+          {translation.menuItem.improvements}
         </button>
         <button
           onClick={onStatisticsClick}
@@ -34,7 +36,7 @@ export default function MenuItem({
             alt="Statistics"
             className="inline-block h-4.5 w-4.5 object-cover"
           />{" "}
-          Statistik
+          {translation.menuItem.statistics}
         </button>
       </div>
     </div>
