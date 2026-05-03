@@ -6,12 +6,14 @@ interface FilterBtnGroupMobProps {
   filter: (state: string) => void;
   tabs: string[];
   position: string;
+  startState: string;
 }
 export function FilterBtnGroupMob({
   selected,
   filter,
   tabs,
   position,
+  startState,
 }: FilterBtnGroupMobProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -28,7 +30,7 @@ export function FilterBtnGroupMob({
           key={tab}
           onClick={() => {
             const newSelected =
-              selected === tab && tab !== "Alle" ? selected : tab;
+              selected === tab && tab !== startState ? selected : tab;
             filter(newSelected);
             setIsCollapsed((prev) => !prev);
           }}

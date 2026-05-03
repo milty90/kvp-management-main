@@ -6,7 +6,6 @@ export function loadKvps(): Kvp[] {
     try {
       return JSON.parse(stored);
     } catch (error) {
-      console.error("Fehler beim Laden der KVPs:", error);
       return [];
     }
   }

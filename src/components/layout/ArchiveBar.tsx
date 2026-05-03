@@ -3,6 +3,7 @@ import KvpCard from "../kvp/KvpCard";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
+import { useTranslation } from "../../utils/useTranslation";
 
 const VALID_STATES = ["Rejected", "Archived"] as const;
 
@@ -13,6 +14,9 @@ interface ArchiveBarProps {
 }
 
 const priorityMap: Record<string, string> = {
+  High: "High",
+  Medium: "Medium",
+  Low: "Low",
   Hoch: "High",
   Mittel: "Medium",
   Niedrig: "Low",
@@ -22,15 +26,17 @@ export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
   const { kvps } = useKvpContext();
   const { theme } = useTheme();
   const width = useWindowWidth();
+  const translation = useTranslation();
 
   const filtered = kvps.filter((k) => {
     const stateMatch =
-      activeFilter === "Alle" ||
+      activeFilter === translation.actionBar.startState ||
       k.state === activeFilter ||
       (activeFilter === "Archiv" && k.state === "Archived") ||
       (activeFilter === "Abgelehnt" && k.state === "Rejected");
     const priorityMatch =
-      activePriority === "Alle" || k.priority === priorityMap[activePriority];
+      activePriority === translation.actionBar.startState ||
+      k.priority === priorityMap[activePriority];
     return stateMatch && priorityMatch;
   });
 
@@ -56,7 +62,7 @@ export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
             </div>
 
             {stateFiltered.length === 0 ? (
-              <div className="flex items-center justify-center h-32 rounded-lg border border-dashed border-gray-300">
+              <div className="flex items-center justify-center h-16 md:h-32 rounded-lg border border-dashed border-gray-300">
                 <p className="text-xs text-gray-500">Keine Elemente</p>
               </div>
             ) : (

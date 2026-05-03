@@ -1,6 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
-
-const tabs = ["KVPs", "Archiv"];
+import { useTranslation } from "../../utils/useTranslation";
 
 interface KvpSwitchTabProps {
   isArchiveOpen: boolean;
@@ -9,7 +8,11 @@ interface KvpSwitchTabProps {
 
 export function KvpSwitchTab({ isArchiveOpen, onChange }: KvpSwitchTabProps) {
   const { theme } = useTheme();
-  const selected = isArchiveOpen ? "Archiv" : "KVPs";
+  const translation = useTranslation();
+  const tabs = translation.actionBar.actionButton;
+  const selected = isArchiveOpen
+    ? translation.actionBar.actionButton[1]
+    : translation.actionBar.actionButton[0];
 
   return (
     <div
@@ -19,7 +22,7 @@ export function KvpSwitchTab({ isArchiveOpen, onChange }: KvpSwitchTabProps) {
         <button
           key={tab}
           onClick={() => {
-            onChange?.(tab === "KVPs");
+            onChange?.(tab === translation.actionBar.actionButton[0]);
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${

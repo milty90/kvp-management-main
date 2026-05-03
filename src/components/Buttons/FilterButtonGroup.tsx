@@ -6,6 +6,7 @@ interface FilterButtonGroupProps {
   filter: (state: string) => void;
   onChange?: (state: boolean) => void;
   tabs: string[];
+  startState: string;
 }
 
 export default function FilterButtonGroup({
@@ -13,6 +14,7 @@ export default function FilterButtonGroup({
   filter,
   onChange,
   tabs,
+  startState,
 }: FilterButtonGroupProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { theme } = useTheme();
@@ -29,7 +31,7 @@ export default function FilterButtonGroup({
           key={tab}
           onClick={() => {
             const newSelected =
-              selected === tab && tab !== "Alle" ? selected : tab;
+              selected === tab && tab !== startState ? selected : tab;
             filter(newSelected);
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150

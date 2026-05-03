@@ -76,9 +76,24 @@ export const translations = {
         current: "Aktuell: An",
       },
       settingsButton: {
-        save: "Änderungen speichern",
+        save: "Speichern",
         cancel: "Abbrechen",
       },
+    },
+    profileModal: {
+      title: "Profil",
+      profileButton: "Profil ändern",
+      loadData: "Lade Benutzerdaten...",
+      name: "Benutzername",
+      email: "E-Mail",
+      department: "Abteilung",
+      role: "Rolle",
+      lastLogin: "Letzte Anmeldung",
+      cardActive: "Aktiv",
+      cardAssigned: "Zugewiesen",
+      cardClosed: "Abgeschlossen",
+      closeButton: "Abbrechen",
+      saveButton: "Speichern",
     },
     statistics: {
       DonutChart: {
@@ -105,6 +120,16 @@ export const translations = {
         description: "Neue Verbesserungen pro Monat",
       },
     },
+    actionBar: {
+      startState: "Alle",
+      filter: ["Alle", "Plan", "Do", "Check", "Act"],
+      priority: ["Alle", "Niedrig", "Mittel", "Hoch"],
+      archive: ["Alle", "Abgelehnt", "Archiv"],
+      actionButton: ["KVPs", "Archiv"],
+      newPCDAButton: {
+        openModal: "Neue KVP",
+      },
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -129,7 +154,6 @@ export const translations = {
     },
     settingsModal: {
       settings: "Settings",
-
       settingTheme: {
         title: "Dark Mode",
         descriptionLight: "Switch to Light Mode",
@@ -149,9 +173,24 @@ export const translations = {
         current: "Current: On",
       },
       settingsButton: {
-        save: "Save Changes",
+        save: "Save",
         cancel: "Cancel",
       },
+    },
+    profileModal: {
+      title: "Profile",
+      profileButton: "Edit Profile",
+      loadData: "Loading user data...",
+      name: "Username",
+      email: "Email",
+      cardActive: "Active",
+      cardAssigned: "Assigned",
+      cardClosed: "Closed",
+      department: "Department",
+      role: "Role",
+      lastLogin: "Last Login",
+      closeButton: "Cancel",
+      saveButton: "Save",
     },
     statistics: {
       DonutChart: {
@@ -209,6 +248,16 @@ export const translations = {
       alreadyHaveAccount: "Already have an account?",
       demoAccount: "Use demo account",
       orLogInWithSocials: "or log in with a social account.",
+    },
+    actionBar: {
+      startState: "All",
+      filter: ["All", "Plan", "Do", "Check", "Act"],
+      priority: ["All", "Low", "Medium", "High"],
+      archive: ["All", "Rejected", "Archived"],
+      actionButton: ["PCDA", "Archive"],
+      newPCDAButton: {
+        openModal: "New PCDA",
+      },
     },
   },
 };

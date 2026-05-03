@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { KvpSwitchTab } from "../buttons/KvpSwitchTab";
 import { useSpaceCalculation } from "../../utils/useSpaceCalculation";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface ActionBarProps {
   isArchiveOpen: boolean;
@@ -31,6 +32,7 @@ export default function ActionBar({
 
   const width = useWindowWidth();
   const { theme } = useTheme();
+  const translation = useTranslation();
 
   const [isCycleCollapsed, setIsCycleCollapsed] = useState(true);
   const [isPriorityCollapsed, setIsPriorityCollapsed] = useState(true);
@@ -68,15 +70,17 @@ export default function ActionBar({
           {width < 768 ? (
             <div className="relative">
               <FilterBtnGroupMob
+                startState={translation.actionBar.startState}
                 selected={activeFilter}
                 filter={onFilter}
-                tabs={["Alle", "Abgelehnt", "Archiv"]}
+                tabs={translation.actionBar.archive}
                 position="left-0"
               />
               <FilterBtnGroupMob
+                startState={translation.actionBar.startState}
                 selected={activePriority}
                 filter={onPriority}
-                tabs={["Alle", "Niedrig", "Mittel", "Hoch"]}
+                tabs={translation.actionBar.priority}
                 position="left-22"
               />
             </div>
@@ -86,13 +90,15 @@ export default function ActionBar({
                 selected={activeFilter}
                 filter={onFilter}
                 onChange={handleCycleChange}
-                tabs={["Alle", "Abgelehnt", "Archiv"]}
+                tabs={translation.actionBar.archive}
+                startState={translation.actionBar.startState}
               />
               <FilterButtonGroup
                 selected={activePriority}
                 filter={onPriority}
                 onChange={handlePriorityChange}
-                tabs={["Alle", "Niedrig", "Mittel", "Hoch"]}
+                tabs={translation.actionBar.priority}
+                startState={translation.actionBar.startState}
               />
             </div>
           )}
@@ -102,15 +108,17 @@ export default function ActionBar({
           {width < 768 ? (
             <div className="relative">
               <FilterBtnGroupMob
+                startState={translation.actionBar.startState}
                 selected={activeFilter}
                 filter={onFilter}
-                tabs={["Alle", "Plan", "Do", "Check", "Act"]}
+                tabs={translation.actionBar.filter}
                 position="left-0"
               />
               <FilterBtnGroupMob
+                startState={translation.actionBar.startState}
                 selected={activePriority}
                 filter={onPriority}
-                tabs={["Alle", "Niedrig", "Mittel", "Hoch"]}
+                tabs={translation.actionBar.priority}
                 position="left-22"
               />
             </div>
@@ -120,13 +128,15 @@ export default function ActionBar({
                 selected={activeFilter}
                 filter={onFilter}
                 onChange={handleCycleChange}
-                tabs={["Alle", "Plan", "Do", "Check", "Act"]}
+                tabs={translation.actionBar.filter}
+                startState={translation.actionBar.startState}
               />
               <FilterButtonGroup
                 selected={activePriority}
                 filter={onPriority}
                 onChange={handlePriorityChange}
-                tabs={["Alle", "Niedrig", "Mittel", "Hoch"]}
+                tabs={translation.actionBar.priority}
+                startState={translation.actionBar.startState}
               />
             </div>
           )}
@@ -143,7 +153,9 @@ export default function ActionBar({
           color={theme === "dark" ? "gray" : "white"}
           isTextOnly={true}
         >
-          {isArchiveOpen ? "KVPs" : "Archiv"}
+          {isArchiveOpen
+            ? translation.actionBar.actionButton[0]
+            : translation.actionBar.actionButton[1]}
         </ColorButton>
       ) : (
         <KvpSwitchTab
@@ -160,7 +172,7 @@ export default function ActionBar({
         color={theme === "dark" ? "green" : "blue"}
         icon="/add.svg"
       >
-        Neue KVP
+        {translation.actionBar.newPCDAButton.openModal}
       </ColorButton>
     </div>
   );

@@ -2,6 +2,7 @@ import { useKvpContext } from "../../context/KvpContext";
 import KvpCard from "../kvp/KvpCard";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
@@ -44,16 +45,19 @@ export default function KvpBar({
 }: KvpBarProps) {
   const { kvps } = useKvpContext();
   const width = useWindowWidth();
+  const { theme } = useTheme();
+  const translation = useTranslation();
+  const colorClasses = theme === "dark" ? colorClassesDark : colorClassesLight;
 
   const filtered = kvps.filter((k) => {
-    const stateMatch = activeFilter === "Alle" || k.state === activeFilter;
+    const stateMatch =
+      activeFilter === translation.actionBar.startState ||
+      k.state === activeFilter;
     const priorityMatch =
-      activePriority === "Alle" || k.priority === priorityMap[activePriority];
+      activePriority === translation.actionBar.startState ||
+      k.priority === priorityMap[activePriority];
     return stateMatch && priorityMatch;
   });
-
-  const { theme } = useTheme();
-  const colorClasses = theme === "dark" ? colorClassesDark : colorClassesLight;
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 w-full pt-2.5 md:pt-3 px-2.5 md:px-3 rounded-t-xl bg-surface text-gray-800 gap-3 overflow-y-auto z-0 flex-1 scrollbar-none">
@@ -76,7 +80,7 @@ export default function KvpBar({
             </div>
 
             {filteredByState.length === 0 ? (
-              <div className="flex items-center justify-center h-32 rounded-lg border border-dashed border-border">
+              <div className="flex items-center justify-center h-16 md:h-32 rounded-lg border border-dashed border-border">
                 <p className="text-xs text-text-secondary">Keine Elemente</p>
               </div>
             ) : (
