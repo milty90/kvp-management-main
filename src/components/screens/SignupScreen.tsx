@@ -4,6 +4,7 @@ import { signUpWithEmailandPassword } from "../../utils/authDatabase";
 import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { useTranslation } from "../../utils/useTranslation";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export function SignupScreen() {
 
   const { theme } = useTheme();
   const width = useWindowWidth();
+  const translation = useTranslation();
 
   async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,10 +64,11 @@ export function SignupScreen() {
           alt="Logo"
           className="w-55 mb-4 ml-4"
         />
-        <h1 className="text-xl font-semibold mb-1">Erstellen Sie Ihr Konto</h1>
+        <h1 className="text-xl font-semibold mb-1">
+          {translation.signupScreen.title}
+        </h1>
         <p className="text-sm text-text-secondary mb-8">
-          Bitte füllen Sie die folgenden Informationen aus, um ein neues Konto
-          zu erstellen.
+          {translation.signupScreen.description}
         </p>
         <form className="w-full max-w-sm" onSubmit={handleEmailSignUp}>
           <div className="mb-5 items-start justify-items-start">
@@ -73,14 +76,14 @@ export function SignupScreen() {
               className="block text-left text-text-primary text-sm font-semibold mb-2 pl-2"
               htmlFor="email"
             >
-              E-Mail Adresse
+              {translation.signupScreen.emailTitle}
             </label>
             <input
               className={`shadow border border-slate-400 rounded w-full py-2 px-3 text-text-primary leading-tight focus:outline-1 ${theme === "dark" ? "focus:outline-green-500" : "focus:outline-blue-500"}`}
               id="email"
               type="email"
               required
-              placeholder="E-Mail-Adresse eingeben"
+              placeholder={translation.signupScreen.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -90,7 +93,7 @@ export function SignupScreen() {
               className="block text-left text-text-primary text-sm font-semibold mb-2 pl-2"
               htmlFor="password"
             >
-              Passwort
+              {translation.signupScreen.passwordTitle}
             </label>
 
             <input
@@ -98,7 +101,7 @@ export function SignupScreen() {
               id="password"
               type={showPassword ? "text" : "password"}
               required
-              placeholder="Passwort eingeben"
+              placeholder={translation.signupScreen.passwordPlaceholder}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -140,7 +143,7 @@ export function SignupScreen() {
               </svg>
             </span>
             <span className="text-xs text-text-secondary mb-1">
-              Das Passwort muss mindestens 6 Zeichen lang sein.
+              {translation.signupScreen.passwordText}
             </span>
           </div>
           <div className="flex px-2 items-center justify-between">
@@ -148,13 +151,13 @@ export function SignupScreen() {
               type="submit"
               className="px-5 py-2.5 bg-button text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150"
             >
-              Konto erstellen
+              {translation.signupScreen.signupButton}
             </button>
             <a
               className="inline-block align-baseline font-semibold text-sm text-button hover:text-button-hover cursor-pointer"
               onClick={() => navigate("/login")}
             >
-              Bereits ein Konto?
+              {translation.signupScreen.alreadyHaveAccount}
             </a>
           </div>
         </form>
@@ -163,10 +166,10 @@ export function SignupScreen() {
             className="font-semibold  text-button hover:text-button-hover cursor-pointer"
             onClick={() => navigate("/kvps")}
           >
-            Demo account nutzen
+            {translation.signupScreen.demoAccount}
           </a>
           <br />
-          oder melden Sie sich mit einem sozialen Konto an.
+          {translation.signupScreen.orLogInWithSocials}
         </p>
         <div className="flex mt-6 space-x-4">
           <button
