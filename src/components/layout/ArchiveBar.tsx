@@ -57,13 +57,17 @@ export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
               <span
                 className={`text-sm ml-2 font-semibold text-gray-600 ${theme === "dark" ? "text-text-secondary" : " text-text-secondary"}`}
               >
-                {state === "Archived" ? "Archivierte KVPs" : "Abgelehnte KVPs"}
+                {state === "Archived"
+                  ? translation.archiveBar.archivedPCDA
+                  : translation.archiveBar.rejectedPCDA}
               </span>
             </div>
 
             {stateFiltered.length === 0 ? (
               <div className="flex items-center justify-center h-16 md:h-32 rounded-lg border border-dashed border-gray-300">
-                <p className="text-xs text-gray-500">Keine Elemente</p>
+                <p className="text-xs text-gray-500">
+                  {translation.archiveBar.noItems}
+                </p>
               </div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

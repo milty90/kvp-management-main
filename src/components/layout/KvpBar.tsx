@@ -3,6 +3,7 @@ import KvpCard from "../kvp/KvpCard";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
+import type { Priority } from "../../types";
 
 const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
@@ -32,7 +33,10 @@ const colorMap: Record<string, string> = {
   Act: "green",
 };
 
-const priorityMap: Record<string, string> = {
+const priorityMap: Record<string, Priority> = {
+  High: "High",
+  Medium: "Medium",
+  Low: "Low",
   Hoch: "High",
   Mittel: "Medium",
   Niedrig: "Low",
@@ -81,7 +85,9 @@ export default function KvpBar({
 
             {filteredByState.length === 0 ? (
               <div className="flex items-center justify-center h-16 md:h-32 rounded-lg border border-dashed border-border">
-                <p className="text-xs text-text-secondary">Keine Elemente</p>
+                <p className="text-xs text-text-secondary">
+                  {translation.pcdaBar.noItems}
+                </p>
               </div>
             ) : (
               <div className="flex flex-col gap-3">

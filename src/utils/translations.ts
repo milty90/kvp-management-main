@@ -130,6 +130,14 @@ export const translations = {
         openModal: "Neue KVP",
       },
     },
+    archiveBar: {
+      rejectedPCDA: "Abgelehnte KVPs",
+      archivedPCDA: "Archivierte KVPs",
+      noItems: "Keine Elemente",
+    },
+    pcdaBar: {
+      noItems: "Keine Elemente",
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -258,6 +266,14 @@ export const translations = {
       newPCDAButton: {
         openModal: "New PCDA",
       },
+    },
+    archiveBar: {
+      rejectedPCDA: "Rejected PCDAs",
+      archivedPCDA: "Archived PCDAs",
+      noItems: "No items to display",
+    },
+    pcdaBar: {
+      noItems: "No items to display",
     },
   },
 };
