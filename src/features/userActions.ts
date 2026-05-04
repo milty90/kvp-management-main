@@ -41,3 +41,13 @@ export const deleteUser = async (dispatch: Dispatch, userId: number) => {
 
   dispatch({ type: "DELETE_USER", userId });
 };
+
+export const getUsers = async (dispatch: Dispatch) => {
+  const { data, error } = await supabase.from("users").select("*");
+  if (error) {
+    console.error("Error fetching users:", error);
+    return;
+  }
+
+  dispatch({ type: "SET_USERS", users: data });
+};

@@ -9,7 +9,12 @@ import {
 } from "react";
 import { supabase } from "../utils/supabase";
 import userManagmentReducer from "../features/userManagmentReducer";
-import { addUser, updateUser, deleteUser } from "../features/userActions";
+import {
+  addUser,
+  updateUser,
+  deleteUser,
+  getUsers,
+} from "../features/userActions";
 
 interface UserContextType {
   user: SupabaseUser | null;
@@ -34,13 +39,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, dispatch] = useReducer(userManagmentReducer, []);
 
   useEffect(() => {
-    getCurrentUser().then((data) => setUser(data as SupabaseUser | null));
+    getCurrentUser().then((data) => setUser(data ?? null));
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser((session?.user as SupabaseUser | null) ?? null);
+      setUser(session?.user ?? null);
     });
+
+    getUsers(dispatch);
 
     return () => subscription.unsubscribe();
   }, []);
