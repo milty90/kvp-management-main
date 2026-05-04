@@ -1,0 +1,43 @@
+import type { User, UserManagementAction } from "../types";
+import { supabase } from "../utils/supabase";
+
+type Dispatch = (action: UserManagementAction) => void;
+
+export const addUser = async (dispatch: Dispatch, user: User) => {
+  const { data, error } = await supabase
+    .from("users")
+    .insert(user)
+    .select()
+    .single();
+  if (error) {
+    console.error("Error adding user:", error);
+    return;
+  }
+
+  dispatch({ type: "ADD_USER", user: data });
+};
+
+export const updateUser = async (dispatch: Dispatch, user: User) => {
+  const { data, error } = await supabase
+    .from("users")
+    .update(user)
+    .eq("id", user.id)
+    .select()
+    .single();
+  if (error) {
+    console.error("Error updating user:", error);
+    return;
+  }
+
+  dispatch({ type: "UPDATE_USER", user: data });
+};
+
+export const deleteUser = async (dispatch: Dispatch, userId: number) => {
+  const { error } = await supabase.from("users").delete().eq("id", userId);
+  if (error) {
+    console.error("Error deleting user:", error);
+    return;
+  }
+
+  dispatch({ type: "DELETE_USER", userId });
+};

@@ -18,6 +18,11 @@ export type Kvp = {
 
 export type User = {
   id: number;
+  photoUrl: string;
+  department: string;
+  role: string;
+  FirstName: string;
+  LastName: string;
   userName: string;
   userEmail: string;
   createdAt: string;
@@ -43,6 +48,16 @@ export type KvpManagementAction =
       kvp: Kvp;
     }
   | { type: "SET_KVPS"; kvps: Kvp[] };
+
+export type UserManagementState = User[];
+
+export type UserManagementAction =
+  | {
+      type: "ADD_USER" | "UPDATE_USER";
+      user: User;
+    }
+  | { type: "DELETE_USER"; userId: number }
+  | { type: "SET_USERS"; users: User[] };
 
 export type ColorButtonType =
   | "color"

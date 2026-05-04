@@ -191,6 +191,12 @@ export const translations = {
       improvements: "Verbesserungen",
       statistics: "Statistiken",
     },
+    cardMenuItem: {
+      edit: "Bearbeiten",
+      archive: "Archivieren",
+      reject: "Ablehnen",
+      delete: "Löschen",
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -380,6 +386,12 @@ export const translations = {
     menuItem: {
       improvements: "Improvements",
       statistics: "Statistics",
+    },
+    cardMenuItem: {
+      edit: "Edit",
+      archive: "Archive",
+      reject: "Reject",
+      delete: "Delete",
     },
   },
 };

@@ -1,22 +1,61 @@
 import type { User } from "../types";
-import { createContext, useContext, useState } from "react";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { supabase } from "../utils/supabase";
+import userManagmentReducer from "../features/userManagmentReducer";
+import { addUser, updateUser, deleteUser } from "../features/userActions";
 
 interface UserContextType {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: SupabaseUser | null;
+  setUser: (user: SupabaseUser | null) => void;
+  users: User[];
+  addUser: (user: User) => void;
+  updateUser: (user: User) => void;
+  deleteUser: (userId: number) => void;
 }
 
 const UserContext = createContext<UserContextType>({
   user: null,
   setUser: () => {},
+  users: [],
+  addUser: () => {},
+  updateUser: () => {},
+  deleteUser: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [users, dispatch] = useReducer(userManagmentReducer, []);
+
+  useEffect(() => {
+    getCurrentUser().then((data) => setUser(data as SupabaseUser | null));
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser((session?.user as SupabaseUser | null) ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        users,
+        addUser: (user: User) => addUser(dispatch, user),
+        updateUser: (user: User) => updateUser(dispatch, user),
+        deleteUser: (userId: number) => deleteUser(dispatch, userId),
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

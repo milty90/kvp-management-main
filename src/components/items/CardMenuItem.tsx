@@ -1,4 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface CardMenuItemProps {
   onEdit: () => void;
@@ -14,6 +15,7 @@ export default function CardMenuItem({
   onDelete,
 }: CardMenuItemProps) {
   const { theme } = useTheme();
+  const translations = useTranslation();
   return (
     <div className="relative z-10 flex flex-col items-start">
       <div
@@ -23,25 +25,25 @@ export default function CardMenuItem({
           onClick={onEdit}
           className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
         >
-          Bearbeiten
+          {translations.cardMenuItem.edit}
         </button>
         <button
           onClick={onArchive}
           className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
         >
-          Archivieren
+          {translations.cardMenuItem.archive}
         </button>
         <button
           onClick={onReject}
           className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
         >
-          Ablehnen
+          {translations.cardMenuItem.reject}
         </button>
         <button
           onClick={onDelete}
           className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-red-500" : "hover:bg-gray-200 hover:text-red-600"} rounded hover:scale-95 transition-transform duration-250`}
         >
-          Löschen
+          {translations.cardMenuItem.delete}
         </button>
       </div>
     </div>
