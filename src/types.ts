@@ -21,8 +21,8 @@ export type User = {
   photoUrl: string;
   department: string;
   role: string;
-  FirstName: string;
-  LastName: string;
+  firstName: string;
+  lastName: string;
   userName: string;
   userEmail: string;
   createdAt: string;

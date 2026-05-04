@@ -6,6 +6,8 @@ import { showToast } from "./ToastItem";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
+import { addUser, deleteUser, updateUser } from "../../features/userActions";
+import type { User } from "../../types";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -57,12 +59,18 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
               color="gray"
               isTextOnly={true}
               onClick={() =>
-                showToast(
-                  width,
-                  theme,
-                  "info",
-                  "Profil ändern ist derzeit nicht verfügbar.",
-                )
+                addUser(() => {}, {
+                  id: 0,
+                  photoUrl: "/face-id.png",
+                  department: "lorem ipsum",
+                  role: "lorem ipsum",
+                  firstName: "John",
+                  lastName: "Doe",
+                  userName: "johndoe",
+                  userEmail: "johndoe@example.com",
+                  createdAt: new Date().toISOString(),
+                  lastSignIn: new Date().toISOString(),
+                } as User)
               }
             >
               {translation.profileModal.profileButton}
