@@ -12,11 +12,11 @@ export default function userManagmentReducer(
 
     case "UPDATE_USER":
       return (updatedState = state.map((user) =>
-        user.id === action.user.id ? action.user : user,
+        user.userId === action.user.userId ? action.user : user,
       ));
 
     case "DELETE_USER":
-      return state.filter((user) => user.id !== action.userId);
+      return state.filter((user) => user.userId !== action.userId);
     case "SET_USERS":
       return (updatedState = action.users);
     default:

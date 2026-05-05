@@ -16,19 +16,6 @@ export type Kvp = {
   benefit?: string;
 };
 
-export type User = {
-  id: number;
-  photoUrl: string;
-  department: string;
-  role: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  userEmail: string;
-  createdAt: string;
-  lastSignIn: string;
-};
-
 export type FormColor = {
   pdcaState?: State | "";
   targetDate?: string;
@@ -49,6 +36,19 @@ export type KvpManagementAction =
     }
   | { type: "SET_KVPS"; kvps: Kvp[] };
 
+export type User = {
+  userId: string;
+  photoUrl?: string;
+  department?: string;
+  role?: string;
+  firstName?: string;
+  lastName?: string;
+  userName: string;
+  userEmail: string;
+  createdAt: string;
+  lastSignIn: string;
+};
+
 export type UserManagementState = User[];
 
 export type UserManagementAction =
@@ -56,7 +56,7 @@ export type UserManagementAction =
       type: "ADD_USER" | "UPDATE_USER";
       user: User;
     }
-  | { type: "DELETE_USER"; userId: number }
+  | { type: "DELETE_USER"; userId: string }
   | { type: "SET_USERS"; users: User[] };
 
 export type ColorButtonType =

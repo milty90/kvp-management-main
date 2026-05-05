@@ -3,7 +3,7 @@ import { useRef, useState, type ReactNode } from "react";
 import type { ColorButtonType } from "../../types";
 import { SettingItem } from "../items/SettingItem";
 import { useClickOutside } from "../../utils/clickOutside";
-import { signOut } from "../../utils/authDatabase";
+import { signOut } from "../../features/authDatabase";
 import { ConfirmDialogItem } from "../items/ConfirmDialogItem";
 import { createPortal } from "react-dom";
 import { SettingsModal } from "../items/SettingsModal";

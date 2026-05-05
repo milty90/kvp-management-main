@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { supabase } from "../utils/supabase";
+import { getCurrentUser } from "../features/authDatabase";
 import userManagmentReducer from "../features/userManagmentReducer";
 import {
   addUser,
@@ -22,7 +23,7 @@ interface UserContextType {
   users: User[];
   addUser: (user: User) => void;
   updateUser: (user: User) => void;
-  deleteUser: (userId: number) => void;
+  deleteUser: (userId: string) => void;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -60,7 +61,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         users,
         addUser: (user: User) => addUser(dispatch, user),
         updateUser: (user: User) => updateUser(dispatch, user),
-        deleteUser: (userId: number) => deleteUser(dispatch, userId),
+        deleteUser: (userId: string) => deleteUser(dispatch, userId),
       }}
     >
       {children}
@@ -69,63 +70,3 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const useUserContext = () => useContext(UserContext);
-
-export async function signInWithGitHub() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-  });
-
-  if (error) {
-    console.error("Error signing in with GitHub:", error);
-  }
-}
-
-export async function signInWithSlack() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "slack",
-  });
-  if (error) {
-    console.error("Error signing in with Slack:", error);
-  }
-}
-
-export async function signUpWithEmailandPassword(
-  email: string,
-  password: string,
-) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-  if (error) {
-    console.error("Error signing up with email:", error);
-  }
-  return { data, error };
-}
-
-export async function signInWithEmail(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-  if (error) {
-    console.error("Error logging in with email:", error);
-  }
-  return { data, error };
-}
-
-export async function signOut() {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    console.error("Error signing out:", error);
-  }
-}
-
-export async function getCurrentUser() {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) {
-    console.error("Error getting current user:", error);
-    return null;
-  }
-  return data.user;
-}

@@ -1,4 +1,4 @@
-import { fetchUser } from "../../utils/authDatabase";
+import { fetchUser } from "../../features/authDatabase";
 import ColorButton from "../buttons/ColorButton";
 
 import { useEffect, useState } from "react";
@@ -6,8 +6,6 @@ import { showToast } from "./ToastItem";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
-import { addUser, deleteUser, updateUser } from "../../features/userActions";
-import type { User } from "../../types";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -27,9 +25,11 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
 
   const department = "lorem ipsum";
   const role = "lorem ipsum";
-
+  const [lastSignIn, setLastSignIn] = useState(
+    "... " + useTranslation().profileModal.loadData,
+  );
   useEffect(() => {
-    fetchUser(setUsername, setEmail);
+    fetchUser(setUsername, setEmail, setLastSignIn);
   }, []);
 
   return (
@@ -59,18 +59,12 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
               color="gray"
               isTextOnly={true}
               onClick={() =>
-                addUser(() => {}, {
-                  id: 0,
-                  photoUrl: "/face-id.png",
-                  department: "lorem ipsum",
-                  role: "lorem ipsum",
-                  firstName: "John",
-                  lastName: "Doe",
-                  userName: "johndoe",
-                  userEmail: "johndoe@example.com",
-                  createdAt: new Date().toISOString(),
-                  lastSignIn: new Date().toISOString(),
-                } as User)
+                showToast(
+                  width,
+                  theme,
+                  "info",
+                  "Profil ändern Funktion ist noch nicht implementiert.",
+                )
               }
             >
               {translation.profileModal.profileButton}
@@ -120,7 +114,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
           </p>
           <p className="text-sm text-text-secondary my-1">
             {translation.profileModal.lastLogin}:
-            <span className="text-text-primary pl-3">23.03.2026</span>
+            <span className="text-text-primary pl-3">{lastSignIn}</span>
           </p>
         </div>
 

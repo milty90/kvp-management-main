@@ -21,7 +21,7 @@ export const updateUser = async (dispatch: Dispatch, user: User) => {
   const { data, error } = await supabase
     .from("users")
     .update(user)
-    .eq("id", user.id)
+    .eq("userId", user.userId)
     .select()
     .single();
   if (error) {
@@ -32,8 +32,8 @@ export const updateUser = async (dispatch: Dispatch, user: User) => {
   dispatch({ type: "UPDATE_USER", user: data });
 };
 
-export const deleteUser = async (dispatch: Dispatch, userId: number) => {
-  const { error } = await supabase.from("users").delete().eq("id", userId);
+export const deleteUser = async (dispatch: Dispatch, userId: string) => {
+  const { error } = await supabase.from("users").delete().eq("userId", userId);
   if (error) {
     console.error("Error deleting user:", error);
     return;

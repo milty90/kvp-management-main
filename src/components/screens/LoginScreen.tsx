@@ -4,7 +4,7 @@ import {
   signInWithGitHub,
   signInWithSlack,
   signInWithEmail,
-} from "../../utils/authDatabase";
+} from "../../features/authDatabase";
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";

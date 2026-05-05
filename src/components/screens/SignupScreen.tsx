@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUpWithEmailandPassword } from "../../utils/authDatabase";
+import { signUpWithEmailandPassword } from "../../features/authDatabase";
 import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
+import { useUserContext } from "../../context/UserContext";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export function SignupScreen() {
   const { theme } = useTheme();
   const width = useWindowWidth();
   const translation = useTranslation();
+  const { addUser } = useUserContext();
 
   async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,6 +44,19 @@ export function SignupScreen() {
       return;
     }
 
+    await addUser({
+      userId: data.user.id,
+      photoUrl: "",
+      department: "",
+      role: "",
+      firstName: "",
+      lastName: "",
+      userName: email.slice(0, email.indexOf("@")),
+      userEmail: email,
+      createdAt: new Date().toISOString(),
+      lastSignIn: new Date().toISOString(),
+    });
+
     if (data.session) {
       showToast(width, theme, "success", "Konto erfolgreich erstellt!");
       navigate("/login");
@@ -54,6 +69,7 @@ export function SignupScreen() {
       "success",
       "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
     );
+
     navigate("/login");
   }
   return (
