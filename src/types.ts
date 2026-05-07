@@ -47,6 +47,7 @@ export type User = {
   userEmail: string;
   createdAt: string;
   lastSignIn: string;
+  aboutMe?: string;
 };
 
 export type UserManagementState = User[];

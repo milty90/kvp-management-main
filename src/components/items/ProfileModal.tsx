@@ -36,14 +36,19 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   );
 
   const assignedTo =
-    kvps?.filter((kvp) => kvp.assignedTo === username).length || 0;
+    kvps?.filter((kvp) => kvp.assignedTo === username && kvp.state !== "Act")
+      .length || 0;
 
   const createdBy =
     kvps?.filter((kvp) => kvp.createdBy === username).length || 0;
 
   const act =
-    kvps?.filter((kvp) => kvp.createdBy === username && kvp.state === "Act")
+    kvps?.filter((kvp) => kvp.assignedTo === username && kvp.state === "Act")
       .length || 0;
+
+  //const actPercentage = createdBy > 0 ? Math.round((act / createdBy) * 100) : 0;
+
+  const profileUser = users?.find((user) => user.userEmail === email)?.photoUrl;
 
   useEffect(() => {
     fetchUser(setUsername, setEmail, setLastSignIn);
@@ -68,7 +73,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
         <div className="flex flex-col items-start justify-start mb-2 p-5 rounded-lg border border-gray-500">
           <div className="flex flex-row w-full justify-between items-center px-1">
             <img
-              src="/face-id.png"
+              src={profileUser || "/face-id.png"}
               alt="Profilbild"
               className="w-24 h-24 rounded-md object-cover"
             />
@@ -99,7 +104,7 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
               {translation.profileModal.name}: {username}
             </p>
             <p className="text-sm text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              {users?.find((user) => user.userEmail === email)?.aboutMe}
             </p>
           </div>
         </div>
