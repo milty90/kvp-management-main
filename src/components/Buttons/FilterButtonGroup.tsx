@@ -22,6 +22,12 @@ export default function FilterButtonGroup({
   const visibleTabs = isCollapsed ? [selected] : tabs;
   const arrow = isCollapsed ? ">" : "<";
 
+  function handleToggle() {
+    const nextState = !isCollapsed;
+    setIsCollapsed(nextState);
+    onChange?.(nextState);
+  }
+
   return (
     <div
       className={`inline-flex items-center p-1 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
@@ -31,7 +37,7 @@ export default function FilterButtonGroup({
           key={tab}
           onClick={() => {
             const newSelected =
-              selected === tab && tab !== startState ? selected : tab;
+              selected === tab && tab !== startState ? startState : tab;
             filter(newSelected);
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
@@ -47,10 +53,7 @@ export default function FilterButtonGroup({
       ))}
       <button
         type="button"
-        onClick={() => {
-          setIsCollapsed((prev) => !prev);
-          onChange?.(!isCollapsed);
-        }}
+        onClick={handleToggle}
         className={`inline-flex px-2 md:px-3 py-0.5 ml-1 rounded-lg text-xl font-medium text-gray-500 hover:text-gray-700
           ${
             isCollapsed

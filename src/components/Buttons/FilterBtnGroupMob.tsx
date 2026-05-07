@@ -21,6 +21,13 @@ export function FilterBtnGroupMob({
 
   const { theme } = useTheme();
 
+  function handleTabClick(tab: string) {
+    const newSelected =
+      selected === tab && tab !== startState ? startState : tab;
+    filter(newSelected);
+    setIsCollapsed((prev) => !prev);
+  }
+
   return (
     <div
       className={`absolute z-30 flex flex-col items-center gap-1 -top-5 ${position} p-1 rounded-xl ${theme === "dark" ? "bg-gray-500" : "bg-gray-200/80"}`}
@@ -29,10 +36,7 @@ export function FilterBtnGroupMob({
         <button
           key={tab}
           onClick={() => {
-            const newSelected =
-              selected === tab && tab !== startState ? selected : tab;
-            filter(newSelected);
-            setIsCollapsed((prev) => !prev);
+            handleTabClick(tab);
           }}
           className={`py-1.5 w-18 rounded-lg text-sm font-medium transition-all duration-150 ${
             selected === tab

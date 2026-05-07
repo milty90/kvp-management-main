@@ -9,6 +9,7 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
 import { sliceText } from "../../utils/sliceText";
 import { useTranslation } from "../../utils/useTranslation";
+import { formatDate } from "../../utils/formatDate";
 
 interface KvpCardProps {
   id: number;
@@ -96,6 +97,14 @@ export default function KvpCard({
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(menuWrapperRef, () => setShowMenu(false));
+
+  const priorityMapping = (priority: string) => {
+    return priorityMap[translation.pdcaCard.priorities[0]] === priority
+      ? translation.pdcaCard.priorities[0]
+      : priorityMap[translation.pdcaCard.priorities[1]] === priority
+        ? translation.pdcaCard.priorities[1]
+        : translation.pdcaCard.priorities[2];
+  };
 
   const handleArchive = () => {
     archiveKvp(id);
@@ -185,11 +194,7 @@ export default function KvpCard({
         <span
           className={`px-2.5 py-0.5 text-xs text-text-primary font-body font-medium rounded-full border-2 shadow ${priorityColors(theme)[priority]}`}
         >
-          {priorityMap[translation.pdcaCard.priorities[0]] === priority
-            ? translation.pdcaCard.priorities[0]
-            : priorityMap[translation.pdcaCard.priorities[1]] === priority
-              ? translation.pdcaCard.priorities[1]
-              : translation.pdcaCard.priorities[2]}
+          {priorityMapping(priority)}
         </span>
       </div>
       {/* Divider */}
@@ -228,7 +233,7 @@ export default function KvpCard({
             alt="Calender"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {translation.pdcaCard.createdAt}: {createdAt.slice(2, 10)}
+          {translation.pdcaCard.createdAt}: {formatDate(createdAt)}
         </span>
         <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
@@ -236,7 +241,7 @@ export default function KvpCard({
             alt="Target"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {translation.pdcaCard.targetDate}: {targetDate.slice(2, 10)}
+          {translation.pdcaCard.targetDate}: {formatDate(targetDate)}
         </span>
       </div>
       {showDialog &&

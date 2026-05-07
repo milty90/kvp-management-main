@@ -46,8 +46,10 @@ export const getUsers = async (dispatch: Dispatch) => {
   const { data, error } = await supabase.from("users").select("*");
   if (error) {
     console.error("Error fetching users:", error);
+
     return;
   }
+  console.log("Fetched users:", data);
 
   dispatch({ type: "SET_USERS", users: data });
 };

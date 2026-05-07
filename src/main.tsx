@@ -7,18 +7,21 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext.tsx";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
 import { LanguageProvider } from "./context/LanguageContext.tsx";
+import { SessionProvider } from "./context/SessionContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
-        <UserProvider>
-          <KvpProvider>
-            <App />
-            <ToastContainer />
-          </KvpProvider>
-        </UserProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <UserProvider>
+            <KvpProvider>
+              <App />
+              <ToastContainer />
+            </KvpProvider>
+          </UserProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </SessionProvider>
   </StrictMode>,
 );

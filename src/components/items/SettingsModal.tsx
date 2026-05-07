@@ -14,8 +14,6 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
   const { language, toggleLanguage } = useLanguage();
 
   const handleNotificationToggle = () => {
-    const { theme } = useTheme();
-
     showToast(
       300,
       theme,

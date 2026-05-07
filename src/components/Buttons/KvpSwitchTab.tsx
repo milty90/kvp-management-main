@@ -9,10 +9,9 @@ interface KvpSwitchTabProps {
 export function KvpSwitchTab({ isArchiveOpen, onChange }: KvpSwitchTabProps) {
   const { theme } = useTheme();
   const translation = useTranslation();
-  const tabs = translation.actionBar.actionButton;
-  const selected = isArchiveOpen
-    ? translation.actionBar.actionButton[1]
-    : translation.actionBar.actionButton[0];
+  const [activeTab, archiveTab] = translation.actionBar.actionButton;
+  const tabs = [activeTab, archiveTab];
+  const selected = isArchiveOpen ? archiveTab : activeTab;
 
   return (
     <div
@@ -22,7 +21,7 @@ export function KvpSwitchTab({ isArchiveOpen, onChange }: KvpSwitchTabProps) {
         <button
           key={tab}
           onClick={() => {
-            onChange?.(tab === translation.actionBar.actionButton[0]);
+            onChange?.(tab === activeTab);
           }}
           className={`px-3 md:px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150
               ${

@@ -41,13 +41,11 @@ export default function ColorButton({
           ${color === "white" ? "text-gray-700" : "text-white"} text-sm font-medium
           shadow-[0_1px_1px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
           hover:shadow-[0_2px_2px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
-          active:scale-[0.98] active:bg-${color}-700
+          active:scale-[0.98]
           transition-all duration-150 
         `}
     >
-      {icon ? (
-        <img src={icon ? icon : "/done.svg"} alt="Icon" className="h-4 w-4" />
-      ) : null}{" "}
+      {icon && <img src={icon} alt="Icon" className="h-4 w-4" />}
       <span className={`${!isTextOnly ? "hidden md:inline" : ""}`}>
         {children}
       </span>

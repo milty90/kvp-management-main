@@ -6,6 +6,9 @@ import { showToast } from "./ToastItem";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
+import { formatDate } from "../../utils/formatDate";
+import { useUserContext } from "../../context/UserContext";
+import { useKvpContext } from "../../context/KvpContext";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -22,15 +25,29 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   const { theme } = useTheme();
   const width = useWindowWidth();
   const translation = useTranslation();
+  const { users } = useUserContext();
+  const { kvps } = useKvpContext();
 
-  const department = "lorem ipsum";
-  const role = "lorem ipsum";
+  const department =
+    users?.find((user) => user.userEmail === email)?.department || "N/A";
+  const role = users?.find((user) => user.userEmail === email)?.role || "N/A";
   const [lastSignIn, setLastSignIn] = useState(
     "... " + useTranslation().profileModal.loadData,
   );
+
+  const assignedTo =
+    kvps?.filter((kvp) => kvp.assignedTo === username).length || 0;
+
+  const createdBy =
+    kvps?.filter((kvp) => kvp.createdBy === username).length || 0;
+
+  const act =
+    kvps?.filter((kvp) => kvp.createdBy === username && kvp.state === "Act")
+      .length || 0;
+
   useEffect(() => {
     fetchUser(setUsername, setEmail, setLastSignIn);
-  }, []);
+  }, [users]);
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
@@ -71,7 +88,14 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
             </ColorButton>
           </div>
           <div className="flex flex-col items-start justify-start mt-3 px-1 gap-1">
-            <p className=" text-text-primary text-xl font-semibold">
+            <p className="text-2xl text-text-primary font-bold">
+              {users?.find((user) => user.userEmail === email)?.firstName ||
+                "N/A"}{" "}
+              {users?.find((user) => user.userEmail === email)?.lastName ||
+                "N/A"}
+            </p>
+
+            <p className=" text-text-secondary text-base font-semibold">
               {translation.profileModal.name}: {username}
             </p>
             <p className="text-sm text-gray-500">
@@ -81,19 +105,19 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
         </div>
         <div className="flex items-center justify-between  h-20 mb-2 gap-2 ">
           <div className="flex flex-col items-center text-sm w-3/12 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
-            <p className="text-3xl text-blue-500">12</p>
+            <p className="text-3xl text-blue-500">{createdBy}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardActive}
             </p>
           </div>
           <div className="flex flex-col items-center text-sm w-4/12 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
-            <p className="text-3xl text-yellow-500">5</p>
+            <p className="text-3xl text-yellow-500">{assignedTo}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardAssigned}
             </p>
           </div>
           <div className="flex flex-col items-center text-sm w-5/13 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
-            <p className="text-3xl text-green-500">1</p>
+            <p className="text-3xl text-green-500">{act}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardClosed}
             </p>
@@ -114,7 +138,9 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
           </p>
           <p className="text-sm text-text-secondary my-1">
             {translation.profileModal.lastLogin}:
-            <span className="text-text-primary pl-3">{lastSignIn}</span>
+            <span className="text-text-primary pl-2">
+              {formatDate(lastSignIn)}
+            </span>
           </p>
         </div>
 
