@@ -14,6 +14,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { TopNavButton } from "../buttons/TopNavButton";
 import { useTranslation } from "../../utils/useTranslation";
+import EditProfileModal from "../items/EditProfileModal";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -37,6 +38,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
   useClickOutside(settingsWrapperRef, () => {
     setShowSettings(false);
@@ -116,7 +118,9 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             {showSettings && (
               <SettingItem
                 onSetting={handleSettingsClick}
-                onProfile={handleProfileClick}
+                onProfile={() => {
+                  handleProfileClick();
+                }}
                 onLogout={handleLogoutClick}
               />
             )}
@@ -169,6 +173,18 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           <ProfileModal
             onConfirm={() => setShowProfileModal(false)}
             onCancel={() => setShowProfileModal(false)}
+            showEditProfile={() => {
+              setShowProfileModal(false);
+              setShowEditProfileModal(true);
+            }}
+          />,
+          document.body,
+        )}
+      {showEditProfileModal &&
+        createPortal(
+          <EditProfileModal
+            onConfirm={() => setShowEditProfileModal(false)}
+            onCancel={() => setShowEditProfileModal(false)}
           />,
           document.body,
         )}

@@ -2,7 +2,6 @@ import { fetchUser } from "../../features/authDatabase";
 import ColorButton from "../buttons/ColorButton";
 
 import { useEffect, useState } from "react";
-import { showToast } from "./ToastItem";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
@@ -13,9 +12,14 @@ import { useKvpContext } from "../../context/KvpContext";
 interface ProfileModalProps {
   onConfirm: () => void;
   onCancel: () => void;
+  showEditProfile?: () => void;
 }
 
-export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
+export function ProfileModal({
+  onConfirm,
+  onCancel,
+  showEditProfile,
+}: ProfileModalProps) {
   const [username, setUsername] = useState(
     "... " + useTranslation().profileModal.loadData,
   );
@@ -45,8 +49,6 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
   const act =
     kvps?.filter((kvp) => kvp.assignedTo === username && kvp.state === "Act")
       .length || 0;
-
-  //const actPercentage = createdBy > 0 ? Math.round((act / createdBy) * 100) : 0;
 
   const profileUser = users?.find((user) => user.userEmail === email)?.photoUrl;
 
@@ -80,14 +82,11 @@ export function ProfileModal({ onConfirm, onCancel }: ProfileModalProps) {
             <ColorButton
               color="gray"
               isTextOnly={true}
-              onClick={() =>
-                showToast(
-                  width,
-                  theme,
-                  "info",
-                  "Profil ändern Funktion ist noch nicht implementiert.",
-                )
-              }
+              onClick={() => {
+                if (showEditProfile) {
+                  showEditProfile();
+                }
+              }}
             >
               {translation.profileModal.profileButton}
             </ColorButton>
