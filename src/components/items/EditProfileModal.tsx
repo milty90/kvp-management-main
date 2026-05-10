@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import ColorButton from "../buttons/ColorButton";
+import { useTheme } from "../../context/ThemeContext";
 
 interface EditProfileModalProps {
   onConfirm: () => void;
@@ -11,6 +13,7 @@ export default function EditProfileModal({
 }: EditProfileModalProps) {
   const [preview, setPreview] = useState<string>("/face-id.png");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { theme } = useTheme();
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
@@ -51,58 +54,62 @@ export default function EditProfileModal({
               }}
             />
           </div>
-          <div className="flex flex-col bg-card p-3 min-w-90 rounded-lg border border-border">
-            <label className="text-sm text-text-primary mb-1">Username</label>
+          <div className="flex flex-col bg-card p-2.5 w-3/5 rounded-lg border border-border">
+            <label className="text-sm text-text-primary pl-1 mb-1 -mt-0.5">
+              Username
+            </label>
             <input
               type="text"
-              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+              className="text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
               placeholder="Enter your username"
             />
           </div>
         </div>
 
-        <div className="flex flex-col px-2 py-4 gap-4 ">
-          <div className="flex bg-gray-500 px-3  py-2  gap-2 rounded-lg border border-border">
-            <div className="flex flex-col w-full mb-1">
-              <label className="text-sm text-text-primary mb-1">
+        <div className="flex flex-col md:px-2 py-4 gap-4 ">
+          <div className="flex bg-card px-2.5 pt-2 pb-1 gap-3 rounded-lg border border-border">
+            <div className="flex flex-col flex-1 min-w-0 mb-1">
+              <label className="text-sm text-text-primary pl-1 mb-1">
                 First Name
               </label>
               <input
                 type="text"
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
                 placeholder="Enter your first name"
-              />{" "}
+              />
             </div>
-            <div className="flex flex-col w-full mb-1 ">
-              <label className="text-sm text-text-primary mb-1">
+            <div className="flex flex-col flex-1 min-w-0 mb-1">
+              <label className="text-sm text-text-primary pl-1 mb-1">
                 Last Name
               </label>
               <input
                 type="text"
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
                 placeholder="Enter your last name"
-              />{" "}
+              />
             </div>
           </div>
 
-          <div className="flex bg-gray-500 px-3  py-2  gap-2 rounded-lg border border-border">
-            <div className="flex flex-col w-full mb-1">
-              <label className="text-sm text-text-primary mb-1">
+          <div className="flex bg-card px-2.5 pt-2 pb-1 gap-3 rounded-lg border border-border">
+            <div className="flex flex-col flex-1 min-w-0 mb-1">
+              <label className="text-sm text-text-primary pl-1 mb-1">
                 Department
               </label>
               <input
                 type="text"
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
                 placeholder="Enter your department"
-              />{" "}
+              />
             </div>
-            <div className="flex flex-col w-full mb-1 ">
-              <label className="text-sm text-text-primary mb-1">Role</label>
+            <div className="flex flex-col flex-1 min-w-0 mb-1">
+              <label className="text-sm text-text-primary pl-1 mb-1">
+                Role
+              </label>
               <input
                 type="text"
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
                 placeholder="Enter your role"
-              />{" "}
+              />
             </div>
           </div>
 
@@ -111,22 +118,19 @@ export default function EditProfileModal({
               About Me
             </label>
             <textarea
-              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+              className="text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
               placeholder="Tell us about yourself"
               rows={4}
             ></textarea>
           </div>
         </div>
-        <div className="flex flex-col px-5">
-          <button
-            onClick={onConfirm}
-            className="mt-3  py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-          >
+        <div className="flex flex-row-reverse px-5 gap-3">
+          <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
             Save Changes
-          </button>
+          </ColorButton>
           <button
             onClick={onCancel}
-            className="my-3 py-1.5 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+            className={`px-4 py-2 rounded-md text-sm font-medium ${theme === "dark" ? " text-text-secondary hover:text-text-primary hover:bg-gray-700/80" : "text-text-secondary hover:text-text-primary hover:bg-gray-300/80"} transition-colors duration-150`}
           >
             Cancel
           </button>
