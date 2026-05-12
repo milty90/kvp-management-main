@@ -1,9 +1,7 @@
 import { fetchUser } from "../../features/authDatabase";
 import ColorButton from "../buttons/ColorButton";
-
 import { useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
-import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
 import { formatDate } from "../../utils/formatDate";
 import { useUserContext } from "../../context/UserContext";
@@ -27,10 +25,18 @@ export function ProfileModal({
     "... " + useTranslation().profileModal.loadData,
   );
   const { theme } = useTheme();
-  const width = useWindowWidth();
   const translation = useTranslation();
   const { users } = useUserContext();
   const { kvps } = useKvpContext();
+
+  const userNameFromContext = users?.find(
+    (user) => user.userEmail === email,
+  )?.userName;
+  useEffect(() => {
+    if (userNameFromContext) {
+      setUsername(userNameFromContext);
+    }
+  }, [userNameFromContext]);
 
   const department =
     users?.find((user) => user.userEmail === email)?.department || "N/A";
@@ -70,67 +76,77 @@ export function ProfileModal({
           &times;
         </button>
 
-        <div className="border-t border-border my-4"></div>
+        <div className="border-t border-border mt-4 mb-2"></div>
 
-        <div className="flex flex-col items-start justify-start mb-2 p-5 rounded-lg border border-gray-500">
-          <div className="flex flex-row w-full justify-between items-center px-1">
-            <img
-              src={profileUser || "/face-id.png"}
-              alt="Profilbild"
-              className="w-24 h-24 rounded-md object-cover"
-            />
-            <ColorButton
-              color="gray"
-              isTextOnly={true}
-              onClick={() => {
-                if (showEditProfile) {
-                  showEditProfile();
-                }
-              }}
-            >
-              {translation.profileModal.profileButton}
-            </ColorButton>
-          </div>
-          <div className="flex flex-col items-start justify-start mt-3 px-1 gap-1">
-            <p className="text-2xl text-text-primary font-bold">
-              {users?.find((user) => user.userEmail === email)?.firstName ||
-                "N/A"}{" "}
-              {users?.find((user) => user.userEmail === email)?.lastName ||
-                "N/A"}
-            </p>
+        <div className="flex flex-row items-center justify-between mb-2 p-4 ">
+          <div className="flex flex-row items-center justify-center  px-1 ">
+            <div className="flex flex-row border-2 rounded-full p-1 w-max h-max">
+              <img
+                src={profileUser || "/face-id.png"}
+                alt="Profilbild"
+                className="w-24 h-24 rounded-full object-cover "
+              />
+            </div>
+            <div className="flex flex-col items-start ml-4">
+              <p className="text-xl text-text-primary font-semibold">
+                {users?.find((user) => user.userEmail === email)?.firstName ||
+                  "N/A"}{" "}
+                {users?.find((user) => user.userEmail === email)?.lastName ||
+                  "N/A"}
+              </p>
 
-            <p className=" text-text-secondary text-base font-semibold">
-              {translation.profileModal.name}: {username}
-            </p>
-            <p className="text-sm text-gray-500">
-              {users?.find((user) => user.userEmail === email)?.aboutMe}
-            </p>
+              <p className=" text-text-secondary text-base font-medium ">
+                {email}
+              </p>
+              <p className="text-sm text-gray-500">
+                {users?.find((user) => user.userEmail === email)?.aboutMe}
+              </p>
+            </div>
           </div>
+          <ColorButton
+            color="gray"
+            isTextOnly={true}
+            onClick={() => {
+              if (showEditProfile) {
+                showEditProfile();
+              }
+            }}
+          >
+            {translation.profileModal.profileButton}
+          </ColorButton>
         </div>
         <div className="flex items-center justify-between  h-20 mb-2 gap-2 ">
-          <div className="flex flex-col items-center text-sm w-3/12 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
+          <div
+            className={`flex flex-col items-center text-sm w-3/12 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+          >
             <p className="text-3xl text-blue-500">{createdBy}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardActive}
             </p>
           </div>
-          <div className="flex flex-col items-center text-sm w-4/12 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
+          <div
+            className={`flex flex-col items-center text-sm w-4/12 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+          >
             <p className="text-3xl text-yellow-500">{assignedTo}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardAssigned}
             </p>
           </div>
-          <div className="flex flex-col items-center text-sm w-5/13 lg:w-4/12 text-gray-500 border border-gray-500 rounded-lg px-5 py-3">
+          <div
+            className={`flex flex-col items-center text-sm w-5/13 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+          >
             <p className="text-3xl text-green-500">{act}</p>
             <p className="text-md text-text-secondary ">
               {translation.profileModal.cardClosed}
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center px-6 lg:px-8 py-3 mb-2 rounded-lg border border-gray-500">
+        <div className="flex flex-col items-start justify-start px-6 lg:px-8 py-3 mb-2 mt-4 rounded-lg border-dashed border-2 border-border ">
           <p className="text-sm text-text-secondary my-1">
-            {translation.profileModal.email}:{" "}
-            <span className="text-text-primary pl-3">{email}</span>
+            {translation.profileModal.name}:{" "}
+            <span className="text-text-primary pl-3">
+              {userNameFromContext || username}
+            </span>
           </p>
           <p className="text-sm text-text-secondary my-1">
             {translation.profileModal.department}:{" "}
