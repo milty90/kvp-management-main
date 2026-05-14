@@ -33,7 +33,9 @@ export const updateUser = async (dispatch: Dispatch, user: User) => {
 };
 
 export const deleteUser = async (dispatch: Dispatch, userId: string) => {
-  const { error } = await supabase.from("users").delete().eq("userId", userId);
+  const { error } = await supabase.functions.invoke("delete-user", {
+    body: { userId },
+  });
   if (error) {
     console.error("Error deleting user:", error);
     return;

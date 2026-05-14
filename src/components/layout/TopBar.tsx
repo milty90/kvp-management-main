@@ -15,6 +15,7 @@ import { showToast } from "../items/ToastItem";
 import { TopNavButton } from "../buttons/TopNavButton";
 import { useTranslation } from "../../utils/useTranslation";
 import EditProfileModal from "../items/EditProfileModal";
+import { useUserContext } from "../../context/UserContext";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -32,6 +33,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const { deleteUser, user } = useUserContext();
 
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -73,6 +75,23 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const handleStatisticsClick = () => {
     navigate("/stats");
     setShowMenu(false);
+  };
+
+  const handleDeleteProfileClick = () => {
+    deleteUser(user?.id || "");
+    console.log("User deleted:", user?.id);
+    signOut();
+    navigate("/login");
+    showToast(
+      width,
+      theme,
+      "success",
+      translation.profileModal.deleteButton +
+        " " +
+        translation.logOutModal.toastMessage,
+    );
+    setShowDeleteProfileDialog(true);
+    setShowProfileModal(false);
   };
   return (
     <div className="flex flex-col w-full shadow-md rounded-2xl">
@@ -203,14 +222,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
               "Funktion zum Löschen des Kontos ist noch nicht implementiert."
             }
             onConfirm={() => {
-              showToast(
-                width,
-                theme,
-                "success",
-                "Funktion zum Löschen des Kontos ist noch nicht implementiert.",
-              );
-              signOut();
-              navigate("/login");
+              handleDeleteProfileClick();
             }}
             onCancel={() => setShowDeleteProfileDialog(false)}
           />,
