@@ -83,6 +83,7 @@ export const translations = {
     profileModal: {
       title: "Profil",
       profileButton: "Profil ändern",
+      deleteButton: "Konto löschen",
       loadData: "Lade Benutzerdaten...",
       name: "Benutzername",
       email: "E-Mail",
@@ -264,6 +265,7 @@ export const translations = {
     profileModal: {
       title: "Profile",
       profileButton: "Edit Profile",
+      deleteButton: "Delete Account",
       loadData: "Loading user data...",
       name: "Username",
       email: "Email",

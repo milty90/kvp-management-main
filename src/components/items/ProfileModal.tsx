@@ -78,7 +78,7 @@ export function ProfileModal({
 
         <div className="border-t border-border mt-4 mb-2"></div>
 
-        <div className="flex flex-row items-center justify-between mb-2 p-4 ">
+        <div className="flex flex-row items-center justify-between mb-2 py-4 pr-1.5 pl-0 md:p-4 ">
           <div className="flex flex-row items-center justify-center  px-1 ">
             <div className="flex flex-row border-2 rounded-full p-1 w-max h-max">
               <img
@@ -103,17 +103,32 @@ export function ProfileModal({
               </p>
             </div>
           </div>
-          <ColorButton
-            color="gray"
-            isTextOnly={true}
-            onClick={() => {
-              if (showEditProfile) {
-                showEditProfile();
-              }
-            }}
-          >
-            {translation.profileModal.profileButton}
-          </ColorButton>
+          <div className="flex flex-col items-end gap-2.5">
+            <ColorButton
+              color="gray"
+              isTextOnly={false}
+              icon="edit.svg"
+              onClick={() => {
+                if (showEditProfile) {
+                  showEditProfile();
+                }
+              }}
+            >
+              {translation.profileModal.profileButton}
+            </ColorButton>
+            <ColorButton
+              color="red"
+              isTextOnly={false}
+              icon="user-delete.svg"
+              onClick={() => {
+                if (showEditProfile) {
+                  showEditProfile();
+                }
+              }}
+            >
+              {translation.profileModal.deleteButton}
+            </ColorButton>
+          </div>
         </div>
         <div className="flex items-center justify-between  h-20 mb-2 gap-2 ">
           <div
