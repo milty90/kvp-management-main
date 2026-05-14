@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import {
   signInWithGoogle,
   signInWithGitHub,
-  signInWithSlack,
   signInWithEmail,
 } from "../../features/authDatabase";
 import { useState } from "react";
