@@ -11,12 +11,14 @@ interface ProfileModalProps {
   onConfirm: () => void;
   onCancel: () => void;
   showEditProfile?: () => void;
+  showDeleteProfile?: () => void;
 }
 
 export function ProfileModal({
   onConfirm,
   onCancel,
   showEditProfile,
+  showDeleteProfile,
 }: ProfileModalProps) {
   const [username, setUsername] = useState(
     "... " + useTranslation().profileModal.loadData,
@@ -121,8 +123,8 @@ export function ProfileModal({
               isTextOnly={false}
               icon="user-delete.svg"
               onClick={() => {
-                if (showEditProfile) {
-                  showEditProfile();
+                if (showDeleteProfile) {
+                  showDeleteProfile();
                 }
               }}
             >

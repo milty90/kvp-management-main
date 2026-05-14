@@ -39,6 +39,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+  const [showDeleteProfileDialog, setShowDeleteProfileDialog] = useState(false);
 
   useClickOutside(settingsWrapperRef, () => {
     setShowSettings(false);
@@ -177,6 +178,10 @@ export default function TopBar({ kvpBar }: TopBarProps) {
               setShowProfileModal(false);
               setShowEditProfileModal(true);
             }}
+            showDeleteProfile={() => {
+              setShowProfileModal(false);
+              setShowDeleteProfileDialog(true);
+            }}
           />,
           document.body,
         )}
@@ -185,6 +190,29 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           <EditProfileModal
             onConfirm={() => setShowEditProfileModal(false)}
             onCancel={() => setShowEditProfileModal(false)}
+          />,
+          document.body,
+        )}
+      {showDeleteProfileDialog &&
+        createPortal(
+          <ConfirmDialogItem
+            confirmButtonText={translation.profileModal.deleteButton}
+            cancelButtonText={translation.logOutModal.onCancel}
+            title={translation.profileModal.deleteButton}
+            message={
+              "Funktion zum Löschen des Kontos ist noch nicht implementiert."
+            }
+            onConfirm={() => {
+              showToast(
+                width,
+                theme,
+                "success",
+                "Funktion zum Löschen des Kontos ist noch nicht implementiert.",
+              );
+              signOut();
+              navigate("/login");
+            }}
+            onCancel={() => setShowDeleteProfileDialog(false)}
           />,
           document.body,
         )}
