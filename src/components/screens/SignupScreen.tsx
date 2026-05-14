@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUpWithEmailandPassword } from "../../features/authDatabase";
+import {
+  signInWithGitHub,
+  signInWithGoogle,
+  signUpWithEmailandPassword,
+} from "../../features/authDatabase";
 import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
@@ -185,7 +189,7 @@ export function SignupScreen() {
                 width,
                 theme,
                 "info",
-                "Demo account functionality is currently not available.",
+                translation.signupScreen.demoAccount,
               )
             }
           >
@@ -197,11 +201,13 @@ export function SignupScreen() {
         <div className="flex mt-6 space-x-4">
           <button
             onClick={() =>
-              showToast(
-                width,
-                theme,
-                "info",
-                "Google Anmeldung ist derzeit nicht verfügbar.",
+              signInWithGoogle().catch((error) =>
+                showToast(
+                  width,
+                  theme,
+                  "error",
+                  translation.signupScreen.oAuthError + ": " + error.message,
+                ),
               )
             }
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
@@ -215,11 +221,13 @@ export function SignupScreen() {
           </button>
           <button
             onClick={() =>
-              showToast(
-                width,
-                theme,
-                "info",
-                "GitHub Anmeldung ist derzeit nicht verfügbar.",
+              signInWithGitHub().catch((error) =>
+                showToast(
+                  width,
+                  theme,
+                  "error",
+                  translation.signupScreen.oAuthError + ": " + error.message,
+                ),
               )
             }
             className={`flex items-center px-3 py-2 ${theme === "light" ? "bg-gray-900" : "bg-gray-600"} text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150`}
@@ -246,7 +254,7 @@ export function SignupScreen() {
                 width,
                 theme,
                 "info",
-                "Slack Anmeldung ist derzeit nicht verfügbar.",
+                translation.signupScreen.oAuthError,
               )
             }
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"

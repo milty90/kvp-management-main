@@ -173,7 +173,14 @@ export function LoginScreen() {
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
             type="button"
             onClick={() => {
-              signInWithGoogle();
+              signInWithGoogle().catch((error) =>
+                showToast(
+                  width,
+                  theme,
+                  "error",
+                  translation.loginScreen.oAuthError + ": " + error.message,
+                ),
+              );
             }}
           >
             <img
@@ -188,14 +195,14 @@ export function LoginScreen() {
             className={`flex items-center px-3 py-2 ${theme === "light" ? "bg-gray-900" : "bg-gray-600"} text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150`}
             type="button"
             onClick={() => {
-              showToast(
-                width,
-                theme,
-                "info",
-                "GitHub Anmeldung ist derzeit nicht verfügbar.",
+              signInWithGitHub().catch((error) =>
+                showToast(
+                  width,
+                  theme,
+                  "error",
+                  translation.loginScreen.oAuthError + ": " + error.message,
+                ),
               );
-
-              signInWithGitHub();
             }}
           >
             <svg
@@ -223,9 +230,8 @@ export function LoginScreen() {
                 width,
                 theme,
                 "info",
-                "Slack Anmeldung ist derzeit nicht verfügbar.",
+                translation.loginScreen.oAuthError,
               );
-              signInWithSlack();
             }}
           >
             <img src="/slack.svg" alt="Slack" className="w-6 mr-2 -ml-1" />

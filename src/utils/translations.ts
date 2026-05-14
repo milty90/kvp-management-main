@@ -19,6 +19,7 @@ export const translations = {
       haventGotAccount: "Noch kein Konto?",
       signupButton: "Registrieren",
       orLogInWithSocials: "oder melden Sie sich mit einem sozialen Konto an.",
+      oAuthError: "Anmeldung ist derzeit nicht verfügbar.",
     },
     signupScreen: {
       title: "Erstellen Sie Ihr Konto",
@@ -35,6 +36,7 @@ export const translations = {
       alreadyHaveAccount: "Bereits ein Konto?",
       demoAccount: "Demo account nutzen",
       orLogInWithSocials: "oder melden Sie sich mit einem sozialen Konto an.",
+      oAuthError: "Registrierung ist derzeit nicht verfügbar.",
     },
     statCard: {
       total: "Gesamt",
@@ -318,6 +320,7 @@ export const translations = {
       haventGotAccount: "Don't have an account?",
       signupButton: "Sign Up",
       orLogInWithSocials: "or log in with a social account.",
+      oAuthError: "Login is currently unavailable.",
     },
     signupScreen: {
       title: "Create Your Account",
@@ -334,6 +337,7 @@ export const translations = {
       alreadyHaveAccount: "Already have an account?",
       demoAccount: "Use demo account",
       orLogInWithSocials: "or log in with a social account.",
+      oAuthError: "Registration is currently unavailable.",
     },
     actionBar: {
       startState: "All",
