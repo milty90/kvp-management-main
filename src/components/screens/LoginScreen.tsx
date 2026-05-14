@@ -144,12 +144,13 @@ export function LoginScreen() {
             <a
               className="inline-block align-baseline font-semibold text-sm text-button hover:text-button-hover cursor-pointer"
               onClick={() =>
-                showToast(
-                  width,
-                  theme,
-                  "info",
-                  "Password reset functionality is currently not available.",
-                )
+                // showToast(
+                //   width,
+                //   theme,
+                //   "info",
+                //   "Password reset functionality is currently not available.",
+                // )
+                navigate("/forgot-password")
               }
             >
               {translation.loginScreen.forgotPassword}
@@ -229,7 +230,7 @@ export function LoginScreen() {
                 width,
                 theme,
                 "info",
-                translation.loginScreen.oAuthError,
+                "Slack: " + translation.loginScreen.oAuthError,
               );
             }}
           >

@@ -1,5 +1,20 @@
 import { supabase } from "../utils/supabase";
 
+export async function forgotPassword(email: string) {
+  if (!email) {
+    console.error("Email is required for password reset.");
+    return { error: new Error("Email is required for password reset.") };
+  }
+
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+
+  if (error) {
+    console.error("Error sending password reset email:", error);
+  } else {
+    console.log("Password reset email sent:", data);
+  }
+}
+
 export async function signInWithGoogle() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",

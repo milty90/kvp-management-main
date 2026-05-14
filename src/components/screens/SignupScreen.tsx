@@ -254,7 +254,7 @@ export function SignupScreen() {
                 width,
                 theme,
                 "info",
-                translation.signupScreen.oAuthError,
+                "Slack: " + translation.signupScreen.oAuthError,
               )
             }
             className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"

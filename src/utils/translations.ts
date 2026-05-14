@@ -217,6 +217,20 @@ export const translations = {
       saveButton: "Änderungen speichern",
       cancelButton: "Abbrechen",
     },
+    forgotPasswordScreen: {
+      title: "Passwort zurücksetzen",
+      description:
+        "Geben Sie Ihre E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen Ihres Passworts zu erhalten.",
+      emailTitle: "E-Mail Adresse",
+      emailPlaceholder: "E-Mail eingeben",
+      resetButton: "Passwort zurücksetzen",
+      backToLogin: "Zurück zur Anmeldung",
+      missingEmailError: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+      resetSuccess:
+        "Wenn ein Konto mit dieser E-Mail-Adresse existiert, erhalten Sie in Kürze Anweisungen zum Zurücksetzen Ihres Passworts.",
+      resetError:
+        "Fehler beim Zurücksetzen des Passworts. Bitte versuchen Sie es später erneut.",
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -432,6 +446,20 @@ export const translations = {
       aboutMePlaceholder: "Tell us about yourself",
       saveButton: "Save Changes",
       cancelButton: "Cancel",
+    },
+    forgotPasswordScreen: {
+      title: "Reset Password",
+      description:
+        "Enter your email address to receive instructions on how to reset your password.",
+      emailTitle: "Email Address",
+      emailPlaceholder: "Enter your email",
+      resetButton: "Reset Password",
+      backToLogin: "Back to Login",
+      missingEmailError: "Please enter your email address.",
+      resetSuccess:
+        "If an account with that email address exists, you will receive instructions to reset your password shortly.",
+      resetError:
+        "Error resetting password. Please try again later.",
     },
   },
 };
