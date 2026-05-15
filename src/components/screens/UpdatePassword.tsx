@@ -14,11 +14,21 @@ export default function UpdatePassword() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY" && session) {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
         setSessionReady(true);
       }
     });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if ((event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") && session) {
+        setSessionReady(true);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handlePasswordUpdate = async (
