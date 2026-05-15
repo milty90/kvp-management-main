@@ -10,6 +10,7 @@ import { SignupScreen } from "./components/screens/SignupScreen";
 import { LoginScreen } from "./components/screens/LoginScreen";
 import { useSessionContext } from "./context/SessionContext";
 import { ForgotPassword } from "./components/screens/ForgotPassword";
+import UpdatePassword from "./components/screens/UpdatePassword";
 
 const ProtectedRoute = ({
   children,
@@ -37,6 +38,7 @@ function App() {
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/signup" element={<SignupScreen />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
         <Route
           path="/kvps"
           element={

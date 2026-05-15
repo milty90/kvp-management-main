@@ -8,6 +8,7 @@ type ColorButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 const colorClasses = {
@@ -29,11 +30,13 @@ export default function ColorButton({
   icon,
   children,
   type = "button",
+  disabled = false,
 }: ColorButtonProps) {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={`
           inline-flex items-center gap-2 px-4 py-${height} h-9 rounded-lg text-nowrap
           bg-button text-primary hover:bg-button-hover active:bg-button-active

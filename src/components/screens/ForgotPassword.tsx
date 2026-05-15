@@ -5,6 +5,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useTranslation } from "../../utils/useTranslation";
 import { supabase } from "../../utils/supabase";
+import ColorButton from "../buttons/ColorButton";
 export function ForgotPassword() {
   const navigate = useNavigate();
   const width = useWindowWidth();
@@ -56,14 +57,14 @@ export function ForgotPassword() {
         <img
           src={theme === "dark" ? "/spark-dark.png" : "/spark-light.png"}
           alt="Logo"
-          className="w-55 mb-4 ml-4"
+          className="w-50 mb-4 ml-4"
         />
         <h2 className="text-2xl font-semibold mb-6">
           {translation.forgotPasswordScreen.title}
         </h2>
         <form className="w-full mb-1 max-w-sm" onSubmit={handlePasswordReset}>
-          <div className="mb-4 items-start justify-items-start">
-            <label className="block text-sm text-text-primary mb-1">
+          <div className="mb-6 items-center justify-items-center">
+            <label className="block text-sm text-text-primary mb-1 pl-2">
               {translation.forgotPasswordScreen.emailTitle}
             </label>
             <input
@@ -75,12 +76,9 @@ export function ForgotPassword() {
               placeholder={translation.forgotPasswordScreen.emailPlaceholder}
             />
           </div>
-          <button
-            type="submit"
-            className={`w-full py-2 ${theme === "light" ? "bg-gray-900" : "bg-gray-600"} text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150`}
-          >
+          <ColorButton type="submit">
             {translation.forgotPasswordScreen.resetButton}
-          </button>
+          </ColorButton>
         </form>
       </div>
     </div>

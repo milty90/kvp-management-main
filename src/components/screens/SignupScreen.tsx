@@ -184,14 +184,7 @@ export function SignupScreen() {
         <p className="text-sm text-text-secondary mt-6">
           <a
             className="font-semibold  text-button hover:text-button-hover cursor-pointer"
-            onClick={() =>
-              showToast(
-                width,
-                theme,
-                "info",
-                translation.signupScreen.demoAccount,
-              )
-            }
+            onClick={() => navigate("/update-password")}
           >
             {translation.signupScreen.demoAccount}
           </a>

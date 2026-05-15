@@ -143,15 +143,7 @@ export function LoginScreen() {
             </button>
             <a
               className="inline-block align-baseline font-semibold text-sm text-button hover:text-button-hover cursor-pointer"
-              onClick={() =>
-                // showToast(
-                //   width,
-                //   theme,
-                //   "info",
-                //   "Password reset functionality is currently not available.",
-                // )
-                navigate("/forgot-password")
-              }
+              onClick={() => navigate("/forgot-password")}
             >
               {translation.loginScreen.forgotPassword}
             </a>
