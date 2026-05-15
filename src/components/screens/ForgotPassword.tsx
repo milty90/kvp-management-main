@@ -29,7 +29,9 @@ export function ForgotPassword() {
       return;
     }
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `https://ITYEOLDALAD.COM/update-password`,
+    });
 
     if (error) {
       showToast(
