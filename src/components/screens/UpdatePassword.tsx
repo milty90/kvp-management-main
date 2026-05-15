@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "./../../utils/supabase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,14 +7,29 @@ import ColorButton from "../buttons/ColorButton";
 
 export default function UpdatePassword() {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionReady, setSessionReady] = useState(false);
   const { theme } = useTheme();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" && session) {
+        setSessionReady(true);
+      }
+    });
+  }, []);
 
   const handlePasswordUpdate = async (
     e: React.SubmitEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Die Passwörter stimmen nicht überein.");
+      return;
+    }
     setLoading(true);
 
     const { error } = await supabase.auth.updateUser({
@@ -29,6 +44,14 @@ export default function UpdatePassword() {
     }
     setLoading(false);
   };
+
+  if (!sessionReady) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-background">
+        <p className="text-text-primary">Validierung läuft...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center md:justify-center  h-screen bg-background">
@@ -58,8 +81,8 @@ export default function UpdatePassword() {
             type="password"
             placeholder="Bestätigen Sie das neue Passwort"
             className="border p-2 rounded w-75"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </form>
