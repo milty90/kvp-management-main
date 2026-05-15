@@ -95,10 +95,10 @@ export default function UpdatePassword() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+          <ColorButton type="submit" disabled={loading}>
+            {loading ? "Speichern..." : "Passwort aktualisieren"}
+          </ColorButton>
         </form>
-        <ColorButton type="submit" disabled={loading}>
-          {loading ? "Speichern..." : "Passwort aktualisieren"}
-        </ColorButton>
       </div>
     </div>
   );
