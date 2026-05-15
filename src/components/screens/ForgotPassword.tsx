@@ -30,7 +30,7 @@ export function ForgotPassword() {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `https://ITYEOLDALAD.COM/update-password`,
+      redirectTo: `https://pdcamanagement.netlify.app/update-password`,
     });
 
     if (error) {
