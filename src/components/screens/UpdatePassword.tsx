@@ -78,13 +78,13 @@ export default function UpdatePassword() {
     setLoading(false);
   };
 
-  if (!sessionReady) {
-    return (
-      <div className="flex flex-col items-center justify-center  bg-background">
-        <LoadingSpinner text={translations.updatePassword.validityMessage} />
-      </div>
-    );
-  }
+  // if (!sessionReady) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center  bg-background">
+  //       <LoadingSpinner text={translations.updatePassword.validityMessage} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex flex-col items-center md:justify-center  h-screen bg-background">
@@ -105,7 +105,7 @@ export default function UpdatePassword() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder={translations.updatePassword.passwordPlaceholder}
-              className="border p-2 rounded w-85 mb-6"
+              className={`border p-2 rounded w-85 mb-7 ${theme === "dark" ? "border-gray-600 focus:ring-green-600" : "border-gray-300 focus:ring-blue-500"} rounded-lg focus:outline-none focus:ring-2`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -158,7 +158,7 @@ export default function UpdatePassword() {
               placeholder={
                 translations.updatePassword.confirmPasswordPlaceholder
               }
-              className="border p-2 rounded w-85 mb-7"
+              className={`border p-2 rounded w-85 mb-7 ${theme === "dark" ? "border-gray-600 focus:ring-green-600" : "border-gray-300 focus:ring-blue-500"} rounded-lg focus:outline-none focus:ring-2`}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -203,7 +203,12 @@ export default function UpdatePassword() {
             </span>
           </div>
 
-          <ColorButton type="submit" disabled={loading} isTextOnly={true}>
+          <ColorButton
+            type="submit"
+            disabled={loading}
+            isTextOnly={true}
+            color={theme === "dark" ? "green" : "blue"}
+          >
             {loading
               ? translations.updatePassword.loadingText
               : translations.updatePassword.updateButton}
