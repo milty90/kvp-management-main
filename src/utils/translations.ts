@@ -37,6 +37,11 @@ export const translations = {
       demoAccount: "Demo account nutzen",
       orLogInWithSocials: "oder melden Sie sich mit einem sozialen Konto an.",
       oAuthError: "Registrierung ist derzeit nicht verfügbar.",
+      loggedInWithDemo: "Angemeldet mit Demo-Account",
+      emailPassFail: "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+      signUpFailed: "Fehler bei der Kontoerstellung: ",
+      signUpSuccess: "Konto erfolgreich erstellt!",
+      confirmSignUp: "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
     },
     statCard: {
       total: "Gesamt",
@@ -366,6 +371,11 @@ export const translations = {
       demoAccount: "Use demo account",
       orLogInWithSocials: "or log in with a social account.",
       oAuthError: "Registration is currently unavailable.",
+      loggedInWithDemo: "Logged in with demo account",
+      emailPassFail: "Please enter both email and password.",
+      signUpFailed: "Error creating account: ",
+      signUpSuccess: "Account created successfully!",
+      confirmSignUp: "Account created successfully! Please confirm your email now and then log in.",
     },
     actionBar: {
       startState: "All",

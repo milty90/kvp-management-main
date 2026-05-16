@@ -4,6 +4,7 @@ import {
   signInWithGitHub,
   signInWithGoogle,
   signUpWithEmailandPassword,
+  signInWithEmail,
 } from "../../features/authDatabase";
 import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
@@ -23,16 +24,37 @@ export function SignupScreen() {
   const translation = useTranslation();
   const { addUser } = useUserContext();
 
-  async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleDemoLogin() {
+    const { data, error } = await signInWithEmail(
+      "demo@mail.com",
+      "demopassword",
+    );
 
-    if (!email || !password) {
+    if (error || !data.session) {
       showToast(
         width,
         theme,
         "error",
-        "Bitte geben Sie sowohl E-Mail als auch Passwort ein.",
+        translation.signupScreen.loggedInWithDemo + " " + error?.message,
       );
+      return;
+    }
+
+    showToast(
+      width,
+      theme,
+      "success",
+      translation.signupScreen.loggedInWithDemo,
+    );
+
+    navigate("/kvps");
+  }
+
+  async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!email || !password) {
+      showToast(width, theme, "error", translation.signupScreen.emailPassFail);
       return;
     }
 
@@ -43,7 +65,7 @@ export function SignupScreen() {
         width,
         theme,
         "error",
-        "Fehler bei der Kontoerstellung: " + error?.message,
+        translation.signupScreen.signUpFailed + error?.message,
       );
       return;
     }
@@ -62,17 +84,17 @@ export function SignupScreen() {
     });
 
     if (data.session) {
-      showToast(width, theme, "success", "Konto erfolgreich erstellt!");
+      showToast(
+        width,
+        theme,
+        "success",
+        translation.signupScreen.signUpSuccess,
+      );
       navigate("/login");
       return;
     }
 
-    showToast(
-      width,
-      theme,
-      "success",
-      "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
-    );
+    showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
 
     navigate("/login");
   }
@@ -184,7 +206,7 @@ export function SignupScreen() {
         <p className="text-sm text-text-secondary mt-6">
           <a
             className="font-semibold  text-button hover:text-button-hover cursor-pointer"
-            onClick={() => navigate("/update-password")}
+            onClick={() => handleDemoLogin()}
           >
             {translation.signupScreen.demoAccount}
           </a>
