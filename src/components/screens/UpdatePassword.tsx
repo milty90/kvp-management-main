@@ -78,13 +78,13 @@ export default function UpdatePassword() {
     setLoading(false);
   };
 
-  // if (!sessionReady) {
-  //   return (
-  //     <div className="flex flex-col items-center justify-center  bg-background">
-  //       <LoadingSpinner text={translations.updatePassword.validityMessage} />
-  //     </div>
-  //   );
-  // }
+  if (!sessionReady) {
+    return (
+      <div className="flex flex-col items-center justify-center  bg-background">
+        <LoadingSpinner text={translations.updatePassword.validityMessage} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center md:justify-center  h-screen bg-background">
