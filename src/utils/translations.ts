@@ -105,7 +105,7 @@ export const translations = {
     },
     statistics: {
       DonutChart: {
-        title: "PDCA-Phasen Verteilung",
+        title: "KVP-Phasen Verteilung",
         description: "Anzahl der Verbesserungen pro Phase",
         total: "Gesamt",
       },
