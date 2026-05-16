@@ -11,7 +11,6 @@ export function ForgotPassword() {
   const width = useWindowWidth();
   const translation = useTranslation();
   const { theme } = useTheme();
-
   const [email, setEmail] = useState("");
 
   async function handlePasswordReset(
@@ -59,9 +58,9 @@ export function ForgotPassword() {
         <img
           src={theme === "dark" ? "/spark-dark.png" : "/spark-light.png"}
           alt="Logo"
-          className="w-50 mb-4 ml-4"
+          className="w-50 mb-2 ml-4"
         />
-        <h2 className="text-2xl font-semibold mb-6">
+        <h2 className="text-xl font-semibold mb-7">
           {translation.forgotPasswordScreen.title}
         </h2>
         <form className="w-full mb-1 max-w-sm" onSubmit={handlePasswordReset}>
@@ -78,7 +77,7 @@ export function ForgotPassword() {
               placeholder={translation.forgotPasswordScreen.emailPlaceholder}
             />
           </div>
-          <ColorButton type="submit">
+          <ColorButton type="submit" isTextOnly={true}>
             {translation.forgotPasswordScreen.resetButton}
           </ColorButton>
         </form>

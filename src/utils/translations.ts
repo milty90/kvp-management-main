@@ -231,6 +231,20 @@ export const translations = {
       resetError:
         "Fehler beim Zurücksetzen des Passworts. Bitte versuchen Sie es später erneut.",
     },
+    updatePassword: {
+      title: "Neues Passwort",
+      passwordTitle: "Neues Passwort",
+      passwordPlaceholder: "Geben Sie das neue Passwort ein",
+      confirmPasswordTitle: "Neues Passwort bestätigen",
+      confirmPasswordPlaceholder: "Bestätigen Sie das neue Passwort",
+      updateButton: "Passwort aktualisieren",
+      loadingText: "Speichern...",
+      confirmationMessage: "Passwort wurde erfolgreich aktualisiert!",
+      confirmationError: (error: string) =>
+        "Fehler beim Aktualisieren des Passworts: " + error,
+      confirmationMismatch: "Die Passwörter stimmen nicht überein.",
+      validityMessage: "Validierung läuft...",
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -461,5 +475,19 @@ export const translations = {
       resetError:
         "Error resetting password. Please try again later.",
     },
+    updatePassword: {
+      title: "New Password",
+      passwordTitle: "New Password",
+      passwordPlaceholder: "Enter the new password",
+      confirmPasswordTitle: "Confirm New Password",
+      confirmPasswordPlaceholder: "Confirm the new password",
+      updateButton: "Update Password",
+      loadingText: "Saving...",
+      confirmationMessage: "Password updated successfully!",
+      confirmationError: (error: string) =>
+        "Error updating password: " + error,
+      confirmationMismatch: "Passwords do not match.",
+      validityMessage: "Validating...",
+    }  
   },
 };
