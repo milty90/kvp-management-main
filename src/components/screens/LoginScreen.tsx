@@ -160,7 +160,7 @@ export function LoginScreen() {
           <br />
           {translation.loginScreen.orLogInWithSocials}
         </p>
-        <div className="flex mt-6 space-x-4">
+        <div className="flex mt-6 space-x-2 md:space-x-4">
           <button
             className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
             type="button"

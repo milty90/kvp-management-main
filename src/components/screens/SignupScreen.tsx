@@ -188,7 +188,7 @@ export function SignupScreen() {
               {translation.signupScreen.passwordText}
             </span>
           </div>
-          <div className="flex px-2 items-center justify-between">
+          <div className="flex px-0.5 md:px-2 items-center justify-between">
             <button
               type="submit"
               className="px-5 py-2.5 bg-button text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150"
@@ -213,7 +213,7 @@ export function SignupScreen() {
           <br />
           {translation.signupScreen.orLogInWithSocials}
         </p>
-        <div className="flex mt-6 space-x-4">
+        <div className="flex mt-6 space-x-2 md:space-x-4">
           <button
             onClick={() =>
               signInWithGoogle().catch((error) =>
