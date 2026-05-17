@@ -91,7 +91,7 @@ export function ProfileModal({
 
         <div className="border-t border-border mt-4 mb-2"></div>
 
-        <div className="flex flex-row items-center justify-between mb-2 py-4 pr-1.5 pl-0 md:p-4 ">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 py-4 md:pr-1.5 pl-0 md:p-4 ">
           <div className="flex flex-row items-center justify-center  px-1 ">
             <div className="flex flex-row border-2 rounded-full p-1 w-max h-max">
               <img
@@ -116,21 +116,23 @@ export function ProfileModal({
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2.5">
+          <div className="flex md:flex-col w-full mt-4 md:mt-1 items-center md:items-end gap-2.5">
             {isDemo ? (
               <>
                 <ColorButton
                   color="gray"
-                  isTextOnly={false}
+                  isTextOnly={true}
                   icon="denied.svg"
+                  width={width < 768 ? "full" : "auto"}
                   onClick={handleDamoClick}
                 >
                   {translation.profileModal.profileButton}
                 </ColorButton>
                 <ColorButton
                   color="gray"
-                  isTextOnly={false}
+                  isTextOnly={true}
                   icon="denied.svg"
+                  width={width < 768 ? "full" : "auto"}
                   onClick={handleDamoClick}
                 >
                   {translation.profileModal.deleteButton}
@@ -142,6 +144,7 @@ export function ProfileModal({
                   color="color"
                   isTextOnly={false}
                   icon="edit.svg"
+                  width={width < 768 ? "full" : "auto"}
                   onClick={() => {
                     if (showEditProfile) {
                       showEditProfile();
@@ -154,6 +157,7 @@ export function ProfileModal({
                   color="red"
                   isTextOnly={false}
                   icon="user-delete.svg"
+                  width={width < 768 ? "full" : "auto"}
                   onClick={() => {
                     if (showDeleteProfile) {
                       showDeleteProfile();

@@ -4,6 +4,7 @@ type ColorButtonProps = {
   color?: ColorButtonType;
   isTextOnly?: boolean;
   height?: string;
+  width?: string;
   icon?: string;
   children: React.ReactNode;
   onClick?: () => void;
@@ -26,6 +27,7 @@ export default function ColorButton({
   color = "blue",
   height = "2",
   isTextOnly = false,
+  width = "auto",
   onClick,
   icon,
   children,
@@ -38,7 +40,7 @@ export default function ColorButton({
       onClick={onClick}
       disabled={disabled}
       className={`
-          inline-flex items-center gap-2 px-4 py-${height} h-9 rounded-lg text-nowrap
+          inline-flex w-${width} items-center gap-2 px-4 py-${height} h-9 rounded-lg text-nowrap
           bg-button text-primary hover:bg-button-hover active:bg-button-active
           ${colorClasses[color]}
           ${color === "white" ? "text-gray-700" : "text-white"} text-sm font-medium
