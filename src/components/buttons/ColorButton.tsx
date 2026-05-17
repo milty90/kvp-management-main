@@ -17,7 +17,7 @@ const colorClasses = {
   green: "bg-green-700/90 hover:bg-green-600 active:bg-green-500",
   red: "bg-red-500 hover:bg-red-600 active:bg-red-700",
   gray: "bg-gray-500 hover:bg-gray-600 active:bg-gray-700",
-  violet: "bg-violet-500 hover:bg-violet-600 active:bg-violet-700",
+  yellow: "bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-800",
   white:
     "bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-700 hover:text-gray-900 border border-gray-200 hover:border-gray-300",
 };

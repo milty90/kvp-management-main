@@ -250,6 +250,9 @@ export const translations = {
       confirmationMismatch: "Die Passwörter stimmen nicht überein.",
       validityMessage: "Validierung läuft...",
     },
+    demoMode: {
+      toastMessage: "Sie verwenden den Demo-Account. Einige Funktionen sind eingeschränkt.",
+    },
   },
   en: {
     appName: "PCDA Management System",
@@ -498,6 +501,9 @@ export const translations = {
         "Error updating password: " + error,
       confirmationMismatch: "Passwords do not match.",
       validityMessage: "Validating...",
-    }  
+    },
+    demoMode: {
+      toastMessage: "You are using the demo account. Some features are limited.",
+    },
   },
 };

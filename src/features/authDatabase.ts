@@ -84,6 +84,8 @@ export async function getCurrentUser() {
   return data.user;
 }
 
+export const isDemoUser = (email?: string ) => email === "demo@mail.com";
+
 export async function fetchUser(
   setUsername: React.Dispatch<React.SetStateAction<string>>,
   setEmail: React.Dispatch<React.SetStateAction<string>>,

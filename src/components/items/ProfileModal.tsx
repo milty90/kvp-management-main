@@ -6,6 +6,10 @@ import { useTranslation } from "../../utils/useTranslation";
 import { formatDate } from "../../utils/formatDate";
 import { useUserContext } from "../../context/UserContext";
 import { useKvpContext } from "../../context/KvpContext";
+import { useSessionContext } from "../../context/SessionContext";
+import { isDemoUser } from "../../features/authDatabase";
+import { showToast } from "../items/ToastItem";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -30,6 +34,9 @@ export function ProfileModal({
   const translation = useTranslation();
   const { users } = useUserContext();
   const { kvps } = useKvpContext();
+  const { session } = useSessionContext();
+  const isDemo = isDemoUser(session?.user?.email);
+  const width = useWindowWidth();
 
   const userNameFromContext = users?.find(
     (user) => user.userEmail === email,
@@ -63,6 +70,10 @@ export function ProfileModal({
   useEffect(() => {
     fetchUser(setUsername, setEmail, setLastSignIn);
   }, [users]);
+
+  const handleDamoClick = () => {
+    showToast(width, theme, "warning", translation.demoMode.toastMessage);
+  };
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
@@ -106,30 +117,53 @@ export function ProfileModal({
             </div>
           </div>
           <div className="flex flex-col items-end gap-2.5">
-            <ColorButton
-              color="gray"
-              isTextOnly={false}
-              icon="edit.svg"
-              onClick={() => {
-                if (showEditProfile) {
-                  showEditProfile();
-                }
-              }}
-            >
-              {translation.profileModal.profileButton}
-            </ColorButton>
-            <ColorButton
-              color="red"
-              isTextOnly={false}
-              icon="user-delete.svg"
-              onClick={() => {
-                if (showDeleteProfile) {
-                  showDeleteProfile();
-                }
-              }}
-            >
-              {translation.profileModal.deleteButton}
-            </ColorButton>
+            {isDemo ? (
+              <>
+                <ColorButton
+                  color="gray"
+                  isTextOnly={false}
+                  icon="denied.svg"
+                  onClick={handleDamoClick}
+                >
+                  {translation.profileModal.profileButton}
+                </ColorButton>
+                <ColorButton
+                  color="gray"
+                  isTextOnly={false}
+                  icon="denied.svg"
+                  onClick={handleDamoClick}
+                >
+                  {translation.profileModal.deleteButton}
+                </ColorButton>
+              </>
+            ) : (
+              <>
+                <ColorButton
+                  color="color"
+                  isTextOnly={false}
+                  icon="edit.svg"
+                  onClick={() => {
+                    if (showEditProfile) {
+                      showEditProfile();
+                    }
+                  }}
+                >
+                  {translation.profileModal.profileButton}
+                </ColorButton>
+                <ColorButton
+                  color="red"
+                  isTextOnly={false}
+                  icon="user-delete.svg"
+                  onClick={() => {
+                    if (showDeleteProfile) {
+                      showDeleteProfile();
+                    }
+                  }}
+                >
+                  {translation.profileModal.deleteButton}
+                </ColorButton>
+              </>
+            )}
           </div>
         </div>
         <div className="flex items-center justify-between  h-20 mb-2 gap-2 ">

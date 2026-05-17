@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import type { ToastContent } from "react-toastify";
 
-type ToastType = "info" | "warning" | "success" | "error";
+type ToastType = "info" | "warning" | "success" | "error" ;
 
 export const showToast = (
   width: number,

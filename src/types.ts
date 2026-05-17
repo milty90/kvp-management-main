@@ -64,7 +64,7 @@ export type ColorButtonType =
   | "color"
   | "blue"
   | "green"
-  | "violet"
+  | "yellow"
   | "red"
   | "gray"
   | "white";

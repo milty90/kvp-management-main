@@ -9,6 +9,8 @@ import { supabase } from "../../utils/supabase";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
+import { isDemoUser } from "../../features/authDatabase";
+import { useSessionContext } from "../../context/SessionContext";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -38,6 +40,8 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
 
   const { theme } = useTheme();
   const width = useWindowWidth();
+  const { session } = useSessionContext();
+  const isDemo = isDemoUser(session?.user?.email);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -257,15 +261,35 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             >
               {translation.pdcaForm.cancelButton}
             </ColorButton>
-            <ColorButton
-              color={theme === "dark" ? "green" : "blue"}
-              icon="/add.svg"
-              type="submit"
-            >
-              {initialData
-                ? translation.pdcaForm.saveEditButton
-                : translation.pdcaForm.saveCreateButton}
-            </ColorButton>
+            {isDemo ? (
+              <ColorButton
+                color="gray"
+                icon="denied.svg"
+                onClick={() =>
+                  showToast(
+                    width,
+                    theme,
+                    "warning",
+                    translation.demoMode.toastMessage,
+                  )
+                }
+                type="button"
+              >
+                {initialData
+                  ? translation.pdcaForm.saveEditButton
+                  : translation.pdcaForm.saveCreateButton}
+              </ColorButton>
+            ) : (
+              <ColorButton
+                color={theme === "dark" ? "green" : "blue"}
+                icon="/add.svg"
+                type="submit"
+              >
+                {initialData
+                  ? translation.pdcaForm.saveEditButton
+                  : translation.pdcaForm.saveCreateButton}
+              </ColorButton>
+            )}
           </div>
         </form>
       </div>

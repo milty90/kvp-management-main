@@ -10,6 +10,8 @@ import { showToast } from "../items/ToastItem";
 import { sliceText } from "../../utils/sliceText";
 import { useTranslation } from "../../utils/useTranslation";
 import { formatDate } from "../../utils/formatDate";
+import { useSessionContext } from "../../context/SessionContext";
+import { isDemoUser } from "../../features/authDatabase";
 
 interface KvpCardProps {
   id: number;
@@ -93,6 +95,8 @@ export default function KvpCard({
   const { theme } = useTheme();
   const width = useWindowWidth();
   const translation = useTranslation();
+  const { session } = useSessionContext();
+  const isDemo = isDemoUser(session?.user?.email);
 
   const menuWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -152,6 +156,11 @@ export default function KvpCard({
       onOpenModal();
     }
   };
+
+  const handleDamoClick = () => {
+    showToast(width, theme, "warning", translation.demoMode.toastMessage);
+  };
+
   return (
     <div
       className={`bg-card z-0 p-4 pb-2.5 text-left border-b-3 ${pcdaColors(theme)[state]} rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
@@ -172,12 +181,22 @@ export default function KvpCard({
         <div
           className={`absolute ${showMenu ? "block" : "hidden"} right-8.5 -mt-1.5 `}
         >
-          <CardMenuItem
-            onEdit={handleEditClick}
-            onArchive={handleArchive}
-            onReject={handleReject}
-            onDelete={handleDelete}
-          />
+          {" "}
+          {isDemo ? (
+            <CardMenuItem
+              onEdit={handleEditClick}
+              onArchive={handleDamoClick}
+              onReject={handleDamoClick}
+              onDelete={handleDamoClick}
+            />
+          ) : (
+            <CardMenuItem
+              onEdit={handleEditClick}
+              onArchive={handleArchive}
+              onReject={handleReject}
+              onDelete={handleDelete}
+            />
+          )}
         </div>
       </div>
       <p className="text-text-primary text-sm lg:text-md text-pretty break-all mb-3">

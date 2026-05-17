@@ -91,7 +91,7 @@ export default function EditProfileModal({
             </label>
             <input
               type="text"
-              className="text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+              className={`text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary`}
               placeholder={translations.editProfileModal.userNamePlaceholder}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
@@ -109,7 +109,7 @@ export default function EditProfileModal({
               </label>
               <input
                 type="text"
-                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
+                className={`text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary w-full`}
                 placeholder={translations.editProfileModal.firstNamePlaceholder}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -121,7 +121,7 @@ export default function EditProfileModal({
               </label>
               <input
                 type="text"
-                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
+                className={`text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary w-full`}
                 placeholder={translations.editProfileModal.lastNamePlaceholder}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -138,7 +138,7 @@ export default function EditProfileModal({
               </label>
               <input
                 type="text"
-                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
+                className={`text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary w-full`}
                 placeholder={
                   translations.editProfileModal.departmentPlaceholder
                 }
@@ -152,7 +152,7 @@ export default function EditProfileModal({
               </label>
               <input
                 type="text"
-                className="text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary w-full"
+                className={`text-xs md:text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary w-full`}
                 placeholder={translations.editProfileModal.rolePlaceholder}
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
@@ -167,7 +167,7 @@ export default function EditProfileModal({
               {translations.editProfileModal.aboutMe}
             </label>
             <textarea
-              className="text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-surface text-text-primary"
+              className={`text-xs md:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"} bg-surface text-text-primary`}
               placeholder={translations.editProfileModal.aboutMePlaceholder}
               value={aboutMe}
               onChange={(e) => setAboutMe(e.target.value)}
