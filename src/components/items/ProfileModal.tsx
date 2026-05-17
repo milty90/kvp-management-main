@@ -142,7 +142,7 @@ export function ProfileModal({
               <>
                 <ColorButton
                   color="color"
-                  isTextOnly={false}
+                  isTextOnly={true}
                   icon="edit.svg"
                   width={width < 768 ? "full" : "auto"}
                   onClick={() => {
@@ -155,7 +155,7 @@ export function ProfileModal({
                 </ColorButton>
                 <ColorButton
                   color="red"
-                  isTextOnly={false}
+                  isTextOnly={true}
                   icon="user-delete.svg"
                   width={width < 768 ? "full" : "auto"}
                   onClick={() => {
