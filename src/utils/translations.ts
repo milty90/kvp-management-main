@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const translations = {
   de: {
     appName: "KVP Management System",
@@ -81,6 +83,7 @@ export const translations = {
         description:
           "Verwalten Sie Ihre Schalten Sie die Benachrichtigungen ein oder aus",
         current: "Aktuell: An",
+          toastMessage: "Benachrichtigungen sind derzeit nicht verfügbar.",
       },
       settingsButton: {
         save: "Speichern",
@@ -294,6 +297,7 @@ export const translations = {
         title: "Notifications",
         description: "Manage your notifications by turning them on or off",
         current: "Current: On",
+        toastMessage: "Notifications are currently unavailable.",
       },
       settingsButton: {
         save: "Save",

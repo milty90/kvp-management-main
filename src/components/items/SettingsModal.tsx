@@ -3,6 +3,9 @@ import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import { useLanguage } from "../../context/LanguageContext";
 import { showToast } from "./ToastItem";
+import { useState } from "react";
+import { useWindowWidth } from "../../utils/useWindowWidth";
+
 interface SettingsModalProps {
   onConfirm: () => void;
   onCancel: () => void;
@@ -12,13 +15,16 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
   const { theme, toggleTheme } = useTheme();
   const translation = useTranslation();
   const { language, toggleLanguage } = useLanguage();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const width = useWindowWidth();
 
   const handleNotificationToggle = () => {
+    setNotificationsEnabled((prev) => !prev);
     showToast(
-      300,
+      width,
       theme,
       "info",
-      "Benachrichtigungen sind derzeit nicht verfügbar.",
+      translation.settingsModal.settingsNotification.toastMessage,
     );
   };
   return (
@@ -111,8 +117,10 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                       type="checkbox"
                       className="sr-only peer"
                       value="theme"
-                      checked={theme === "dark"}
-                      onChange={handleNotificationToggle}
+                      checked={notificationsEnabled}
+                      onChange={() => {
+                        handleNotificationToggle();
+                      }}
                     />
                     <div className="group bg-surface rounded-full duration-300 w-8 h-4 ring-2 ring-gray-400 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-2.5 after:w-2.5 after:top-0.75 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-3 peer-hover:after:scale-95"></div>
                   </label>
