@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 export const translations = {
   de: {
     appName: "KVP Management System",
