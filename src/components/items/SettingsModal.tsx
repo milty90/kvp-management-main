@@ -138,7 +138,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
             </p>
           </div>
           <div
-            className={`flex flex-row ${isDemo ? " opacity-60" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+            className={`flex flex-row ${isDemo ? " opacity-60 pointer-events-none" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
             <div className="flex flex-col items-start justify-between w-full mb-2">
               <p className="text-sm text-text-primary text-ellipsis overflow-hidden whitespace-nowrap min-w-0 flex-1 mr-2 mb-1">
@@ -149,8 +149,9 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                 {translation.settingsModal.settingsActivityLog.description}
               </p>
             </div>
+
             <ColorButton
-              color={isDemo ? "gray" : "color"}
+              color={isDemo ? "gray" : "white"}
               onClick={() => {
                 if (isDemo) {
                   showToast(
@@ -159,6 +160,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                     "info",
                     translation.settingsModal.settingsActivityLog.toastMessage,
                   );
+                } else {
                 }
               }}
               isTextOnly={true}
