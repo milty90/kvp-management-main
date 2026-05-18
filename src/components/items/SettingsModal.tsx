@@ -101,7 +101,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
           </div>
 
           <div
-            className={`flex flex-col bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+            className={`flex flex-col pointer-events-none opacity-60 bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
             <div className="flex items-start justify-between w-full mb-1">
               <p className="text-sm text-text-primary mr-4">
@@ -109,7 +109,9 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
               </p>
               <div className="flex items-center">
                 <p className="text-xs lg:text-sm tracking-tight text-text-secondary mr-3">
-                  {translation.settingsModal.settingsNotification.current}
+                  {notificationsEnabled
+                    ? translation.settingsModal.settingsNotification.on
+                    : translation.settingsModal.settingsNotification.off}
                 </p>
                 <div className="flex items-center">
                   <label className="relative inline-flex items-center cursor-pointer lg:mr-1">
@@ -131,17 +133,23 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
               {translation.settingsModal.settingsNotification.description}
             </p>
           </div>
+          <div
+            className={`flex flex-col opacity-50 bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+          >
+            <div className="flex items-start justify-between w-full mb-1">
+              <p className="text-sm text-text-primary mr-4">
+                {translation.settingsModal.settingsActivityLog.title}
+              </p>
+            </div>
+            <p className="text-xs  text-text-secondary">
+              {translation.settingsModal.settingsActivityLog.description}
+            </p>
+          </div>
         </div>
 
         <div className="mt-4 mb-1 flex justify-end gap-3 pr-4">
-          <button
-            onClick={onCancel}
-            className="hover:bg-gray-200 hover:text-gray-700 px-4 py-2 rounded-md text-sm font-medium text-text-secondary"
-          >
-            {translation.settingsModal.settingsButton.cancel}
-          </button>
           <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
-            {translation.settingsModal.settingsButton.save}
+            {translation.settingsModal.settingsButton.back}
           </ColorButton>
         </div>
       </div>

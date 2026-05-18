@@ -220,14 +220,8 @@ export function ProfileModal({
         </div>
 
         <div className="mt-6 pr-2 flex justify-end gap-3">
-          <button
-            onClick={onCancel}
-            className={`px-4 py-2 rounded-md text-sm font-medium ${theme === "dark" ? " text-text-secondary hover:text-text-primary hover:bg-gray-700/80" : "text-text-secondary hover:text-text-primary hover:bg-gray-300/80"} transition-colors duration-150`}
-          >
-            {translation.profileModal.closeButton}
-          </button>
           <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
-            {translation.profileModal.saveButton}
+            {translation.profileModal.backButton}
           </ColorButton>
         </div>
       </div>

@@ -80,12 +80,19 @@ export const translations = {
         title: "Benachrichtigungen",
         description:
           "Verwalten Sie Ihre Schalten Sie die Benachrichtigungen ein oder aus",
-        current: "Aktuell: An",
-          toastMessage: "Benachrichtigungen sind derzeit nicht verfügbar.",
+        on: "Aktuell: Ein",
+        off: "Aktuell: Aus",
+
+        toastMessage: "Benachrichtigungen sind derzeit nicht verfügbar.",
+      },
+      settingsActivityLog: {
+        title: "Aktivitätsprotokoll",
+        description: "Zeigen Sie Ihr Aktivitätsprotokoll an oder löschen Sie es",
+        
+        toastMessage: "Aktivitätsprotokoll ist derzeit nicht verfügbar.",
       },
       settingsButton: {
-        save: "Speichern",
-        cancel: "Abbrechen",
+        back: "Zurück",
       },
     },
     profileModal: {
@@ -101,8 +108,8 @@ export const translations = {
       cardActive: "Aktiv",
       cardAssigned: "Zugewiesen",
       cardClosed: "Abgeschlossen",
-      closeButton: "Abbrechen",
-      saveButton: "Speichern",
+     
+      backButton: "Zurück",
     },
     statistics: {
       DonutChart: {
@@ -294,12 +301,18 @@ export const translations = {
       settingsNotification: {
         title: "Notifications",
         description: "Manage your notifications by turning them on or off",
-        current: "Current: On",
+        on: "Current: On",
+        off: "Current: Off",
         toastMessage: "Notifications are currently unavailable.",
       },
+      settingsActivityLog: {
+        title: "Activity Log",
+        description: "View or clear your activity log",
+        
+        toastMessage: "Activity log is currently unavailable.",
+      },
       settingsButton: {
-        save: "Save",
-        cancel: "Cancel",
+        back: "Back",
       },
     },
     profileModal: {
@@ -315,8 +328,8 @@ export const translations = {
       department: "Department",
       role: "Role",
       lastLogin: "Last Login",
-      closeButton: "Cancel",
-      saveButton: "Save",
+     
+      backButton: "Back",
     },
     statistics: {
       DonutChart: {
