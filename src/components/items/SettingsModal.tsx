@@ -5,6 +5,8 @@ import { useLanguage } from "../../context/LanguageContext";
 import { showToast } from "./ToastItem";
 import { useState } from "react";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { isDemoUser } from "../../features/authDatabase";
+import { useSessionContext } from "../../context/SessionContext";
 
 interface SettingsModalProps {
   onConfirm: () => void;
@@ -16,6 +18,8 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
   const translation = useTranslation();
   const { language, toggleLanguage } = useLanguage();
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const { session } = useSessionContext();
+  const isDemo = isDemoUser(session?.user?.email);
   const width = useWindowWidth();
 
   const handleNotificationToggle = () => {
@@ -101,7 +105,7 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
           </div>
 
           <div
-            className={`flex flex-col pointer-events-none opacity-60 bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+            className={`flex flex-col ${isDemo ? "pointer-events-none opacity-60" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
             <div className="flex items-start justify-between w-full mb-1">
               <p className="text-sm text-text-primary mr-4">
@@ -134,16 +138,33 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
             </p>
           </div>
           <div
-            className={`flex flex-col opacity-50 bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
+            className={`flex flex-row ${isDemo ? " opacity-60" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
-            <div className="flex items-start justify-between w-full mb-1">
-              <p className="text-sm text-text-primary mr-4">
+            <div className="flex flex-col items-start justify-between w-full mb-2">
+              <p className="text-sm text-text-primary text-ellipsis overflow-hidden whitespace-nowrap min-w-0 flex-1 mr-2 mb-1">
                 {translation.settingsModal.settingsActivityLog.title}
               </p>
+
+              <p className="text-xs  text-text-secondary">
+                {translation.settingsModal.settingsActivityLog.description}
+              </p>
             </div>
-            <p className="text-xs  text-text-secondary">
-              {translation.settingsModal.settingsActivityLog.description}
-            </p>
+            <ColorButton
+              color={isDemo ? "gray" : "color"}
+              onClick={() => {
+                if (isDemo) {
+                  showToast(
+                    width,
+                    theme,
+                    "info",
+                    translation.settingsModal.settingsActivityLog.toastMessage,
+                  );
+                }
+              }}
+              isTextOnly={true}
+            >
+              {translation.settingsModal.settingsActivityLog.button}
+            </ColorButton>
           </div>
         </div>
 

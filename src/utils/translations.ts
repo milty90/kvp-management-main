@@ -88,7 +88,7 @@ export const translations = {
       settingsActivityLog: {
         title: "Aktivitätsprotokoll",
         description: "Zeigen Sie Ihr Aktivitätsprotokoll an oder löschen Sie es",
-        
+        button: "Anzeigen",
         toastMessage: "Aktivitätsprotokoll ist derzeit nicht verfügbar.",
       },
       settingsButton: {
@@ -308,7 +308,7 @@ export const translations = {
       settingsActivityLog: {
         title: "Activity Log",
         description: "View or clear your activity log",
-        
+        button: "View",
         toastMessage: "Activity log is currently unavailable.",
       },
       settingsButton: {
