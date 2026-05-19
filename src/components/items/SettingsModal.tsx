@@ -84,7 +84,6 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
               <p className="text-sm text-text-primary mr-4">
                 {translation.settingsModal.settingLanguage.title}
               </p>
-
               <div className="flex items-center">
                 <p className="text-xs lg:text-sm text-text-secondary mr-2">
                   {translation.settingsModal.settingLanguage.current}
