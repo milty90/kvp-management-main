@@ -15,6 +15,7 @@ export function setKvpsToDataBase(kvps: Kvp[]) {
       .from("kvps")
       .upsert(kvp, { onConflict: "id" });
     if (error) {
+      console.error("Failed to upsert KVP:", error);
     }
   });
 }
@@ -22,11 +23,13 @@ export function setKvpsToDataBase(kvps: Kvp[]) {
 export async function deleteKvpFromDataBase(id: number) {
   const { error } = await supabase.from("kvps").delete().eq("id", id);
   if (error) {
+    console.error("Failed to delete KVP:", error);
   }
 }
 
 export async function logActivity(log: ActivityLog) {
-  await supabase.from("activity_log").insert({
+  const { error } = await supabase.from("activity_logs").insert({
+    id: log.id,
     userId: log.userId,
     userName: log.userName,
     action: log.action,
@@ -35,11 +38,15 @@ export async function logActivity(log: ActivityLog) {
     details: log.details,
     timestamp: log.timestamp,
   });
+
+  if (error) {
+    console.error("Failed to log activity:", error);
+  }
 }
 
 export async function getLogActivities() {
   const { data: activities, error } = await supabase
-    .from("activity_log")
+    .from("activity_logs")
     .select("*")
      
     if(error) {

@@ -12,6 +12,7 @@ import { useTranslation } from "../../utils/useTranslation";
 import { isDemoUser } from "../../features/authDatabase";
 import { useSessionContext } from "../../context/SessionContext";
 import { logActivity } from "../../storage/kvpDatabase";
+import { useUserContext } from "../../context/UserContext";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -42,6 +43,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const { theme } = useTheme();
   const width = useWindowWidth();
   const { session } = useSessionContext();
+  const { user } = useUserContext();
   const isDemo = isDemoUser(session?.user?.email);
 
   useEffect(() => {
@@ -101,14 +103,12 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     );
 
     await logActivity({
+      id: Date.now().toString(),
       userId: session?.user.id ?? "",
-      userName:
-        session?.user.user_metadata.full_name ||
-        session?.user.email ||
-        "Unknown User",
+      userName: session?.user.email?.split("@")[0] || "Unknown User",
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "KVP",
-      entityId: String(newKvp.id),
+      entityId: initialData ? String(initialData.id) : String(newKvp.id),
       details: `${newKvp.title}`,
       timestamp: new Date().toISOString(),
     });

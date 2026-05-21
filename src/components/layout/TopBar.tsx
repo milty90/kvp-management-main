@@ -236,7 +236,11 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           />,
           document.body,
         )}
-      {showActivityLog && createPortal(<LogActivityModal />, document.body)}
+      {showActivityLog &&
+        createPortal(
+          <LogActivityModal onClose={() => setShowActivityLog(false)} />,
+          document.body,
+        )}
     </div>
   );
 }
