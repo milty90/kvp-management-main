@@ -16,7 +16,7 @@ export function TopNavButton({ theme, onChange }: TopNavButtonProps) {
       : translation.topNavButton.stats;
   return (
     <div
-      className={`inline-flex items-center p-1 gap-1.5 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
+      className={`inline-flex items-center p-1 gap-0.5 rounded-xl ${theme === "dark" ? "bg-gray-500/50" : "bg-gray-200/80"}`}
     >
       {tabs.map((tab) => (
         <button

@@ -24,3 +24,41 @@ export async function deleteKvpFromDataBase(id: number) {
   if (error) {
   }
 }
+
+export async function logActivity({
+  userId,
+  userName,
+  action,
+  entityType,
+  entityId,
+  details,
+}: {
+  userId: string;
+  userName: string;
+  action: "CREATED" | "UPDATED" | "DELETED" | "LOGIN" | "LOGOUT";
+  entityType: "KVP" | "USER" | "AUTH";
+  entityId?: string;
+  details?: string;
+}
+
+) {
+  await supabase.from("activity_log").insert({
+    user_id: userId,
+    user_name: userName,
+    action,
+    entity_type: entityType,
+    entity_id: entityId,
+    details,
+  });
+}
+
+export async function getLogActivities() {
+  const { data: activities, error } = await supabase
+    .from("activity_log")
+    .select("*")
+     
+    if(error) {
+      return [];
+    }
+  return activities;
+}

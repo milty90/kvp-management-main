@@ -11,6 +11,7 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
 import { isDemoUser } from "../../features/authDatabase";
 import { useSessionContext } from "../../context/SessionContext";
+import { logActivity } from "../../storage/kvpDatabase";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -75,7 +76,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     createdBy: createdBy,
   });
 
-  function submitForm() {
+  async function submitForm() {
     if (
       !title.trim() ||
       !description.trim() ||
@@ -98,6 +99,15 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       "success",
       `${translation.pdcaForm.pdca} ${initialData ? translation.pdcaForm.updated : translation.pdcaForm.added}: ${initialData ? updateKvpData.title : newKvp.title}`,
     );
+
+    await logActivity({
+      userId: session?.user?.id || "unknown",
+      userName: session?.user?.email || translation.pdcaForm.unknownUser,
+      action: initialData ? "UPDATED" : "CREATED",
+      entityType: "KVP",
+      entityId: initialData ? initialData.id.toString() : undefined,
+      details: `Title: ${initialData ? updateKvpData.title : newKvp.title}`,
+    });
   }
 
   return (

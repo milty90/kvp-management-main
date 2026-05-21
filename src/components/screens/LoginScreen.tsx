@@ -213,22 +213,6 @@ export function LoginScreen() {
             </svg>
             GitHub
           </button>
-
-          <button
-            className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-            type="button"
-            onClick={() => {
-              showToast(
-                width,
-                theme,
-                "info",
-                "Slack: " + translation.loginScreen.oAuthError,
-              );
-            }}
-          >
-            <img src="/slack.svg" alt="Slack" className="w-6 mr-2 -ml-1" />
-            Slack
-          </button>
         </div>
       </div>
     </div>
