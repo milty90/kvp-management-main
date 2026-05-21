@@ -278,23 +278,25 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
               {translation.pdcaForm.cancelButton}
             </ColorButton>
             {isDemo ? (
-              <ColorButton
-                color="gray"
-                icon="denied.svg"
-                onClick={() =>
-                  showToast(
-                    width,
-                    theme,
-                    "warning",
-                    translation.demoMode.toastMessage,
-                  )
-                }
-                type="button"
-              >
-                {initialData
-                  ? translation.pdcaForm.saveEditButton
-                  : translation.pdcaForm.saveCreateButton}
-              </ColorButton>
+              <div className="opacity-60">
+                <ColorButton
+                  color="gray"
+                  icon="denied.svg"
+                  onClick={() =>
+                    showToast(
+                      width,
+                      theme,
+                      "warning",
+                      translation.demoMode.toastMessage,
+                    )
+                  }
+                  type="button"
+                >
+                  {initialData
+                    ? translation.pdcaForm.saveEditButton
+                    : translation.pdcaForm.saveCreateButton}
+                </ColorButton>
+              </div>
             ) : (
               <ColorButton
                 color={theme === "dark" ? "green" : "blue"}

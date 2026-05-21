@@ -119,24 +119,30 @@ export function ProfileModal({
           <div className="flex md:flex-col w-full mt-4 md:mt-1 items-center md:items-end gap-2.5">
             {isDemo ? (
               <>
-                <ColorButton
-                  color="gray"
-                  isTextOnly={true}
-                  icon="denied.svg"
-                  width={width < 768 ? "full" : "auto"}
-                  onClick={handleDamoClick}
-                >
-                  {translation.profileModal.profileButton}
-                </ColorButton>
-                <ColorButton
-                  color="gray"
-                  isTextOnly={true}
-                  icon="denied.svg"
-                  width={width < 768 ? "full" : "auto"}
-                  onClick={handleDamoClick}
-                >
-                  {translation.profileModal.deleteButton}
-                </ColorButton>
+                <div className="opacity-60">
+                  <ColorButton
+                    color="gray"
+                    isTextOnly={true}
+                    icon="denied.svg"
+                    width={width < 768 ? "full" : "auto"}
+                    onClick={handleDamoClick}
+                    disabled={true}
+                  >
+                    {translation.profileModal.profileButton}
+                  </ColorButton>
+                </div>
+                <div className="opacity-60">
+                  <ColorButton
+                    color="gray"
+                    isTextOnly={true}
+                    icon="denied.svg"
+                    width={width < 768 ? "full" : "auto"}
+                    onClick={handleDamoClick}
+                    disabled={true}
+                  >
+                    {translation.profileModal.deleteButton}
+                  </ColorButton>
+                </div>
               </>
             ) : (
               <>
