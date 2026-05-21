@@ -12,7 +12,6 @@ import { useTranslation } from "../../utils/useTranslation";
 import { isDemoUser } from "../../features/authDatabase";
 import { useSessionContext } from "../../context/SessionContext";
 import { logActivity } from "../../storage/kvpDatabase";
-import { useUserContext } from "../../context/UserContext";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -43,7 +42,6 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   const { theme } = useTheme();
   const width = useWindowWidth();
   const { session } = useSessionContext();
-  const { user } = useUserContext();
   const isDemo = isDemoUser(session?.user?.email);
 
   useEffect(() => {
@@ -78,7 +76,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     createdBy: createdBy,
   });
 
-  async function submitForm() {
+  function submitForm() {
     if (
       !title.trim() ||
       !description.trim() ||
@@ -102,9 +100,13 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       `${translation.pdcaForm.pdca} ${initialData ? translation.pdcaForm.updated : translation.pdcaForm.added}: ${initialData ? updateKvpData.title : newKvp.title}`,
     );
 
+    logger();
+  }
+
+  const logger = async () => {
     await logActivity({
       id: Date.now().toString(),
-      userId: session?.user.id ?? "",
+      userId: session?.user.id || "unknown",
       userName: session?.user.email?.split("@")[0] || "Unknown User",
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "KVP",
@@ -112,7 +114,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       details: `${newKvp.title}`,
       timestamp: new Date().toISOString(),
     });
-  }
+  };
 
   return (
     <div className="fixed inset-0 z-40 bg-gray-700/30 shadow-md flex items-center justify-center">
