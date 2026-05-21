@@ -68,3 +68,14 @@ export type ColorButtonType =
   | "red"
   | "gray"
   | "white";
+
+export type ActivityLog = {
+ 
+  userId: string;
+  userName: string;
+  action: "CREATED" | "UPDATED" | "DELETED" | "LOGIN" | "LOGOUT";
+  entityType: "KVP" | "USER" | "AUTH";
+  entityId?: string;
+  details?: string;
+  timestamp: string;
+};

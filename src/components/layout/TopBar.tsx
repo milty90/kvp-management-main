@@ -16,6 +16,7 @@ import { TopNavButton } from "../buttons/TopNavButton";
 import { useTranslation } from "../../utils/useTranslation";
 import EditProfileModal from "../items/EditProfileModal";
 import { useUserContext } from "../../context/UserContext";
+import { LogActivityModal } from "../items/LogActivityModal";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -42,6 +43,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const [showDeleteProfileDialog, setShowDeleteProfileDialog] = useState(false);
+  const [showActivityLog, setShowActivityLog] = useState(false);
 
   useClickOutside(settingsWrapperRef, () => {
     setShowSettings(false);
@@ -92,6 +94,11 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     );
     setShowDeleteProfileDialog(true);
     setShowProfileModal(false);
+  };
+
+  const handleActivityLogClick = () => {
+    setShowActivityLog(true);
+    setShowSettingsModal(false);
   };
   return (
     <div className="flex flex-col w-full shadow-md rounded-2xl">
@@ -185,6 +192,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           <SettingsModal
             onConfirm={() => setShowSettingsModal(false)}
             onCancel={() => setShowSettingsModal(false)}
+            showActivityLog={() => handleActivityLogClick()}
           />,
           document.body,
         )}
@@ -228,6 +236,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           />,
           document.body,
         )}
+      {showActivityLog && createPortal(<LogActivityModal />, document.body)}
     </div>
   );
 }

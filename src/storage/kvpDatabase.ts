@@ -1,4 +1,4 @@
-import type { Kvp } from "../types";
+import type { Kvp, ActivityLog } from "../types";
 import { supabase } from "../utils/supabase";
 
 export async function getKvpsfromDataBase() {
@@ -25,30 +25,15 @@ export async function deleteKvpFromDataBase(id: number) {
   }
 }
 
-export async function logActivity({
-  userId,
-  userName,
-  action,
-  entityType,
-  entityId,
-  details,
-}: {
-  userId: string;
-  userName: string;
-  action: "CREATED" | "UPDATED" | "DELETED" | "LOGIN" | "LOGOUT";
-  entityType: "KVP" | "USER" | "AUTH";
-  entityId?: string;
-  details?: string;
-}
-
-) {
+export async function logActivity(log: ActivityLog) {
   await supabase.from("activity_log").insert({
-    user_id: userId,
-    user_name: userName,
-    action,
-    entity_type: entityType,
-    entity_id: entityId,
-    details,
+    userId: log.userId,
+    userName: log.userName,
+    action: log.action,
+    entityType: log.entityType,
+    entityId: log.entityId,
+    details: log.details,
+    timestamp: log.timestamp,
   });
 }
 

@@ -11,14 +11,20 @@ import { useSessionContext } from "../../context/SessionContext";
 interface SettingsModalProps {
   onConfirm: () => void;
   onCancel: () => void;
+  showActivityLog?: () => void;
 }
 
-export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
+export function SettingsModal({
+  onConfirm,
+  onCancel,
+  showActivityLog,
+}: SettingsModalProps) {
   const { theme, toggleTheme } = useTheme();
   const translation = useTranslation();
   const { language, toggleLanguage } = useLanguage();
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { session } = useSessionContext();
+
   const isDemo = isDemoUser(session?.user?.email);
   const width = useWindowWidth();
 
@@ -160,6 +166,10 @@ export function SettingsModal({ onConfirm, onCancel }: SettingsModalProps) {
                     translation.settingsModal.settingsActivityLog.toastMessage,
                   );
                 } else {
+                  setNotificationsEnabled(false);
+                  if (showActivityLog) {
+                    showActivityLog();
+                  }
                 }
               }}
               isTextOnly={true}

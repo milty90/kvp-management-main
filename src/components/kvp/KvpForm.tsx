@@ -101,12 +101,16 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
     );
 
     await logActivity({
-      userId: session?.user?.id || "unknown",
-      userName: session?.user?.email || translation.pdcaForm.unknownUser,
+      userId: session?.user.id ?? "",
+      userName:
+        session?.user.user_metadata.full_name ||
+        session?.user.email ||
+        "Unknown User",
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "KVP",
-      entityId: initialData ? initialData.id.toString() : undefined,
-      details: `Title: ${initialData ? updateKvpData.title : newKvp.title}`,
+      entityId: String(newKvp.id),
+      details: `${newKvp.title}`,
+      timestamp: new Date().toISOString(),
     });
   }
 
