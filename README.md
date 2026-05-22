@@ -1,7 +1,7 @@
 # The PCDA Management System
 
 <p align="center">
-  <img src="public/spark-dark.png" alt="KVP Management Logo" width="350" />
+  <img src="public/spark.png" alt="KVP Management Logo" width="350" />
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@
 
 <p align="center">
   <img src="public/dashboard.png" alt="Dashboard" width="500" />
-  <img src="public/detail-view.png" alt="Detail View" width="250" />
+  <img src="public/detail-view.png" alt="Detail View" width="150" />
 </p>
 
 ---
@@ -53,13 +53,15 @@
 
 ## 🛠️ Tech Stack
 
-| Technology                                    | Version | Purpose                  |
-| --------------------------------------------- | ------- | ------------------------ |
-| [React](https://react.dev/)                   | 19      | UI framework             |
-| [TypeScript](https://www.typescriptlang.org/) | 5       | Type-safe JavaScript     |
-| [Vite](https://vitejs.dev/)                   | 6       | Build tool & dev server  |
-| [Tailwind CSS](https://tailwindcss.com/)      | 4       | Utility-first styling    |
-| IndexedDB (native)                            | —       | Local persistent storage |
+| Technology                                    | Version  | Purpose                  |
+| --------------------------------------------- | -------- | ------------------------ |
+| [React](https://react.dev/)                   | 19       | UI framework             |
+| [TypeScript](https://www.typescriptlang.org/) | 5        | Type-safe JavaScript     |
+| [Vite](https://vitejs.dev/)                   | 6        | Build tool & dev server  |
+| [Tailwind CSS](https://tailwindcss.com/)      | 4        | Utility-first styling    |
+| [Supabase](https://supabase.com/)             | latest   | Auth & backend services  |
+| [Netlify](https://netlify.com/)               | latest   | Hosting & deployment     |
+| IndexedDB                                     | (native) | Local persistent storage |
 
 ---
 
