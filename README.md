@@ -1,7 +1,7 @@
 # The PCDA Management System
 
 <p align="center">
-  <img src="public/spark2.png" alt="KVP Management Logo" width="500" />
+  <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
 </p>
 
 <p align="center">
@@ -29,7 +29,7 @@
 <p align="center ">
   <img src="public/dashboard.png" alt="Dashboard" width="60%" />
   <img width="5%" />
-  <img src="public/detail-view.png" alt="Detail View" width="15%" />
+  <img src="public/detail-view.png" alt="Detail View" width="20%" />
 </p>
 
 ---
