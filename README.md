@@ -1,4 +1,4 @@
-# The PCDA Management System. <p textsize="8px">powered by Supabase</p>
+# The PDCA Management System <sub>powered by Supabase</sub>
 
 <p align="center">
   <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
@@ -27,7 +27,7 @@
 ## 📸 Screenshots
 
 <p align="center ">
-  <img src="public/dashboard.png" alt="Dashboard" width="63%" />
+  <img src="public/dashboard.png" alt="Dashboard" width="61%" />
   <img width="5%" />
   <img src="public/detail-view.png" alt="Detail View" width="22%" />
 </p>
