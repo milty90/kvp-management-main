@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + SupaBase.
+  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + Supabase.
 </p>
 
 ---
@@ -40,12 +40,12 @@
 | Feature                   | Description                                                      |
 | ------------------------- | ---------------------------------------------------------------- |
 | ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles with full lifecycle support |
-| 🔍 **Search & Filter**    | Quickly find items by keyword, status, or date                   |
+| 🔍 **Filter**             | Quickly find items by tatus                                      |
 | 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time     |
 | 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail      |
 | 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet    |
 | 📱 **Responsive Design**  | Fully functional on mobile and desktop                           |
-| ⚡ **Fast & Lightweight** | Powered by Vite, zero backend overhead                           |
+| ⚡ **Fast & Lightweight** | Powered by Supabase, zero backend overhead                       |
 | 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible            |
 | 🎨 **Theme Support**      | Switch between Light and Dark mode with persistent preference    |
 | 🔐 **Authentication**     | Sign in with Email, Google, GitHub, and more                     |
@@ -55,15 +55,14 @@
 
 ## 🛠️ Tech Stack
 
-| Technology                                    | Version  | Purpose                  |
-| --------------------------------------------- | -------- | ------------------------ |
-| [React](https://react.dev/)                   | 19       | UI framework             |
-| [TypeScript](https://www.typescriptlang.org/) | 5        | Type-safe JavaScript     |
-| [Vite](https://vitejs.dev/)                   | 6        | Build tool & dev server  |
-| [Tailwind CSS](https://tailwindcss.com/)      | 4        | Utility-first styling    |
-| [Supabase](https://supabase.com/)             | latest   | Auth & backend services  |
-| [Netlify](https://netlify.com/)               | latest   | Hosting & deployment     |
-| IndexedDB                                     | (native) | Local persistent storage |
+| Technology                                    | Version | Purpose                 |
+| --------------------------------------------- | ------- | ----------------------- |
+| [React](https://react.dev/)                   | 19      | UI framework            |
+| [TypeScript](https://www.typescriptlang.org/) | 5       | Type-safe JavaScript    |
+| [Vite](https://vitejs.dev/)                   | 6       | Build tool & dev server |
+| [Tailwind CSS](https://tailwindcss.com/)      | 4       | Utility-first styling   |
+| [Supabase](https://supabase.com/)             | latest  | Auth & backend services |
+| [Netlify](https://netlify.com/)               | latest  | Hosting & deployment    |
 
 ---
 
@@ -72,7 +71,7 @@
 <p align="center ">
 <strong>What is the Continuous Improvement Process?</strong>
 </p>
-<p align="center ">
+<p align="start ">
 What is the Continuous Improvement Process?
 The Continuous Improvement Process (PDCA) is a systematic approach that enables companies to improve their processes, products, and services step by step. Unlike one-time optimization projects, PDCA is based on a permanent cycle: problems or areas for improvement are identified, solutions are developed and tested in small increments, and successful measures are documented and established as a new standard.
 </p>
