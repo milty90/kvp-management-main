@@ -13,6 +13,8 @@
   <img src="https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite" alt="Vite" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License" />
+  <img src="https://img.shields.io/badge/Multilanguage-🌍-orange?style=for-the-badge" alt="Multilanguage" />
+  <img src="https://img.shields.io/badge/Theme-Light%20%7C%20Dark-333?style=for-the-badge&logo=halfbrickstudios" alt="Theme Support" />
 </p>
 
 <p align="center">
@@ -24,16 +26,12 @@
 
 ## 📸 Screenshots
 
-> _Add screenshots or a demo GIF here to showcase the UI_
-
-<!-- Example:
 <p align="center">
   <img src="docs/screenshots/dashboard.png" alt="Dashboard" width="700" />
 </p>
 <p align="center">
   <img src="docs/screenshots/detail-view.png" alt="Detail View" width="700" />
 </p>
--->
 
 ---
 
@@ -47,6 +45,10 @@
 | 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet    |
 | 📱 **Responsive Design**  | Fully functional on mobile and desktop                           |
 | ⚡ **Fast & Lightweight** | Powered by Vite, zero backend overhead                           |
+| 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible            |
+| 🎨 **Theme Support**      | Switch between Light and Dark mode with persistent preference    |
+| 🔐 **Authentication**     | Sign in with Email, Google, GitHub, and more                     |
+| 🧪 **Demo Mode**          | Try the app instantly — no registration required                 |
 
 ---
 
@@ -123,6 +125,60 @@ kvp-management/
 
 ---
 
+## 🔐 Authentication
+
+The app supports multiple sign-in methods so users can get started quickly with their preferred account:
+
+| Provider                | Type                                              |
+| ----------------------- | ------------------------------------------------- |
+| 📧 **Email & Password** | Classic credentials-based login                   |
+| 🔵 **Google**           | OAuth 2.0 via Google account                      |
+| 🐙 **GitHub**           | OAuth 2.0 via GitHub account                      |
+| ➕ **More providers**   | Easily extensible with additional OAuth providers |
+
+User sessions are managed securely and preferences (theme, language) are tied to the account.
+
+---
+
+## 🧪 Demo Mode
+
+Not ready to create an account? No problem.
+
+The app includes a **Demo Mode** that lets you explore all features instantly — no registration, no email, no commitment. Just click **"Try Demo"** on the login screen and you're in.
+
+> ⚠️ Data created in Demo Mode is stored only in your browser (IndexedDB) and is not synced to any account. To keep your data, sign up and log in.
+
+---
+
+## 🌍 Multilanguage Support
+
+The application supports multiple languages out of the box. The language can be switched directly from the UI, and the preference is saved locally.
+
+**Currently supported languages:**
+
+| Language     | Code |
+| ------------ | ---- |
+| 🇬🇧 English   | `en` |
+| 🇩🇪 German    | `de` |
+| 🇭🇺 Hungarian | `hu` |
+
+> Want to add a new language? Add a new translation file in the `src/locales/` directory and register it in the i18n config.
+
+---
+
+## 🎨 Theme Support
+
+The app comes with built-in **Light** and **Dark** mode support. The selected theme is persisted in the browser so your preference is remembered across sessions.
+
+| Theme    | Preview                                             |
+| -------- | --------------------------------------------------- |
+| ☀️ Light | Clean, bright interface for daytime use             |
+| 🌙 Dark  | Easy-on-the-eyes dark UI for low-light environments |
+
+Theme switching is available directly from the top navigation bar.
+
+---
+
 ## 🌐 Deployment
 
 The app is deployed and publicly accessible at:
@@ -135,37 +191,6 @@ To deploy your own instance:
 2. Connect the repository to [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
 3. Set the build command to `npm run build` and the publish directory to `dist`.
 4. Deploy — done!
-
----
-
-## 🤝 Contributing
-
-Contributions, bug reports, and feature requests are welcome!
-
-1. **Fork** the repository
-2. **Create** a new branch
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Commit** your changes
-   ```bash
-   git commit -m "feat: add your feature description"
-   ```
-4. **Push** to your branch
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. **Open a Pull Request** — describe what you changed and why
-
-Please follow the existing code style and make sure TypeScript types are properly defined for any new additions.
-
-### Reporting Bugs
-
-Found a bug? Please [open an issue](https://github.com/milty90/kvp-management/issues) and include:
-
-- A clear description of the problem
-- Steps to reproduce it
-- Your browser and OS version
 
 ---
 
