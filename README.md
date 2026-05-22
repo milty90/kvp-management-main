@@ -1,7 +1,7 @@
 # 🗂️ KVP Management
 
 <p align="center">
-  <img src="./src/assets/spark-dark.png" alt="KVP Management Logo" width="120" />
+  <img src="./src/public/spark-dark.png" alt="KVP Management Logo" width="120" />
 </p>
 
 A modern, browser-based **key-value pair (KVP) management application** built with React + TypeScript + Vite. Data is stored locally using IndexedDB – no server required.
