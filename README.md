@@ -1,4 +1,6 @@
-# The PDCA Management System <sub>powered by Supabase</sub>
+# The PDCA Management System
+
+<sub>powered by Supabase</sub>
 
 <p align="center">
   <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
@@ -18,8 +20,7 @@
 </p>
 
 <p align="center">
-  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + Vite.<br/>
-  All data is stored locally via IndexedDB — <em>no server, no account, no data leaks.</em>
+  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + Vite.
 </p>
 
 ---
@@ -27,7 +28,7 @@
 ## 📸 Screenshots
 
 <p align="center ">
-  <img src="public/dashboard.png" alt="Dashboard" width="61%" />
+  <img src="public/dashboard.png" alt="Dashboard" width="60%" />
   <img width="5%" />
   <img src="public/detail-view.png" alt="Detail View" width="22%" />
 </p>
@@ -68,6 +69,14 @@
 
 ## 🚀 Getting Started
 
+<p align="center ">
+<strong>What is the Continuous Improvement Process?</strong>
+</p>
+<p align="center ">
+What is the Continuous Improvement Process?
+The Continuous Improvement Process (PDCA) is a systematic approach that enables companies to improve their processes, products, and services step by step. Unlike one-time optimization projects, PDCA is based on a permanent cycle: problems or areas for improvement are identified, solutions are developed and tested in small increments, and successful measures are documented and established as a new standard.
+</p>
+
 ## 📁 Project Structure
 
 ```
@@ -92,12 +101,11 @@ kvp-management/
 
 The app supports multiple sign-in methods so users can get started quickly with their preferred account:
 
-| Provider                | Type                                              |
-| ----------------------- | ------------------------------------------------- |
-| 📧 **Email & Password** | Classic credentials-based login                   |
-| 🔵 **Google**           | OAuth 2.0 via Google account                      |
-| 🐙 **GitHub**           | OAuth 2.0 via GitHub account                      |
-| ➕ **More providers**   | Easily extensible with additional OAuth providers |
+| Provider                | Type                            |
+| ----------------------- | ------------------------------- |
+| 📧 **Email & Password** | Classic credentials-based login |
+| 🔵 **Google**           | OAuth 2.0 via Google account    |
+| 🐙 **GitHub**           | OAuth 2.0 via GitHub account    |
 
 User sessions are managed securely and preferences (theme, language) are tied to the account.
 
@@ -107,7 +115,7 @@ User sessions are managed securely and preferences (theme, language) are tied to
 
 Not ready to create an account? No problem.
 
-The app includes a **Demo Mode** that lets you explore all features instantly — no registration, no email, no commitment. Just click **"Try Demo"** on the login screen and you're in.
+The app includes a **Demo Mode** that lets you explore all features instantly — no registration, no email, no commitment. Just click **"Try Demo"** on the SignIn screen and you're in.
 
 > ⚠️ Demo Mode is read-only. Some basic features are limited and not available for demo users. To keep your data, sign up and log in.
 
