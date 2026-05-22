@@ -27,10 +27,10 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="Dashboard" width="700" />
+  <img src="public/dashboard.png" alt="Dashboard" width="700" />
 </p>
 <p align="center">
-  <img src="docs/screenshots/detail-view.png" alt="Detail View" width="700" />
+  <img src="public/detail-view.png" alt="Detail View" width="700" />
 </p>
 
 ---
