@@ -1,4 +1,4 @@
-# 🗂️ KVP Management
+# The PCDA Management System
 
 <p align="center">
   <img src="public/spark-dark.png" alt="KVP Management Logo" width="350" />
@@ -28,8 +28,6 @@
 
 <p align="center">
   <img src="public/dashboard.png" alt="Dashboard" width="500" />
-</p>
-<p align="center">
   <img src="public/detail-view.png" alt="Detail View" width="250" />
 </p>
 
@@ -41,6 +39,7 @@
 | ------------------------- | ---------------------------------------------------------------- |
 | ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles with full lifecycle support |
 | 🔍 **Search & Filter**    | Quickly find items by keyword, status, or date                   |
+| 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time     |
 | 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail      |
 | 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet    |
 | 📱 **Responsive Design**  | Fully functional on mobile and desktop                           |
@@ -65,45 +64,6 @@
 ---
 
 ## 🚀 Getting Started
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) `>= 18.x`
-- [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/milty90/kvp-management.git
-cd kvp-management
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
-```
-
-The app will be available at `http://localhost:5173`.
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-The output will be in the `dist/` folder, ready to deploy to any static host (Netlify, Vercel, GitHub Pages, etc.).
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
----
 
 ## 📁 Project Structure
 
@@ -146,7 +106,7 @@ Not ready to create an account? No problem.
 
 The app includes a **Demo Mode** that lets you explore all features instantly — no registration, no email, no commitment. Just click **"Try Demo"** on the login screen and you're in.
 
-> ⚠️ Data created in Demo Mode is stored only in your browser (IndexedDB) and is not synced to any account. To keep your data, sign up and log in.
+> ⚠️ Demo Mode is read-only. Some basic features are limited and not available for demo users. To keep your data, sign up and log in.
 
 ---
 
@@ -156,13 +116,10 @@ The application supports multiple languages out of the box. The language can be 
 
 **Currently supported languages:**
 
-| Language     | Code |
-| ------------ | ---- |
-| 🇬🇧 English   | `en` |
-| 🇩🇪 German    | `de` |
-| 🇭🇺 Hungarian | `hu` |
-
-> Want to add a new language? Add a new translation file in the `src/locales/` directory and register it in the i18n config.
+| Language   | Code |
+| ---------- | ---- |
+| 🇬🇧 English | `en` |
+| 🇩🇪 German  | `de` |
 
 ---
 
@@ -175,8 +132,6 @@ The app comes with built-in **Light** and **Dark** mode support. The selected th
 | ☀️ Light | Clean, bright interface for daytime use             |
 | 🌙 Dark  | Easy-on-the-eyes dark UI for low-light environments |
 
-Theme switching is available directly from the top navigation bar.
-
 ---
 
 ## 🌐 Deployment
@@ -184,13 +139,6 @@ Theme switching is available directly from the top navigation bar.
 The app is deployed and publicly accessible at:
 
 **➡️ [https://pdcamanagement.netlify.app](https://pdcamanagement.netlify.app)**
-
-To deploy your own instance:
-
-1. Push your code to GitHub.
-2. Connect the repository to [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
-3. Set the build command to `npm run build` and the publish directory to `dist`.
-4. Deploy — done!
 
 ---
 
