@@ -1,6 +1,6 @@
 # The PDCA Management System
 
-<sub>powered by Supabase</sub>
+<sub>\* powered by Supabase</sub>
 
 <p align="center">
   <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + Vite.
+  A modern, browser-based <strong>PDCA cycle management application</strong> built with React + TypeScript + SupaBase.
 </p>
 
 ---
