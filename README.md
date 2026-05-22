@@ -3,7 +3,7 @@
 <sub>\* powered by Supabase</sub>
 
 <p align="center">
-  <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
+  <img src="public/spark2.png" alt="KVP Management Logo" width="350" />
 </p>
 
 <p align="center">
