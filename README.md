@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# 🗂️ KVP Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, browser-based **key-value pair (KVP) management application** built with React + TypeScript + Vite. Data is stored locally using IndexedDB – no server required.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- ✅ Create, edit and delete KVPs
+- 🔍 Search and filter
+- 📋 Activity Log
+- 💾 Local data storage (IndexedDB)
+- 📱 Responsive design (mobile + desktop)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Technology                                    | Description             |
+| --------------------------------------------- | ----------------------- |
+| [React 19](https://react.dev/)                | UI framework            |
+| [TypeScript](https://www.typescriptlang.org/) | Type-safe JavaScript    |
+| [Vite](https://vitejs.dev/)                   | Build tool & dev server |
+| [Tailwind CSS 4](https://tailwindcss.com/)    | Utility-first CSS       |
+| IndexedDB                                     | Local data storage      |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ⚙️ Installation & Running
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+- **Node.js** 18+
+- **npm** or **yarn**
+
+### Steps
+
+```bash
+# Clone the repository
+git clone https://github.com/milty90/kvp-management-main.git
+cd kvp-management-main
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at: **http://localhost:5173**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📦 Build
+
+```bash
+# Production build
+npm run build
+
+# Preview the build
+npm run preview
 ```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/       # React components
+│   └── items/        # KVP and log components
+├── storage/          # IndexedDB handling (kvpDatabase.ts)
+├── types/            # TypeScript types
+├── utils/            # Helper functions (e.g. formatDate)
+└── main.tsx          # Entry point
+```
+
+---
+
+## 📄 License
+
+MIT © [milty90](https://github.com/milty90)
