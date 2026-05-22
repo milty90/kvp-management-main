@@ -27,7 +27,7 @@
 ## 📸 Screenshots
 
 <p align="center ">
-  <img src="public/dashboard.png" alt="Dashboard" width="80%" />
+  <img src="public/dashboard.png" alt="Dashboard" width="60%" />
   <img width="5%" />
   <img src="public/detail-view.png" alt="Detail View" width="15%" />
 </p>
