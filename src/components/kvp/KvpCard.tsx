@@ -12,6 +12,8 @@ import { useTranslation } from "../../utils/useTranslation";
 import { formatDate } from "../../utils/formatDate";
 import { useSessionContext } from "../../context/SessionContext";
 import { isDemoUser } from "../../features/authDatabase";
+import { logActivity } from "../../storage/kvpDatabase";
+import type { ActivityLog } from "../../types";
 
 interface KvpCardProps {
   id: number;
@@ -118,6 +120,7 @@ export default function KvpCard({
       "success",
       `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.archived}.`,
     );
+    logger("ARCHIVED");
     setShowMenu(false);
   };
 
@@ -129,12 +132,14 @@ export default function KvpCard({
       "info",
       `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.rejected}.`,
     );
+    logger("REJECTED");
     setShowMenu(false);
   };
 
   const handleDelete = () => {
     setShowDialog(true);
     setShowMenu(false);
+    logger("DELETED");
   };
 
   const handleEditClick = () => {
@@ -159,6 +164,19 @@ export default function KvpCard({
 
   const handleDamoClick = () => {
     showToast(width, theme, "warning", translation.demoMode.toastMessage);
+  };
+
+  const logger = async (action: ActivityLog["action"]) => {
+    await logActivity({
+      id: Date.now().toString(),
+      userId: session?.user.id || "unknown",
+      userName: session?.user.email?.split("@")[0] || "Unknown User",
+      action: action,
+      entityType: "KVP",
+      entityId: id.toString(),
+      details: `${title}`,
+      timestamp: new Date().toISOString(),
+    });
   };
 
   return (

@@ -20,7 +20,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
-      <div className="bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
+      <div className="bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full md:h-auto max-w-4xl relative">
         <h2 className="text-xl font-bold pl-1">{"Activity Log"}</h2>
         <button
           type="button"
@@ -30,21 +30,41 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
           &times;
         </button>
         <div className="border-t border-border my-4"></div>
-        <p className="text-sm font-semibold text-text-primary mb-2">Logs</p>
+
         {activities.length === 0 ? (
           <p className="text-sm text-text-secondary">No activity</p>
         ) : (
-          activities.map((log) => (
-            <div
-              key={log.entityId + log.timestamp}
-              className="flex justify-between text-sm text-text-secondary my-0.5"
-            >
-              <span>{log.details}</span>
-              <span>{log.action}</span>
-              <span>{log.userName}</span>
-              <span className="text-xs">{formatDate(log.timestamp)}</span>
-            </div>
-          ))
+          <div className="overflow-auto  md:max-h-[60vh] scrollbar-none">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-text-secondary">
+                  <th className="py-2 px-3">Entity Type</th>
+                  <th className="py-2 px-3">Details</th>
+                  <th className="py-2 px-3">Action</th>
+                  <th className="py-2 px-3">User</th>
+                  <th className="py-2 px-3 text-center">Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activities.map((log) => (
+                  <tr
+                    key={log.entityId + log.timestamp}
+                    className="border-b border-border/50 hover:bg-ground-600/30"
+                  >
+                    <td className="py-2 px-3 text-text-secondary">
+                      {log.entityType}
+                    </td>
+                    <td className="py-2 px-3">{log.details}</td>
+                    <td className="py-2 px-3">{log.action}</td>
+                    <td className="py-2 px-3">{log.userName}</td>
+                    <td className="py-2 px-3 text-xs text-center">
+                      {formatDate(log.timestamp)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

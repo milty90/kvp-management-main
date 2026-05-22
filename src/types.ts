@@ -73,7 +73,7 @@ export type ActivityLog = {
   id: string;
   userId: string;
   userName: string;
-  action: "CREATED" | "UPDATED" | "DELETED" | "LOGIN" | "LOGOUT";
+  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED";
   entityType: "KVP" | "USER" | "AUTH";
   entityId?: string;
   details?: string;
