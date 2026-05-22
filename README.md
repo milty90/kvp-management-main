@@ -1,4 +1,4 @@
-# The PCDA Management System
+# The PCDA Management System. <p>powered by Supabase</p>
 
 <p align="center">
   <img src="public/spark2.png" alt="KVP Management Logo" width="400" />
