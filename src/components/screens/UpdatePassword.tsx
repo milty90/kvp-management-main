@@ -28,14 +28,12 @@ export default function UpdatePassword() {
     if (event === "PASSWORD_RECOVERY") {
       setSessionReady(true);
     } else if (event === "SIGNED_IN" && session) {
-      // csak akkor fogadjuk el ha PASSWORD_RECOVERY volt előtte
       setSessionReady(true);
     } else if (event === "SIGNED_OUT") {
       navigate("/login");
     }
   });
-
-  // ellenőrzés hogy már van-e aktív session
+   
   supabase.auth.getSession().then(({ data: { session } }) => {
     if (session?.user) {
       setSessionReady(true);
