@@ -29,7 +29,7 @@ export function ForgotPassword() {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `https://pdcamanagement.netlify.app/update-password`,
+      redirectTo: `https://pdcamanagement.com/update-password`,
     });
 
     if (error) {
