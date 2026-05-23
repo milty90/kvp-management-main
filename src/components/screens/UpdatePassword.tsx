@@ -21,23 +21,29 @@ export default function UpdatePassword() {
   const navigate = useNavigate();
   const translations = useTranslation();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        setSessionReady(true);
-      }
-    });
+ useEffect(() => {
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((event, session) => {
+    if (event === "PASSWORD_RECOVERY") {
+      setSessionReady(true);
+    } else if (event === "SIGNED_IN" && session) {
+      // csak akkor fogadjuk el ha PASSWORD_RECOVERY volt előtte
+      setSessionReady(true);
+    } else if (event === "SIGNED_OUT") {
+      navigate("/login");
+    }
+  });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if ((event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") && session) {
-        setSessionReady(true);
-      }
-    });
+  // ellenőrzés hogy már van-e aktív session
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (session?.user) {
+      setSessionReady(true);
+    }
+  });
 
-    return () => subscription.unsubscribe();
-  }, []);
+  return () => subscription.unsubscribe();
+}, []);
 
   const handlePasswordUpdate = async (
     e: React.SubmitEvent<HTMLFormElement>,
