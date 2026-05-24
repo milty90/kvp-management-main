@@ -76,24 +76,6 @@ What is the Continuous Improvement Process?
 The Continuous Improvement Process (PDCA) is a systematic approach that enables companies to improve their processes, products, and services step by step. Unlike one-time optimization projects, PDCA is based on a permanent cycle: problems or areas for improvement are identified, solutions are developed and tested in small increments, and successful measures are documented and established as a new standard.
 </p>
 
-## 📁 Project Structure
-
-```
-kvp-management/
-├── public/                   # Static assets (logo, favicon, etc.)
-├── src/
-│   ├── components/           # Reusable React components
-│   │   └── items/            # PDCA item & activity log components
-│   ├── storage/              # IndexedDB logic (kvpDatabase.ts)
-│   ├── types/                # Shared TypeScript interfaces & types
-│   ├── utils/                # Helper functions (e.g. formatDate)
-│   └── main.tsx              # Application entry point
-├── index.html
-├── vite.config.ts
-├── tailwind.config.ts
-└── tsconfig.json
-```
-
 ---
 
 ## 🔐 Authentication
