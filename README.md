@@ -3,7 +3,7 @@
 <sub>\* powered by Supabase</sub>
 
 <p align="center">
-  <img src="public/spark2.png" alt="KVP Management Logo" width="350" />
+  <img src="public/spark2.png" alt="KVP Management Logo" width="320" />
 </p>
 
 <p align="center">
@@ -37,19 +37,19 @@
 
 ## ✨ Features
 
-| Feature                   | Description                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles with full lifecycle support |
-| 🔍 **Filter**             | Quickly find items by tatus                                      |
-| 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time     |
-| 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail      |
-| 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet    |
-| 📱 **Responsive Design**  | Fully functional on mobile and desktop                           |
-| ⚡ **Fast & Lightweight** | Powered by Supabase, zero backend overhead                       |
-| 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible            |
-| 🎨 **Theme Support**      | Switch between Light and Dark mode with persistent preference    |
-| 🔐 **Authentication**     | Sign in with Email, Google, GitHub, and more                     |
-| 🧪 **Demo Mode**          | Try the app instantly — no registration required                 |
+| Feature                   | Description                                                   |
+| ------------------------- | ------------------------------------------------------------- |
+| ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles                          |
+| 🔍 **Filter**             | Quickly find items by status                                  |
+| 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time  |
+| 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail   |
+| 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet |
+| 📱 **Responsive Design**  | Fully functional on mobile and desktop                        |
+| ⚡ **Fast & Lightweight** | Powered by Supabase, zero backend overhead                    |
+| 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible         |
+| 🎨 **Theme Support**      | Switch between Light and Dark mode                            |
+| 🔐 **Authentication**     | Sign in with Email, Google, GitHub                            |
+| 🧪 **Demo Mode**          | Try the app instantly — no registration required              |
 
 ---
 
@@ -148,7 +148,7 @@ The app comes with built-in **Light** and **Dark** mode support. The selected th
 
 The app is deployed and publicly accessible at:
 
-**➡️ [https://pdcamanagement.netlify.app](https://pdcamanagement.netlify.app)**
+**➡️ [https://pdcamanagement.com](https://pdcamanagement.com)**
 
 ---
 
