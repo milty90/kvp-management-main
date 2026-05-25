@@ -135,6 +135,4 @@ The app is deployed and publicly accessible at:
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
-MIT © [milty90](https://github.com/milty90)
+This project is licensed under the **MIT License** — © [milty90](https://github.com/milty90)
