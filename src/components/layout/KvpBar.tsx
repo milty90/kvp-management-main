@@ -4,7 +4,6 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import type { Priority } from "../../types";
-import { useEffect } from "react";
 
 const VALID_STATES = ["Plan", "Do", "Check", "Act"] as const;
 
