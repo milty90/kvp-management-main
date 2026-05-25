@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://pdcamanagement.com">
-    <img src="https://img.shields.io/badge/Live%20Demo-pdcamanagement.netlify.app-brightgreen?style=for-the-badge&logo=netlify" alt="Live Demo" />
+    <img src="https://img.shields.io/badge/Live%20Demo-pdcamanagement.com-brightgreen?style=for-the-badge&logo=netlify" alt="Live Demo" />
   </a>
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React 19" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript" />
