@@ -44,7 +44,6 @@ export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
     <div className="grid md:grid-cols-2 lg:grid-cols-2 w-full pt-2.5 px-2.5 md:pt-3 md:px-3 rounded-t-xl bg-surface text-text-primary gap-3 flex-1 overflow-y-auto scrollbar-none">
       {VALID_STATES.map((state) => {
         const stateFiltered = filtered.filter((k) => k.state === state);
-        console.log(state, stateFiltered.length);
 
         return (
           <div

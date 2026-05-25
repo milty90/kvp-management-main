@@ -3,7 +3,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import { useLanguage } from "../../context/LanguageContext";
 import { showToast } from "./ToastItem";
-import { useState } from "react";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { isDemoUser } from "../../features/authDatabase";
 import { useSessionContext } from "../../context/SessionContext";
@@ -22,21 +21,12 @@ export function SettingsModal({
   const { theme, toggleTheme } = useTheme();
   const translation = useTranslation();
   const { language, toggleLanguage } = useLanguage();
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
   const { session } = useSessionContext();
 
   const isDemo = isDemoUser(session?.user?.email);
   const width = useWindowWidth();
 
-  const handleNotificationToggle = () => {
-    setNotificationsEnabled((prev) => !prev);
-    showToast(
-      width,
-      theme,
-      "info",
-      translation.settingsModal.settingsNotification.toastMessage,
-    );
-  };
   return (
     <div className="fixed z-40 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-surface px-6 pt-8 md:py-5 md:rounded-xl shadow-lg w-full h-full md:h-auto max-w-xl relative">
@@ -109,39 +99,6 @@ export function SettingsModal({
             </p>
           </div>
 
-          {/* <div
-            className={`flex flex-col ${isDemo ? "pointer-events-none opacity-60" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
-          >
-            <div className="flex items-start justify-between w-full mb-1">
-              <p className="text-sm text-text-primary mr-4">
-                {translation.settingsModal.settingsNotification.title}
-              </p>
-              <div className="flex items-center">
-                <p className="text-xs lg:text-sm tracking-tight text-text-secondary mr-3">
-                  {notificationsEnabled
-                    ? translation.settingsModal.settingsNotification.on
-                    : translation.settingsModal.settingsNotification.off}
-                </p>
-                <div className="flex items-center">
-                  <label className="relative inline-flex items-center cursor-pointer lg:mr-1">
-                    <input
-                      type="checkbox"
-                      className="sr-only peer"
-                      value="theme"
-                      checked={notificationsEnabled}
-                      onChange={() => {
-                        handleNotificationToggle();
-                      }}
-                    />
-                    <div className="group bg-surface rounded-full duration-300 w-8 h-4 ring-2 ring-gray-400 after:duration-300 after:bg-gray-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-2.5 after:w-2.5 after:top-0.75 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-3 peer-hover:after:scale-95"></div>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs  text-text-secondary">
-              {translation.settingsModal.settingsNotification.description}
-            </p>
-          </div> */}
           <div
             className={`flex flex-row ${isDemo ? " opacity-60 pointer-events-none" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
@@ -166,7 +123,6 @@ export function SettingsModal({
                     translation.settingsModal.settingsActivityLog.toastMessage,
                   );
                 } else {
-                  setNotificationsEnabled(false);
                   if (showActivityLog) {
                     showActivityLog();
                   }

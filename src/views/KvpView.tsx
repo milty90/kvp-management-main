@@ -2,7 +2,7 @@ import TopBar from "../components/layout/TopBar";
 import ActionBar from "../components/layout/ActionBar";
 import KvpBar from "../components/layout/KvpBar";
 import KvpCycleBar from "../components/layout/KvpCycleBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArchiveBar } from "../components/layout/ArchiveBar";
 import { useTranslation } from "../utils/useTranslation";
 
@@ -19,6 +19,11 @@ function KvpView({ onOpenModal }: KvpViewProps) {
   const [activePriority, setActivePriority] = useState(
     translation.actionBar.startState,
   );
+
+  useEffect(() => {
+    setActivePriority(translation.actionBar.startState);
+    setActiveFilter(translation.actionBar.startState);
+  }, [translation]);
 
   return (
     <div className="flex flex-col px-2 pt-0 md:px-8 pb-0 md:pt-8 items-center bg-background gap-3 h-screen">

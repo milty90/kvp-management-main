@@ -1,5 +1,10 @@
 export const translations = {
   de: {
+    priorityMap: {
+      High: "Hoch",
+      Medium: "Mittel",
+      Low: "Niedrig",
+    },
     appName: "KVP Management System",
     topNavButton: { pdca: "Verbesserungen", stats: "Statistiken" },
     loginScreen: {
@@ -263,6 +268,11 @@ export const translations = {
     },
   },
   en: {
+    priorityMap: {
+      High: "High",
+      Medium: "Medium",
+      Low: "Low",
+    },
     appName: "PCDA Management System",
     topNavButton: { pdca: "Improvements", stats: "Statistics" },
     statCard: {
