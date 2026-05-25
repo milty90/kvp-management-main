@@ -41,11 +41,14 @@ export function ProfileModal({
   const userNameFromContext = users?.find(
     (user) => user.userEmail === email,
   )?.userName;
+
   useEffect(() => {
     if (userNameFromContext) {
       setUsername(userNameFromContext);
     }
   }, [userNameFromContext]);
+
+  console.log(userNameFromContext);
 
   const department =
     users?.find((user) => user.userEmail === email)?.department || "N/A";
@@ -55,15 +58,17 @@ export function ProfileModal({
   );
 
   const assignedTo =
-    kvps?.filter((kvp) => kvp.assignedTo === username && kvp.state !== "Act")
-      .length || 0;
+    kvps?.filter(
+      (kvp) => kvp.assignedTo === userNameFromContext && kvp.state !== "Act",
+    ).length || 0;
 
   const createdBy =
     kvps?.filter((kvp) => kvp.createdBy === username).length || 0;
 
   const act =
-    kvps?.filter((kvp) => kvp.assignedTo === username && kvp.state === "Act")
-      .length || 0;
+    kvps?.filter(
+      (kvp) => kvp.assignedTo === userNameFromContext && kvp.state === "Act",
+    ).length || 0;
 
   const profileUser = users?.find((user) => user.userEmail === email)?.photoUrl;
 

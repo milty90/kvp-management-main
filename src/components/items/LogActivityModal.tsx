@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../../utils/formatDate";
 import { getLogActivities } from "../../storage/kvpDatabase";
 import type { ActivityLog } from "../../types";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface LogActivityModalProps {
   onClose: () => void;
@@ -9,11 +10,14 @@ interface LogActivityModalProps {
 
 export function LogActivityModal({ onClose }: LogActivityModalProps) {
   const [activities, setActivities] = useState<ActivityLog[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchLogs = async () => {
+      setLoading(true);
       const logs = await getLogActivities();
       setActivities(logs);
+      setLoading(false);
     };
     fetchLogs();
   }, []);
@@ -32,7 +36,15 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
         <div className="border-t border-border my-4"></div>
 
         {activities.length === 0 ? (
-          <p className="text-sm text-text-secondary">No activity</p>
+          <div className="flex items-center justify-center h-50 rounded-lg">
+            {loading ? (
+              <LoadingSpinner text="Loading..." />
+            ) : (
+              <p className="text-sm text-text-secondary">
+                No activities logged yet.
+              </p>
+            )}
+          </div>
         ) : (
           <div className="overflow-auto  md:max-h-[60vh] scrollbar-none">
             <table className="w-full text-sm">
