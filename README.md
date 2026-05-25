@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://pdcamanagement.netlify.app">
+  <a href="https://pdcamanagement.com">
     <img src="https://img.shields.io/badge/Live%20Demo-pdcamanagement.netlify.app-brightgreen?style=for-the-badge&logo=netlify" alt="Live Demo" />
   </a>
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React 19" />
@@ -135,4 +135,4 @@ The app is deployed and publicly accessible at:
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — © [milty90](https://github.com/milty90)
+This project is licensed under the **MIT License** © [milty90](https://github.com/milty90)
