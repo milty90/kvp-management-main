@@ -109,7 +109,7 @@ export function SettingsModal({
             </p>
           </div>
 
-          <div
+          {/* <div
             className={`flex flex-col ${isDemo ? "pointer-events-none opacity-60" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >
             <div className="flex items-start justify-between w-full mb-1">
@@ -141,7 +141,7 @@ export function SettingsModal({
             <p className="text-xs  text-text-secondary">
               {translation.settingsModal.settingsNotification.description}
             </p>
-          </div>
+          </div> */}
           <div
             className={`flex flex-row ${isDemo ? " opacity-60 pointer-events-none" : ""} bg-card p-4 rounded-lg border ${theme === "dark" ? "border-border" : "border-gray-400/80"}`}
           >

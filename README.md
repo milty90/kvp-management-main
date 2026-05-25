@@ -37,19 +37,18 @@
 
 ## ✨ Features
 
-| Feature                   | Description                                                   |
-| ------------------------- | ------------------------------------------------------------- |
-| ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles                          |
-| 🔍 **Filter**             | Quickly find items by status                                  |
-| 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time  |
-| 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail   |
-| 💾 **Offline-first**      | All data stored locally in IndexedDB — works without internet |
-| 📱 **Responsive Design**  | Fully functional on mobile and desktop                        |
-| ⚡ **Fast & Lightweight** | Powered by Supabase, zero backend overhead                    |
-| 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible         |
-| 🎨 **Theme Support**      | Switch between Light and Dark mode                            |
-| 🔐 **Authentication**     | Sign in with Email, Google, GitHub                            |
-| 🧪 **Demo Mode**          | Try the app instantly — no registration required              |
+| Feature                   | Description                                                  |
+| ------------------------- | ------------------------------------------------------------ |
+| ✅ **PDCA Management**    | Create, edit, and delete PDCA cycles                         |
+| 🔍 **Filter**             | Quickly find items by status                                 |
+| 📊 **Statistics**         | Visual overview of your PDCA activity and progress over time |
+| 📋 **Activity Log**       | Track every change with a detailed, timestamped audit trail  |
+| 📱 **Responsive Design**  | Fully functional on mobile and desktop                       |
+| ⚡ **Fast & Lightweight** | Powered by Supabase, zero backend overhead                   |
+| 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible        |
+| 🎨 **Theme Support**      | Switch between Light and Dark mode                           |
+| 🔐 **Authentication**     | Sign in with Email, Google, GitHub                           |
+| 🧪 **Demo Mode**          | Try the app instantly — no registration required             |
 
 ---
 
@@ -130,7 +129,7 @@ The app comes with built-in **Light** and **Dark** mode support. The selected th
 
 The app is deployed and publicly accessible at:
 
-**➡️ [https://pdcamanagement.com](https://pdcamanagement.com)**
+**➡️ [https://www.pdcamanagement.com](https://pdcamanagement.com)**
 
 ---
 
