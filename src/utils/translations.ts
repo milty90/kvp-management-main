@@ -1,5 +1,3 @@
-import { Activity } from "react";
-
 export const translations = {
   de: {
     appName: "KVP Management System",
@@ -231,6 +229,7 @@ export const translations = {
       aboutMePlaceholder: "Erzählen Sie uns etwas über sich",
       saveButton: "Änderungen speichern",
       cancelButton: "Abbrechen",
+      toastMessage: "Profil erfolgreich aktualisiert!",
     },
     forgotPasswordScreen: {
       title: "Passwort zurücksetzen",
@@ -500,7 +499,9 @@ export const translations = {
       aboutMePlaceholder: "Tell us about yourself",
       saveButton: "Save Changes",
       cancelButton: "Cancel",
+      toastMessage: "Profile updated successfully!",
     },
+
     forgotPasswordScreen: {
       title: "Reset Password",
       description:

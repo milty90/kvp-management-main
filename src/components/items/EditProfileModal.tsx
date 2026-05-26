@@ -3,28 +3,62 @@ import ColorButton from "../buttons/ColorButton";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
+import type { User } from "../../types";
+import { supabase } from "../../utils/supabase";
+import { showToast } from "./ToastItem";
+import { useWindowWidth } from "../../utils/useWindowWidth";
 
 interface EditProfileModalProps {
   onConfirm: () => void;
   onCancel: () => void;
+  initialData?: User;
 }
 
 export default function EditProfileModal({
   onConfirm,
   onCancel,
+  initialData,
 }: EditProfileModalProps) {
-  const [preview, setPreview] = useState<string>("/face-id.png");
+  const [preview, setPreview] = useState<string>(
+    initialData?.photoUrl || "/face-id.png",
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
   const translations = useTranslation();
-  const [userName, setUserName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [department, setDepartment] = useState("");
-  const [role, setRole] = useState("");
-  const [aboutMe, setAboutMe] = useState("");
+  const [userName, setUserName] = useState(initialData?.userName || "");
+  const [firstName, setFirstName] = useState(initialData?.firstName || "");
+  const [lastName, setLastName] = useState(initialData?.lastName || "");
+  const [department, setDepartment] = useState(initialData?.department || "");
+  const [role, setRole] = useState(initialData?.role || "");
+  const [aboutMe, setAboutMe] = useState(initialData?.aboutMe || "");
+  const [photoUrl, setPhotoUrl] = useState(initialData?.photoUrl || "");
   const updateUser = useUserContext().updateUser;
   const user = useUserContext().user;
+  const width = useWindowWidth();
+
+  async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !user?.id) return;
+
+    setPreview(URL.createObjectURL(file));
+
+    const fileExt = file.name.split(".").pop();
+    const filePath = `${user.id}/avatar.${fileExt}`;
+
+    const { error } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, file, {
+        upsert: true,
+      });
+
+    if (error) {
+      console.error("Error uploading avatar:", error);
+      return;
+    }
+
+    const { data } = supabase.storage.from("avatars").getPublicUrl(filePath);
+    setPhotoUrl(data.publicUrl);
+  }
 
   function handleConfirm() {
     updateUser({
@@ -35,11 +69,18 @@ export default function EditProfileModal({
       department,
       role,
       aboutMe,
+      photoUrl,
       userEmail: user?.email || "",
       createdAt: user?.created_at || "",
       lastSignIn: user?.last_sign_in_at || "",
     });
     onConfirm();
+    showToast(
+      width,
+      theme,
+      "success",
+      translations.editProfileModal.toastMessage,
+    );
   }
 
   return (
@@ -75,12 +116,7 @@ export default function EditProfileModal({
               type="file"
               accept="image/*"
               className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  setPreview(URL.createObjectURL(file));
-                }
-              }}
+              onChange={handleAvatarChange}
             />
           </div>
           <div

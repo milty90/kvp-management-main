@@ -34,7 +34,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const { deleteUser, user } = useUserContext();
+  const { deleteUser, user, users } = useUserContext();
+  const currentUser = users.find((u) => u.userId === user?.id);
 
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -217,6 +218,23 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           <EditProfileModal
             onConfirm={() => setShowEditProfileModal(false)}
             onCancel={() => setShowEditProfileModal(false)}
+            initialData={
+              currentUser
+                ? {
+                    userId: currentUser.userId,
+                    userEmail: currentUser.userEmail,
+                    createdAt: currentUser.createdAt,
+                    lastSignIn: currentUser.lastSignIn,
+                    userName: currentUser.userName,
+                    firstName: currentUser.firstName,
+                    lastName: currentUser.lastName,
+                    department: currentUser.department,
+                    role: currentUser.role,
+                    aboutMe: currentUser.aboutMe,
+                    photoUrl: currentUser.photoUrl,
+                  }
+                : undefined
+            }
           />,
           document.body,
         )}
