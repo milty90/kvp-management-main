@@ -17,8 +17,15 @@ const logger = async (
   id: string,
   userId: string,
   userName: string,
-  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED",
-  entityType: "KVP" | "USER" | "AUTH",
+  action:
+    | "CREATED"
+    | "UPDATED"
+    | "DELETED"
+    | "REJECTED"
+    | "ARCHIVED"
+    | "SIGNED_UP"
+    | "LOGGED_IN",
+  entityType: "PDCA" | "USER" | "AUTH",
   entityId: string | undefined,
   details: string,
   timestamp: string,
@@ -38,6 +45,9 @@ const logger = async (
 export function SignupScreen() {
   const navigate = useNavigate();
 
+  const demoEmail = import.meta.env.VITE_DEMO_EMAIL;
+  const demoPassword = import.meta.env.VITE_DEMO_PASSWORD;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -48,10 +58,7 @@ export function SignupScreen() {
   const { addUser } = useUserContext();
 
   async function handleDemoLogin() {
-    const { data, error } = await signInWithEmail(
-      "demo@mail.com",
-      "demopassword",
-    );
+    const { data, error } = await signInWithEmail(demoEmail, demoPassword);
 
     if (error || !data.session) {
       showToast(
@@ -72,9 +79,9 @@ export function SignupScreen() {
 
     await logger(
       Date.now().toString(),
-      "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      data.user.id,
       "Demo User",
-      "CREATED",
+      "LOGGED_IN",
       "AUTH",
       undefined,
       "Demo",
@@ -104,7 +111,7 @@ export function SignupScreen() {
       return;
     }
 
-    await addUser({
+    addUser({
       userId: data.user.id,
       photoUrl: "",
       department: "",
@@ -132,7 +139,7 @@ export function SignupScreen() {
       Date.now().toString(),
       data.user.id,
       email,
-      "CREATED",
+      "SIGNED_UP",
       "AUTH",
       undefined,
       email.slice(0, email.indexOf("@")),
