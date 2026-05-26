@@ -172,7 +172,7 @@ export default function KvpCard({
       userId: session?.user.id || "unknown",
       userName: session?.user.email?.split("@")[0] || "Unknown User",
       action: action,
-      entityType: "KVP",
+      entityType: "PDCA",
       entityId: id.toString(),
       details: `${title}`,
       timestamp: new Date().toISOString(),
