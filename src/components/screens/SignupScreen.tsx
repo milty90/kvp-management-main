@@ -13,16 +13,25 @@ import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
 import { logActivity } from "../../storage/kvpDatabase";
 
-const logger = async () => {
+const logger = async (
+  id: string,
+  userId: string,
+  userName: string,
+  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED",
+  entityType: "KVP" | "USER" | "AUTH",
+  entityId: string | undefined,
+  details: string,
+  timestamp: string,
+) => {
   await logActivity({
-    id: Date.now().toString(),
-    userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
-    userName: "Demo User",
-    action: "CREATED",
-    entityType: "AUTH",
-    entityId: undefined,
-    details: "Demo",
-    timestamp: new Date().toISOString(),
+    id: id,
+    userId: userId,
+    userName: userName,
+    action: action,
+    entityType: entityType,
+    entityId: entityId,
+    details: details,
+    timestamp: timestamp,
   });
 };
 
@@ -61,7 +70,16 @@ export function SignupScreen() {
       translation.signupScreen.loggedInWithDemo,
     );
 
-    await logger();
+    await logger(
+      Date.now().toString(),
+      "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      "Demo User",
+      "CREATED",
+      "AUTH",
+      undefined,
+      "Demo",
+      new Date().toISOString(),
+    );
 
     navigate("/kvps");
   }
@@ -109,6 +127,17 @@ export function SignupScreen() {
       navigate("/login");
       return;
     }
+
+    await logger(
+      Date.now().toString(),
+      data.user.id,
+      email,
+      "CREATED",
+      "AUTH",
+      undefined,
+      email.slice(0, email.indexOf("@")),
+      new Date().toISOString(),
+    );
 
     showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
 
