@@ -109,7 +109,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       userId: session?.user.id || "unknown",
       userName: session?.user.email?.split("@")[0] || "Unknown User",
       action: initialData ? "UPDATED" : "CREATED",
-      entityType: "KVP",
+      entityType: "PDCA",
       entityId: initialData ? String(initialData.id) : String(newKvp.id),
       details: `${newKvp.title}`,
       timestamp: new Date().toISOString(),
