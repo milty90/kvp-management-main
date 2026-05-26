@@ -49,7 +49,7 @@ export function SignupScreen() {
     );
 
     await logActivity({
-      id: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      id: new Date().toISOString(),
       userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
       userName: "Demo User",
       action: "CREATED",
@@ -58,6 +58,7 @@ export function SignupScreen() {
       details: "Demo",
       timestamp: new Date().toISOString(),
     });
+
     navigate("/kvps");
   }
 
@@ -104,17 +105,6 @@ export function SignupScreen() {
       navigate("/login");
       return;
     }
-
-    await logActivity({
-      id: data.user.id,
-      userId: data.user.id,
-      userName: email.slice(0, email.indexOf("@")),
-      action: "CREATED",
-      entityType: "AUTH",
-      entityId: email,
-      details: "new user",
-      timestamp: new Date().toISOString(),
-    });
 
     showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
 
