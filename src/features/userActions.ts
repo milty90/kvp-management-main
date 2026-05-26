@@ -51,7 +51,7 @@ export const getUsers = async (dispatch: Dispatch) => {
 
     return;
   }
-  console.log("Fetched users:", data);
+  
 
   dispatch({ type: "SET_USERS", users: data });
 };
