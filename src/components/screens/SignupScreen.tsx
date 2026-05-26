@@ -65,7 +65,7 @@ export function SignupScreen() {
         width,
         theme,
         "error",
-        translation.signupScreen.loggedInWithDemo + " " + error?.message,
+        translation.signupScreen.loggedInWithDemo + "  " + error?.message,
       );
       return;
     }
