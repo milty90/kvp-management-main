@@ -11,6 +11,7 @@ import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
+import { logActivity } from "../../storage/kvpDatabase";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -23,6 +24,19 @@ export function SignupScreen() {
   const width = useWindowWidth();
   const translation = useTranslation();
   const { addUser } = useUserContext();
+
+  const logger = async () => {
+    await logActivity({
+      id: Date.now().toString(),
+      userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      userName: "Demo User",
+      action: "CREATED",
+      entityType: "AUTH",
+      entityId: "",
+      details: "Demo",
+      timestamp: new Date().toISOString(),
+    });
+  };
 
   async function handleDemoLogin() {
     const { data, error } = await signInWithEmail(
@@ -46,6 +60,8 @@ export function SignupScreen() {
       "success",
       translation.signupScreen.loggedInWithDemo,
     );
+
+    await logger();
 
     navigate("/kvps");
   }
