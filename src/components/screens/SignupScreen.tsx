@@ -13,6 +13,19 @@ import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
 import { logActivity } from "../../storage/kvpDatabase";
 
+const logger = async () => {
+  await logActivity({
+    id: Date.now().toString(),
+    userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+    userName: "Demo User",
+    action: "CREATED",
+    entityType: "AUTH",
+    entityId: undefined,
+    details: "Demo",
+    timestamp: new Date().toISOString(),
+  });
+};
+
 export function SignupScreen() {
   const navigate = useNavigate();
 
@@ -48,16 +61,7 @@ export function SignupScreen() {
       translation.signupScreen.loggedInWithDemo,
     );
 
-    await logActivity({
-      id: new Date().getTime().toString(),
-      userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
-      userName: "Demo User",
-      action: "CREATED",
-      entityType: "AUTH",
-      entityId: "",
-      details: "Demo",
-      timestamp: new Date().toISOString(),
-    });
+    await logger();
 
     navigate("/kvps");
   }
