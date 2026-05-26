@@ -3,6 +3,7 @@ import { formatDate } from "../../utils/formatDate";
 import { getLogActivities } from "../../storage/kvpDatabase";
 import type { ActivityLog } from "../../types";
 import LoadingSpinner from "./LoadingSpinner";
+import { useTranslation } from "../../utils/useTranslation";
 
 interface LogActivityModalProps {
   onClose: () => void;
@@ -11,11 +12,13 @@ interface LogActivityModalProps {
 export function LogActivityModal({ onClose }: LogActivityModalProps) {
   const [activities, setActivities] = useState<ActivityLog[]>([]);
   const [loading, setLoading] = useState(false);
+  const translations = useTranslation();
 
   useEffect(() => {
     const fetchLogs = async () => {
       setLoading(true);
       const logs = await getLogActivities();
+
       setActivities(logs);
       setLoading(false);
     };
@@ -25,7 +28,9 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className="bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full md:h-auto max-w-4xl relative">
-        <h2 className="text-xl font-bold pl-1">{"Activity Log"}</h2>
+        <h2 className="text-xl font-bold pl-1">
+          {translations.activityLog.title}
+        </h2>
         <button
           type="button"
           className="absolute top-4 right-6 text-3xl bg-ground-600/80 text-secondary hover:text-text-primary"
@@ -36,12 +41,15 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
         <div className="border-t border-border my-4"></div>
 
         {activities.length === 0 ? (
-          <div className="flex items-center justify-center h-50 rounded-lg">
+          <div className="flex items-center justify-center h-50 mt-8 rounded-lg">
             {loading ? (
-              <LoadingSpinner text="Loading..." />
+              <LoadingSpinner
+                text={translations.activityLog.loading}
+                size="medium"
+              />
             ) : (
               <p className="text-sm text-text-secondary">
-                No activities logged yet.
+                {translations.activityLog.noActivities}
               </p>
             )}
           </div>
@@ -50,11 +58,19 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-text-secondary">
-                  <th className="py-2 px-3">Entity Type</th>
-                  <th className="py-2 px-3">Details</th>
-                  <th className="py-2 px-3">Action</th>
-                  <th className="py-2 px-3">User</th>
-                  <th className="py-2 px-3 text-center">Timestamp</th>
+                  <th className="py-2 px-3">
+                    {translations.activityLog.entityType}
+                  </th>
+                  <th className="py-2 px-3">
+                    {translations.activityLog.details}
+                  </th>
+                  <th className="py-2 px-3">
+                    {translations.activityLog.action}
+                  </th>
+                  <th className="py-2 px-3">{translations.activityLog.user}</th>
+                  <th className="py-2 px-3 text-center">
+                    {translations.activityLog.timestamp}
+                  </th>
                 </tr>
               </thead>
               <tbody>

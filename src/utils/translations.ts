@@ -1,10 +1,7 @@
+import { Activity } from "react";
+
 export const translations = {
   de: {
-    priorityMap: {
-      High: "Hoch",
-      Medium: "Mittel",
-      Low: "Niedrig",
-    },
     appName: "KVP Management System",
     topNavButton: { pdca: "Verbesserungen", stats: "Statistiken" },
     loginScreen: {
@@ -266,13 +263,18 @@ export const translations = {
     demoMode: {
       toastMessage: "Sie verwenden den Demo-Account. Einige Funktionen sind eingeschränkt.",
     },
+    activityLog: {
+      title: "Aktivitätsprotokoll",
+      noActivities: "Keine Aktivitäten zu anzeigen.",
+      entityType: "Entitätstyp",
+      details: "Details",
+      action: "Aktion",
+      user: "Benutzer",
+      timestamp: "Zeitstempel",
+      loading: "Lade Aktivitäten...",
+    },
   },
   en: {
-    priorityMap: {
-      High: "High",
-      Medium: "Medium",
-      Low: "Low",
-    },
     appName: "PCDA Management System",
     topNavButton: { pdca: "Improvements", stats: "Statistics" },
     statCard: {
@@ -530,5 +532,15 @@ export const translations = {
     demoMode: {
       toastMessage: "You are using the demo account. Some features are limited.",
     },
+    activityLog: { 
+      title: "Activity Log",
+      noActivities: "No activities to display.",
+      entityType: "Entity Type",
+      details: "Details",
+      action: "Action",
+      user: "User",
+      timestamp: "Timestamp",
+      loading: "Loading activities..."
   },
+}
 };
