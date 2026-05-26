@@ -21,27 +21,27 @@ export default function UpdatePassword() {
   const navigate = useNavigate();
   const translations = useTranslation();
 
- useEffect(() => {
-  const {
-    data: { subscription },
-  } = supabase.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY") {
-      setSessionReady(true);
-    } else if (event === "SIGNED_IN" && session) {
-      setSessionReady(true);
-    } else if (event === "SIGNED_OUT") {
-      navigate("/login");
-    }
-  });
-   
-  supabase.auth.getSession().then(({ data: { session } }) => {
-    if (session?.user) {
-      setSessionReady(true);
-    }
-  });
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setSessionReady(true);
+      } else if (event === "SIGNED_IN" && session) {
+        setSessionReady(true);
+      } else if (event === "SIGNED_OUT") {
+        navigate("/login");
+      }
+    });
 
-  return () => subscription.unsubscribe();
-}, []);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setSessionReady(true);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handlePasswordUpdate = async (
     e: React.SubmitEvent<HTMLFormElement>,
@@ -85,7 +85,10 @@ export default function UpdatePassword() {
   if (!sessionReady) {
     return (
       <div className="flex flex-col items-center justify-center  bg-background">
-        <LoadingSpinner text={translations.updatePassword.validityMessage} />
+        <LoadingSpinner
+          text={translations.updatePassword.validityMessage}
+          size="large"
+        />
       </div>
     );
   }

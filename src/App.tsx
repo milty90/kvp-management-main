@@ -28,7 +28,7 @@ function App() {
   const { session, isAuthLoading } = useSessionContext();
 
   if (isAuthLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner size="large" />;
   }
 
   return (
