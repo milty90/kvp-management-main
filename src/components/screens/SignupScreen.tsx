@@ -49,7 +49,7 @@ export function SignupScreen() {
     );
 
     await logActivity({
-      id: new Date().toISOString(),
+      id: new Date().getTime().toString(),
       userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
       userName: "Demo User",
       action: "CREATED",
