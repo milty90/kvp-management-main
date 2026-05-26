@@ -25,19 +25,6 @@ export function SignupScreen() {
   const translation = useTranslation();
   const { addUser } = useUserContext();
 
-  const logger = async () => {
-    await logActivity({
-      id: Date.now().toString(),
-      userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
-      userName: "Demo User",
-      action: "CREATED",
-      entityType: "AUTH",
-      entityId: "",
-      details: "Demo",
-      timestamp: new Date().toISOString(),
-    });
-  };
-
   async function handleDemoLogin() {
     const { data, error } = await signInWithEmail(
       "demo@mail.com",
@@ -61,8 +48,16 @@ export function SignupScreen() {
       translation.signupScreen.loggedInWithDemo,
     );
 
-    await logger();
-
+    await logActivity({
+      id: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      userId: "3f99c566-58cf-42f3-8676-8ccd498e8b18",
+      userName: "Demo User",
+      action: "CREATED",
+      entityType: "AUTH",
+      entityId: "",
+      details: "Demo",
+      timestamp: new Date().toISOString(),
+    });
     navigate("/kvps");
   }
 
@@ -109,6 +104,17 @@ export function SignupScreen() {
       navigate("/login");
       return;
     }
+
+    await logActivity({
+      id: data.user.id,
+      userId: data.user.id,
+      userName: email.slice(0, email.indexOf("@")),
+      action: "CREATED",
+      entityType: "AUTH",
+      entityId: email,
+      details: "new user",
+      timestamp: new Date().toISOString(),
+    });
 
     showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
 
