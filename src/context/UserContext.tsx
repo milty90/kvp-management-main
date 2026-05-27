@@ -44,8 +44,31 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
+
+      if (_event === "SIGNED_IN" && session?.user) {
+        const existing = await supabase
+          .from("users")
+          .select("userId")
+          .eq("userId", session.user.id)
+          .single();
+
+        if (!existing.data) {
+          await addUser(dispatch, {
+            userId: session.user.id,
+            userEmail: session.user.email ?? "",
+            userName: session.user.email?.split("@")[0] ?? "",
+            photoUrl: session.user.user_metadata?.avatar_url ?? "",
+            department: "",
+            role: "",
+            firstName: "",
+            lastName: "",
+            createdAt: new Date().toISOString(),
+            lastSignIn: new Date().toISOString(),
+          });
+        }
+      }
     });
 
     getUsers(dispatch);

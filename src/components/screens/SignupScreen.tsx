@@ -98,19 +98,6 @@ export function SignupScreen() {
       return;
     }
 
-    await addUser({
-      userId: data.user.id,
-      photoUrl: "",
-      department: "",
-      role: "",
-      firstName: "",
-      lastName: "",
-      userName: email.slice(0, email.indexOf("@")),
-      userEmail: email,
-      createdAt: new Date().toISOString(),
-      lastSignIn: new Date().toISOString(),
-    });
-
     await logActivity({
       id: Date.now().toString(),
       userId: data.user.id,
@@ -129,6 +116,7 @@ export function SignupScreen() {
         "success",
         translation.signupScreen.signUpSuccess,
       );
+      setLoading(false);
       navigate("/login");
       return;
     }
