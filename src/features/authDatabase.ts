@@ -76,12 +76,13 @@ export async function signOut() {
 }
 
 export async function getCurrentUser() {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) {
-    console.error("Error fetching current user:", error);
+  try {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) return null;
+    return data.user;
+  } catch {
     return null;
   }
-  return data.user;
 }
 
 export const isDemoUser = (email?: string ) => email === "demo@mail.com";
