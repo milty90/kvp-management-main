@@ -10,7 +10,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
-import { useUserContext } from "../../context/UserContext";
 import { logActivity } from "../../storage/kvpDatabase";
 
 export function SignupScreen() {
