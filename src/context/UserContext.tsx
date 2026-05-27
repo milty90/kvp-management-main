@@ -39,20 +39,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [users, dispatch] = useReducer(userManagmentReducer, []);
 
-  // useEffect(() => {
-  //   getCurrentUser().then((data) => setUser(data ?? null));
-
-  //   const {
-  //     data: { subscription },
-  //   } = supabase.auth.onAuthStateChange((_event, session) => {
-  //     setUser(session?.user ?? null);
-  //   });
-
-  //   getUsers(dispatch);
-
-  //   return () => subscription.unsubscribe();
-  // }, []);
-
   useEffect(() => {
     getCurrentUser().then((data) => setUser(data ?? null));
 
@@ -60,39 +46,38 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-
-      if (_event === "SIGNED_IN" && session?.user) {
-        const userId = session.user.id;
-        const userEmail = session.user.email ?? "";
-
-        supabase
-          .from("users")
-          .select("userId")
-          .eq("userId", userId)
-          .single()
-          .then(({ data: existing }) => {
-            if (!existing) {
-              addUser(dispatch, {
-                userId,
-                userEmail,
-                userName: userEmail.split("@")[0],
-                photoUrl: session.user.user_metadata?.avatar_url ?? "",
-                department: "",
-                role: "",
-                firstName: "",
-                lastName: "",
-                createdAt: new Date().toISOString(),
-                lastSignIn: new Date().toISOString(),
-              });
-            }
-          });
-      }
     });
 
     getUsers(dispatch);
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
+    supabase
+      .from("users")
+      .select("userId")
+      .eq("userId", user.id)
+      .single()
+      .then(({ data: existing }) => {
+        if (!existing) {
+          addUser(dispatch, {
+            userId: user.id,
+            userEmail: user.email ?? "",
+            userName: user.email?.split("@")[0] ?? "",
+            photoUrl: user.user_metadata?.avatar_url ?? "",
+            department: "",
+            role: "",
+            firstName: "",
+            lastName: "",
+            createdAt: new Date().toISOString(),
+            lastSignIn: new Date().toISOString(),
+          });
+        }
+      });
+  }, [user?.id]);
 
   return (
     <UserContext.Provider
