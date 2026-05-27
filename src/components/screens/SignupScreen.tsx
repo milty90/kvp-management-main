@@ -96,18 +96,17 @@ export function SignupScreen() {
       return;
     }
 
-    await logActivity({
-      id: Date.now().toString(),
-      userId: data.user.id,
-      userName: email,
-      action: "SIGNED_UP",
-      entityType: "AUTH",
-      entityId: undefined,
-      details: email.slice(0, email.indexOf("@")),
-      timestamp: new Date().toISOString(),
-    });
-
     if (data.session) {
+      await logActivity({
+        id: Date.now().toString(),
+        userId: data.user.id,
+        userName: email,
+        action: "SIGNED_UP",
+        entityType: "AUTH",
+        entityId: undefined,
+        details: email.slice(0, email.indexOf("@")),
+        timestamp: new Date().toISOString(),
+      });
       showToast(
         width,
         theme,
