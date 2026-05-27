@@ -16,6 +16,7 @@ import {
   deleteUser,
   getUsers,
 } from "../features/userActions";
+import { logActivity } from "../storage/kvpDatabase";
 
 interface UserContextType {
   user: SupabaseUser | null;
@@ -77,6 +78,16 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           });
         }
       });
+    logActivity({
+      id: Date.now().toString(),
+      userId: user.id,
+      userName: user.email ?? "",
+      action: "SIGNED_UP",
+      entityType: "AUTH",
+      entityId: undefined,
+      details: user.email?.split("@")[0] ?? "",
+      timestamp: new Date().toISOString(),
+    });
   }, [user?.id]);
 
   return (

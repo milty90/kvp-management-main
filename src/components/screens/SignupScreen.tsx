@@ -96,28 +96,6 @@ export function SignupScreen() {
       return;
     }
 
-    if (data.session) {
-      await logActivity({
-        id: Date.now().toString(),
-        userId: data.user.id,
-        userName: email,
-        action: "SIGNED_UP",
-        entityType: "AUTH",
-        entityId: undefined,
-        details: email.slice(0, email.indexOf("@")),
-        timestamp: new Date().toISOString(),
-      });
-      showToast(
-        width,
-        theme,
-        "success",
-        translation.signupScreen.signUpSuccess,
-      );
-      setLoading(false);
-      navigate("/login");
-      return;
-    }
-
     setLoading(false);
 
     showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
