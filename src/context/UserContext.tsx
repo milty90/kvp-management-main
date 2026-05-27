@@ -76,13 +76,24 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             createdAt: new Date().toISOString(),
             lastSignIn: new Date().toISOString(),
           });
+          logActivity({
+            id: Date.now().toString(),
+            userId: user.id,
+            userName: user.email ?? "",
+            action: "SIGNED_UP",
+            entityType: "AUTH",
+            entityId: undefined,
+            details: user.email?.split("@")[0] ?? "",
+            timestamp: new Date().toISOString(),
+          });
         }
       });
+
     logActivity({
       id: Date.now().toString(),
       userId: user.id,
       userName: user.email ?? "",
-      action: "SIGNED_UP",
+      action: "LOGGED_IN",
       entityType: "AUTH",
       entityId: undefined,
       details: user.email?.split("@")[0] ?? "",
