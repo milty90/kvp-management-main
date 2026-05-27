@@ -27,7 +27,6 @@ export function SignupScreen() {
   const { theme } = useTheme();
   const width = useWindowWidth();
   const translation = useTranslation();
-  const { addUser } = useUserContext();
 
   async function handleDemoLogin() {
     const { data, error } = await signInWithEmail(demoEmail, demoPassword);
