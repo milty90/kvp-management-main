@@ -19,9 +19,12 @@ export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleEmailLogin(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setLoading(true);
 
     if (!email || !password) {
       showToast(
@@ -30,6 +33,7 @@ export function LoginScreen() {
         "error",
         translation.loginScreen.missingFieldsError,
       );
+      setLoading(false);
       return;
     }
 
@@ -42,10 +46,12 @@ export function LoginScreen() {
         "error",
         translation.loginScreen.loginError + " " + error?.message,
       );
+      setLoading(false);
       return;
     }
 
     showToast(width, theme, "success", translation.loginScreen.loginSuccess);
+    setLoading(false);
 
     navigate("/kvps");
   }
@@ -136,8 +142,9 @@ export function LoginScreen() {
           </div>
           <div className="flex px-2 items-center justify-between">
             <button
+              disabled={loading}
               type="submit"
-              className="px-5 py-2.5 bg-button text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150"
+              className={`px-5 py-2.5 bg-button ${loading ? "opacity-50 cursor-not-allowed" : ""} text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150`}
             >
               {translation.loginScreen.loginButton}
             </button>

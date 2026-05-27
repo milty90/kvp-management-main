@@ -13,35 +13,6 @@ import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
 import { logActivity } from "../../storage/kvpDatabase";
 
-const logger = async (
-  id: string,
-  userId: string,
-  userName: string,
-  action:
-    | "CREATED"
-    | "UPDATED"
-    | "DELETED"
-    | "REJECTED"
-    | "ARCHIVED"
-    | "SIGNED_UP"
-    | "LOGGED_IN",
-  entityType: "PDCA" | "USER" | "AUTH",
-  entityId: string | undefined,
-  details: string,
-  timestamp: string,
-) => {
-  await logActivity({
-    id: id,
-    userId: userId,
-    userName: userName,
-    action: action,
-    entityType: entityType,
-    entityId: entityId,
-    details: details,
-    timestamp: timestamp,
-  });
-};
-
 export function SignupScreen() {
   const navigate = useNavigate();
 
@@ -51,6 +22,7 @@ export function SignupScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { theme } = useTheme();
   const width = useWindowWidth();
@@ -77,16 +49,16 @@ export function SignupScreen() {
       translation.signupScreen.loggedInWithDemo,
     );
 
-    await logger(
-      Date.now().toString(),
-      data.user.id,
-      "Demo User",
-      "LOGGED_IN",
-      "AUTH",
-      undefined,
-      "Demo",
-      new Date().toISOString(),
-    );
+    await logActivity({
+      id: Date.now().toString(),
+      userId: data.user.id,
+      userName: "Demo User",
+      action: "LOGGED_IN",
+      entityType: "AUTH",
+      entityId: undefined,
+      details: "Demo",
+      timestamp: new Date().toISOString(),
+    });
 
     navigate("/kvps");
   }
@@ -94,8 +66,22 @@ export function SignupScreen() {
   async function handleEmailSignUp(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    setLoading(true);
+
     if (!email || !password) {
       showToast(width, theme, "error", translation.signupScreen.emailPassFail);
+      setLoading(false);
+      return;
+    }
+
+    if (password.length < 6) {
+      showToast(
+        width,
+        theme,
+        "error",
+        translation.signupScreen.passwordTooShort,
+      );
+      setLoading(false);
       return;
     }
 
@@ -108,10 +94,11 @@ export function SignupScreen() {
         "error",
         translation.signupScreen.signUpFailed + error?.message,
       );
+      setLoading(false);
       return;
     }
 
-    addUser({
+    await addUser({
       userId: data.user.id,
       photoUrl: "",
       department: "",
@@ -122,6 +109,17 @@ export function SignupScreen() {
       userEmail: email,
       createdAt: new Date().toISOString(),
       lastSignIn: new Date().toISOString(),
+    });
+
+    await logActivity({
+      id: Date.now().toString(),
+      userId: data.user.id,
+      userName: email,
+      action: "SIGNED_UP",
+      entityType: "AUTH",
+      entityId: undefined,
+      details: email.slice(0, email.indexOf("@")),
+      timestamp: new Date().toISOString(),
     });
 
     if (data.session) {
@@ -135,16 +133,7 @@ export function SignupScreen() {
       return;
     }
 
-    await logger(
-      Date.now().toString(),
-      data.user.id,
-      email,
-      "SIGNED_UP",
-      "AUTH",
-      undefined,
-      email.slice(0, email.indexOf("@")),
-      new Date().toISOString(),
-    );
+    setLoading(false);
 
     showToast(width, theme, "success", translation.signupScreen.confirmSignUp);
 
@@ -195,6 +184,7 @@ export function SignupScreen() {
               id="password"
               type={showPassword ? "text" : "password"}
               required
+              minLength={6}
               placeholder={translation.signupScreen.passwordPlaceholder}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -242,8 +232,9 @@ export function SignupScreen() {
           </div>
           <div className="flex px-0.5 md:px-2 items-center justify-between">
             <button
+              disabled={loading}
               type="submit"
-              className="px-5 py-2.5 bg-button text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150"
+              className={`px-5 py-2.5 bg-button ${loading ? "opacity-50 cursor-not-allowed" : ""} text-white font-semibold rounded-lg shadow-lg hover:bg-button-hover transition-colors duration-150`}
             >
               {translation.signupScreen.signupButton}
             </button>

@@ -42,6 +42,7 @@ export const translations = {
       signUpFailed: "Fehler bei der Kontoerstellung: ",
       signUpSuccess: "Konto erfolgreich erstellt!",
       confirmSignUp: "Konto erfolgreich erstellt! Bitte bestätigen Sie jetzt Ihre E-Mail und melden Sie sich danach an.",
+      passwordTooShort: "Das Passwort muss mindestens 6 Zeichen lang sein.",
     },
     statCard: {
       total: "Gesamt",
@@ -405,6 +406,7 @@ export const translations = {
       signUpFailed: "Error creating account: ",
       signUpSuccess: "Account created successfully!",
       confirmSignUp: "Account created successfully! Please confirm your email now and then log in.",
+      passwordTooShort: "Password must be at least 6 characters long.",
     },
     actionBar: {
       startState: "All",
