@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatDate } from "../../utils/formatDate";
+import { formatDateTime } from "../../utils/formatDate";
 import { getLogActivities } from "../../storage/kvpDatabase";
 import type { ActivityLog } from "../../types";
 import LoadingSpinner from "./LoadingSpinner";
@@ -86,7 +86,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                     <td className="py-2 px-3">{log.action}</td>
                     <td className="py-2 px-3">{log.userName}</td>
                     <td className="py-2 px-3 text-xs text-center">
-                      {formatDate(log.timestamp)}
+                      {formatDateTime(log.timestamp)}
                     </td>
                   </tr>
                 ))}
