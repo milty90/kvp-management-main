@@ -39,7 +39,7 @@ export function ProfileModal({
   const width = useWindowWidth();
 
   const userNameFromContext = users?.find(
-    (user) => user.userEmail === email,
+    (user) => user.userEmail === session?.user?.email,
   )?.userName;
 
   useEffect(() => {
@@ -51,8 +51,11 @@ export function ProfileModal({
   console.log(userNameFromContext);
 
   const department =
-    users?.find((user) => user.userEmail === email)?.department || "N/A";
-  const role = users?.find((user) => user.userEmail === email)?.role || "N/A";
+    users?.find((user) => user.userEmail === session?.user?.email)
+      ?.department || "N/A";
+  const role =
+    users?.find((user) => user.userEmail === session?.user?.email)?.role ||
+    "N/A";
   const [lastSignIn, setLastSignIn] = useState(
     "... " + useTranslation().profileModal.loadData,
   );
@@ -70,7 +73,9 @@ export function ProfileModal({
       (kvp) => kvp.assignedTo === userNameFromContext && kvp.state === "Act",
     ).length || 0;
 
-  const profileUser = users?.find((user) => user.userEmail === email)?.photoUrl;
+  const profileUser = users?.find(
+    (user) => user.userEmail === session?.user?.email,
+  )?.photoUrl;
 
   useEffect(() => {
     fetchUser(setUsername, setEmail, setLastSignIn);
@@ -98,26 +103,29 @@ export function ProfileModal({
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 py-4 md:pr-1.5 pl-0 md:p-4 ">
           <div className="flex flex-row items-center justify-center  px-1 ">
-            <div className="flex flex-row border-2 rounded-full p-1 w-max h-max">
+            <div className="flex flex-row border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max">
               <img
-                src={profileUser || "/face-id.png"}
+                src={profileUser || "/avatar.png"}
                 alt="Profilbild"
                 className="w-24 h-24 rounded-full object-cover "
               />
             </div>
             <div className="flex flex-col items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
-                {users?.find((user) => user.userEmail === email)?.firstName ||
-                  "N/A"}{" "}
-                {users?.find((user) => user.userEmail === email)?.lastName ||
-                  "N/A"}
+                {users?.find((user) => user.userEmail === session?.user?.email)
+                  ?.firstName || "N/A"}{" "}
+                {users?.find((user) => user.userEmail === session?.user?.email)
+                  ?.lastName || "N/A"}
               </p>
 
               <p className=" text-text-secondary text-base font-medium ">
                 {email}
               </p>
               <p className="text-sm text-gray-500">
-                {users?.find((user) => user.userEmail === email)?.aboutMe}
+                {
+                  users?.find((user) => user.userEmail === session?.user?.email)
+                    ?.aboutMe
+                }
               </p>
             </div>
           </div>
@@ -164,19 +172,21 @@ export function ProfileModal({
                 >
                   {translation.profileModal.profileButton}
                 </ColorButton>
-                <ColorButton
-                  color="red"
-                  isTextOnly={true}
-                  icon="user-delete.svg"
-                  width={width < 768 ? "full" : "auto"}
-                  onClick={() => {
-                    if (showDeleteProfile) {
-                      showDeleteProfile();
-                    }
-                  }}
-                >
-                  {translation.profileModal.deleteButton}
-                </ColorButton>
+                {width <= 767 ? (
+                  <ColorButton
+                    color="red"
+                    isTextOnly={true}
+                    icon="user-delete.svg"
+                    width={width < 768 ? "full" : "auto"}
+                    onClick={() => {
+                      if (showDeleteProfile) {
+                        showDeleteProfile();
+                      }
+                    }}
+                  >
+                    {translation.profileModal.deleteButton}
+                  </ColorButton>
+                ) : null}
               </>
             )}
           </div>
@@ -234,6 +244,21 @@ export function ProfileModal({
           <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
             {translation.profileModal.backButton}
           </ColorButton>
+          {width >= 768 ? (
+            <ColorButton
+              color="red"
+              isTextOnly={true}
+              icon="user-delete.svg"
+              width={width < 768 ? "full" : "auto"}
+              onClick={() => {
+                if (showDeleteProfile) {
+                  showDeleteProfile();
+                }
+              }}
+            >
+              {translation.profileModal.deleteButton}
+            </ColorButton>
+          ) : null}
         </div>
       </div>
     </div>
