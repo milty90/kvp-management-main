@@ -10,7 +10,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
-import { logActivity } from "../../storage/kvpDatabase";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -46,17 +45,6 @@ export function SignupScreen() {
       "success",
       translation.signupScreen.loggedInWithDemo,
     );
-
-    await logActivity({
-      id: Date.now().toString(),
-      userId: data.user.id,
-      userName: "Demo User",
-      action: "LOGGED_IN",
-      entityType: "AUTH",
-      entityId: undefined,
-      details: "Demo",
-      timestamp: new Date().toISOString(),
-    });
 
     navigate("/kvps");
   }

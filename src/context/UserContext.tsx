@@ -39,14 +39,17 @@ const UserContext = createContext<UserContextType>({
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [users, dispatch] = useReducer(userManagmentReducer, []);
+  const [authEvent, setAuthEvent] = useState<string | null>(null);
 
+  // 1. Csak auth state figyelés – semmi más!
   useEffect(() => {
     getCurrentUser().then((data) => setUser(data ?? null));
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
+      setAuthEvent(event);
     });
 
     getUsers(dispatch);
@@ -54,52 +57,58 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // 2. User/DB műveletek külön useEffect-ben, auth callback-en kívül
   useEffect(() => {
-    if (!user) return;
+    if (!user || authEvent !== "SIGNED_IN") return;
 
-    supabase
-      .from("users")
-      .select("userId")
-      .eq("userId", user.id)
-      .single()
-      .then(({ data: existing }) => {
-        if (!existing) {
-          addUser(dispatch, {
-            userId: user.id,
-            userEmail: user.email ?? "",
-            userName: user.email?.split("@")[0] ?? "",
-            photoUrl: user.user_metadata?.avatar_url ?? "",
-            department: "",
-            role: "",
-            firstName: "",
-            lastName: "",
-            createdAt: new Date().toISOString(),
-            lastSignIn: new Date().toISOString(),
-          });
-          logActivity({
-            id: Date.now().toString(),
-            userId: user.id,
-            userName: user.email ?? "",
-            action: "SIGNED_UP",
-            entityType: "AUTH",
-            entityId: undefined,
-            details: user.email?.split("@")[0] ?? "",
-            timestamp: new Date().toISOString(),
-          });
-        }
+    const handleSignIn = async () => {
+      const { data: existing } = await supabase
+        .from("users")
+        .select("userId")
+        .eq("userId", user.id)
+        .single();
+
+      if (!existing) {
+        await addUser(dispatch, {
+          userId: user.id,
+          userEmail: user.email ?? "",
+          userName: user.email?.split("@")[0] ?? "",
+          photoUrl: user.user_metadata?.avatar_url ?? "",
+          department: "",
+          role: "",
+          firstName: "",
+          lastName: "",
+          createdAt: new Date().toISOString(),
+          lastSignIn: new Date().toISOString(),
+        });
+
+        await logActivity({
+          id: Date.now().toString(),
+          userId: user.id,
+          userName: user.email ?? "",
+          action: "SIGNED_UP",
+          entityType: "AUTH",
+          entityId: undefined,
+          details: user.email?.split("@")[0] ?? "",
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      await logActivity({
+        id: Date.now().toString(),
+        userId: user.id,
+        userName: user.email ?? "",
+        action: "LOGGED_IN",
+        entityType: "AUTH",
+        entityId: undefined,
+        details: user.email?.split("@")[0] ?? "",
+        timestamp: new Date().getTime().toString(),
       });
+      console.log(new Date().toISOString());
+    };
 
-    logActivity({
-      id: Date.now().toString(),
-      userId: user.id,
-      userName: user.email ?? "",
-      action: "LOGGED_IN",
-      entityType: "AUTH",
-      entityId: undefined,
-      details: user.email?.split("@")[0] ?? "",
-      timestamp: new Date().toISOString(),
-    });
-  }, [user?.id]);
+    handleSignIn();
+  }, [user?.id, authEvent]);
 
   return (
     <UserContext.Provider
