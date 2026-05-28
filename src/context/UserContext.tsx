@@ -102,9 +102,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         entityType: "AUTH",
         entityId: undefined,
         details: user.email?.split("@")[0] ?? "",
-        timestamp: new Date().getTime().toString(),
+        timestamp: new Date().toISOString(),
       });
-      console.log(new Date().toISOString());
     };
 
     handleSignIn();
