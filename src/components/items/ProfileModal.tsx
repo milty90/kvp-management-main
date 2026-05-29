@@ -107,10 +107,10 @@ export function ProfileModal({
               <img
                 src={profileUser || "/avatar.png"}
                 alt="Profilbild"
-                className="w-24 h-24 rounded-full object-cover "
+                className=" h-24 rounded-full object-cover "
               />
             </div>
-            <div className="flex flex-col items-start ml-4">
+            <div className="flex flex-col max-h-18 overflow-hidden items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {users?.find((user) => user.userEmail === session?.user?.email)
                   ?.firstName || "N/A"}{" "}
@@ -144,18 +144,20 @@ export function ProfileModal({
                     {translation.profileModal.profileButton}
                   </ColorButton>
                 </div>
-                <div className="opacity-60">
-                  <ColorButton
-                    color="gray"
-                    isTextOnly={true}
-                    icon="denied.svg"
-                    width={width < 768 ? "full" : "auto"}
-                    onClick={handleDamoClick}
-                    disabled={true}
-                  >
-                    {translation.profileModal.deleteButton}
-                  </ColorButton>
-                </div>
+                {width <= 767 ? (
+                  <div className="opacity-60">
+                    <ColorButton
+                      color="gray"
+                      isTextOnly={true}
+                      icon="denied.svg"
+                      width={width < 768 ? "full" : "auto"}
+                      onClick={handleDamoClick}
+                      disabled={true}
+                    >
+                      {translation.profileModal.deleteButton}
+                    </ColorButton>
+                  </div>
+                ) : null}
               </>
             ) : (
               <>
@@ -244,7 +246,7 @@ export function ProfileModal({
           <ColorButton onClick={onConfirm} color="blue" isTextOnly={true}>
             {translation.profileModal.backButton}
           </ColorButton>
-          {width >= 768 ? (
+          {width >= 768 && !isDemo ? (
             <ColorButton
               color="red"
               isTextOnly={true}
@@ -258,7 +260,22 @@ export function ProfileModal({
             >
               {translation.profileModal.deleteButton}
             </ColorButton>
-          ) : null}
+          ) : (
+            width >= 768 && (
+              <div className="opacity-60">
+                <ColorButton
+                  color="gray"
+                  isTextOnly={true}
+                  icon="denied.svg"
+                  width={width < 768 ? "full" : "auto"}
+                  onClick={handleDamoClick}
+                  disabled={true}
+                >
+                  {translation.profileModal.deleteButton}
+                </ColorButton>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

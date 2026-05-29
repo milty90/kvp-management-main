@@ -21,7 +21,7 @@ export default function EditProfileModal({
   initialData,
 }: EditProfileModalProps) {
   const [preview, setPreview] = useState<string>(
-    initialData?.photoUrl || "/face-id.png",
+    initialData?.photoUrl || "/avatar.png",
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();

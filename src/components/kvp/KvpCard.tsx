@@ -174,7 +174,7 @@ export default function KvpCard({
       action: action,
       entityType: "PDCA",
       entityId: id.toString(),
-      details: `${title}`,
+      details: `User ${session?.user.email || "unknown"} ${action.toLowerCase()} PDCA "${title}".`,
       timestamp: new Date().toISOString(),
     });
   };
