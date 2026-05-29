@@ -78,7 +78,7 @@ export default function EditProfileModal({
     logActivity({
       id: Date.now().toString(),
       userId: user?.id || "",
-      userName: userName,
+      userName: user?.email || "Unknown User",
       action: "UPDATED",
       entityType: "USER",
       entityId: user?.id || "",

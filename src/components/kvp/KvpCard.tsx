@@ -170,7 +170,7 @@ export default function KvpCard({
     await logActivity({
       id: Date.now().toString(),
       userId: session?.user.id || "unknown",
-      userName: session?.user.email?.split("@")[0] || "Unknown User",
+      userName: session?.user.email || "Unknown User",
       action: action,
       entityType: "PDCA",
       entityId: id.toString(),
