@@ -90,7 +90,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
         action: "DELETED",
         entityType: "USER",
         entityId: user?.id || "",
-        details: `User ${user?.email || ""} deleted their profile.`,
+        details: `User ${user?.email?.split("@")[0] || ""} deleted their profile.`,
         timestamp: new Date().toISOString(),
       });
 

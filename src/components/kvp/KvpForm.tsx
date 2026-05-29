@@ -111,7 +111,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "PDCA",
       entityId: initialData ? String(initialData.id) : String(newKvp.id),
-      details: `User  ${initialData ? "updated" : "created"} PDCA "${initialData ? updateKvpData.title : newKvp.title}".`,
+      details: `User ${initialData ? "updated" : "created"} PDCA "${initialData ? updateKvpData.title : newKvp.title}".`,
       timestamp: new Date().toISOString(),
     });
   };

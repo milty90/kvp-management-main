@@ -28,33 +28,10 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
       <div className=" bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full md:h-auto max-w-4xl relative">
-        <div className="relative items-center">
+        <div className="flex  items-center justify-between">
           <h2 className="text-xl font-bold pl-1">
             {translations.activityLog.title}
           </h2>
-          {/* <div className="relative right-0 -top-3.5 gap-0.5 ">
-            <FilterBtnGroupMob
-              position="left-35"
-              selected={"All"}
-              filter={() => {}}
-              tabs={["All", "Auth", "User", "PDCA"]}
-              startState={"All"}
-            />
-            <FilterBtnGroupMob
-              position="left-56"
-              selected={"All"}
-              filter={() => {}}
-              tabs={["All", "Auth", "User", "PDCA"]}
-              startState={"All"}
-            />
-            <FilterBtnGroupMob
-              position="left-77"
-              selected={"All"}
-              filter={() => {}}
-              tabs={["All", "Auth", "User", "PDCA"]}
-              startState={"All"}
-            />
-          </div> */}
         </div>
         <button
           type="button"
