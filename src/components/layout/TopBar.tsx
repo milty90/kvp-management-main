@@ -81,30 +81,43 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     setShowMenu(false);
   };
 
-  const handleDeleteProfileClick = () => {
-    deleteUser(user?.id || "");
-    logActivity({
-      id: Date.now().toString(),
-      userId: user?.id || "",
-      userName: user?.email || "",
-      action: "DELETED",
-      entityType: "USER",
-      entityId: user?.id || "",
-      details: `User ${user?.email || ""} deleted their profile.`,
-      timestamp: new Date().toISOString(),
-    });
-    signOut();
-    navigate("/login");
-    showToast(
-      width,
-      theme,
-      "success",
-      translation.profileModal.deleteButton +
-        " " +
-        translation.logOutModal.toastMessage,
-    );
-    setShowDeleteProfileDialog(true);
-    setShowProfileModal(false);
+  const handleDeleteProfileClick = async () => {
+    try {
+      await logActivity({
+        id: Date.now().toString(),
+        userId: user?.id || "",
+        userName: user?.email || "",
+        action: "DELETED",
+        entityType: "USER",
+        entityId: user?.id || "",
+        details: `User ${user?.email || ""} deleted their profile.`,
+        timestamp: new Date().toISOString(),
+      });
+
+      await deleteUser(user?.id || "");
+
+      await signOut();
+      navigate("/login");
+      showToast(
+        width,
+        theme,
+        "success",
+        translation.profileModal.deleteButton +
+          " " +
+          translation.logOutModal.toastMessage,
+      );
+
+      setShowDeleteProfileDialog(false);
+      setShowProfileModal(false);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      showToast(
+        width,
+        theme,
+        "error",
+        "An error occurred while deleting the profile. Please try again.",
+      );
+    }
   };
 
   const handleActivityLogClick = () => {
