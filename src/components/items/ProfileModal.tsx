@@ -46,7 +46,7 @@ export function ProfileModal({
     if (userNameFromContext) {
       setUsername(userNameFromContext);
     }
-  }, [userNameFromContext]);
+  }, [session]);
 
   console.log(userNameFromContext);
 

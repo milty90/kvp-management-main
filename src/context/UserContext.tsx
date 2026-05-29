@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useRef,
   useState,
 } from "react";
 import { supabase } from "../utils/supabase";
@@ -40,16 +41,33 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [users, dispatch] = useReducer(userManagmentReducer, []);
   const [authEvent, setAuthEvent] = useState<string | null>(null);
+  const prevUserRef = useRef<SupabaseUser | null>(null);
 
-  // 1. Csak auth state figyelés – semmi más!
   useEffect(() => {
     getCurrentUser().then((data) => setUser(data ?? null));
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        prevUserRef.current = session.user;
+      }
       setUser(session?.user ?? null);
-      setAuthEvent(event);
+
+      if (event === "SIGNED_IN") {
+        const alreadyLogged = sessionStorage.getItem(
+          `logged_${session?.user?.id}`,
+        );
+        if (!alreadyLogged) {
+          sessionStorage.setItem(`logged_${session?.user?.id}`, "true");
+          setAuthEvent("SIGNED_IN");
+        }
+      }
+
+      if (event === "SIGNED_OUT") {
+        sessionStorage.clear();
+        setAuthEvent("SIGNED_OUT");
+      }
     });
 
     getUsers(dispatch);
@@ -57,57 +75,79 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // 2. User/DB műveletek külön useEffect-ben, auth callback-en kívül
   useEffect(() => {
-    if (!user || authEvent !== "SIGNED_IN") return;
+    if (authEvent === "SIGNED_IN" && user) {
+      setAuthEvent(null);
 
-    const handleSignIn = async () => {
-      const { data: existing } = await supabase
-        .from("users")
-        .select("userId")
-        .eq("userId", user.id)
-        .single();
+      console.log("Logged in user:", user);
 
-      if (!existing) {
-        await addUser(dispatch, {
-          userId: user.id,
-          userEmail: user.email ?? "",
-          userName: user.email?.split("@")[0] ?? "",
-          photoUrl: user.user_metadata?.avatar_url ?? "",
-          department: "",
-          role: "",
-          firstName: "",
-          lastName: "",
-          createdAt: new Date().toISOString(),
-          lastSignIn: new Date().toISOString(),
-        });
+      const handleSignIn = async () => {
+        const { data: existing } = await supabase
+          .from("users")
+          .select("userId")
+          .eq("userId", user.id)
+          .single();
+
+        if (!existing) {
+          await addUser(dispatch, {
+            userId: user.id,
+            userEmail: user.email ?? "",
+            userName: user.email?.split("@")[0] ?? "",
+            photoUrl: user.user_metadata?.avatar_url ?? "",
+            department: "",
+            role: "",
+            firstName: "",
+            lastName: "",
+            createdAt: new Date().toISOString(),
+            lastSignIn: new Date().toISOString(),
+          });
+
+          await logActivity({
+            id: Date.now().toString(),
+            userId: user.id,
+            userName: user.email ?? "",
+            action: "SIGNED_UP",
+            entityType: "AUTH",
+            entityId: user.id || undefined,
+            details: `User ${user?.email?.split("@")[0] || ""} signed up.`,
+            timestamp: new Date().toISOString(),
+          });
+        }
 
         await logActivity({
           id: Date.now().toString(),
           userId: user.id,
           userName: user.email ?? "",
-          action: "SIGNED_UP",
+          action: "LOGGED_IN",
           entityType: "AUTH",
-          entityId: undefined,
-          details: user.email?.split("@")[0] ?? "",
+          entityId: user.id || undefined,
+          details: `User ${user?.email?.split("@")[0] || ""} logged in.`,
+          timestamp: new Date().toISOString(),
+        });
+      };
+
+      handleSignIn();
+    }
+
+    if (authEvent === "SIGNED_OUT") {
+      setAuthEvent(null);
+      const loggedOutUser = prevUserRef.current;
+
+      if (loggedOutUser) {
+        prevUserRef.current = null;
+        logActivity({
+          id: Date.now().toString(),
+          userId: loggedOutUser.id,
+          userName: loggedOutUser.email ?? "",
+          action: "LOGGED_OUT",
+          entityType: "AUTH",
+          entityId: loggedOutUser.id || undefined,
+          details: `User ${loggedOutUser?.email?.split("@")[0] || ""} logged out.`,
           timestamp: new Date().toISOString(),
         });
       }
-
-      await logActivity({
-        id: Date.now().toString(),
-        userId: user.id,
-        userName: user.email ?? "",
-        action: "LOGGED_IN",
-        entityType: "AUTH",
-        entityId: undefined,
-        details: user.email?.split("@")[0] ?? "",
-        timestamp: new Date().toISOString(),
-      });
-    };
-
-    handleSignIn();
-  }, [user?.id, authEvent]);
+    }
+  }, [authEvent, user]);
 
   return (
     <UserContext.Provider

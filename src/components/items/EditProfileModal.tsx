@@ -7,6 +7,7 @@ import type { User } from "../../types";
 import { supabase } from "../../utils/supabase";
 import { showToast } from "./ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { logActivity } from "../../storage/kvpDatabase";
 
 interface EditProfileModalProps {
   onConfirm: () => void;
@@ -73,6 +74,16 @@ export default function EditProfileModal({
       userEmail: user?.email || "",
       createdAt: user?.created_at || "",
       lastSignIn: user?.last_sign_in_at || "",
+    });
+    logActivity({
+      id: Date.now().toString(),
+      userId: user?.id || "",
+      userName: userName,
+      action: "UPDATED",
+      entityType: "USER",
+      entityId: user?.id || "",
+      details: `User ${userName} updated their profile.`,
+      timestamp: new Date().toISOString(),
     });
     onConfirm();
     showToast(
