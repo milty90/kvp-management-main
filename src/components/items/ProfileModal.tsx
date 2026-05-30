@@ -25,11 +25,9 @@ export function ProfileModal({
   showDeleteProfile,
 }: ProfileModalProps) {
   const [username, setUsername] = useState(
-    "... " + useTranslation().profileModal.loadData,
+    useTranslation().profileModal.loadData,
   );
-  const [email, setEmail] = useState(
-    "... " + useTranslation().profileModal.loadData,
-  );
+  const [email, setEmail] = useState(useTranslation().profileModal.loadData);
   const { theme } = useTheme();
   const translation = useTranslation();
   const { users } = useUserContext();
@@ -50,14 +48,21 @@ export function ProfileModal({
 
   console.log(userNameFromContext);
 
-  const department =
-    users?.find((user) => user.userEmail === session?.user?.email)
-      ?.department || "N/A";
-  const role =
-    users?.find((user) => user.userEmail === session?.user?.email)?.role ||
-    "N/A";
+  const department = users?.find(
+    (user) => user.userEmail === session?.user?.email,
+  )?.department || (
+    <span className="text-xs text-gray-500">
+      {translation.profileModal.fillProfile}
+    </span>
+  );
+  const role = users?.find((user) => user.userEmail === session?.user?.email)
+    ?.role || (
+    <span className="text-xs text-gray-500">
+      {translation.profileModal.fillProfile}
+    </span>
+  );
   const [lastSignIn, setLastSignIn] = useState(
-    "... " + useTranslation().profileModal.loadData,
+    useTranslation().profileModal.loadData,
   );
 
   const assignedTo =
@@ -103,19 +108,23 @@ export function ProfileModal({
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 py-4 md:pr-1.5 pl-0 md:p-4 ">
           <div className="flex flex-row items-center justify-center  px-1 ">
-            <div className="flex flex-row border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max">
+            <div className="flex flex-row border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max shadow-sm border-border">
               <img
                 src={profileUser || "/avatar.png"}
                 alt="Profilbild"
-                className=" h-24 rounded-full object-cover "
+                className="w-24 h-24 rounded-full object-cover"
               />
             </div>
-            <div className="flex flex-col max-h-18 overflow-hidden items-start ml-4">
+            <div className="flex flex-col max-h overflow-hidden items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {users?.find((user) => user.userEmail === session?.user?.email)
-                  ?.firstName || "N/A"}{" "}
+                  ?.firstName || (
+                  <span className="text-xs font-normal overflow-auto whitespace-nowrap text-gray-500">
+                    {translation.profileModal.fillProfile}
+                  </span>
+                )}{" "}
                 {users?.find((user) => user.userEmail === session?.user?.email)
-                  ?.lastName || "N/A"}
+                  ?.lastName || null}
               </p>
 
               <p className=" text-text-secondary text-base font-medium ">
@@ -195,7 +204,7 @@ export function ProfileModal({
         </div>
         <div className="flex items-center justify-between  h-20 mb-2 gap-2 ">
           <div
-            className={`flex flex-col items-center text-sm w-3/12 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+            className={`flex flex-col items-center text-sm w-3/12 shadow-sm lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
           >
             <p className="text-3xl text-blue-500">{createdBy}</p>
             <p className="text-md text-text-secondary ">
@@ -203,7 +212,7 @@ export function ProfileModal({
             </p>
           </div>
           <div
-            className={`flex flex-col items-center text-sm w-4/12 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+            className={`flex flex-col items-center text-sm w-4/12 shadow-sm lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
           >
             <p className="text-3xl text-yellow-500">{assignedTo}</p>
             <p className="text-md text-text-secondary ">
@@ -211,7 +220,7 @@ export function ProfileModal({
             </p>
           </div>
           <div
-            className={`flex flex-col items-center text-sm w-5/13 lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+            className={`flex flex-col items-center text-sm w-5/13 shadow-sm lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
           >
             <p className="text-3xl text-green-500">{act}</p>
             <p className="text-md text-text-secondary ">
@@ -219,7 +228,7 @@ export function ProfileModal({
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-start justify-start px-6 lg:px-8 py-3 mb-2 mt-4 rounded-lg border-dashed border-2 border-border ">
+        <div className="flex flex-col items-start justify-start px-6 lg:px-8 py-3 mb-2 mt-4 rounded-lg border shadow border-border ">
           <p className="text-sm text-text-secondary my-1">
             {translation.profileModal.name}:{" "}
             <span className="text-text-primary pl-3">

@@ -98,9 +98,10 @@ export const translations = {
     },
     profileModal: {
       title: "Profil",
+      fillProfile: "Profil vervollständigen",
       profileButton: "Profil ändern",
       deleteButton: "Konto löschen",
-      loadData: "Lade Benutzerdaten...",
+      loadData: "Lade daten...",
       name: "Benutzername",
       email: "E-Mail",
       department: "Abteilung",
@@ -329,9 +330,10 @@ export const translations = {
     },
     profileModal: {
       title: "Profile",
+      fillProfile: "Please complete your profile",
       profileButton: "Edit Profile",
       deleteButton: "Delete Account",
-      loadData: "Loading user data...",
+      loadData: "Loading ...",
       name: "Username",
       email: "Email",
       cardActive: "Active",
@@ -340,7 +342,6 @@ export const translations = {
       department: "Department",
       role: "Role",
       lastLogin: "Last Login",
-     
       backButton: "Back",
     },
     statistics: {
