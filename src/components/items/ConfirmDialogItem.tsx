@@ -6,6 +6,7 @@ interface ConfirmDialogProps {
   message: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
+  disableConfirmButton?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -15,6 +16,7 @@ export function ConfirmDialogItem({
   message,
   confirmButtonText,
   cancelButtonText,
+  disableConfirmButton = false,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
@@ -43,7 +45,12 @@ export function ConfirmDialogItem({
           >
             {cancelButtonText || "Abbrechen"}
           </button>
-          <ColorButton onClick={onConfirm} color="red" isTextOnly={true}>
+          <ColorButton
+            onClick={onConfirm}
+            color="red"
+            isTextOnly={true}
+            disabled={disableConfirmButton}
+          >
             {confirmButtonText || "Bestätigen"}
           </ColorButton>
         </div>
