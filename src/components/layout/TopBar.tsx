@@ -29,7 +29,6 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const navigate = useNavigate();
 
   const { theme } = useTheme();
-
   const width = useWindowWidth();
   const translation = useTranslation();
 
@@ -46,6 +45,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const [showDeleteProfileDialog, setShowDeleteProfileDialog] = useState(false);
   const [showActivityLog, setShowActivityLog] = useState(false);
+  const [isDeletingProfile, setIsDeletingProfile] = useState(false);
 
   useClickOutside(settingsWrapperRef, () => {
     setShowSettings(false);
@@ -83,6 +83,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
   const handleDeleteProfileClick = async () => {
     try {
+      setIsDeletingProfile(true);
       isDeleting.current = true;
       await deleteUser(user?.id || "");
 
@@ -100,6 +101,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
       setShowDeleteProfileDialog(false);
       setShowProfileModal(false);
+      setIsDeletingProfile(false);
+      isDeleting.current = false;
     } catch (error) {
       console.error("Error deleting user:", error);
       showToast(
@@ -108,6 +111,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
         "error",
         "An error occurred while deleting the profile. Please try again.",
       );
+      setIsDeletingProfile(false);
+      isDeleting.current = false;
     }
   };
 
@@ -257,6 +262,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
           <ConfirmDialogItem
             confirmButtonText={translation.profileModal.deleteButton}
             cancelButtonText={translation.logOutModal.onCancel}
+            disableConfirmButton={isDeletingProfile}
             title={translation.profileModal.deleteButton}
             message={translation.profileModal.deleteMessage}
             onConfirm={() => {
