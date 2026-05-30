@@ -17,7 +17,6 @@ import { useTranslation } from "../../utils/useTranslation";
 import EditProfileModal from "../items/EditProfileModal";
 import { useUserContext } from "../../context/UserContext";
 import { LogActivityModal } from "../items/LogActivityModal";
-import { logActivity } from "../../storage/kvpDatabase";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -35,7 +34,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const { deleteUser, user, users } = useUserContext();
+  const { isDeleting, deleteUser, user, users } = useUserContext();
   const currentUser = users.find((u) => u.userId === user?.id);
 
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -83,17 +82,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
 
   const handleDeleteProfileClick = async () => {
     try {
-      await logActivity({
-        id: Date.now().toString(),
-        userId: user?.id || "",
-        userName: user?.email || "",
-        action: "DELETED",
-        entityType: "USER",
-        entityId: user?.id || "",
-        details: `User ${user?.email?.split("@")[0] || ""} deleted their profile.`,
-        timestamp: new Date().toISOString(),
-      });
-
+      isDeleting.current = true;
       await deleteUser(user?.id || "");
 
       await signOut();

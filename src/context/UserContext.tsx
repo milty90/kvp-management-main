@@ -26,6 +26,7 @@ interface UserContextType {
   addUser: (user: User) => void;
   updateUser: (user: User) => void;
   deleteUser: (userId: string) => Promise<void>;
+  isDeleting: React.RefObject<boolean>;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -35,6 +36,7 @@ const UserContext = createContext<UserContextType>({
   addUser: () => {},
   updateUser: () => {},
   deleteUser: async () => {},
+  isDeleting: { current: false },
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,6 +44,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, dispatch] = useReducer(userManagmentReducer, []);
   const [authEvent, setAuthEvent] = useState<string | null>(null);
   const prevUserRef = useRef<SupabaseUser | null>(null);
+  const isDeleting = useRef(false);
   const userName = user?.email?.split("@")[0] ?? "Unknown User";
 
   useEffect(() => {
@@ -79,8 +82,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (authEvent === "SIGNED_IN" && user) {
       setAuthEvent(null);
-
-      console.log("Logged in user:", user);
 
       const handleSignIn = async () => {
         const { data: existing } = await supabase
@@ -132,6 +133,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (authEvent === "SIGNED_OUT") {
       setAuthEvent(null);
+
+      if (isDeleting.current) {
+        isDeleting.current = false;
+        return;
+      }
+
       const loggedOutUser = prevUserRef.current;
 
       if (loggedOutUser) {
@@ -159,6 +166,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         setUser,
         users,
+        isDeleting,
         addUser: (user: User) => addUser(dispatch, user),
         updateUser: (user: User) => updateUser(dispatch, user),
         deleteUser: (userId: string) => deleteUser(dispatch, userId),
