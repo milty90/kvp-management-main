@@ -32,7 +32,7 @@ export function ConfirmDialogItem({
           {title}
         </h2>
         <p
-          className={`text-sm pt-1 pl-2 pr-4 text-center ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}
+          className={`text-sm pt-1 pl-2 pr-4 max-w-100  text-center ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}
         >
           {message}
         </p>

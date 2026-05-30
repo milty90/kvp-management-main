@@ -267,9 +267,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             confirmButtonText={translation.profileModal.deleteButton}
             cancelButtonText={translation.logOutModal.onCancel}
             title={translation.profileModal.deleteButton}
-            message={
-              "Funktion zum Löschen des Kontos ist noch nicht implementiert."
-            }
+            message={translation.profileModal.deleteMessage}
             onConfirm={() => {
               handleDeleteProfileClick();
             }}

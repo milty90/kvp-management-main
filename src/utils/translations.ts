@@ -110,7 +110,7 @@ export const translations = {
       cardActive: "Aktiv",
       cardAssigned: "Zugewiesen",
       cardClosed: "Abgeschlossen",
-     
+      deleteMessage: "Möchten Sie Ihr Konto wirklich löschen? Dieser Vorgang kann nicht rückgängig gemacht werden.",
       backButton: "Zurück",
     },
     statistics: {
@@ -342,6 +342,7 @@ export const translations = {
       department: "Department",
       role: "Role",
       lastLogin: "Last Login",
+      deleteMessage: "Are you sure you want to delete your account? This action cannot be undone.",
       backButton: "Back",
     },
     statistics: {
