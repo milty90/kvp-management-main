@@ -12,6 +12,7 @@ import { useTranslation } from "../../utils/useTranslation";
 import { isDemoUser } from "../../features/authDatabase";
 import { useSessionContext } from "../../context/SessionContext";
 import { logActivity } from "../../storage/kvpDatabase";
+import { sliceText } from "../../utils/sliceText";
 
 interface KvpFormProps {
   onClose: () => void;
@@ -111,7 +112,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "PDCA",
       entityId: initialData ? String(initialData.id) : String(newKvp.id),
-      details: `User ${initialData ? "updated" : "created"} PDCA "${initialData ? updateKvpData.title : newKvp.title}".`,
+      details: `User ${initialData ? "updated" : "created"} PDCA "${initialData ? sliceText(updateKvpData.title, 50) : sliceText(newKvp.title, 50)}".`,
       timestamp: new Date().toISOString(),
     });
   };

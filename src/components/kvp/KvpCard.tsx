@@ -234,24 +234,28 @@ export default function KvpCard({
           {priorityMapping(priority)}
         </span>
       </div>
+
       {/* Divider */}
+
       <div
         className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
       />
-      <p className="font-normal tracking-tight text-text-secondary text-wrap break-all text-sm mb-3">
-        {translation.pdcaCard.assignedTo}: {assignedTo}
+      <p className="font-normal tracking-tight text-text-secondary overflow-hidden text-clip text-sm mb-3">
+        {translation.pdcaCard.assignedTo}: {sliceText(assignedTo, 30)}
       </p>
-      <p className="font-normal tracking-tight text-text-secondary truncate text-sm mb-3">
+      <p className="font-normal tracking-tight text-text-secondary text-sm mb-3">
         {translation.pdcaCard.benefit}:{" "}
-        {benefit ? benefit : translation.pdcaCard.noBenefits}
+        {benefit ? sliceText(benefit, 30) : translation.pdcaCard.noBenefits}
       </p>
-      <p className="text-text-primary font-semibold text-pretty text-xs mb-2">
+      <p className="text-text-primary font-semibold overflow-hidden text-pretty text-xs mb-2">
         {translation.pdcaCard.description}:
         <span className="text-xs font-normal text-text-secondary ml-2">
           {sliceText(description, 200)}
         </span>
       </p>
+
       {/* Divider */}
+
       <div
         className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} my-3`}
       />

@@ -1,5 +1,6 @@
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+  const normalized = dateString.endsWith("Z") ? dateString : dateString + "Z";
+  const date = new Date(normalized);
   if (isNaN(date.getTime())) return dateString;
   return date.toLocaleDateString("de-DE", {
     year: "numeric",
@@ -9,7 +10,8 @@ export function formatDate(dateString: string): string {
 }
 
 export function formatDateTime(dateString: string): string {
-  const date = new Date(dateString);
+  const normalized = dateString.endsWith("Z") ? dateString : dateString + "Z";
+  const date = new Date(normalized);
   if (isNaN(date.getTime())) return dateString;
   return date.toLocaleString("de-DE", {
     year: "numeric",
