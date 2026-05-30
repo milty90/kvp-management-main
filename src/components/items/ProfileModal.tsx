@@ -115,11 +115,11 @@ export function ProfileModal({
                 className="w-24 h-24 rounded-full object-cover"
               />
             </div>
-            <div className="flex flex-col max-h overflow-hidden items-start ml-4">
+            <div className="flex flex-col max-h overflow-auto whitespace-nowrap items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {users?.find((user) => user.userEmail === session?.user?.email)
                   ?.firstName || (
-                  <span className="text-xs font-normal overflow-auto whitespace-nowrap text-gray-500">
+                  <span className="text-xs font-normal text-gray-500">
                     {translation.profileModal.fillProfile}
                   </span>
                 )}{" "}

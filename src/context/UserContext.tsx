@@ -42,6 +42,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, dispatch] = useReducer(userManagmentReducer, []);
   const [authEvent, setAuthEvent] = useState<string | null>(null);
   const prevUserRef = useRef<SupabaseUser | null>(null);
+  const userName = user?.email?.split("@")[0] ?? "Unknown User";
 
   useEffect(() => {
     getCurrentUser().then((data) => setUser(data ?? null));
@@ -108,8 +109,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             userName: user.email ?? "",
             action: "SIGNED_UP",
             entityType: "AUTH",
-            entityId: user.id || undefined,
-            details: `User ${user?.email?.split("@")[0] || ""} signed up.`,
+            entityId: user.id,
+            details: `User ${userName} signed up.`,
             timestamp: new Date().toISOString(),
           });
         }
@@ -120,8 +121,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           userName: user.email ?? "",
           action: "LOGGED_IN",
           entityType: "AUTH",
-          entityId: user.id || undefined,
-          details: `User ${user?.email?.split("@")[0] || ""} logged in.`,
+          entityId: user.id,
+          details: `User ${userName} logged in.`,
           timestamp: new Date().toISOString(),
         });
       };
@@ -135,16 +136,19 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (loggedOutUser) {
         prevUserRef.current = null;
-        logActivity({
-          id: Date.now().toString(),
-          userId: loggedOutUser.id,
-          userName: loggedOutUser.email ?? "",
-          action: "LOGGED_OUT",
-          entityType: "AUTH",
-          entityId: loggedOutUser.id || undefined,
-          details: `User ${loggedOutUser?.email?.split("@")[0] || ""} logged out.`,
-          timestamp: new Date().toISOString(),
-        });
+        const handleSignOut = async () => {
+          await logActivity({
+            id: Date.now().toString(),
+            userId: loggedOutUser.id,
+            userName: loggedOutUser.email ?? "",
+            action: "LOGGED_OUT",
+            entityType: "AUTH",
+            entityId: loggedOutUser.id,
+            details: `User ${loggedOutUser?.email?.split("@")[0] || "Unknown User"} logged out.`,
+            timestamp: new Date().toISOString(),
+          });
+        };
+        handleSignOut();
       }
     }
   }, [authEvent, user]);
