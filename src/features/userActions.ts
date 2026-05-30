@@ -9,6 +9,7 @@ export const addUser = async (dispatch: Dispatch, user: User) => {
     .insert(user)
     .select()
     .single();
+
   if (error) {
     console.error("Error adding user:", error);
     return;
@@ -24,6 +25,7 @@ export const updateUser = async (dispatch: Dispatch, user: User) => {
     .eq("userId", user.userId)
     .select()
     .single();
+
   if (error) {
     console.error("Error updating user:", error);
     return;
@@ -36,8 +38,10 @@ export const deleteUser = async (dispatch: Dispatch, userId: string) => {
   const { error } = await supabase.functions.invoke("delete-user", {
     body: { userId },
   });
+
   if (error) {
     console.error("Error deleting user:", error);
+    
     return;
   }
 

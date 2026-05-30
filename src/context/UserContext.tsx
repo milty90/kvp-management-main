@@ -25,7 +25,7 @@ interface UserContextType {
   users: User[];
   addUser: (user: User) => void;
   updateUser: (user: User) => void;
-  deleteUser: (userId: string) => void;
+  deleteUser: (userId: string) => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -34,7 +34,7 @@ const UserContext = createContext<UserContextType>({
   users: [],
   addUser: () => {},
   updateUser: () => {},
-  deleteUser: () => {},
+  deleteUser: async () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
