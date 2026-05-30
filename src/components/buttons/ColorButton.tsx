@@ -48,6 +48,7 @@ export default function ColorButton({
           hover:shadow-[0_2px_2px_rgba(0,0,0,0.1),0_2px_2px_rgba(0,0,0,0.1)]
           active:scale-[0.98]
           transition-all duration-150 
+          disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
         `}
     >
       {icon && <img src={icon} alt="Icon" className="h-4 w-4" />}
