@@ -17,6 +17,7 @@ import { useTranslation } from "../../utils/useTranslation";
 import EditProfileModal from "../items/EditProfileModal";
 import { useUserContext } from "../../context/UserContext";
 import { LogActivityModal } from "../items/LogActivityModal";
+import { supabase } from "../../utils/supabase";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -85,7 +86,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
       isDeleting.current = true;
       await deleteUser(user?.id || "");
 
-      await signOut();
+      await supabase.auth.signOut().catch(() => {});
+
       navigate("/login");
       showToast(
         width,
