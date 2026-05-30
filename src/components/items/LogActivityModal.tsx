@@ -4,6 +4,7 @@ import { getLogActivities } from "../../storage/kvpDatabase";
 import type { ActivityLog } from "../../types";
 import LoadingSpinner from "./LoadingSpinner";
 import { useTranslation } from "../../utils/useTranslation";
+import { useTheme } from "../../context/ThemeContext";
 
 interface LogActivityModalProps {
   onClose: () => void;
@@ -13,6 +14,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
   const [activities, setActivities] = useState<ActivityLog[]>([]);
   const [loading, setLoading] = useState(false);
   const translations = useTranslation();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -42,7 +44,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
         </button>
         <div className="border-t border-border my-4"></div>
         {activities.length === 0 ? (
-          <div className="flex items-center justify-center h-48">
+          <div className="flex items-center justify-center h-150 md:h-80">
             {loading ? (
               <LoadingSpinner
                 text={translations.activityLog.loading}
@@ -74,12 +76,20 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                   <div className="flex gap-2 text-xs text-text-secondary">
                     <span className="font-semibold">{log.entityType}</span>
                     <span>
-                      #{" "}
-                      <img
-                        src="/user.svg"
-                        alt="User Icon"
-                        className="inline w-3 h-3 mb-1 rounded-full object-cover"
-                      />
+                      #
+                      {theme === "dark" ? (
+                        <img
+                          src="/user-white.svg"
+                          alt="User Icon"
+                          className="inline w-3 h-3 mb-1 ml-1 rounded-full object-cover"
+                        />
+                      ) : (
+                        <img
+                          src="/user.svg"
+                          alt="User Icon"
+                          className="inline w-3 h-3 mb-1 ml-1 rounded-full object-cover"
+                        />
+                      )}
                     </span>
                     <span>{log.userName}</span>
                   </div>
