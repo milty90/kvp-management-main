@@ -9,22 +9,41 @@ export async function getKvpsfromDataBase() {
   return kvps;
 }
 
-export function setKvpsToDataBase(kvps: Kvp[]) {
-  kvps.forEach(async (kvp) => {
-    const { error } = await supabase
-      .from("kvps")
-      .upsert(kvp, { onConflict: "id" });
-    if (error) {
-      console.error("Failed to upsert KVP:", error);
-    }
-  });
+export async function addKvpToDataBase(kvp: Kvp) {
+  const { error } = await supabase.from("kvps").insert(kvp);
+  if (error) throw new Error(error.message); 
+}
+
+export async function updateKvpInDataBase(kvp: Kvp) {
+  const { error } = await supabase
+    .from("kvps")
+    .update(kvp)
+    .eq("id", kvp.id);
+
+ if (error) throw new Error(error.message);
 }
 
 export async function deleteKvpFromDataBase(id: number) {
   const { error } = await supabase.from("kvps").delete().eq("id", id);
-  if (error) {
-    console.error("Failed to delete KVP:", error);
-  }
+  if (error) throw new Error(error.message);
+}
+
+export async function archiveKvpInDataBase(id: number) {
+  const { error } = await supabase
+    .from("kvps")
+    .update({ status: "archived" })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+}
+
+export async function rejectKvpInDataBase(id: number) {
+  const { error } = await supabase
+    .from("kvps")
+    .update({ status: "rejected" })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
 }
 
 export async function logActivity(log: ActivityLog) {
@@ -39,9 +58,8 @@ export async function logActivity(log: ActivityLog) {
     timestamp: log.timestamp,
   });
 
-  if (error) {
-    console.error("Failed to log activity:", error);
-  }
+  if (error) throw new Error(error.message);
+  
 }
 
 export async function getLogActivities() {

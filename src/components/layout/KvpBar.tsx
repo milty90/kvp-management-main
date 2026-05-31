@@ -47,11 +47,13 @@ export default function KvpBar({
   activePriority,
   onOpenModal,
 }: KvpBarProps) {
-  const { kvps } = useKvpContext();
+  const { kvps, isLoading } = useKvpContext();
   const width = useWindowWidth();
   const { theme } = useTheme();
   const translation = useTranslation();
   const colorClasses = theme === "dark" ? colorClassesDark : colorClassesLight;
+
+  console.log("loading", isLoading);
 
   const filtered = kvps.filter((k) => {
     const stateMatch =
@@ -86,7 +88,9 @@ export default function KvpBar({
             {filteredByState.length === 0 ? (
               <div className="flex items-center justify-center h-16 md:h-32 rounded-lg border border-dashed border-border">
                 <p className="text-xs text-text-secondary">
-                  {translation.pcdaBar.noItems}
+                  {isLoading
+                    ? translation.pcdaBar.loading
+                    : translation.pcdaBar.noItems}
                 </p>
               </div>
             ) : (

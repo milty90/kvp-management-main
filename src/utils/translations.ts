@@ -77,18 +77,10 @@ export const translations = {
         description: "Wechseln Sie zu Deutsch oder Englisch",
         current: "Aktuell:",
       },
-      settingsNotification: {
-        title: "Benachrichtigungen",
-        description:
-          "Verwalten Sie Ihre Schalten Sie die Benachrichtigungen ein oder aus",
-        on: "Aktuell: Ein",
-        off: "Aktuell: Aus",
-
-        toastMessage: "Benachrichtigungen sind derzeit nicht verfügbar.",
-      },
+      
       settingsActivityLog: {
         title: "Aktivitätsprotokoll",
-        description: "Zeigen Sie Ihr Aktivitätsprotokoll an oder löschen Sie es",
+        description: "Zeigen Sie Ihr Aktivitätsprotokoll an",
         button: "Anzeigen",
         toastMessage: "Aktivitätsprotokoll ist derzeit nicht verfügbar.",
       },
@@ -101,7 +93,7 @@ export const translations = {
       fillProfile: "Profil vervollständigen",
       profileButton: "Profil ändern",
       deleteButton: "Konto löschen",
-      loadData: "Lade daten...",
+      loadData: "Lade Daten...",
       name: "Benutzername",
       email: "E-Mail",
       department: "Abteilung",
@@ -154,6 +146,7 @@ export const translations = {
       noItems: "Keine Elemente",
     },
     pcdaBar: {
+      loading: "Lade KVPs...",
       noItems: "Keine Elemente",
     },
     pdcaForm: {
@@ -311,16 +304,9 @@ export const translations = {
         description: "Switch between English and German",
         current: "Current:",
       },
-      settingsNotification: {
-        title: "Notifications",
-        description: "Manage your notifications by turning them on or off",
-        on: "Current: On",
-        off: "Current: Off",
-        toastMessage: "Notifications are currently unavailable.",
-      },
       settingsActivityLog: {
         title: "Activity Log",
-        description: "View or clear your activity log",
+        description: "View your activity log",
         button: "View",
         toastMessage: "Activity log is currently unavailable.",
       },
@@ -426,6 +412,7 @@ export const translations = {
       noItems: "No items to display",
     },
     pcdaBar: {
+      loading: "Loading PCDAs...",
       noItems: "No items to display",
     },
     pdcaForm: {

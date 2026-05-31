@@ -74,20 +74,19 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                     {log.details}
                   </p>
                   <div className="flex gap-2 text-xs text-text-secondary">
-                    <span className="font-semibold">{log.entityType}</span>
+                    <span className="font-semibold">{log.entityType} </span>
                     <span>
-                      #
                       {theme === "dark" ? (
                         <img
                           src="/user-white.svg"
                           alt="User Icon"
-                          className="inline w-3 h-3 mb-1 ml-1 rounded-full object-cover"
+                          className="inline w-3 h-3 mb-1 rounded-full object-cover"
                         />
                       ) : (
                         <img
                           src="/user.svg"
                           alt="User Icon"
-                          className="inline w-3 h-3 mb-1 ml-1 rounded-full object-cover"
+                          className="inline w-3 h-3 mb-1 rounded-full object-cover"
                         />
                       )}
                     </span>

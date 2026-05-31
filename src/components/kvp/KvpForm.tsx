@@ -167,7 +167,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder={translation.pdcaForm.formDescriptionPlaceholder}
-            className={`w-full border text-sm text-text-primary border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"}`}
+            className={`w-full border text-sm text-text-primary resize-none border-gray-300 h-30 rounded-md p-2 focus:outline-none focus:ring-2 ${theme === "dark" ? "focus:ring-green-500" : "focus:ring-blue-500"}`}
           />
           <div className="grid grid-cols-2 items-center mt-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-4">
