@@ -73,7 +73,7 @@ export type ActivityLog = {
   id: string;
   userId: string;
   userName: string;
-  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED" | "RESTORED" | "SIGNED_UP"  | "LOGGED_IN" | "LOGGED_OUT";
+  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED" | "RESTORED" | "SIGNED_UP"  | "LOGGED_IN" | "LOGGED_OUT" | "PASSWORD_UPDATED";
   entityType: "PDCA" | "USER" | "AUTH";
   entityId?: string;
   details?: string;

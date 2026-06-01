@@ -7,6 +7,8 @@ import LoadingSpinner from "../items/LoadingSpinner";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
+import { logActivity } from "../../storage/kvpDatabase";
+import { useSessionContext } from "../../context/SessionContext";
 
 export default function UpdatePassword() {
   const [password, setPassword] = useState("");
@@ -20,28 +22,24 @@ export default function UpdatePassword() {
   const width = useWindowWidth();
   const navigate = useNavigate();
   const translations = useTranslation();
+  const { session, authEvent } = useSessionContext();
 
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY") {
-        setSessionReady(true);
-      } else if (event === "SIGNED_IN" && session) {
-        setSessionReady(true);
-      } else if (event === "SIGNED_OUT") {
-        navigate("/login");
-      }
-    });
+    if (
+      authEvent === "PASSWORD_RECOVERY" ||
+      (authEvent === "SIGNED_IN" && session)
+    ) {
+      setSessionReady(true);
+    } else if (authEvent === "SIGNED_OUT") {
+      navigate("/login");
+    }
+  }, [authEvent, session, navigate]);
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        setSessionReady(true);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  useEffect(() => {
+    if (session?.user) {
+      setSessionReady(true);
+    }
+  }, [session]);
 
   const handlePasswordUpdate = async (
     e: React.SubmitEvent<HTMLFormElement>,
@@ -63,14 +61,29 @@ export default function UpdatePassword() {
       password: password,
     });
 
-    if (error) {
-      showToast(
-        width,
-        theme,
-        "error",
-        translations.updatePassword.confirmationError(error.message),
-      );
-    } else {
+    await logActivity({
+      id: Date.now().toString(),
+      userId: session?.user?.id ?? "Unknown User",
+      userName: session?.user?.email ?? "Unknown User",
+      action: "PASSWORD_UPDATED",
+      entityType: "AUTH",
+      entityId: session?.user?.id ?? "Unknown User",
+      details: `User ${session?.user?.email ?? "Unknown User"} updated their password.`,
+      timestamp: new Date().toISOString(),
+    });
+
+    if (!error) {
+      await logActivity({
+        id: Date.now().toString(),
+        userId: session?.user?.id ?? "Unknown",
+        userName: session?.user?.email ?? "Unknown",
+        action: "PASSWORD_UPDATED",
+        entityType: "AUTH",
+        entityId: session?.user?.id ?? "Unknown",
+        details: `User ${session?.user?.email ?? "Unknown"} updated their password.`,
+        timestamp: new Date().toISOString(),
+      });
+
       showToast(
         width,
         theme,
@@ -78,6 +91,13 @@ export default function UpdatePassword() {
         translations.updatePassword.confirmationMessage,
       );
       navigate("/login");
+    } else {
+      showToast(
+        width,
+        theme,
+        "error",
+        translations.updatePassword.confirmationError(error.message),
+      );
     }
     setLoading(false);
   };
