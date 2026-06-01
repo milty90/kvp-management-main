@@ -46,8 +46,6 @@ export function ProfileModal({
     }
   }, [session]);
 
-  console.log(userNameFromContext);
-
   const department = users?.find(
     (user) => user.userEmail === session?.user?.email,
   )?.department || (

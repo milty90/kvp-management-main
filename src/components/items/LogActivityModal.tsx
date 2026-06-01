@@ -5,6 +5,7 @@ import type { ActivityLog } from "../../types";
 import LoadingSpinner from "./LoadingSpinner";
 import { useTranslation } from "../../utils/useTranslation";
 import { useTheme } from "../../context/ThemeContext";
+import { sortLogsByTimestamp } from "../../utils/sortLogs";
 
 interface LogActivityModalProps {
   onClose: () => void;
@@ -21,7 +22,8 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
       setLoading(true);
       const logs = await getLogActivities();
 
-      setActivities(logs);
+      setActivities(sortLogsByTimestamp(logs));
+
       setLoading(false);
     };
     fetchLogs();
