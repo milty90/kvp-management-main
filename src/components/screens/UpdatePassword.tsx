@@ -61,17 +61,6 @@ export default function UpdatePassword() {
       password: password,
     });
 
-    await logActivity({
-      id: Date.now().toString(),
-      userId: session?.user?.id ?? "Unknown User",
-      userName: session?.user?.email ?? "Unknown User",
-      action: "PASSWORD_UPDATED",
-      entityType: "AUTH",
-      entityId: session?.user?.id ?? "Unknown User",
-      details: `User ${session?.user?.email ?? "Unknown User"} updated their password.`,
-      timestamp: new Date().toISOString(),
-    });
-
     if (!error) {
       await logActivity({
         id: Date.now().toString(),
