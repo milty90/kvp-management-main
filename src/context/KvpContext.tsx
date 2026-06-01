@@ -1,4 +1,5 @@
 import type { Kvp } from "../types";
+import { useSessionContext } from "./SessionContext";
 import kvpManagmentReducer from "../features/kvpManagmentReducer";
 import {
   createContext,
@@ -8,7 +9,6 @@ import {
   useReducer,
   useState,
 } from "react";
-
 import {
   getKvpsfromDataBase,
   deleteKvpFromDataBase,
@@ -17,8 +17,6 @@ import {
   rejectKvpInDataBase,
   archiveKvpInDataBase,
 } from "../storage/kvpDatabase";
-import { supabase } from "../utils/supabase";
-import { useSessionContext } from "./SessionContext";
 
 interface KvpContextType {
   kvps: Kvp[];
