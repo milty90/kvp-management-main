@@ -44,6 +44,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, dispatch] = useReducer(userManagmentReducer, []);
   const prevUserRef = useRef<SupabaseUser | null>(null);
   const isDeleting = useRef(false);
+  const hasLoggedInRef = useRef(false);
 
   useEffect(() => {
     if (session?.user) {
@@ -123,13 +124,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (authEvent === "SIGNED_IN" && user) {
       const alreadyLogged = sessionStorage.getItem(`logged_${user.id}`);
-      if (!alreadyLogged) {
+      if (!alreadyLogged && !hasLoggedInRef.current) {
         sessionStorage.setItem(`logged_${user.id}`, "true");
+        hasLoggedInRef.current = true;
         void handleSignIn(user);
       }
     }
 
     if (authEvent === "SIGNED_OUT") {
+      hasLoggedInRef.current = false;
       sessionStorage.clear();
 
       if (isDeleting.current) {
