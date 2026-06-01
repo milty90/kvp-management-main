@@ -2,6 +2,7 @@ import type { User } from "../types";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -9,7 +10,6 @@ import {
   useState,
 } from "react";
 import { supabase } from "../utils/supabase";
-import { getCurrentUser } from "../features/authDatabase";
 import userManagmentReducer from "../features/userManagmentReducer";
 import {
   addUser,
@@ -18,10 +18,10 @@ import {
   getUsers,
 } from "../features/userActions";
 import { logActivity } from "../storage/kvpDatabase";
+import { useSessionContext } from "./SessionContext";
 
 interface UserContextType {
   user: SupabaseUser | null;
-  setUser: (user: SupabaseUser | null) => void;
   users: User[];
   addUser: (user: User) => void;
   updateUser: (user: User) => void;
@@ -31,7 +31,6 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType>({
   user: null,
-  setUser: () => {},
   users: [],
   addUser: () => {},
   updateUser: () => {},
@@ -40,131 +39,112 @@ const UserContext = createContext<UserContextType>({
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const { session, authEvent } = useSessionContext();
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [users, dispatch] = useReducer(userManagmentReducer, []);
-  const [authEvent, setAuthEvent] = useState<string | null>(null);
   const prevUserRef = useRef<SupabaseUser | null>(null);
   const isDeleting = useRef(false);
-  const userName = user?.email?.split("@")[0] ?? "Unknown User";
 
   useEffect(() => {
-    getCurrentUser().then((data) => setUser(data ?? null));
+    if (session?.user) {
+      prevUserRef.current = session.user;
+      setUser(session.user);
+    } else {
+      setUser(null);
+    }
+  }, [session]);
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        prevUserRef.current = session.user;
-      }
-      setUser(session?.user ?? null);
-
-      if (event === "SIGNED_IN") {
-        const alreadyLogged = sessionStorage.getItem(
-          `logged_${session?.user?.id}`,
-        );
-        if (!alreadyLogged) {
-          sessionStorage.setItem(`logged_${session?.user?.id}`, "true");
-          setAuthEvent("SIGNED_IN");
-        }
-      }
-
-      if (event === "SIGNED_OUT") {
-        sessionStorage.clear();
-        setAuthEvent("SIGNED_OUT");
-      }
-    });
-
+  useEffect(() => {
     getUsers(dispatch);
+  }, []);
 
-    return () => subscription.unsubscribe();
+  const handleSignIn = useCallback(async (currentUser: SupabaseUser) => {
+    const userName = currentUser.email?.split("@")[0] ?? "Unknown User";
+
+    const { data: existing } = await supabase
+      .from("users")
+      .select("userId")
+      .eq("userId", currentUser.id)
+      .single();
+
+    if (!existing) {
+      await addUser(dispatch, {
+        userId: currentUser.id,
+        userEmail: currentUser.email ?? "",
+        userName,
+        photoUrl: currentUser.user_metadata?.avatar_url ?? "",
+        department: "",
+        role: "",
+        firstName: "",
+        lastName: "",
+        createdAt: new Date().toISOString(),
+        lastSignIn: new Date().toISOString(),
+      });
+
+      await logActivity({
+        id: Date.now().toString(),
+        userId: currentUser.id,
+        userName: currentUser.email ?? "",
+        action: "SIGNED_UP",
+        entityType: "AUTH",
+        entityId: currentUser.id,
+        details: `User ${userName} signed up.`,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    await logActivity({
+      id: Date.now().toString(),
+      userId: currentUser.id,
+      userName: currentUser.email ?? "",
+      action: "LOGGED_IN",
+      entityType: "AUTH",
+      entityId: currentUser.id,
+      details: `User ${userName} logged in.`,
+      timestamp: new Date().toISOString(),
+    });
+  }, []);
+
+  const handleSignOut = useCallback(async (loggedOutUser: SupabaseUser) => {
+    const userName = loggedOutUser.email?.split("@")[0] ?? "Unknown User";
+
+    await logActivity({
+      id: Date.now().toString(),
+      userId: loggedOutUser.id,
+      userName: loggedOutUser.email ?? "",
+      action: "LOGGED_OUT",
+      entityType: "AUTH",
+      entityId: loggedOutUser.id,
+      details: `User ${userName} logged out.`,
+      timestamp: new Date().toISOString(),
+    });
   }, []);
 
   useEffect(() => {
     if (authEvent === "SIGNED_IN" && user) {
-      setAuthEvent(null);
-
-      const handleSignIn = async () => {
-        const { data: existing } = await supabase
-          .from("users")
-          .select("userId")
-          .eq("userId", user.id)
-          .single();
-
-        if (!existing) {
-          await addUser(dispatch, {
-            userId: user.id,
-            userEmail: user.email ?? "",
-            userName: user.email?.split("@")[0] ?? "",
-            photoUrl: user.user_metadata?.avatar_url ?? "",
-            department: "",
-            role: "",
-            firstName: "",
-            lastName: "",
-            createdAt: new Date().toISOString(),
-            lastSignIn: new Date().toISOString(),
-          });
-
-          await logActivity({
-            id: Date.now().toString(),
-            userId: user.id,
-            userName: user.email ?? "",
-            action: "SIGNED_UP",
-            entityType: "AUTH",
-            entityId: user.id,
-            details: `User ${userName} signed up.`,
-            timestamp: new Date().toISOString(),
-          });
-        }
-
-        await logActivity({
-          id: Date.now().toString(),
-          userId: user.id,
-          userName: user.email ?? "",
-          action: "LOGGED_IN",
-          entityType: "AUTH",
-          entityId: user.id,
-          details: `User ${userName} logged in.`,
-          timestamp: new Date().toISOString(),
-        });
-      };
-
-      handleSignIn();
+      const alreadyLogged = sessionStorage.getItem(`logged_${user.id}`);
+      if (!alreadyLogged) {
+        sessionStorage.setItem(`logged_${user.id}`, "true");
+        void handleSignIn(user);
+      }
     }
 
     if (authEvent === "SIGNED_OUT") {
-      setAuthEvent(null);
+      sessionStorage.clear();
 
       if (isDeleting.current) {
         isDeleting.current = false;
         return;
       }
 
-      const loggedOutUser = prevUserRef.current;
-
-      if (loggedOutUser) {
-        prevUserRef.current = null;
-        const handleSignOut = async () => {
-          await logActivity({
-            id: Date.now().toString(),
-            userId: loggedOutUser.id,
-            userName: loggedOutUser.email ?? "",
-            action: "LOGGED_OUT",
-            entityType: "AUTH",
-            entityId: loggedOutUser.id,
-            details: `User ${loggedOutUser?.email?.split("@")[0] || "Unknown User"} logged out.`,
-            timestamp: new Date().toISOString(),
-          });
-        };
-        handleSignOut();
-      }
+      prevUserRef.current = null;
     }
-  }, [authEvent, user]);
+  }, [authEvent, user, handleSignIn, handleSignOut]);
 
   return (
     <UserContext.Provider
       value={{
         user,
-        setUser,
         users,
         isDeleting,
         addUser: (user: User) => addUser(dispatch, user),

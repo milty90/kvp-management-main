@@ -18,6 +18,7 @@ import {
   archiveKvpInDataBase,
 } from "../storage/kvpDatabase";
 import { supabase } from "../utils/supabase";
+import { useSessionContext } from "./SessionContext";
 
 interface KvpContextType {
   kvps: Kvp[];
@@ -47,23 +48,19 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
   const [kvps, setKvps] = useReducer(kvpManagmentReducer, []);
   const [selectedKvp, setSelectedKvp] = useState<Kvp | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { session } = useSessionContext();
 
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        getKvpsfromDataBase().then((data) => {
-          setKvps({ type: "SET_KVPS", kvps: data });
-          setIsLoading(false);
-        });
-      } else {
-        setKvps({ type: "SET_KVPS", kvps: [] });
+    if (session) {
+      getKvpsfromDataBase().then((data) => {
+        setKvps({ type: "SET_KVPS", kvps: data });
         setIsLoading(false);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, []);
+      });
+    } else {
+      setKvps({ type: "SET_KVPS", kvps: [] });
+      setIsLoading(false);
+    }
+  }, [session]);
 
   const addKvp = useCallback(async (kvp: Kvp) => {
     try {

@@ -18,6 +18,7 @@ import EditProfileModal from "../items/EditProfileModal";
 import { useUserContext } from "../../context/UserContext";
 import { LogActivityModal } from "../items/LogActivityModal";
 import { supabase } from "../../utils/supabase";
+import { logActivity } from "../../storage/kvpDatabase";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -116,6 +117,26 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     }
   };
 
+  const handleConfirmLogout = async () => {
+    if (user) {
+      const userName = user.email?.split("@")[0] ?? "Unknown User";
+      await logActivity({
+        id: Date.now().toString(),
+        userId: user.id,
+        userName: user.email ?? "Unknown User",
+        action: "LOGGED_OUT",
+        entityType: "AUTH",
+        entityId: user.id,
+        details: `User ${userName} logged out.`,
+        timestamp: new Date().toISOString(),
+      });
+    }
+    await signOut();
+    navigate("/login");
+    showToast(width, theme, "success", translation.logOutModal.toastMessage);
+    setShowConfirmDialog(false);
+  };
+
   const handleActivityLogClick = () => {
     setShowActivityLog(true);
     setShowSettingsModal(false);
@@ -192,17 +213,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             cancelButtonText={translation.logOutModal.onCancel}
             title={translation.logOutModal.title}
             message={translation.logOutModal.message}
-            onConfirm={() => {
-              signOut();
-              navigate("/login");
-              showToast(
-                width,
-                theme,
-                "success",
-                translation.logOutModal.toastMessage,
-              );
-              setShowConfirmDialog(false);
-            }}
+            onConfirm={handleConfirmLogout}
             onCancel={() => setShowConfirmDialog(false)}
           />,
           document.body,
