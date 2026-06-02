@@ -31,7 +31,7 @@ export async function deleteKvpFromDataBase(id: number) {
 export async function archiveKvpInDataBase(id: number) {
   const { error } = await supabase
     .from("kvps")
-    .update({ status: "archived" })
+    .update({ state: "archived" })
     .eq("id", id);
 
   if (error) throw new Error(error.message);
@@ -40,7 +40,7 @@ export async function archiveKvpInDataBase(id: number) {
 export async function rejectKvpInDataBase(id: number) {
   const { error } = await supabase
     .from("kvps")
-    .update({ status: "rejected" })
+    .update({ state: "rejected" })
     .eq("id", id);
 
   if (error) throw new Error(error.message);
