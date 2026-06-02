@@ -112,7 +112,7 @@ export default function EditProfileModal({
         <div className="flex items-center justify-between px-2">
           <div className="relative flex  items-center justify-center">
             <img
-              className={`relative w-26 rounded-full ${theme === "dark" ? "border-border" : "border-gray-400/80"} border-2 p-1 object-cover`}
+              className={`relative w-26 h-26 rounded-full ${theme === "dark" ? "border-border" : "border-gray-400/80"} border-2 p-1 object-cover`}
               src={preview}
               alt="Profile"
             />
