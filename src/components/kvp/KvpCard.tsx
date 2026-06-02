@@ -235,8 +235,6 @@ export default function KvpCard({
         </span>
       </div>
 
-      {/* Divider */}
-
       <div
         className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
       />
@@ -253,8 +251,6 @@ export default function KvpCard({
           {sliceText(description, 200)}
         </span>
       </p>
-
-      {/* Divider */}
 
       <div
         className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} my-3`}
