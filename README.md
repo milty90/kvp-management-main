@@ -28,7 +28,7 @@
 ## 📸 Screenshots
 
 <p align="center ">
-  <img src="public/mochup.png" alt="Dashboard" width="100%" />
+  <img src="public/mockup.png" alt="Dashboard" width="100%" />
 </p>
 
 ---
