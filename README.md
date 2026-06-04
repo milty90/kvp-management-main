@@ -28,9 +28,7 @@
 ## 📸 Screenshots
 
 <p align="center ">
-  <img src="public/dashboard.png" alt="Dashboard" width="60%" />
-  <img width="5%" />
-  <img src="public/detail-view.png" alt="Detail View" width="22%" />
+  <img src="public/mochup.png" alt="Dashboard" width="100%" />
 </p>
 
 ---
@@ -48,7 +46,7 @@
 | 🌍 **Multilanguage**      | UI available in multiple languages, easily extensible        |
 | 🎨 **Theme Support**      | Switch between Light and Dark mode                           |
 | 🔐 **Authentication**     | Sign in with Email, Google, GitHub                           |
-| 🧪 **Demo Mode**          | Try the app instantly — no registration required             |
+| 🧪 **Demo Mode**          | Try the app instantly, no registration required              |
 
 ---
 

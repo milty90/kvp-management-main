@@ -19,7 +19,6 @@ interface KvpCardProps {
   id: number;
   title: string;
   category: string;
-  colorPriority?: "green" | "orange" | "red" | "gray";
   assignedTo: string;
   description: string;
   state: "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
@@ -30,15 +29,6 @@ interface KvpCardProps {
   benefit?: string;
   onOpenModal?: () => void;
 }
-
-const priorityMap: Record<string, string> = {
-  High: "High",
-  Medium: "Medium",
-  Low: "Low",
-  Hoch: "High",
-  Mittel: "Medium",
-  Niedrig: "Low",
-};
 
 const priorityColorsLight = {
   High: "border-red-400",
@@ -104,12 +94,13 @@ export default function KvpCard({
 
   useClickOutside(menuWrapperRef, () => setShowMenu(false));
 
-  const priorityMapping = (priority: string) => {
-    return priorityMap[translation.pdcaCard.priorities[0]] === priority
-      ? translation.pdcaCard.priorities[0]
-      : priorityMap[translation.pdcaCard.priorities[1]] === priority
-        ? translation.pdcaCard.priorities[1]
-        : translation.pdcaCard.priorities[2];
+  const priorityMapping = (priority: string): string => {
+    const map: Record<string, number> = {
+      High: 0,
+      Medium: 1,
+      Low: 2,
+    };
+    return translation.pdcaCard.priorities[map[priority]] ?? priority;
   };
 
   const handleArchive = () => {

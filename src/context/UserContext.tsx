@@ -56,8 +56,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, [session]);
 
   useEffect(() => {
-    getUsers(dispatch);
-  }, []);
+    if (session?.user) {
+      getUsers(dispatch);
+    }
+  }, [session?.user?.id]);
 
   const handleSignIn = useCallback(async (currentUser: SupabaseUser) => {
     const userName = currentUser.email?.split("@")[0] ?? "Unknown User";

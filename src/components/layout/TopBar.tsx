@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState, type ReactNode } from "react";
-import type { ColorButtonType } from "../../types";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { SettingItem } from "../items/SettingItem";
 import { useClickOutside } from "../../utils/clickOutside";
 import { signOut } from "../../features/authDatabase";
@@ -22,8 +21,6 @@ import { logActivity } from "../../storage/kvpDatabase";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
-  kvpButtonColor?: ColorButtonType;
-  statButtonColor?: ColorButtonType;
 }
 
 export default function TopBar({ kvpBar }: TopBarProps) {
@@ -36,8 +33,10 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const [showSettings, setShowSettings] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const { isDeleting, deleteUser, user, users } = useUserContext();
-  const currentUser = users.find((u) => u.userId === user?.id);
-
+  const currentUser = useMemo(
+    () => users.find((u) => u.userId === user?.id),
+    [users, user?.id],
+  );
   const settingsWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -162,7 +161,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
             <TopNavButton theme={theme} onChange={handleTopNavChange} />
           ) : (
             <img
-              className={`w-8 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-500" : "hover:ring-blue-500"}  transition-transform duration-600 ease-in hover:rotate-90 cursor-pointer`}
+              className={`w-8 mr-2 rounded-full object-cover hover:ring-2 hover:ring-offset-1 ${theme === "dark" ? "hover:ring-green-500" : "hover:ring-blue-500"}  transition-transform duration-500 ease-in hover:rotate-90 cursor-pointer`}
               src={theme === "dark" ? "/menu-light.svg" : "/menu.svg"}
               alt="Menu"
               onClick={() => {

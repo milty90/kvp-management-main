@@ -1,6 +1,6 @@
 import { fetchUser } from "../../features/authDatabase";
 import ColorButton from "../buttons/ColorButton";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import { formatDate } from "../../utils/formatDate";
@@ -24,43 +24,41 @@ export function ProfileModal({
   showEditProfile,
   showDeleteProfile,
 }: ProfileModalProps) {
-  const [username, setUsername] = useState(
-    useTranslation().profileModal.loadData,
-  );
-  const [email, setEmail] = useState(useTranslation().profileModal.loadData);
-  const { theme } = useTheme();
   const translation = useTranslation();
+  const [username, setUsername] = useState(translation.profileModal.loadData);
+  const [email, setEmail] = useState(translation.profileModal.loadData);
+  const { theme } = useTheme();
+
   const { users } = useUserContext();
   const { kvps } = useKvpContext();
   const { session } = useSessionContext();
   const isDemo = isDemoUser(session?.user?.email);
   const width = useWindowWidth();
 
-  const userNameFromContext = users?.find(
-    (user) => user.userEmail === session?.user?.email,
-  )?.userName;
+  const currentUserData = useMemo(
+    () => users.find((user) => user.userEmail === session?.user?.email),
+    [users, session?.user?.email],
+  );
+  const userNameFromContext = currentUserData?.userName;
 
   useEffect(() => {
     if (userNameFromContext) {
       setUsername(userNameFromContext);
     }
-  }, [session]);
+  }, [userNameFromContext]);
 
-  const department = users?.find(
-    (user) => user.userEmail === session?.user?.email,
-  )?.department || (
+  const department = currentUserData?.department || (
     <span className="text-xs text-gray-500">
       {translation.profileModal.fillProfile}
     </span>
   );
-  const role = users?.find((user) => user.userEmail === session?.user?.email)
-    ?.role || (
+  const role = currentUserData?.role || (
     <span className="text-xs text-gray-500">
       {translation.profileModal.fillProfile}
     </span>
   );
   const [lastSignIn, setLastSignIn] = useState(
-    useTranslation().profileModal.loadData,
+    translation.profileModal.loadData,
   );
 
   const assignedTo =
@@ -69,7 +67,7 @@ export function ProfileModal({
     ).length || 0;
 
   const createdBy =
-    kvps?.filter((kvp) => kvp.createdBy === username).length || 0;
+    kvps?.filter((kvp) => kvp.createdBy === userNameFromContext).length ?? 0;
 
   const act =
     kvps?.filter(
@@ -113,26 +111,21 @@ export function ProfileModal({
                 className="w-24 h-24 rounded-full object-cover"
               />
             </div>
-            <div className="flex flex-col max-h overflow-auto whitespace-nowrap items-start ml-4">
+            <div className="flex flex-col max-h-full overflow-auto whitespace-nowrap items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
-                {users?.find((user) => user.userEmail === session?.user?.email)
-                  ?.firstName || (
+                {currentUserData?.firstName || (
                   <span className="text-xs font-normal text-gray-500">
                     {translation.profileModal.fillProfile}
                   </span>
                 )}{" "}
-                {users?.find((user) => user.userEmail === session?.user?.email)
-                  ?.lastName || null}
+                {currentUserData?.lastName || null}
               </p>
 
               <p className=" text-text-secondary text-base font-medium ">
                 {email}
               </p>
               <p className="text-sm text-gray-500">
-                {
-                  users?.find((user) => user.userEmail === session?.user?.email)
-                    ?.aboutMe
-                }
+                {currentUserData?.aboutMe}
               </p>
             </div>
           </div>
@@ -218,7 +211,7 @@ export function ProfileModal({
             </p>
           </div>
           <div
-            className={`flex flex-col items-center text-sm w-5/13 shadow-sm lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
+            className={`flex flex-col items-center text-sm w-5/12 shadow-sm lg:w-4/12 ${theme === "dark" ? "bg-card text-gray-500 border border-gray-500" : "bg-gray-100 text-gray-500 border border-border"} rounded-lg px-5 py-3`}
           >
             <p className="text-3xl text-green-500">{act}</p>
             <p className="text-md text-text-secondary ">

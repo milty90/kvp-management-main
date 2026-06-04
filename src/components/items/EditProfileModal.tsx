@@ -33,15 +33,18 @@ export default function EditProfileModal({
   const [role, setRole] = useState(initialData?.role || "");
   const [aboutMe, setAboutMe] = useState(initialData?.aboutMe || "");
   const [photoUrl, setPhotoUrl] = useState(initialData?.photoUrl || "");
-  const updateUser = useUserContext().updateUser;
-  const user = useUserContext().user;
+  const { user, updateUser } = useUserContext();
   const width = useWindowWidth();
 
   async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !user?.id) return;
 
-    setPreview(URL.createObjectURL(file));
+    const objectUrl = URL.createObjectURL(file);
+    setPreview((prev) => {
+      if (prev.startsWith("blob:")) URL.revokeObjectURL(prev);
+      return objectUrl;
+    });
 
     const fileExt = file.name.split(".").pop();
     const filePath = `${user.id}/avatar.${fileExt}`;
@@ -61,7 +64,7 @@ export default function EditProfileModal({
     setPhotoUrl(data.publicUrl);
   }
 
-  function handleConfirm() {
+  async function handleConfirm() {
     updateUser({
       userId: user?.id || "",
       userName: userName,
@@ -75,7 +78,7 @@ export default function EditProfileModal({
       createdAt: user?.created_at || "",
       lastSignIn: user?.last_sign_in_at || "",
     });
-    logActivity({
+    await logActivity({
       id: Date.now().toString(),
       userId: user?.id || "",
       userName: user?.email || "Unknown User",
