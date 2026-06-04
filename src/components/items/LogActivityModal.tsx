@@ -31,7 +31,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
 
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-700/50">
-      <div className="bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full md:max-w-4xl relative h-full md:h-auto flex flex-col">
+      <div className="bg-surface px-6 pt-6 md:py-5 md:rounded-xl shadow-lg w-full md:max-w-5xl relative h-full md:h-auto flex flex-col">
         <div className="flex items-center justify-between">
           <h2 className="text-lg md:text-xl font-bold pl-1">
             {translations.activityLog.title}
@@ -101,13 +101,13 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
             <table className="hidden md:table w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-text-secondary">
-                  <th className="py-2 px-3">
+                  <th className="py-2 px-3 w-15">
                     {translations.activityLog.entityType}
                   </th>
                   <th className="py-2 px-3">
                     {translations.activityLog.details}
                   </th>
-                  <th className="py-2 px-3">
+                  <th className="py-2 px-3 w-35">
                     {translations.activityLog.action}
                   </th>
                   <th className="py-2 px-3">{translations.activityLog.user}</th>
@@ -122,13 +122,13 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                     key={log.entityId + log.timestamp}
                     className="border-b border-border/50 hover:bg-ground-600/30"
                   >
-                    <td className="py-2 px-3 text-text-secondary">
+                    <td className="py-2 px-3   text-text-secondary">
                       <span className="font-medium">{log.entityType}</span>
                     </td>
                     <td className="py-2 px-3">{log.details}</td>
                     <td className="py-2 px-3">{log.action}</td>
                     <td className="py-2 px-3">{log.userName}</td>
-                    <td className="py-2 px-3 text-xs text-center">
+                    <td className="py-2 px-3 max-w-20 text-xs text-center">
                       {formatDateTime(log.timestamp)}
                     </td>
                   </tr>

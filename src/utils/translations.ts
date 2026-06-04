@@ -260,7 +260,7 @@ export const translations = {
     activityLog: {
       title: "Aktivitätsprotokoll",
       noActivities: "Keine Aktivitäten zu anzeigen.",
-      entityType: "Entitätstyp",
+      entityType: "Typ",
       details: "Details",
       action: "Aktion",
       user: "Benutzer",
@@ -527,7 +527,7 @@ export const translations = {
     activityLog: { 
       title: "Activity Log",
       noActivities: "No activities to display.",
-      entityType: "Entity Type",
+      entityType: "Type",
       details: "Details",
       action: "Action",
       user: "User",

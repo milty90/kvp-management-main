@@ -53,6 +53,8 @@ export default function KvpBar({
   const translation = useTranslation();
   const colorClasses = theme === "dark" ? colorClassesDark : colorClassesLight;
 
+  console.log(isLoading);
+
   const filtered = kvps.filter((k) => {
     const stateMatch =
       activeFilter === translation.actionBar.startState ||

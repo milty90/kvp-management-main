@@ -112,12 +112,12 @@ export default function EditProfileModal({
         <div className="flex items-center justify-between px-2">
           <div className="relative flex  items-center justify-center">
             <img
-              className={`relative w-26 h-26 rounded-full ${theme === "dark" ? "border-border" : "border-gray-400/80"} border-2 p-1 object-cover`}
+              className={`relative w-28 h-28 rounded-full ${theme === "dark" ? "border-border" : "border-gray-400/80"} border-2 p-1 object-cover`}
               src={preview}
               alt="Profile"
             />
             <img
-              className={`absolute top-18 left-18 ${theme === "dark" ? "bg-green-700" : "bg-blue-600"} z-10 w-8 h-8 p-1.5 rounded-full object-cover cursor-pointer`}
+              className={`absolute top-19 left-19 ${theme === "dark" ? "bg-green-700" : "bg-blue-600"} z-10 w-8 h-8 p-1.5 rounded-full object-cover cursor-pointer`}
               src="/camera-light.svg"
               alt="Profile"
               onClick={() => fileInputRef.current?.click()}

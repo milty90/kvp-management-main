@@ -45,10 +45,11 @@ const KvpContext = createContext<KvpContextType>({
 export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
   const [kvps, setKvps] = useReducer(kvpManagmentReducer, []);
   const [selectedKvp, setSelectedKvp] = useState<Kvp | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { session } = useSessionContext();
 
   useEffect(() => {
+    setIsLoading(true);
     if (session) {
       getKvpsfromDataBase().then((data) => {
         setKvps({ type: "SET_KVPS", kvps: data });
