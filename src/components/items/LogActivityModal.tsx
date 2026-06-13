@@ -117,7 +117,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                 </tr>
               </thead>
               <tbody>
-                {activities.map((log) => (
+                {[...activities].reverse().map((log) => (
                   <tr
                     key={log.entityId + log.timestamp}
                     className="border-b border-border/50 hover:bg-ground-600/30"
@@ -127,7 +127,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                     </td>
                     <td className="py-2 px-3">{log.details}</td>
                     <td className="py-2 px-3">{log.action}</td>
-                    <td className="py-2 px-3">{log.userName}</td>
+                    <td className="py-2 px-3">{log.userName.split("@")[0]}</td>
                     <td className="py-2 px-3 max-w-20 text-xs text-center">
                       {formatDateTime(log.timestamp)}
                     </td>
