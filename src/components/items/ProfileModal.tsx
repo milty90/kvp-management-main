@@ -10,6 +10,7 @@ import { useSessionContext } from "../../context/SessionContext";
 import { isDemoUser } from "../../features/authDatabase";
 import { showToast } from "../items/ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
+import { sliceText } from "../../utils/sliceText";
 
 interface ProfileModalProps {
   onConfirm: () => void;
@@ -92,6 +93,7 @@ export function ProfileModal({
         <h2 className="text-xl font-bold pl-1">
           {translation.profileModal.title}
         </h2>
+
         <button
           type="button"
           className="absolute top-4 right-7 text-3xl text-gray-500 hover:text-text-primary"
@@ -104,14 +106,24 @@ export function ProfileModal({
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 py-4 md:pr-1.5 pl-0 md:p-4 ">
           <div className="flex flex-row items-center justify-center  px-1 ">
-            <div className="flex flex-row border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max shadow-sm border-border">
+            <div className="flex flex-row relative border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max shadow-sm border-border">
               <img
                 src={profileUser || "/avatar.png"}
                 alt="Profilbild"
                 className="w-24 h-24 rounded-full object-cover"
               />
+              <img
+                className={`${width < 768 ? "hidden" : "absolute top-19 left-19"} ${theme === "dark" ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"} z-10 w-8 h-8 p-1.5 rounded-full object-cover cursor-pointer`}
+                src="/edit.svg"
+                alt="Profile"
+                onClick={() => {
+                  if (showEditProfile) {
+                    showEditProfile();
+                  }
+                }}
+              />
             </div>
-            <div className="flex flex-col max-h-full overflow-auto whitespace-nowrap items-start ml-4">
+            <div className="flex flex-col min-w-0 items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {currentUserData?.firstName || (
                   <span className="text-xs font-normal text-gray-500">
@@ -121,14 +133,15 @@ export function ProfileModal({
                 {currentUserData?.lastName || null}
               </p>
 
-              <p className=" text-text-secondary text-base font-medium ">
-                {email}
+              <p className=" text-text-secondary font-medium overflow-hidden text-clip">
+                {`${sliceText(email, 30)}`}
               </p>
               <p className="text-sm text-gray-500">
                 {currentUserData?.aboutMe}
               </p>
             </div>
           </div>
+
           <div className="flex md:flex-col w-full mt-4 md:mt-1 items-center md:items-end gap-2.5">
             {isDemo ? (
               <>
@@ -161,33 +174,35 @@ export function ProfileModal({
               </>
             ) : (
               <>
-                <ColorButton
-                  color="color"
-                  isTextOnly={true}
-                  icon="edit.svg"
-                  width={width < 768 ? "full" : "auto"}
-                  onClick={() => {
-                    if (showEditProfile) {
-                      showEditProfile();
-                    }
-                  }}
-                >
-                  {translation.profileModal.profileButton}
-                </ColorButton>
                 {width <= 767 ? (
-                  <ColorButton
-                    color="red"
-                    isTextOnly={true}
-                    icon="user-delete.svg"
-                    width={width < 768 ? "full" : "auto"}
-                    onClick={() => {
-                      if (showDeleteProfile) {
-                        showDeleteProfile();
-                      }
-                    }}
-                  >
-                    {translation.profileModal.deleteButton}
-                  </ColorButton>
+                  <>
+                    <ColorButton
+                      color="color"
+                      isTextOnly={true}
+                      icon="edit.svg"
+                      width={width < 768 ? "full" : "auto"}
+                      onClick={() => {
+                        if (showEditProfile) {
+                          showEditProfile();
+                        }
+                      }}
+                    >
+                      {translation.profileModal.profileButton}
+                    </ColorButton>
+                    <ColorButton
+                      color="red"
+                      isTextOnly={true}
+                      icon="user-delete.svg"
+                      width={width < 768 ? "full" : "auto"}
+                      onClick={() => {
+                        if (showDeleteProfile) {
+                          showDeleteProfile();
+                        }
+                      }}
+                    >
+                      {translation.profileModal.deleteButton}
+                    </ColorButton>
+                  </>
                 ) : null}
               </>
             )}

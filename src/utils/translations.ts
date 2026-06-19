@@ -191,6 +191,17 @@ export const translations = {
       deletePdca: "KVP löschen",
       deleteMessage: (title: string) =>
         `Möchten Sie das KVP "${title}" wirklich löschen?`,
+      editPdca: "KVP bearbeiten",
+      editMessage: (title: string) =>
+        `Möchten Sie das KVP "${title}" wirklich bearbeiten?`,
+      archivePdca: "KVP archivieren",
+      archiveMessage: (title: string) =>
+        `Möchten Sie das KVP "${title}" wirklich archivieren?`,
+      rejectPdca: "KVP ablehnen",
+      rejectMessage: (title: string) =>
+        `Möchten Sie das KVP "${title}" wirklich ablehnen?`,
+      rejectedToastMessage: "Dieses KVP ist abgelehnt. Kann nicht geöffnet werden.",
+     
       confirmButton: "Löschen",
       cancelButton: "Abbrechen",
       pdca: "KVP",
@@ -457,6 +468,16 @@ export const translations = {
       deletePdca: "Delete PDCA",
       deleteMessage: (title: string) =>
         `Are you sure you want to delete the PDCA "${title}"?`,
+      editPdca: "Edit PDCA",
+      editMessage: (title: string) =>
+        `Are you sure you want to edit the PDCA "${title}"?`,
+      archivePdca: "Archive PDCA",
+      archiveMessage: (title: string) =>
+        `Are you sure you want to archive the PDCA "${title}"?`,
+      rejectPdca: "Reject PDCA",
+      rejectMessage: (title: string) =>
+        `Are you sure you want to reject the PDCA "${title}"?`,
+      rejectedToastMessage: "This PDCA is rejected. Cannot be opened.",
       confirmButton: "Delete",
       cancelButton: "Cancel",
       pdca: "PDCA",

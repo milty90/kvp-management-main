@@ -83,7 +83,10 @@ export default function KvpCard({
   const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
 
   const [showMenu, setShowMenu] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showArchiveDialog, setShowArchiveDialog] = useState(false);
+  const [showRejectDialog, setShowRejectDialog] = useState(false);
   const { theme } = useTheme();
   const width = useWindowWidth();
   const translation = useTranslation();
@@ -104,53 +107,26 @@ export default function KvpCard({
   };
 
   const handleArchive = () => {
-    archiveKvp(id);
-    showToast(
-      width,
-      theme,
-      "success",
-      `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.archived}.`,
-    );
-    logger("ARCHIVED");
+    setShowArchiveDialog(true);
     setShowMenu(false);
+    logger("ARCHIVED");
   };
 
   const handleReject = () => {
-    rejectKvp(id);
-    showToast(
-      width,
-      theme,
-      "info",
-      `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.rejected}.`,
-    );
-    logger("REJECTED");
+    setShowRejectDialog(true);
     setShowMenu(false);
+    logger("REJECTED");
   };
 
   const handleDelete = () => {
-    setShowDialog(true);
+    setShowDeleteDialog(true);
     setShowMenu(false);
     logger("DELETED");
   };
 
   const handleEditClick = () => {
-    setSelectedKvp({
-      id,
-      title,
-      category,
-      assignedTo,
-      description,
-      state,
-      priority,
-      createdBy,
-      createdAt,
-      targetDate,
-      benefit,
-    });
-
-    if (onOpenModal) {
-      onOpenModal();
-    }
+    setShowEditDialog(true);
+    setShowMenu(false);
   };
 
   const handleDamoClick = () => {
@@ -172,7 +148,7 @@ export default function KvpCard({
 
   return (
     <div
-      className={`bg-card z-0 p-4 pb-2.5 text-left border-b-3 ${pcdaColors(theme)[state]} rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in cursor-pointer ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
+      className={`bg-card z-0 p-4 pb-2.5 text-left border-b-3 ${pcdaColors(theme)[state]} rounded-lg shadow-md hover:translate-y-1 hover:shadow-lg transition-transform duration-100 ease-in ${state === "Archived" || state === "Rejected" ? "opacity-80" : ""}`}
     >
       <div
         ref={menuWrapperRef}
@@ -272,12 +248,12 @@ export default function KvpCard({
           {translation.pdcaCard.targetDate}: {formatDate(targetDate)}
         </span>
       </div>
-      {showDialog &&
+      {showDeleteDialog &&
         createPortal(
           <ConfirmDialogItem
             title={translation.pdcaCard.deletePdca}
             message={translation.pdcaCard.deleteMessage(title)}
-            confirmButtonText={translation.pdcaCard.confirmButton}
+            confirmButtonText={translation.pdcaCard.deletePdca}
             cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
               deleteKvp(id);
@@ -287,9 +263,82 @@ export default function KvpCard({
                 "success",
                 `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.deleted}.`,
               );
-              setShowDialog(false);
+              setShowDeleteDialog(false);
             }}
-            onCancel={() => setShowDialog(false)}
+            onCancel={() => setShowDeleteDialog(false)}
+          />,
+          document.body,
+        )}
+      {showArchiveDialog &&
+        createPortal(
+          <ConfirmDialogItem
+            title={translation.pdcaCard.archivePdca}
+            message={translation.pdcaCard.archiveMessage(title)}
+            confirmButtonText={translation.pdcaCard.archivePdca}
+            cancelButtonText={translation.pdcaCard.cancelButton}
+            onConfirm={() => {
+              archiveKvp(id);
+              showToast(
+                width,
+                theme,
+                "success",
+                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.archived}.`,
+              );
+              setShowArchiveDialog(false);
+            }}
+            onCancel={() => setShowArchiveDialog(false)}
+          />,
+          document.body,
+        )}
+      {showRejectDialog &&
+        createPortal(
+          <ConfirmDialogItem
+            title={translation.pdcaCard.rejectPdca}
+            message={translation.pdcaCard.rejectMessage(title)}
+            confirmButtonText={translation.pdcaCard.rejectPdca}
+            cancelButtonText={translation.pdcaCard.cancelButton}
+            onConfirm={() => {
+              rejectKvp(id);
+              showToast(
+                width,
+                theme,
+                "info",
+                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.rejected}.`,
+              );
+              setShowRejectDialog(false);
+            }}
+            onCancel={() => setShowRejectDialog(false)}
+          />,
+          document.body,
+        )}
+      {showEditDialog &&
+        createPortal(
+          <ConfirmDialogItem
+            title={translation.pdcaCard.editPdca}
+            message={translation.pdcaCard.editMessage(title)}
+            confirmButtonText={translation.pdcaCard.editPdca}
+            cancelButtonText={translation.pdcaCard.cancelButton}
+            onConfirm={() => {
+              setSelectedKvp({
+                id,
+                title,
+                category,
+                assignedTo,
+                description,
+                state,
+                priority,
+                createdBy,
+                createdAt,
+                targetDate,
+                benefit,
+              });
+
+              if (onOpenModal) {
+                onOpenModal();
+              }
+              setShowEditDialog(false);
+            }}
+            onCancel={() => setShowEditDialog(false)}
           />,
           document.body,
         )}

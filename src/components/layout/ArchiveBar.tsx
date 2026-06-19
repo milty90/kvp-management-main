@@ -4,6 +4,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
 import { useTranslation } from "../../utils/useTranslation";
+import { useState } from "react";
 
 const VALID_STATES = ["Rejected", "Archived"] as const;
 
@@ -22,7 +23,11 @@ const priorityMap: Record<string, string> = {
   Niedrig: "Low",
 };
 
-export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
+export function ArchiveBar({
+  activeFilter,
+  activePriority,
+  onOpenModal,
+}: ArchiveBarProps) {
   const { kvps } = useKvpContext();
   const { theme } = useTheme();
   const width = useWindowWidth();
@@ -76,12 +81,16 @@ export function ArchiveBar({ activeFilter, activePriority }: ArchiveBarProps) {
                     {...kvp}
                     state={state}
                     onOpenModal={() => {
-                      showToast(
-                        width,
-                        theme,
-                        "info",
-                        "Diese KVP ist nicht mehr bearbeitbar.",
-                      );
+                      if (kvp.state === "Archived") {
+                        onOpenModal?.();
+                      } else {
+                        showToast(
+                          width,
+                          theme,
+                          "info",
+                          translation.pdcaCard.rejectedToastMessage,
+                        );
+                      }
                     }}
                   />
                 ))}
