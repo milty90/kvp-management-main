@@ -6,6 +6,7 @@ interface CardMenuItemProps {
   onArchive: () => void;
   onReject: () => void;
   onDelete: () => void;
+  isRejected?: boolean;
 }
 
 export default function CardMenuItem({
@@ -13,6 +14,7 @@ export default function CardMenuItem({
   onArchive,
   onReject,
   onDelete,
+  isRejected = false,
 }: CardMenuItemProps) {
   const { theme } = useTheme();
   const translations = useTranslation();
@@ -23,19 +25,22 @@ export default function CardMenuItem({
       >
         <button
           onClick={onEdit}
-          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
+          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250 ${isRejected ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={isRejected}
         >
           {translations.cardMenuItem.edit}
         </button>
         <button
           onClick={onArchive}
-          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
+          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250 ${isRejected ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={isRejected}
         >
           {translations.cardMenuItem.archive}
         </button>
         <button
           onClick={onReject}
-          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250`}
+          className={`p-2 text-sm w-full ${theme === "dark" ? "hover:bg-gray-500/50 hover:text-green-400" : "hover:bg-gray-200 hover:text-blue-600"} rounded hover:scale-95 transition-transform duration-250 ${isRejected ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={isRejected}
         >
           {translations.cardMenuItem.reject}
         </button>

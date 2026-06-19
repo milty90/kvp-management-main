@@ -28,6 +28,7 @@ interface KvpCardProps {
   targetDate: string;
   benefit?: string;
   onOpenModal?: () => void;
+  isRejected?: boolean;
 }
 
 const priorityColorsLight = {
@@ -79,6 +80,7 @@ export default function KvpCard({
   targetDate,
   benefit,
   onOpenModal,
+  isRejected = false,
 }: KvpCardProps) {
   const { setSelectedKvp, deleteKvp, archiveKvp, rejectKvp } = useKvpContext();
 
@@ -180,6 +182,7 @@ export default function KvpCard({
               onArchive={handleArchive}
               onReject={handleReject}
               onDelete={handleDelete}
+              isRejected={isRejected}
             />
           )}
         </div>
