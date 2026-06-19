@@ -4,7 +4,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
 import { useTranslation } from "../../utils/useTranslation";
-import { useState } from "react";
 
 const VALID_STATES = ["Rejected", "Archived"] as const;
 
