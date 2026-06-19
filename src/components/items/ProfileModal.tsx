@@ -123,7 +123,7 @@ export function ProfileModal({
                 }}
               />
             </div>
-            <div className="flex flex-col min-w-0 items-start ml-4">
+            <div className="flex flex-col w-full items-start ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {currentUserData?.firstName || (
                   <span className="text-xs font-normal text-gray-500">
@@ -133,7 +133,7 @@ export function ProfileModal({
                 {currentUserData?.lastName || null}
               </p>
 
-              <p className=" text-text-secondary font-medium overflow-hidden text-clip">
+              <p className=" text-text-secondary w-max font-medium text-base">
                 {`${sliceText(email, 30)}`}
               </p>
               <p className="text-sm text-gray-500">
