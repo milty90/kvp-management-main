@@ -63,13 +63,13 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
             <div className="md:hidden flex flex-col gap-2 pb-4">
               {activities.map((log) => (
                 <div
-                  key={log.entityId + log.timestamp}
+                  key={(log.entityId || "") + (log.timestamp || "")}
                   className="border border-border rounded-lg p-3 text-sm"
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-medium">{log.action}</span>
                     <span className="text-xs text-text-secondary">
-                      {formatDateTime(log.timestamp)}
+                      {formatDateTime(log.timestamp || "")}
                     </span>
                   </div>
                   <p className="text-text-secondary text-xs mb-1">
@@ -119,7 +119,7 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
               <tbody>
                 {[...activities].reverse().map((log) => (
                   <tr
-                    key={log.entityId + log.timestamp}
+                    key={(log.entityId || "") + (log.timestamp || "")}
                     className="border-b border-border/50 hover:bg-ground-600/30"
                   >
                     <td className="py-2 px-3   text-text-secondary">
@@ -127,9 +127,11 @@ export function LogActivityModal({ onClose }: LogActivityModalProps) {
                     </td>
                     <td className="py-2 px-3">{log.details}</td>
                     <td className="py-2 px-3">{log.action}</td>
-                    <td className="py-2 px-3">{log.userName.split("@")[0]}</td>
+                    <td className="py-2 px-3">
+                      {(log.userName || "").split("@")[0]}
+                    </td>
                     <td className="py-2 px-3 max-w-20 text-xs text-center">
-                      {formatDateTime(log.timestamp)}
+                      {formatDateTime(log.timestamp || "")}
                     </td>
                   </tr>
                 ))}
