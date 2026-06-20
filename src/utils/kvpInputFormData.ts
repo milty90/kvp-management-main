@@ -39,7 +39,7 @@ export function kvpInputFormData({
   };
 
   const updateKvpData: Kvp = {
-    id: initialData?.id,
+    id: initialData?.id || Date.now(),
     title: title.trim(),
     description: description.trim(),
     category: category.trim(),
