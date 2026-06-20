@@ -1,4 +1,4 @@
-import type { Kvp } from "../types";
+import type { InsertKvp, Kvp } from "../types";
 import { useSessionContext } from "./SessionContext";
 import kvpManagmentReducer from "../features/kvpManagmentReducer";
 import {
@@ -20,7 +20,7 @@ import {
 
 interface KvpContextType {
   kvps: Kvp[];
-  addKvp: (kvp: Kvp) => Promise<void>;
+  addKvp: (kvp: InsertKvp) => Promise<void>;
   updateKvp: (kvp: Kvp) => Promise<void>;
   deleteKvp: (id: number) => Promise<void>;
   selectedKvp: Kvp | null;
@@ -61,7 +61,7 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [session]);
 
-  const addKvp = useCallback(async (kvp: Kvp) => {
+  const addKvp = useCallback(async (kvp: InsertKvp) => {
     try {
       await addKvpToDataBase(kvp);
 

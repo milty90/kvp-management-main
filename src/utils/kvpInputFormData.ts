@@ -1,4 +1,4 @@
-import type { Kvp, State, Priority } from "../types";
+import type {InsertKvp, Kvp, State, Priority } from "../types";
 
 interface FormData {
   title: string;
@@ -25,8 +25,7 @@ export function kvpInputFormData({
   initialData,
   createdBy,
 }: FormData) {
-  const newKvp: Kvp = {
-    id: Date.now(),
+  const newKvp: InsertKvp = {
     title: title.trim(),
     description: description.trim(),
     category: category.trim(),
@@ -40,7 +39,7 @@ export function kvpInputFormData({
   };
 
   const updateKvpData: Kvp = {
-    id: initialData?.id || Date.now(),
+    id: initialData?.id,
     title: title.trim(),
     description: description.trim(),
     category: category.trim(),

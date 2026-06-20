@@ -2,8 +2,10 @@ export type Priority = "Low" | "Medium" | "High";
 export type State = "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
 export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
 
+export type InsertKvp = Omit<Kvp, "id">;
+
 export type Kvp = {
-  id: number;
+  id?: number;
   title: string;
   category: string;
   assignedTo: string;
