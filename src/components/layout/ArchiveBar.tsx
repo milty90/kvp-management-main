@@ -4,6 +4,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
 import { showToast } from "../items/ToastItem";
 import { useTranslation } from "../../utils/useTranslation";
+import type { Priority } from "../../types";
 
 const VALID_STATES = ["Rejected", "Archived"] as const;
 
@@ -80,6 +81,7 @@ export function ArchiveBar({
                     key={kvp.id}
                     {...kvp}
                     state={state}
+                    priority={kvp.priority as Priority}
                     onOpenModal={() => {
                       if (kvp.state === "Archived") {
                         onOpenModal?.();
