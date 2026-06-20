@@ -1,4 +1,4 @@
-import type { InsertKvp, Kvp, ActivityLog } from "../types";
+import type { InsertKvp, Kvp, InsertActivityLog } from "../types";
 import { supabase } from "../utils/supabase";
 
 export async function getKvpsfromDataBase() {
@@ -10,8 +10,9 @@ export async function getKvpsfromDataBase() {
 }
 
 export async function addKvpToDataBase(kvp: InsertKvp) {
-  const { error } = await supabase.from("kvps").insert(kvp);
+  const { data, error } = await supabase.from("kvps").insert(kvp).select().single();
   if (error) throw new Error(error.message); 
+  return data;
 }
 
 export async function updateKvpInDataBase(kvp: Kvp) {
@@ -46,20 +47,9 @@ export async function rejectKvpInDataBase(id: number) {
   if (error) throw new Error(error.message);
 }
 
-export async function logActivity(log: ActivityLog) {
-  const { error } = await supabase.from("activity_logs").insert({
-    id: log.id,
-    userId: log.userId,
-    userName: log.userName,
-    action: log.action,
-    entityType: log.entityType,
-    entityId: log.entityId,
-    details: log.details,
-    timestamp: log.timestamp,
-  });
-
+export async function logActivity(log: InsertActivityLog) {
+  const { error } = await supabase.from("activity_logs").insert(log,);
   if (error) throw new Error(error.message);
-  
 }
 
 export async function getLogActivities() {
