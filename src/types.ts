@@ -1,27 +1,30 @@
+import type { Tables, TablesInsert } from "./types/supabase";
+
 export type Priority = "Low" | "Medium" | "High";
 export type State = "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
 export type Statreport = "Total" | "Completed" | "Assigned" | "High Priority";
 
-export type InsertKvp = Omit<Kvp, "id">;
 
-export type Kvp = {
-  id?: number;
-  title: string;
-  category: string;
-  assignedTo: string;
-  description: string;
-  state: State;
-  priority: Priority;
-  createdBy: string;
-  createdAt: string;
-  targetDate: string;
-  benefit?: string;
-};
+export type Kvp = Tables<"kvps">
+
+export type InsertKvp = Omit<TablesInsert<"kvps">, "id" >;
+
+export type User = Tables<"users">;
+
+export type InsertUser = TablesInsert<"users">;
+
+export type ActivityLog = Tables<"activity_logs">;
+
+export type InsertActivityLog = Omit<TablesInsert<"activity_logs">, "id">;
+
+export type ActivityAction = "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED" | "RESTORED" | "SIGNED_UP" | "LOGGED_IN" | "LOGGED_OUT" | "PASSWORD_UPDATED";
+
+
 
 export type FormColor = {
-  pdcaState?: State | "";
+  pdcaState?: State ;
   targetDate?: string;
-  priority?: Priority | "";
+  priority?: Priority ;
 };
 
 export type KvpManagementState = Kvp[];
@@ -37,20 +40,6 @@ export type KvpManagementAction =
       kvp: Kvp;
     }
   | { type: "SET_KVPS"; kvps: Kvp[] };
-
-export type User = {
-  userId: string;
-  photoUrl?: string;
-  department?: string;
-  role?: string;
-  firstName?: string;
-  lastName?: string;
-  userName: string;
-  userEmail: string;
-  createdAt: string;
-  lastSignIn: string;
-  aboutMe?: string;
-};
 
 export type UserManagementState = User[];
 
@@ -70,14 +59,3 @@ export type ColorButtonType =
   | "red"
   | "gray"
   | "white";
-
-export type ActivityLog = {
-  id: string;
-  userId: string;
-  userName: string;
-  action: "CREATED" | "UPDATED" | "DELETED" | "REJECTED" | "ARCHIVED" | "RESTORED" | "SIGNED_UP"  | "LOGGED_IN" | "LOGGED_OUT" | "PASSWORD_UPDATED";
-  entityType: "PDCA" | "USER" | "AUTH";
-  entityId?: string;
-  details?: string;
-  timestamp: string;
-};
