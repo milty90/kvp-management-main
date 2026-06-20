@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { Kvp } from "../../types";
+import type { Kvp, State, Priority, InsertActivityLog } from "../../types";
 import ColorButton from "../buttons/ColorButton";
 import { useKvpContext } from "../../context/KvpContext";
 import { showToast } from "../items/ToastItem";
@@ -59,19 +59,19 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
 
   const { pdcaTextColor, priorityTextColor, targetDateTextColor } =
     kvpInputFormColor({
-      pdcaState: pdcaState as Kvp["state"],
+      pdcaState: pdcaState as State,
       targetDate,
-      priority: priority as Kvp["priority"],
+      priority: priority as Priority,
     });
 
   const { newKvp, updateKvpData } = kvpInputFormData({
     title,
     description,
     category,
-    pdcaState: pdcaState as Kvp["state"],
+    pdcaState: pdcaState as State,
     assignedTo,
     targetDate,
-    priority: priority as Kvp["priority"],
+    priority: priority as Priority,
     benefit: benefit,
     initialData,
     createdBy: createdBy,
@@ -105,16 +105,16 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
   }
 
   const logger = async () => {
-    await logActivity({
-      id: Date.now().toString(),
+    const log: InsertActivityLog = {
       userId: session?.user.id || "unknown",
       userName: session?.user.email || "Unknown User",
       action: initialData ? "UPDATED" : "CREATED",
       entityType: "PDCA",
-      entityId: initialData ? String(initialData.id) : String(newKvp.id),
-      details: `User ${initialData ? "updated" : "created"} PDCA "${initialData ? sliceText(updateKvpData.title, 50) : sliceText(newKvp.title, 50)}".`,
+      entityId: initialData ? String(initialData.id) : String(newKvp),
+      details: `User ${initialData ? "updated" : "created"} PDCA "${initialData ? sliceText(updateKvpData.title ?? "", 50) : sliceText(newKvp.title ?? "", 50)}".`,
       timestamp: new Date().toISOString(),
-    });
+    };
+    await logActivity(log);
   };
 
   return (
@@ -186,7 +186,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 {translation.pdcaForm.formPdcaStateTitle} *
               </span>
               <select
-                value={pdcaState}
+                value={pdcaState ?? ""}
                 onChange={(e) =>
                   setPdcaState(e.target.value as Kvp["state"] | "")
                 }
@@ -235,7 +235,7 @@ export default function KvpForm({ onClose, initialData }: KvpFormProps) {
                 {translation.pdcaForm.formPriority[0]} *
               </span>
               <select
-                value={priority}
+                value={priority ?? ""}
                 onChange={(e) =>
                   setPriority(e.target.value as Kvp["priority"] | "")
                 }

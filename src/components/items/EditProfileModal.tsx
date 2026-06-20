@@ -3,7 +3,7 @@ import ColorButton from "../buttons/ColorButton";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "../../utils/useTranslation";
 import { useUserContext } from "../../context/UserContext";
-import type { User } from "../../types";
+import type { InsertActivityLog, User } from "../../types";
 import { supabase } from "../../utils/supabase";
 import { showToast } from "./ToastItem";
 import { useWindowWidth } from "../../utils/useWindowWidth";
@@ -78,8 +78,8 @@ export default function EditProfileModal({
       createdAt: user?.created_at || "",
       lastSignIn: user?.last_sign_in_at || "",
     });
-    await logActivity({
-      id: Date.now().toString(),
+
+    const log: InsertActivityLog = {
       userId: user?.id || "",
       userName: user?.email || "Unknown User",
       action: "UPDATED",
@@ -87,7 +87,8 @@ export default function EditProfileModal({
       entityId: user?.id || "",
       details: `User ${userName} updated their profile.`,
       timestamp: new Date().toISOString(),
-    });
+    };
+    await logActivity(log);
     onConfirm();
     showToast(
       width,

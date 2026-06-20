@@ -18,6 +18,7 @@ import { useUserContext } from "../../context/UserContext";
 import { LogActivityModal } from "../items/LogActivityModal";
 import { supabase } from "../../utils/supabase";
 import { logActivity } from "../../storage/kvpDatabase";
+import type { InsertActivityLog } from "../../types";
 
 interface TopBarProps {
   kvpBar?: ReactNode;
@@ -119,8 +120,7 @@ export default function TopBar({ kvpBar }: TopBarProps) {
   const handleConfirmLogout = async () => {
     if (user) {
       const userName = user.email?.split("@")[0] ?? "Unknown User";
-      await logActivity({
-        id: Date.now().toString(),
+      const log: InsertActivityLog = {
         userId: user.id,
         userName: user.email ?? "Unknown User",
         action: "LOGGED_OUT",
@@ -128,7 +128,8 @@ export default function TopBar({ kvpBar }: TopBarProps) {
         entityId: user.id,
         details: `User ${userName} logged out.`,
         timestamp: new Date().toISOString(),
-      });
+      };
+      await logActivity(log);
     }
     await signOut();
     navigate("/login");

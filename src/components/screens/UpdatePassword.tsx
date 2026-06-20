@@ -9,6 +9,7 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
 import { logActivity } from "../../storage/kvpDatabase";
 import { useSessionContext } from "../../context/SessionContext";
+import type { InsertActivityLog } from "../../types";
 
 export default function UpdatePassword() {
   const [password, setPassword] = useState("");
@@ -62,8 +63,7 @@ export default function UpdatePassword() {
     });
 
     if (!error) {
-      await logActivity({
-        id: Date.now().toString(),
+      const log: InsertActivityLog = {
         userId: session?.user?.id ?? "Unknown",
         userName: session?.user?.email ?? "Unknown",
         action: "PASSWORD_UPDATED",
@@ -71,7 +71,8 @@ export default function UpdatePassword() {
         entityId: session?.user?.id ?? "Unknown",
         details: `User ${session?.user?.email ?? "Unknown"} updated their password.`,
         timestamp: new Date().toISOString(),
-      });
+      };
+      await logActivity(log);
 
       showToast(
         width,

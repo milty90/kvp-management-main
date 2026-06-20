@@ -82,10 +82,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         lastName: "",
         createdAt: new Date().toISOString(),
         lastSignIn: new Date().toISOString(),
+        aboutMe: "",
       });
 
       await logActivity({
-        id: Date.now().toString(),
         userId: currentUser.id,
         userName: currentUser.email ?? "",
         action: "SIGNED_UP",
@@ -97,7 +97,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     await logActivity({
-      id: Date.now().toString(),
       userId: currentUser.id,
       userName: currentUser.email ?? "",
       action: "LOGGED_IN",
@@ -112,7 +111,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const userName = loggedOutUser.email?.split("@")[0] ?? "Unknown User";
 
     await logActivity({
-      id: Date.now().toString(),
       userId: loggedOutUser.id,
       userName: loggedOutUser.email ?? "",
       action: "LOGGED_OUT",

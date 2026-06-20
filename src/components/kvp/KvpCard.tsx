@@ -13,20 +13,18 @@ import { formatDate } from "../../utils/formatDate";
 import { useSessionContext } from "../../context/SessionContext";
 import { isDemoUser } from "../../features/authDatabase";
 import { logActivity } from "../../storage/kvpDatabase";
-import type { ActivityLog } from "../../types";
+import type {
+  ActivityAction,
+  InsertActivityLog,
+  Kvp,
+  Priority,
+  State,
+} from "../../types";
 
-interface KvpCardProps {
-  id: number;
-  title: string;
-  category: string;
-  assignedTo: string;
-  description: string;
-  state: "Plan" | "Do" | "Check" | "Act" | "Rejected" | "Archived";
-  priority: "High" | "Medium" | "Low";
-  createdBy: string;
-  createdAt: string;
-  targetDate: string;
-  benefit?: string;
+interface KvpCardProps extends Kvp {
+  state: State;
+  priority: Priority;
+
   onOpenModal?: () => void;
   isRejected?: boolean;
 }
@@ -135,9 +133,8 @@ export default function KvpCard({
     showToast(width, theme, "warning", translation.demoMode.toastMessage);
   };
 
-  const logger = async (action: ActivityLog["action"]) => {
-    await logActivity({
-      id: Date.now().toString(),
+  const logger = async (action: ActivityAction) => {
+    const log: InsertActivityLog = {
       userId: session?.user.id || "unknown",
       userName: session?.user.email || "Unknown User",
       action: action,
@@ -145,7 +142,8 @@ export default function KvpCard({
       entityId: id.toString(),
       details: `User ${action.toLowerCase()} PDCA "${title}".`,
       timestamp: new Date().toISOString(),
-    });
+    };
+    await logActivity(log);
   };
 
   return (
@@ -157,7 +155,7 @@ export default function KvpCard({
         className="relative flex items-start justify-between mb-2 gap-1.5"
       >
         <p className="text-sm lg:text-lg text-text-primary font-semibold ">
-          {sliceText(title, 15)}
+          {sliceText(title ?? "Unknown Title", 15)}
         </p>
         <img
           onClick={() => setShowMenu(!showMenu)}
@@ -192,7 +190,7 @@ export default function KvpCard({
         <span className="font-medium text-text-primary mr-1">
           {translation.pdcaCard.category}:{" "}
         </span>
-        {sliceText(category, 30)}
+        {sliceText(category ?? "Unknown Category", 30)}
       </p>
 
       <div className="flex items-center mb-4 gap-2.5 text-gray-500 ">
@@ -210,7 +208,8 @@ export default function KvpCard({
         className={`border-t border-dashed ${theme === "dark" ? "border-gray-500" : "border-gray-300"} mb-3`}
       />
       <p className="font-normal tracking-tight text-text-secondary overflow-hidden text-clip text-sm mb-3">
-        {translation.pdcaCard.assignedTo}: {sliceText(assignedTo, 30)}
+        {translation.pdcaCard.assignedTo}:{" "}
+        {sliceText(assignedTo ?? "Unknown Assignee", 30)}
       </p>
       <p className="font-normal tracking-tight text-text-secondary text-sm mb-3">
         {translation.pdcaCard.benefit}:{" "}
@@ -219,7 +218,7 @@ export default function KvpCard({
       <p className="text-text-primary font-semibold overflow-hidden text-pretty text-xs mb-2">
         {translation.pdcaCard.description}:
         <span className="text-xs font-normal text-text-secondary ml-2">
-          {sliceText(description, 200)}
+          {sliceText(description ?? "No Description", 200)}
         </span>
       </p>
 
@@ -233,7 +232,7 @@ export default function KvpCard({
             alt="User"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {translation.pdcaCard.createdBy}: {createdBy}
+          {translation.pdcaCard.createdBy}: {createdBy ?? "Unknown Creator"}
         </span>
         <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
@@ -241,7 +240,8 @@ export default function KvpCard({
             alt="Calender"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {translation.pdcaCard.createdAt}: {formatDate(createdAt)}
+          {translation.pdcaCard.createdAt}:{" "}
+          {formatDate(createdAt ?? "Unknown Date")}
         </span>
         <span className="text-xs tracking-tight py-0.5 text-text-secondary">
           <img
@@ -249,14 +249,17 @@ export default function KvpCard({
             alt="Target"
             className="h-4 w-4 hidden md:inline rounded-full mr-1.5 mb-1"
           />
-          {translation.pdcaCard.targetDate}: {formatDate(targetDate)}
+          {translation.pdcaCard.targetDate}:{" "}
+          {formatDate(targetDate ?? "Unknown Date")}
         </span>
       </div>
       {showDeleteDialog &&
         createPortal(
           <ConfirmDialogItem
             title={translation.pdcaCard.deletePdca}
-            message={translation.pdcaCard.deleteMessage(title)}
+            message={translation.pdcaCard.deleteMessage(
+              title ?? "Unknown Title",
+            )}
             confirmButtonText={translation.pdcaCard.deletePdca}
             cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
@@ -265,7 +268,7 @@ export default function KvpCard({
                 width,
                 theme,
                 "success",
-                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.deleted}.`,
+                `${translation.pdcaCard.pdca} " ${title ?? "Unknown Title"} " ${translation.pdcaCard.deleted}.`,
               );
               setShowDeleteDialog(false);
             }}
@@ -277,7 +280,9 @@ export default function KvpCard({
         createPortal(
           <ConfirmDialogItem
             title={translation.pdcaCard.archivePdca}
-            message={translation.pdcaCard.archiveMessage(title)}
+            message={translation.pdcaCard.archiveMessage(
+              title ?? "Unknown Title",
+            )}
             confirmButtonText={translation.pdcaCard.archivePdca}
             cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
@@ -286,7 +291,7 @@ export default function KvpCard({
                 width,
                 theme,
                 "success",
-                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.archived}.`,
+                `${translation.pdcaCard.pdca} " ${title ?? "Unknown Title"} " ${translation.pdcaCard.archived}.`,
               );
               setShowArchiveDialog(false);
             }}
@@ -298,7 +303,9 @@ export default function KvpCard({
         createPortal(
           <ConfirmDialogItem
             title={translation.pdcaCard.rejectPdca}
-            message={translation.pdcaCard.rejectMessage(title)}
+            message={translation.pdcaCard.rejectMessage(
+              title ?? "Unknown Title",
+            )}
             confirmButtonText={translation.pdcaCard.rejectPdca}
             cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
@@ -307,7 +314,7 @@ export default function KvpCard({
                 width,
                 theme,
                 "info",
-                `${translation.pdcaCard.pdca} " ${title} " ${translation.pdcaCard.rejected}.`,
+                `${translation.pdcaCard.pdca} " ${title ?? "Unknown Title"} " ${translation.pdcaCard.rejected}.`,
               );
               setShowRejectDialog(false);
             }}
@@ -319,7 +326,7 @@ export default function KvpCard({
         createPortal(
           <ConfirmDialogItem
             title={translation.pdcaCard.editPdca}
-            message={translation.pdcaCard.editMessage(title)}
+            message={translation.pdcaCard.editMessage(title ?? "Unknown Title")}
             confirmButtonText={translation.pdcaCard.editPdca}
             cancelButtonText={translation.pdcaCard.cancelButton}
             onConfirm={() => {
