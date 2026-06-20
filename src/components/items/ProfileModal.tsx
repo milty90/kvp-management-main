@@ -123,7 +123,7 @@ export function ProfileModal({
                 }}
               />
             </div>
-            <div className="flex flex-col w-fit items-start ml-4">
+            <div className="flex flex-col w-fit items-start whitespace-nowrap ml-4">
               <p className="text-xl text-text-primary font-semibold">
                 {currentUserData?.firstName || (
                   <span className="text-xs font-normal text-gray-500">
