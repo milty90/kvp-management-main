@@ -53,8 +53,6 @@ export default function KvpBar({
   const translation = useTranslation();
   const colorClasses = theme === "dark" ? colorClassesDark : colorClassesLight;
 
-  console.log(isLoading);
-
   const filtered = kvps.filter((k) => {
     const stateMatch =
       activeFilter === translation.actionBar.startState ||
@@ -100,6 +98,7 @@ export default function KvpBar({
                     key={kvp.id}
                     {...kvp}
                     state={state}
+                    priority={kvp.priority as Priority}
                     onOpenModal={onOpenModal}
                   />
                 ))}
