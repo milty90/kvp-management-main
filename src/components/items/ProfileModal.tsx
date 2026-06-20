@@ -113,7 +113,7 @@ export function ProfileModal({
                 className="w-24 h-24 rounded-full object-cover"
               />
               <img
-                className={`${width < 768 ? "hidden" : "absolute top-19 left-19"} ${theme === "dark" ? "bg-green-600 hover:bg-green-700" : "bg-blue-500 hover:bg-blue-600"} z-10 w-8 h-8 p-1.5 rounded-full object-cover cursor-pointer`}
+                className={`${width < 768 || isDemo ? "hidden" : "absolute top-19 left-19"} ${theme === "dark" ? "bg-green-600 hover:bg-green-700" : "bg-blue-500 hover:bg-blue-600"} z-10 w-8 h-8 p-1.5 rounded-full object-cover cursor-pointer`}
                 src="/edit.svg"
                 alt="Profile"
                 onClick={() => {

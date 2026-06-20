@@ -175,6 +175,7 @@ export default function KvpCard({
               onArchive={handleDamoClick}
               onReject={handleDamoClick}
               onDelete={handleDamoClick}
+              isRejected={isRejected}
             />
           ) : (
             <CardMenuItem
