@@ -63,9 +63,9 @@ export const KvpProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addKvp = useCallback(async (kvp: InsertKvp) => {
     try {
-      await addKvpToDataBase(kvp);
+      const newKvp = await addKvpToDataBase(kvp);
 
-      setKvps({ type: "ADD_KVP", kvp });
+      setKvps({ type: "ADD_KVP", kvp: newKvp });
 
       setSelectedKvp(null);
     } catch (error) {
