@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { signInWithGoogle, signInWithEmail } from "../../features/authDatabase";
+import { signInWithEmail } from "../../features/authDatabase";
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useWindowWidth } from "../../utils/useWindowWidth";
@@ -7,6 +7,7 @@ import { showToast } from "../items/ToastItem";
 import { useTranslation } from "../../utils/useTranslation";
 import { ShowPasswordEye } from "../buttons/ShowPasswordEye";
 import { GithubButton } from "../buttons/GithubButton";
+import { GoogleButton } from "../buttons/GoogleButton";
 
 export function LoginScreen() {
   const navigate = useNavigate();
@@ -133,27 +134,7 @@ export function LoginScreen() {
           {translation.loginScreen.orLogInWithSocials}
         </p>
         <div className="flex mt-6 space-x-2 md:space-x-4">
-          <button
-            className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-            type="button"
-            onClick={() => {
-              signInWithGoogle().catch((error) =>
-                showToast(
-                  width,
-                  theme,
-                  "error",
-                  translation.loginScreen.oAuthError + ": " + error.message,
-                ),
-              );
-            }}
-          >
-            <img
-              src="/google.svg"
-              alt="Google"
-              className="w-6 mr-1 -ml-1 md:mr-2"
-            />
-            Google
-          </button>
+          <GoogleButton />
           <GithubButton />
         </div>
       </div>

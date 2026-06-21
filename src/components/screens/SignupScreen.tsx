@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  signInWithGoogle,
   signUpWithEmailandPassword,
   signInWithEmail,
 } from "../../features/authDatabase";
@@ -11,6 +10,7 @@ import { useWindowWidth } from "../../utils/useWindowWidth";
 import { useTranslation } from "../../utils/useTranslation";
 import { ShowPasswordEye } from "../buttons/ShowPasswordEye";
 import { GithubButton } from "../buttons/GithubButton";
+import { GoogleButton } from "../buttons/GoogleButton";
 
 export function SignupScreen() {
   const navigate = useNavigate();
@@ -176,27 +176,7 @@ export function SignupScreen() {
           {translation.signupScreen.orLogInWithSocials}
         </p>
         <div className="flex mt-6 space-x-2 md:space-x-4">
-          <button
-            onClick={() =>
-              signInWithGoogle().catch((error) =>
-                showToast(
-                  width,
-                  theme,
-                  "error",
-                  translation.signupScreen.oAuthError + ": " + error.message,
-                ),
-              )
-            }
-            className="flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:translate-y-0.5 transition-transform duration-150"
-          >
-            <img
-              src="/google.svg"
-              alt="Google"
-              className="w-6 mr-1 -ml-1 md:mr-2"
-            />
-            Google
-          </button>
-
+          <GoogleButton />
           <GithubButton />
         </div>
       </div>
