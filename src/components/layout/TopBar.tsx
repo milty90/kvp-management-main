@@ -86,7 +86,10 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     try {
       setIsDeletingProfile(true);
       isDeleting.current = true;
-      await deleteUser(user?.id || "");
+      if (!user?.id) {
+        throw new Error("User ID is missing");
+      }
+      await deleteUser(user.id);
 
       await supabase.auth.signOut().catch(() => {});
 
@@ -121,11 +124,11 @@ export default function TopBar({ kvpBar }: TopBarProps) {
     if (user) {
       const userName = user.email?.split("@")[0] ?? "Unknown User";
       const log: InsertActivityLog = {
-        userId: user.id,
-        userName: user.email ?? "Unknown User",
+        userId: user.id ?? "unknown",
+        userName: userName,
         action: "LOGGED_OUT",
         entityType: "AUTH",
-        entityId: user.id,
+        entityId: user.id ?? "unknown",
         details: `User ${userName} logged out.`,
         timestamp: new Date().toISOString(),
       };

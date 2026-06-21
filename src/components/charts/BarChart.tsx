@@ -9,8 +9,8 @@ interface BarChartProps {
 
 export const BarChart = ({ kvps }: BarChartProps) => {
   const categoryCounts = kvps.reduce((acc: Record<string, number>, kvp) => {
-    const category = kvp.category || "Uncategorized";
-    acc[category] = (acc[category] || 0) + 1;
+    const category = kvp.category ?? "Uncategorized";
+    acc[category] = (acc[category] ?? 0) + 1;
     return acc;
   }, {});
 

@@ -43,7 +43,7 @@ export function ConfirmDialogItem({
             onClick={onCancel}
             className={` px-4 py-2 rounded-md text-sm font-medium ${theme === "dark" ? "text-gray-300 hover:bg-gray-500/50 hover:text-gray-100" : "text-gray-700 hover:bg-gray-200 focus:text-gray-700"} focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2`}
           >
-            {cancelButtonText || "Abbrechen"}
+            {cancelButtonText ?? "Abbrechen"}
           </button>
           <ColorButton
             onClick={onConfirm}
@@ -51,7 +51,7 @@ export function ConfirmDialogItem({
             isTextOnly={true}
             disabled={disableConfirmButton}
           >
-            {confirmButtonText || "Bestätigen"}
+            {confirmButtonText ?? "Bestätigen"}
           </ColorButton>
         </div>
       </div>

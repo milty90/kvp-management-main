@@ -21,18 +21,20 @@ export default function EditProfileModal({
   initialData,
 }: EditProfileModalProps) {
   const [preview, setPreview] = useState<string>(
-    initialData?.photoUrl || "/avatar.png",
+    initialData?.photoUrl ?? "/avatar.png",
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
   const translations = useTranslation();
-  const [userName, setUserName] = useState(initialData?.userName || "");
-  const [firstName, setFirstName] = useState(initialData?.firstName || "");
-  const [lastName, setLastName] = useState(initialData?.lastName || "");
-  const [department, setDepartment] = useState(initialData?.department || "");
-  const [role, setRole] = useState(initialData?.role || "");
-  const [aboutMe, setAboutMe] = useState(initialData?.aboutMe || "");
-  const [photoUrl, setPhotoUrl] = useState(initialData?.photoUrl || "");
+  const [userName, setUserName] = useState(initialData?.userName ?? "");
+  const [firstName, setFirstName] = useState(initialData?.firstName ?? "");
+  const [lastName, setLastName] = useState(initialData?.lastName ?? "");
+  const [department, setDepartment] = useState(initialData?.department ?? "");
+  const [role, setRole] = useState(initialData?.role ?? "");
+  const [aboutMe, setAboutMe] = useState(initialData?.aboutMe ?? "");
+  const [photoUrl, setPhotoUrl] = useState(
+    initialData?.photoUrl ?? "/avatar.png",
+  );
   const { user, updateUser } = useUserContext();
   const width = useWindowWidth();
 
@@ -66,7 +68,7 @@ export default function EditProfileModal({
 
   async function handleConfirm() {
     updateUser({
-      userId: user?.id || "",
+      userId: user?.id ?? "",
       userName: userName,
       firstName,
       lastName,
@@ -74,17 +76,17 @@ export default function EditProfileModal({
       role,
       aboutMe,
       photoUrl,
-      userEmail: user?.email || "",
-      createdAt: user?.created_at || "",
-      lastSignIn: user?.last_sign_in_at || "",
+      userEmail: user?.email ?? "",
+      createdAt: user?.created_at ?? "",
+      lastSignIn: user?.last_sign_in_at ?? "",
     });
 
     const log: InsertActivityLog = {
-      userId: user?.id || "",
-      userName: user?.email || "Unknown User",
+      userId: user?.id ?? "",
+      userName: user?.email ?? "Unknown User",
       action: "UPDATED",
       entityType: "USER",
-      entityId: user?.id || "",
+      entityId: user?.id ?? "",
       details: `User ${userName} updated their profile.`,
       timestamp: new Date().toISOString(),
     };

@@ -48,12 +48,12 @@ export function ProfileModal({
     }
   }, [userNameFromContext]);
 
-  const department = currentUserData?.department || (
+  const department = currentUserData?.department ?? (
     <span className="text-xs text-gray-500">
       {translation.profileModal.fillProfile}
     </span>
   );
-  const role = currentUserData?.role || (
+  const role = currentUserData?.role ?? (
     <span className="text-xs text-gray-500">
       {translation.profileModal.fillProfile}
     </span>
@@ -65,7 +65,7 @@ export function ProfileModal({
   const assignedTo =
     kvps?.filter(
       (kvp) => kvp.assignedTo === userNameFromContext && kvp.state !== "Act",
-    ).length || 0;
+    )?.length ?? 0;
 
   const createdBy =
     kvps?.filter((kvp) => kvp.createdBy === userNameFromContext).length ?? 0;
@@ -73,7 +73,7 @@ export function ProfileModal({
   const act =
     kvps?.filter(
       (kvp) => kvp.assignedTo === userNameFromContext && kvp.state === "Act",
-    ).length || 0;
+    )?.length ?? 0;
 
   const profileUser = users?.find(
     (user) => user.userEmail === session?.user?.email,
@@ -108,7 +108,7 @@ export function ProfileModal({
           <div className="flex flex-row items-center justify-center  px-1 ">
             <div className="flex flex-row relative border-2 rounded-full min-w-24 min-h-24 p-1 w-max h-max shadow-sm border-border">
               <img
-                src={profileUser || "/avatar.png"}
+                src={profileUser ?? "/avatar.png"}
                 alt="Profilbild"
                 className="w-24 h-24 rounded-full object-cover"
               />
@@ -125,12 +125,12 @@ export function ProfileModal({
             </div>
             <div className="flex flex-col w-fit items-start whitespace-nowrap ml-4">
               <p className="text-xl text-text-primary font-semibold">
-                {currentUserData?.firstName || (
+                {currentUserData?.firstName ?? (
                   <span className="text-xs font-normal text-gray-500">
                     {translation.profileModal.fillProfile}
                   </span>
                 )}{" "}
-                {currentUserData?.lastName || null}
+                {currentUserData?.lastName ?? null}
               </p>
 
               <p className=" text-text-secondary w-max font-medium text-base">
@@ -238,7 +238,7 @@ export function ProfileModal({
           <p className="text-sm text-text-secondary my-1">
             {translation.profileModal.name}:{" "}
             <span className="text-text-primary pl-3">
-              {userNameFromContext || username}
+              {userNameFromContext ?? username}
             </span>
           </p>
           <p className="text-sm text-text-secondary my-1">

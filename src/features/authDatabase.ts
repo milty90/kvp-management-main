@@ -96,9 +96,9 @@ export async function fetchUser(
   setLastSignIn: React.Dispatch<React.SetStateAction<string>>,
 ) {
   const { data } = await supabase.auth.getUser();
-  setUsername(data.user?.email?.split("@")[0] || "Unbekannter Benutzer");
-  setEmail(data.user?.email || "Keine E-Mail verfügbar");
+  setUsername(data.user?.email?.split("@")[0] ?? "Unbekannter Benutzer");
+  setEmail(data.user?.email ?? "Keine E-Mail verfügbar");
   setLastSignIn(
-    data.user?.last_sign_in_at || "Keine letzte Anmeldung verfügbar",
+    data.user?.last_sign_in_at ?? "Keine letzte Anmeldung verfügbar",
   );
 }

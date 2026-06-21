@@ -135,8 +135,8 @@ export default function KvpCard({
 
   const logger = async (action: ActivityAction) => {
     const log: InsertActivityLog = {
-      userId: session?.user.id || "unknown",
-      userName: session?.user.email || "Unknown User",
+      userId: session?.user.id ?? "unknown",
+      userName: session?.user.email ?? "Unknown User",
       action: action,
       entityType: "PDCA",
       entityId: id.toString(),

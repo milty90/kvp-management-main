@@ -39,7 +39,7 @@ export function kvpInputFormData({
   };
 
   const updateKvpData: Kvp = {
-    id: initialData?.id || Date.now(),
+    id: initialData?.id ?? Date.now(),
     title: title.trim(),
     description: description.trim(),
     category: category.trim(),
@@ -47,8 +47,8 @@ export function kvpInputFormData({
     assignedTo: assignedTo.trim(),
     targetDate,
     priority,
-    createdBy: initialData?.createdBy || createdBy,
-    createdAt: initialData?.createdAt || new Date().toISOString().split("T")[0],
+    createdBy: initialData?.createdBy ?? createdBy,
+    createdAt: initialData?.createdAt ?? new Date().toISOString().split("T")[0],
     benefit: benefit?.trim(),
   };
 
